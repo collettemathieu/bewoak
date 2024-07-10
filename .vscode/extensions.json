@@ -1,8 +1,11 @@
 {
   "recommendations": [
-    "nrwl.angular-console",
+    "alexkrechik.cucumberautocomplete",
+    "biomejs.biome",
     "esbenp.prettier-vscode",
+    "github.vscode-github-actions",
+    "nrwl.angular-console",
     "oven.bun-vscode",
-    "biomejs.biome"
+    "tamasfe.even-better-toml",
   ]
 }

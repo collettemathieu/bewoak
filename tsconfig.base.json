@@ -1,20 +1,51 @@
 {
     "compileOnSave": false,
     "compilerOptions": {
-        "rootDir": ".",
-        "sourceMap": true,
+        "baseUrl": ".",
         "declaration": false,
-        "moduleResolution": "node",
         "emitDecoratorMetadata": true,
         "experimentalDecorators": true,
         "importHelpers": true,
-        "target": "es2015",
-        "module": "esnext",
         "lib": ["es2020", "dom"],
-        "skipLibCheck": true,
+        "module": "ES2022",
+        "moduleResolution": "node",
+        "paths": {
+            "@bewoak/pathway-design-server-pathway-application": [
+                "libs/pathway-design/server/pathway/application/src/index.ts"
+            ],
+            "@bewoak/pathway-design-server-pathway-business": [
+                "libs/pathway-design/server/pathway/business/src/index.ts"
+            ],
+            "@bewoak/pathway-design-server-pathway-infrastructure": [
+                "libs/pathway-design/server/pathway/infrastructure/src/index.ts"
+            ],
+            "@bewoak/pathway-design-server-pathway-presenters": [
+                "libs/pathway-design/server/pathway/presenters/src/index.ts"
+            ],
+            "@bewoak/pathway-design-server-pathway-interface-adapters": [
+                "libs/pathway-design/server/pathway/interface-adapters/src/index.ts"
+            ],
+            "@bewoak/common-tools-server-http-exceptions": [
+                "libs/common/tools/server/http-exceptions/src/index.ts"
+            ]
+        },
+        "rootDir": ".",
         "skipDefaultLibCheck": true,
-        "baseUrl": ".",
-        "paths": {}
+        "skipLibCheck": true,
+        "sourceMap": true,
+        "target": "es2022"
     },
-    "exclude": ["node_modules", "tmp"]
+    "exclude": [
+        ".angular",
+        ".git",
+        ".github",
+        ".hooks",
+        ".nx",
+        ".verdaccio",
+        ".vscode",
+        "coverage",
+        "dist",
+        "node_modules",
+        "tmp"
+    ]
 }

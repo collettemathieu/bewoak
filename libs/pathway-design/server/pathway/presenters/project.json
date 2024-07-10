@@ -1,0 +1,50 @@
+{
+    "name": "pathway-design-server-pathway-presenters",
+    "$schema": "../../../../../../../node_modules/nx/schemas/project-schema.json",
+    "sourceRoot": "libs/pathway-design/server/pathway/presenters/src",
+    "projectType": "library",
+    "targets": {
+        "build": {
+            "executor": "@nx/js:swc",
+            "outputs": ["{options.outputPath}"],
+            "options": {
+                "outputPath": "dist/libs/pathway-design/server/pathway/presenters",
+                "main": "libs/pathway-design/server/pathway/presenters/src/index.ts",
+                "tsConfig": "libs/pathway-design/server/pathway/presenters/tsconfig.lib.json",
+                "assets": []
+            }
+        },
+        "nx-release-publish": {
+            "options": {
+                "packageRoot": "dist/{projectRoot}"
+            }
+        },
+        "lint": {
+            "executor": "nx:run-commands",
+            "options": {
+                "command": "bun run biome check --write {projectRoot} --config-path={projectRoot}/biome.json"
+            }
+        },
+        "test": {
+            "executor": "nx:run-commands",
+            "options": {
+                "command": "bun test --coverage --coverage-dir=dist/reports/{projectRoot}/coverage --coverage-reporter=lcov {projectRoot}"
+            }
+        },
+        "test-feature": {
+            "executor": "nx:run-commands",
+            "options": {
+                "command": "TS_NODE_PROJECT='{projectRoot}/tsconfig.spec.json' bun run cucumber-js --config={projectRoot}/cucumber.js"
+            }
+        }
+    },
+    "tags": ["type:pathway-design:server:pathway:presenters"],
+    "release": {
+        "version": {
+            "generatorOptions": {
+                "packageRoot": "dist/{projectRoot}",
+                "currentVersionResolver": "git-tag"
+            }
+        }
+    }
+}

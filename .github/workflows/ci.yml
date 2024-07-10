@@ -23,15 +23,29 @@ jobs:
         with:
           bun-version: latest
       
+        # Set NX_BASE and NX_HEAD explicitly for pull requests
+      - name: Set NX_BASE and NX_HEAD for PR
+        if: github.event_name == 'pull_request'
+        run: |
+          echo "NX_BASE=$GITHUB_BASE_REF" >> $GITHUB_ENV
+          echo "NX_HEAD=$GITHUB_HEAD_REF" >> $GITHUB_ENV
+          echo "NX_BASE="$NX_BASE
+          echo "NX_HEAD="$NX_HEAD
 
-      # Connect your workspace on nx.app and uncomment this to enable task distribution.
-      # The "--stop-agents-after" is optional, but allows idle agents to shut down once the "build" targets have been requested
-      # - run: bunx nx-cloud start-ci-run --distribute-on="5 linux-medium-js" --stop-agents-after="build"
+      # Set NX_BASE and NX_HEAD for direct commits
+      - name: Set NX_BASE and NX_HEAD for direct commits
+        if: github.event_name == 'push'
+        run: |
+          BASE_SHA=$(git rev-parse HEAD~1)
+          HEAD_SHA=$(git rev-parse HEAD)
+          echo "NX_BASE=$BASE_SHA" >> $GITHUB_ENV
+          echo "NX_HEAD=$HEAD_SHA" >> $GITHUB_ENV
 
-      
       - run: bun install --no-cache
       - uses: nrwl/nx-set-shas@v4
+      - run: bun run commitlint --from=$NX_BASE --to=$NX_HEAD
+      - run: bun run format:check
 
       # Prepend any command with "nx-cloud record --" to record its logs to Nx Cloud
       # - run: bun nx-cloud record -- echo Hello World
-      - run: bun nx affected -t lint test build
+      - run: bun nx affected -t lint test build test-feature --base=$NX_BASE --head=$NX_HEAD --parallel --maxParallel=3
