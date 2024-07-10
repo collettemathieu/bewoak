@@ -1,0 +1,12 @@
+{
+    "bun.runtime": "$HOME/.bun/bin/bun",
+    "bun.debugTerminal.enabled": true,
+    "bun.debugTerminal.stopOnEntry": false,
+    "editor.formatOnSave": true,
+    "editor.codeActionsOnSave": {
+        "source.organizeImports": "explicit",
+        "quickfix.biome": "explicit",
+        "source.organizeImports.biome": "explicit"
+    },
+    "editor.defaultFormatter": "biomejs.biome"
+}

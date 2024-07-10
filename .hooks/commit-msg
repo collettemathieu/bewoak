@@ -1,0 +1,3 @@
+# #!/bin/sh
+# echo "Checking with commitlint...."
+# bun run commitlint --edit $1

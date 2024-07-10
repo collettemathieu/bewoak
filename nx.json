@@ -1,0 +1,19 @@
+{
+    "$schema": "./node_modules/nx/schemas/nx-schema.json",
+    "namedInputs": {
+        "default": ["{projectRoot}/**/*", "sharedGlobals"],
+        "production": ["default"],
+        "sharedGlobals": []
+    },
+    "nxCloudAccessToken": "MTg5MmI3YWMtODZlOC00MzRhLTgzYTQtNDZhMmJkNTE0Zjk2fHJlYWQtd3JpdGU=",
+    "plugins": [
+        {
+            "plugin": "@nx/webpack/plugin",
+            "options": {
+                "buildTargetName": "build",
+                "serveTargetName": "serve",
+                "previewTargetName": "preview"
+            }
+        }
+    ]
+}
