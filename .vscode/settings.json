@@ -8,5 +8,12 @@
         "quickfix.biome": "explicit",
         "source.organizeImports.biome": "explicit"
     },
-    "editor.defaultFormatter": "biomejs.biome"
+    "editor.defaultFormatter": "biomejs.biome",
+    "cucumber.features": [
+		"apps/bewoak-api/**/*.ts",
+		"apps/bewoak-api/**/*.feature"
+	],
+	"cucumber.glue": [
+		"apps/bewoak-api/**/*.ts"
+	],
 }

@@ -25,6 +25,12 @@
             "options": {
                 "command": "bun run biome check --write {projectRoot} --config-path={projectRoot}/biome.json"
             }
+        },
+        "e2e": {
+            "executor": "nx:run-commands",
+            "options": {
+                "command": "bun run cucumber-js --config={projectRoot}/cucumber.js"
+            }
         }
     }
 }

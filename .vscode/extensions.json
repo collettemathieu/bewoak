@@ -3,6 +3,7 @@
     "nrwl.angular-console",
     "esbenp.prettier-vscode",
     "oven.bun-vscode",
-    "biomejs.biome"
+    "biomejs.biome",
+    "cucumberopen.cucumber-official"
   ]
 }
