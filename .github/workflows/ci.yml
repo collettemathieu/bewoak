@@ -32,6 +32,8 @@ jobs:
       - run: bun install --no-cache
       - uses: nrwl/nx-set-shas@v4
 
+      - run: bun run format:check
+
       # Prepend any command with "nx-cloud record --" to record its logs to Nx Cloud
       # - run: bun nx-cloud record -- echo Hello World
-      - run: bun nx affected -t lint test build
+      - run: bun nx affected -t lint test build e2e --base=$GITHUB_BASE_REF --head=$GITHUB_HEAD_REF --parallel --maxParallel=3
