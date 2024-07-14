@@ -1,19 +1,18 @@
 {
-    "bun.runtime": "$HOME/.bun/bin/bun",
     "bun.debugTerminal.enabled": true,
     "bun.debugTerminal.stopOnEntry": false,
-    "editor.formatOnSave": true,
+    "bun.runtime": "$HOME/.bun/bin/bun",
+    "cucumber.features": [
+        "apps/bewoak-api/src/tests/**/*.ts"
+    ],
+    "cucumber.glue": [
+        "apps/bewoak-api/src/tests/**/*.ts"
+    ],
     "editor.codeActionsOnSave": {
-        "source.organizeImports": "explicit",
         "quickfix.biome": "explicit",
+        "source.organizeImports": "explicit",
         "source.organizeImports.biome": "explicit"
     },
     "editor.defaultFormatter": "biomejs.biome",
-    "cucumber.features": [
-		"apps/bewoak-api/**/*.ts",
-		"apps/bewoak-api/**/*.feature"
-	],
-	"cucumber.glue": [
-		"apps/bewoak-api/**/*.ts"
-	],
+    "editor.formatOnSave": true
 }
