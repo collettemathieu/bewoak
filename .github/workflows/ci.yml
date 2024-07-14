@@ -23,17 +23,7 @@ jobs:
         with:
           bun-version: latest
       
-
-      # Connect your workspace on nx.app and uncomment this to enable task distribution.
-      # The "--stop-agents-after" is optional, but allows idle agents to shut down once the "build" targets have been requested
-      # - run: bunx nx-cloud start-ci-run --distribute-on="5 linux-medium-js" --stop-agents-after="build"
-
-      
-      - run: bun install --no-cache
-      - uses: nrwl/nx-set-shas@v4
-      - run: bun run format:check
-
-      # Set NX_BASE and NX_HEAD explicitly for pull requests
+        # Set NX_BASE and NX_HEAD explicitly for pull requests
       - name: Set NX_BASE and NX_HEAD for PR
         if: github.event_name == 'pull_request'
         run: |
@@ -50,6 +40,11 @@ jobs:
           HEAD_SHA=$(git rev-parse HEAD)
           echo "NX_BASE=$BASE_SHA" >> $GITHUB_ENV
           echo "NX_HEAD=$HEAD_SHA" >> $GITHUB_ENV
+
+      - run: bun install --no-cache
+      - uses: nrwl/nx-set-shas@v4
+      - run: bun run commitlint --from=$NX_BASE --to=$NX_HEAD
+      - run: bun run format:check
 
       # Prepend any command with "nx-cloud record --" to record its logs to Nx Cloud
       # - run: bun nx-cloud record -- echo Hello World
