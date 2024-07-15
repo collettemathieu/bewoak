@@ -1,5 +1,5 @@
-import { Test } from '@nestjs/testing';
 import { beforeAll, describe, expect, test } from 'bun:test';
+import { Test } from '@nestjs/testing';
 
 import { AppService } from './app.service';
 

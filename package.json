@@ -51,7 +51,7 @@
         "lint": "nx run-many --target=lint --parallel=4",
         "nx": "nx",
         "postinstall": "chmod +x .hooks/* && git config core.hooksPath .hooks",
-        "start": "nx serve bewoak-api"
+        "start": "nx serve learning-design"
     },
     "version": "0.0.1"
 }

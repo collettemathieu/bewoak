@@ -1,5 +1,5 @@
-import { Test, type TestingModule } from '@nestjs/testing';
 import { beforeAll, describe, expect, test } from 'bun:test';
+import { Test, type TestingModule } from '@nestjs/testing';
 
 import { AppController } from './app.controller';
 import { AppService } from './app.service';

@@ -1,22 +1,22 @@
 {
-    "name": "bewoak-api",
+    "name": "learning-design",
     "$schema": "../../node_modules/nx/schemas/project-schema.json",
-    "sourceRoot": "apps/bewoak-api/src",
+    "sourceRoot": "apps/learning-design/src",
     "projectType": "application",
-    "tags": ["bewoak-api"],
+    "tags": ["learning-design"],
     "targets": {
         "serve": {
             "executor": "@nx/js:node",
             "defaultConfiguration": "development",
             "options": {
-                "buildTarget": "bewoak-api:build"
+                "buildTarget": "learning-design:build"
             },
             "configurations": {
                 "development": {
-                    "buildTarget": "bewoak-api:build:development"
+                    "buildTarget": "learning-design:build:development"
                 },
                 "production": {
-                    "buildTarget": "bewoak-api:build:production"
+                    "buildTarget": "learning-design:build:production"
                 }
             }
         },

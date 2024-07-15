@@ -1,8 +1,8 @@
+import { strict as assert } from 'node:assert';
+import type { Http2Server } from 'node:http2';
 import type { INestApplication } from '@nestjs/common';
 import { Test } from '@nestjs/testing';
 import { binding, given, then, when } from 'cucumber-tsflow';
-import { strict as assert } from 'node:assert';
-import type { Http2Server } from 'node:http2';
 import request from 'supertest';
 import { AppModule } from '../app/app.module';
 

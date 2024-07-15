@@ -4,6 +4,7 @@
     "esbenp.prettier-vscode",
     "oven.bun-vscode",
     "biomejs.biome",
-    "cucumberopen.cucumber-official"
+    "cucumberopen.cucumber-official",
+    "github.vscode-github-actions"
   ]
 }

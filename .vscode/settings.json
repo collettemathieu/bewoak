@@ -3,10 +3,10 @@
     "bun.debugTerminal.stopOnEntry": false,
     "bun.runtime": "$HOME/.bun/bin/bun",
     "cucumber.features": [
-        "apps/bewoak-api/src/tests/**/*.ts"
+        "apps/learning-design/src/tests/**/*.ts"
     ],
     "cucumber.glue": [
-        "apps/bewoak-api/src/tests/**/*.ts"
+        "apps/learning-design/src/tests/**/*.ts"
     ],
     "editor.codeActionsOnSave": {
         "quickfix.biome": "explicit",

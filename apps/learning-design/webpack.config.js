@@ -3,7 +3,7 @@ const { join } = require('node:path');
 
 module.exports = {
     output: {
-        path: join(__dirname, '../../dist/apps/bewoak-api'),
+        path: join(__dirname, '../../dist/apps/learning-design'),
     },
     plugins: [
         new NxAppWebpackPlugin({
