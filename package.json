@@ -2,6 +2,7 @@
     "dependencies": {
         "@nestjs/common": "^10.0.2",
         "@nestjs/core": "^10.0.2",
+        "@nestjs/cqrs": "^10.2.7",
         "@nestjs/platform-express": "^10.0.2",
         "@nx/nest": "^19.4.2",
         "@swc/cli": "^0.4.0",
@@ -13,6 +14,7 @@
     "devDependencies": {
         "@biomejs/biome": "^1.8.3",
         "@commitlint/config-conventional": "^19.2.2",
+        "@cucumber/cucumber": "^10.8.0",
         "@nestjs/schematics": "^10.0.1",
         "@nestjs/testing": "^10.0.2",
         "@nx/eslint": "19.4.2",
@@ -27,31 +29,33 @@
         "@types/bun": "^1.1.6",
         "@types/node": "~18.16.9",
         "@types/supertest": "^6.0.2",
-        "@typescript-eslint/eslint-plugin": "^7.3.0",
-        "@typescript-eslint/parser": "^7.3.0",
         "bun-types": "^1.1.18",
         "chokidar": "^3.6.0",
         "commitlint": "^19.3.0",
-        "cucumber": "^6.0.7",
         "cucumber-tsflow": "^4.4.4",
         "nx": "19.4.2",
         "supertest": "^7.0.0",
         "typescript": "~5.4.2",
+        "verdaccio": "^5.0.4",
         "webpack-cli": "^5.1.4"
     },
     "license": "MIT",
-    "name": "@bewoak/source",
+    "name": "bewoak",
+    "nx": {
+        "includedScripts": []
+    },
     "private": true,
     "scripts": {
         "biome": "biome",
         "build": "nx run-many --target=build --parallel=4",
-        "e2e": "cucumber-js",
         "format": "biome format --write",
         "format:check": "biome format",
         "lint": "nx run-many --target=lint --parallel=4",
         "nx": "nx",
         "postinstall": "chmod +x .hooks/* && git config core.hooksPath .hooks",
-        "start": "nx serve learning-design"
+        "start": "nx serve pathway-design-server",
+        "test": "nx run-many --target=test --parallel=4",
+        "test:feature": "nx run-many --target=test-feature --parallel=4"
     },
     "version": "0.0.1"
 }

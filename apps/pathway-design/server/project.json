@@ -1,0 +1,42 @@
+{
+    "name": "pathway-design-server",
+    "$schema": "../../../node_modules/nx/schemas/project-schema.json",
+    "sourceRoot": "apps/pathway-design/server/src",
+    "projectType": "application",
+    "tags": ["pathway-design-server"],
+    "targets": {
+        "serve": {
+            "executor": "@nx/js:node",
+            "defaultConfiguration": "development",
+            "options": {
+                "buildTarget": "pathway-design-server:build"
+            },
+            "configurations": {
+                "development": {
+                    "buildTarget": "pathway-design-server:build:development"
+                },
+                "production": {
+                    "buildTarget": "pathway-design-server:build:production"
+                }
+            }
+        },
+        "lint": {
+            "executor": "nx:run-commands",
+            "options": {
+                "command": "bun run biome check --write {projectRoot} --config-path={projectRoot}/biome.json"
+            }
+        },
+        "test": {
+            "executor": "nx:run-commands",
+            "options": {
+                "command": "bun test --coverage --coverage-dir=dist/reports/{projectRoot}/coverage --coverage-reporter=lcov {projectRoot}"
+            }
+        },
+        "test-feature": {
+            "executor": "nx:run-commands",
+            "options": {
+                "command": "TS_NODE_PROJECT='{projectRoot}/tsconfig.spec.json' bun run cucumber-js --config={projectRoot}/cucumber.js"
+            }
+        }
+    }
+}

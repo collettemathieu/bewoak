@@ -33,6 +33,15 @@
             "recommended": true,
             "suspicious": {
                 "noConsoleLog": "error"
+            },
+            "correctness": {
+                "noUnusedVariables": {
+                    "level": "error",
+                    "fix": "none"
+                },
+                "noVoidTypeReturn": {
+                    "level": "error"
+                }
             }
         }
     },

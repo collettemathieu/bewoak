@@ -5,6 +5,7 @@
     "oven.bun-vscode",
     "biomejs.biome",
     "cucumberopen.cucumber-official",
-    "github.vscode-github-actions"
+    "github.vscode-github-actions",
+    "tamasfe.even-better-toml"
   ]
 }

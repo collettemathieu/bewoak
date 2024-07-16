@@ -3,10 +3,11 @@
     "bun.debugTerminal.stopOnEntry": false,
     "bun.runtime": "$HOME/.bun/bin/bun",
     "cucumber.features": [
-        "apps/learning-design/src/tests/**/*.ts"
+        "libs/**/*.ts",
+        "libs/**/*.feature",
     ],
     "cucumber.glue": [
-        "apps/learning-design/src/tests/**/*.ts"
+        "libs/**/*.ts"
     ],
     "editor.codeActionsOnSave": {
         "quickfix.biome": "explicit",
