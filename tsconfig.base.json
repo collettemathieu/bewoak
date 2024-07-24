@@ -15,6 +15,15 @@
             ],
             "@bewoak/pathway-design-server-pathway-business": [
                 "libs/pathway-design/server/pathway/business/src/index.ts"
+            ],
+            "@bewoak/pathway-design-server-pathway-infrastructure": [
+                "libs/pathway-design/server/pathway/infrastructure/src/index.ts"
+            ],
+            "@bewoak/pathway-design-server-pathway-presenters": [
+                "libs/pathway-design/server/pathway/presenters/src/index.ts"
+            ],
+            "@bewoak/pathway-design-server-pathway-interface-adapters": [
+                "libs/pathway-design/server/pathway/interface-adapters/src/index.ts"
             ]
         },
         "rootDir": ".",

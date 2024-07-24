@@ -1,6 +1,11 @@
-export { PathwayDesignServerPathwayBusinessEntitiesPathway } from './lib/entities/pathway';
+export { PDSPBEPathwayEntity } from './lib/entities/pathway';
+export { PDSPBFpathwayFactory } from './lib/factories/pathway';
 export {
-    PATHWAY_DESIGN_SERVER_PATHWAY_BUSINESS_PORTS_INIT_PATHWAY_MEMORY,
-    type PathwayDesignServerPathwayBusinessPortsInitPathwayMemory,
-} from './lib/ports/initialize/index.memory';
-export { PathwayDesignServerPathwayBusinessUsecasesInitPathway } from './lib/usecases/intialize/index.usecase';
+    PDSPBP_HTTP_PATHWAY_PORT,
+    type PDSPBPHttpPathwayPort,
+} from './lib/ports/http/http-pathway.port';
+export {
+    PDSPBP_INIT_PATHWAY_MEMORY_PORT,
+    type PDSPBPInitPathwayMemoryPort,
+} from './lib/ports/initialize/init-port-memory.port';
+export { PDSPBUInitPathwayUsecase } from './lib/usecases/intialize/init-pathway.usecase';

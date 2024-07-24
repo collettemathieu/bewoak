@@ -1,0 +1,65 @@
+import { strict as assert } from 'node:assert';
+import type { Http2Server } from 'node:http2';
+import { PDSPIPathwayInfrastructureModule } from '@bewoak/pathway-design-server-pathway-infrastructure';
+import { PDSPIAInitializePathwayInterfaceAdaptersModule } from '@bewoak/pathway-design-server-pathway-interface-adapters';
+import { PDSPPPathwayPresentersModule } from '@bewoak/pathway-design-server-pathway-presenters';
+import type { DataTable } from '@cucumber/cucumber';
+import type { INestApplication } from '@nestjs/common';
+import { CqrsModule } from '@nestjs/cqrs';
+import { Test } from '@nestjs/testing';
+import { binding, given, then, when } from 'cucumber-tsflow';
+import request from 'supertest';
+
+@binding()
+class ControllerSteps {
+    private app: INestApplication;
+    private response: request.Response;
+    private httpServer: Http2Server;
+
+    @given('I am authenticated on the platform')
+    public async givenAmIAuthenticatedOnThePlatform() {
+        const module = await Test.createTestingModule({
+            imports: [
+                PDSPIAInitializePathwayInterfaceAdaptersModule.withInfrastructure(
+                    PDSPIPathwayInfrastructureModule.use('inMemory')
+                )
+                    .withPresenter(PDSPPPathwayPresentersModule.use('http'))
+                    .build(),
+                CqrsModule.forRoot(),
+            ],
+        }).compile();
+
+        this.app = module.createNestApplication();
+        await this.app.init();
+        this.httpServer = this.app.getHttpServer();
+    }
+
+    @when('I want to initialize a pathway with these data')
+    public async whenIInitiateAPathway(dataTable: DataTable) {
+        const firstRow = dataTable.hashes()[0];
+
+        this.response = await request(this.httpServer)
+            .post('/pathway/init')
+            .send({
+                title: firstRow.title,
+                description: firstRow.description,
+                researchField: firstRow.researchField,
+            });
+    }
+
+    @then('I should retrieve a pathway initialized with its data')
+    public thenIShouldSeeAPathwayInitiated(dataTable: DataTable) {
+        const firstRow = dataTable.hashes()[0];
+
+        assert.equal(this.response.body.title, firstRow.title);
+        assert.equal(this.response.body.description, firstRow.description);
+        assert.equal(this.response.body.researchField, firstRow.researchField);
+    }
+
+    @then('The pathway should be have a unique identifier')
+    public thenThePathwayIdentifierShouldBeUnique() {
+        assert.notEqual(this.response.body.id, undefined);
+    }
+}
+
+export = ControllerSteps;
