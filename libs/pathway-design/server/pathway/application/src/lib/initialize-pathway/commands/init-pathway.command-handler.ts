@@ -1,5 +1,7 @@
 import {
+    type PDSPBPHttpPathwayPort,
     type PDSPBPInitPathwayMemoryPort,
+    PDSPBP_HTTP_PATHWAY_PORT,
     PDSPBP_INIT_PATHWAY_MEMORY_PORT,
 } from '@bewoak/pathway-design-server-pathway-business';
 
@@ -18,13 +20,16 @@ export class PDSPAInitPathwayCommandHandler
         @Inject(PDSPBUInitPathwayUsecase)
         private readonly PDSPBUinitPathwayUseCase: PDSPBUInitPathwayUsecase,
         @Inject(PDSPBP_INIT_PATHWAY_MEMORY_PORT)
-        private readonly PDSPBPinitPathwayMemoryPort: PDSPBPInitPathwayMemoryPort
+        private readonly PDSPBPinitPathwayMemoryPort: PDSPBPInitPathwayMemoryPort,
+        @Inject(PDSPBP_HTTP_PATHWAY_PORT)
+        private readonly pDSPBPHttpPathwayPort: PDSPBPHttpPathwayPort
     ) {}
 
     execute(pDSPAInitPathwayCommand: PDSPAInitPathwayCommand) {
         return firstValueFrom(
             this.PDSPBUinitPathwayUseCase.execute(
                 this.PDSPBPinitPathwayMemoryPort,
+                this.pDSPBPHttpPathwayPort,
                 {
                     title: pDSPAInitPathwayCommand.title,
                     description: pDSPAInitPathwayCommand.description,

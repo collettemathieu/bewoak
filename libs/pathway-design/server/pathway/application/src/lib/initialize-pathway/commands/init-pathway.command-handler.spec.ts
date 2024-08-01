@@ -1,11 +1,14 @@
 import {
-    PDSPBEPathwayEntity,
+    type PDSPBEPathwayEntity,
+    type PDSPBPHttpPathwayPort,
+    type PDSPBPHttpPathwayPortOutput,
     type PDSPBPInitPathwayMemoryPort,
+    PDSPBP_HTTP_PATHWAY_PORT,
     PDSPBP_INIT_PATHWAY_MEMORY_PORT,
 } from '@bewoak/pathway-design-server-pathway-business';
 
-import { Test } from '@nestjs/testing';
 import { beforeEach, describe, expect, spyOn, test } from 'bun:test';
+import { Test } from '@nestjs/testing';
 
 import { PDSPBUInitPathwayUsecase } from '@bewoak/pathway-design-server-pathway-business';
 import { type Observable, of } from 'rxjs';
@@ -19,11 +22,22 @@ class InitPathwayMemory implements PDSPBPInitPathwayMemoryPort {
         return of(PDSPBEpathwayEntity);
     }
 }
+class PathwayPresenter implements PDSPBPHttpPathwayPort {
+    present(PDSPBEpathwayEntity: PDSPBEPathwayEntity) {
+        return {
+            description: PDSPBEpathwayEntity.description?.value ?? '',
+            id: PDSPBEpathwayEntity.id?.value ?? '',
+            researchField: PDSPBEpathwayEntity.researchField?.value ?? '',
+            title: PDSPBEpathwayEntity.title?.value ?? '',
+        };
+    }
+}
 
 describe('PDSPAInitPathwayCommandHandler', () => {
     let pDSPAInitPathwayCommandHandler: PDSPAInitPathwayCommandHandler;
     let PDSPBUinitPathwayUseCase: PDSPBUInitPathwayUsecase;
     let initPathwayMemory: PDSPBPInitPathwayMemoryPort;
+    let pathwayPresenter: PDSPBPHttpPathwayPort;
 
     beforeEach(async () => {
         const module = await Test.createTestingModule({
@@ -33,6 +47,10 @@ describe('PDSPAInitPathwayCommandHandler', () => {
                 {
                     provide: PDSPBP_INIT_PATHWAY_MEMORY_PORT,
                     useExisting: InitPathwayMemory,
+                },
+                {
+                    provide: PDSPBP_HTTP_PATHWAY_PORT,
+                    useClass: PathwayPresenter,
                 },
                 PDSPBUInitPathwayUsecase,
             ],
@@ -48,6 +66,9 @@ describe('PDSPAInitPathwayCommandHandler', () => {
         initPathwayMemory = module.get<PDSPBPInitPathwayMemoryPort>(
             PDSPBP_INIT_PATHWAY_MEMORY_PORT
         );
+        pathwayPresenter = module.get<PDSPBPHttpPathwayPort>(
+            PDSPBP_HTTP_PATHWAY_PORT
+        );
     });
 
     test('should be defined', () => {
@@ -60,7 +81,7 @@ describe('PDSPAInitPathwayCommandHandler', () => {
             'research field',
             'pathway title'
         );
-        let result: Promise<PDSPBEPathwayEntity>;
+        let result: Promise<PDSPBPHttpPathwayPortOutput>;
 
         beforeEach(async () => {
             spyOn(PDSPBUinitPathwayUseCase, 'execute');
@@ -71,6 +92,7 @@ describe('PDSPAInitPathwayCommandHandler', () => {
             expect(PDSPBUinitPathwayUseCase.execute).toHaveBeenCalledTimes(1);
             expect(PDSPBUinitPathwayUseCase.execute).toHaveBeenCalledWith(
                 initPathwayMemory,
+                pathwayPresenter,
                 {
                     title: command.title,
                     description: command.description,
@@ -79,23 +101,12 @@ describe('PDSPAInitPathwayCommandHandler', () => {
             );
         });
 
-        test('should return a pathway', async (done) => {
-            expect(result).toBeDefined();
-            result.then((pathway) => {
-                expect(pathway).toBeInstanceOf(PDSPBEPathwayEntity);
-                done();
-            });
-        });
-
-        test('should return a pathway with the correct data', async (done) => {
-            result.then((pathway) => {
-                expect(
-                    pathway.equals({
-                        description: pathway.description?.value ?? '',
-                        researchField: pathway.researchField?.value ?? '',
-                        title: pathway.title?.value ?? '',
-                    })
-                ).toBe(true);
+        test('should receive the attributes of the pathway', async (done) => {
+            result.then((data) => {
+                expect(data).toBeDefined();
+                expect(data.title).toBe(command.title);
+                expect(data.description).toBe(command.description);
+                expect(data.researchField).toBe(command.researchField);
                 done();
             });
         });
@@ -107,21 +118,18 @@ describe('PDSPAInitPathwayCommandHandler', () => {
             'pharmacology',
             'My pathway'
         );
-        let result: Promise<PDSPBEPathwayEntity>;
+        let result: Promise<PDSPBPHttpPathwayPortOutput>;
 
         beforeEach(async () => {
             result = pDSPAInitPathwayCommandHandler.execute(command);
         });
 
-        test('should return a pathway with the correct data', async (done) => {
-            result.then((pathway) => {
-                expect(
-                    pathway.equals({
-                        description: pathway.description?.value ?? '',
-                        researchField: pathway.researchField?.value ?? '',
-                        title: pathway.title?.value ?? '',
-                    })
-                ).toBe(true);
+        test('should receive a pathway with its correct attributes', async (done) => {
+            result.then((data) => {
+                expect(data).toBeDefined();
+                expect(data.title).toBe(command.title);
+                expect(data.description).toBe(command.description);
+                expect(data.researchField).toBe(command.researchField);
                 done();
             });
         });
