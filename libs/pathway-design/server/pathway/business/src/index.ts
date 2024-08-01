@@ -9,4 +9,4 @@ export {
     PDSPBP_INIT_PATHWAY_MEMORY_PORT,
     type PDSPBPInitPathwayMemoryPort,
 } from './lib/ports/initialize/init-port-memory.port';
-export { PDSPBUInitPathwayUsecase } from './lib/usecases/intialize/init-pathway.usecase';
+export { PDSPBUInitPathwayUsecase } from './lib/usecases/initialize/init-pathway.usecase';

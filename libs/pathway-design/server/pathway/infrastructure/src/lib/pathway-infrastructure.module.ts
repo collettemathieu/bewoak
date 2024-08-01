@@ -1,5 +1,5 @@
 import { Module } from '@nestjs/common';
-import { PDSPIIPPInitPathwayInMemoryPersistenceModule } from './initialize-pathway/persistence/in-memory/init-pathway-in-memory-persistence.module';
+import { PDSPIIPPInitPathwayInMemoryPersistenceModule } from './initialize/persistence/in-memory/init-pathway-in-memory-persistence.module';
 
 const persistenceDriverModuleMap: Record<
     'inMemory',

@@ -1,1 +1,1 @@
-export { PDSPIAInitializePathwayInterfaceAdaptersModule } from './lib/initialize-pathway/initialize-pathway-interface-adapters.module';
+export { PDSPIAInitializePathwayInterfaceAdaptersModule } from './lib/initialize/initialize-pathway-interface-adapters.module';

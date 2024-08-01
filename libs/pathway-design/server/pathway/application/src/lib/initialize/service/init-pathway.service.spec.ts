@@ -1,8 +1,8 @@
-import { beforeEach, describe, expect, mock, test } from 'bun:test';
 import type { PDSPBEPathwayEntity } from '@bewoak/pathway-design-server-pathway-business';
 import { CommandBus } from '@nestjs/cqrs';
 import { Test } from '@nestjs/testing';
-import { PDSPAInitPathwayCommand } from '../commands/init-pathway.command';
+import { beforeEach, describe, expect, mock, test } from 'bun:test';
+import { PDSPAInitPathwayCommand } from '../command/init-pathway.command';
 import { PDSPAInitializePathwayService } from './init-pathway.service';
 
 describe('PDSPAInitializePathwayService', () => {

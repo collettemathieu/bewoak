@@ -3,7 +3,7 @@ import {
     PDSPAInitializePathwayService,
 } from '@bewoak/pathway-design-server-pathway-application';
 import { Body, Controller, Inject, Post } from '@nestjs/common';
-import type { InitializePathwayRequestBodyDto } from '../dtos/request/body/initialize-pathway.dto';
+import type { InitializePathwayRequestBodyDto } from '../dtos/request/body/initialize-pathway-request-body.dto';
 
 @Controller('pathway')
 export class InitializePathwayController {
