@@ -1,4 +1,4 @@
-export class InMemoryPathwayEntity {
+export class PathwayInMemoryEntity {
     constructor(
         public id: string,
         public description: string,

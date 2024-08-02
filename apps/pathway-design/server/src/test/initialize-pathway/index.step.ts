@@ -1,6 +1,6 @@
 import { strict as assert } from 'node:assert';
 import type { Http2Server } from 'node:http2';
-import { PDSPIPathwayInfrastructureModule } from '@bewoak/pathway-design-server-pathway-infrastructure';
+import { PDSPIInitializePathwayPersistenceInfrastructureModule } from '@bewoak/pathway-design-server-pathway-infrastructure';
 import { PDSPIAInitializePathwayInterfaceAdaptersModule } from '@bewoak/pathway-design-server-pathway-interface-adapters';
 import { PDSPPPathwayPresentersModule } from '@bewoak/pathway-design-server-pathway-presenters';
 import type { DataTable } from '@cucumber/cucumber';
@@ -20,8 +20,10 @@ class ControllerSteps {
     public async givenAmIAuthenticatedOnThePlatform() {
         const module = await Test.createTestingModule({
             imports: [
-                PDSPIAInitializePathwayInterfaceAdaptersModule.withInfrastructure(
-                    PDSPIPathwayInfrastructureModule.use('inMemory')
+                PDSPIAInitializePathwayInterfaceAdaptersModule.withPersistence(
+                    PDSPIInitializePathwayPersistenceInfrastructureModule.use(
+                        'inMemory'
+                    )
                 )
                     .withPresenter(PDSPPPathwayPresentersModule.use('http'))
                     .build(),

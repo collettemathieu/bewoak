@@ -1,1 +1,1 @@
-export { PDSPIPathwayInfrastructureModule } from './lib/pathway-infrastructure.module';
+export { PDSPIInitializePathwayPersistenceInfrastructureModule } from './lib/persistence/initialize/initialize-pathway-persistence-infrastructure.module';

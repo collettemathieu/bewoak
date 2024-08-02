@@ -1,12 +1,10 @@
 import { Module } from '@nestjs/common';
-import { PDSPPHttpPathwayPresentersModule } from './http/http-pathway-presenters.module';
+import { ToJsonPathwayPresenterModule } from './toJson/to-json-pathway-presenter.module';
 
-const presenterModuleMap: Record<
-    'http',
-    typeof PDSPPHttpPathwayPresentersModule
-> = {
-    http: PDSPPHttpPathwayPresentersModule,
-};
+const presenterModuleMap: Record<'http', typeof ToJsonPathwayPresenterModule> =
+    {
+        http: ToJsonPathwayPresenterModule,
+    };
 
 type PresenterDriverAuthorized = keyof typeof presenterModuleMap;
 
@@ -14,12 +12,12 @@ type PresenterDriverAuthorized = keyof typeof presenterModuleMap;
 // biome-ignore lint/complexity/noStaticOnlyClass: not pertinent here because this is a module
 export class PDSPPPathwayPresentersModule {
     static use(driver: PresenterDriverAuthorized) {
-        const persistenceModule = presenterModuleMap[driver];
+        const presenterModule = presenterModuleMap[driver];
 
         return {
             module: PDSPPPathwayPresentersModule,
-            imports: [persistenceModule],
-            exports: [persistenceModule],
+            imports: [presenterModule],
+            exports: [presenterModule],
         };
     }
 }

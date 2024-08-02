@@ -1,12 +1,12 @@
 export { PDSPBEPathwayEntity } from './lib/entities/pathway';
 export { PDSPBFpathwayFactory } from './lib/factories/pathway';
 export {
-    PDSPBP_HTTP_PATHWAY_PORT,
-    type PDSPBPHttpPathwayPort,
-    type PDSPBPHttpPathwayPortOutput,
-} from './lib/ports/http/http-pathway.port';
+    PDSPBP_INITIALIZE_PATHWAY_PERSISTENCE_PORT,
+    type PDSPBPInitializePathwayPersistencePort,
+} from './lib/ports/persistences/initialize/initialize-pathway-persitence.port';
 export {
-    PDSPBP_INIT_PATHWAY_MEMORY_PORT,
-    type PDSPBPInitPathwayMemoryPort,
-} from './lib/ports/initialize/init-port-memory.port';
-export { PDSPBUInitPathwayUsecase } from './lib/usecases/initialize/init-pathway.usecase';
+    PDSPBP_TO_JSON_PATHWAY_PRESENTER_PORT,
+    type PDSPBPToJsonPathwayPresenterPort,
+    type PDSPBPToJsonPathwayPresenterPortOutput,
+} from './lib/ports/presenters/to-json-pathway.port';
+export { PDSPBUInitializePathwayUsecase } from './lib/usecases/initialize/initialize-pathway.usecase';

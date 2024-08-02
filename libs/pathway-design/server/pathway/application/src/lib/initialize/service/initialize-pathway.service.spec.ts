@@ -1,9 +1,9 @@
+import { beforeEach, describe, expect, mock, test } from 'bun:test';
 import type { PDSPBEPathwayEntity } from '@bewoak/pathway-design-server-pathway-business';
 import { CommandBus } from '@nestjs/cqrs';
 import { Test } from '@nestjs/testing';
-import { beforeEach, describe, expect, mock, test } from 'bun:test';
-import { PDSPAInitPathwayCommand } from '../command/init-pathway.command';
-import { PDSPAInitializePathwayService } from './init-pathway.service';
+import { PDSPAInitializePathwayCommand } from '../command/initialize-pathway.command';
+import { PDSPAInitializePathwayService } from './initialize-pathway.service';
 
 describe('PDSPAInitializePathwayService', () => {
     let service: PDSPAInitializePathwayService;
@@ -30,7 +30,7 @@ describe('PDSPAInitializePathwayService', () => {
 
     describe('When I initialize a pathway', () => {
         let pathway: PDSPBEPathwayEntity;
-        const PDSPAinitPathwayCommand = new PDSPAInitPathwayCommand(
+        const PDSPAinitPathwayCommand = new PDSPAInitializePathwayCommand(
             'My pathway',
             'Pathway description',
             'biomedicine'

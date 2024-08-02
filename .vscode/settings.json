@@ -2,13 +2,11 @@
     "bun.debugTerminal.enabled": true,
     "bun.debugTerminal.stopOnEntry": false,
     "bun.runtime": "$HOME/.bun/bin/bun",
-    "cucumber.features": [
-        "libs/**/*.ts",
-        "libs/**/*.feature",
-    ],
-    "cucumber.glue": [
+    "cucumberautocomplete.steps": [
+        "apps/**/*.ts",
         "libs/**/*.ts"
     ],
+    "cucumberautocomplete.strictGherkinCompletion": true,
     "editor.codeActionsOnSave": {
         "quickfix.biome": "explicit",
         "source.organizeImports": "explicit",

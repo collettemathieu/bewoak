@@ -1,38 +1,39 @@
 import { strict as assert } from 'node:assert';
 
+import type { PDSPBPInitializePathwayPersistencePort } from '@bewoak/pathway-design-server-pathway-business';
 import type { DataTable } from '@cucumber/cucumber';
 import { binding, then, when } from 'cucumber-tsflow';
-import { firstValueFrom, of } from 'rxjs';
 import type { PDSPBEPathwayEntity } from '../../entities/pathway';
 import type { PathwayInitDto } from '../../factories/pathway.dto';
 import type {
-    PDSPBPHttpPathwayPort,
-    PDSPBPHttpPathwayPortOutput,
-} from '../../ports/http/http-pathway.port';
-import type { PDSPBPInitPathwayMemoryPort } from '../../ports/initialize/init-port-memory.port';
-import { PDSPBUInitPathwayUsecase } from './init-pathway.usecase';
+    PDSPBPToJsonPathwayPresenterPort,
+    PDSPBPToJsonPathwayPresenterPortOutput,
+} from '../../ports/presenters/to-json-pathway.port';
+import { PDSPBUInitializePathwayUsecase } from './initialize-pathway.usecase';
 
-class InitPathwayMemory implements PDSPBPInitPathwayMemoryPort {
-    save(PDSPBEpathwayEntity: PDSPBEPathwayEntity) {
-        return of(PDSPBEpathwayEntity);
+class InitializePathwayPersistence
+    implements PDSPBPInitializePathwayPersistencePort
+{
+    save(pDSPBEPathwayEntity: PDSPBEPathwayEntity) {
+        return Promise.resolve(pDSPBEPathwayEntity);
     }
 }
 
-class PathwayPresenter implements PDSPBPHttpPathwayPort {
-    present(PDSPBEpathwayEntity: PDSPBEPathwayEntity) {
+class ToJsonPathwayPresenter implements PDSPBPToJsonPathwayPresenterPort {
+    present(pDSPBEPathwayEntity: PDSPBEPathwayEntity) {
         return {
-            description: PDSPBEpathwayEntity.description?.value ?? '',
-            id: PDSPBEpathwayEntity.id?.value ?? '',
-            researchField: PDSPBEpathwayEntity.researchField?.value ?? '',
-            title: PDSPBEpathwayEntity.title?.value ?? '',
+            description: pDSPBEPathwayEntity.description?.value ?? '',
+            id: pDSPBEPathwayEntity.id?.value ?? '',
+            researchField: pDSPBEPathwayEntity.researchField?.value ?? '',
+            title: pDSPBEPathwayEntity.title?.value ?? '',
         };
     }
 }
 
 @binding()
 export default class ControllerSteps {
-    private PDSPBUinitPathwayUseCase = new PDSPBUInitPathwayUsecase();
-    private result: PDSPBPHttpPathwayPortOutput | undefined;
+    private pDSPBUInitPathwayUseCase = new PDSPBUInitializePathwayUsecase();
+    private result: PDSPBPToJsonPathwayPresenterPortOutput | undefined;
     private error: Error | undefined;
 
     @when('I want to initialize a pathway with these data')
@@ -40,16 +41,14 @@ export default class ControllerSteps {
         try {
             const firstRow = dataTable.hashes()[0] as PathwayInitDto;
 
-            this.result = await firstValueFrom(
-                this.PDSPBUinitPathwayUseCase.execute(
-                    new InitPathwayMemory(),
-                    new PathwayPresenter(),
-                    {
-                        title: firstRow.title,
-                        description: firstRow.description,
-                        researchField: firstRow.researchField,
-                    }
-                )
+            this.result = await this.pDSPBUInitPathwayUseCase.execute(
+                new InitializePathwayPersistence(),
+                new ToJsonPathwayPresenter(),
+                {
+                    title: firstRow.title,
+                    description: firstRow.description,
+                    researchField: firstRow.researchField,
+                }
             );
         } catch (error) {
             this.error = error as Error;

@@ -1,17 +1,17 @@
 import {
-    PDSPAInitPathwayCommandHandler,
+    PDSPAInitializePathwayCommandHandler,
     PDSPAInitializePathwayService,
 } from '@bewoak/pathway-design-server-pathway-application';
-import { PDSPBUInitPathwayUsecase } from '@bewoak/pathway-design-server-pathway-business';
+import { PDSPBUInitializePathwayUsecase } from '@bewoak/pathway-design-server-pathway-business';
 import { type DynamicModule, Module, type Type } from '@nestjs/common';
 import { InitializePathwayController } from './controller/initialize-pathway.controller';
 
 @Module({
     controllers: [InitializePathwayController],
     providers: [
-        PDSPAInitPathwayCommandHandler,
+        PDSPAInitializePathwayCommandHandler,
         PDSPAInitializePathwayService,
-        PDSPBUInitPathwayUsecase,
+        PDSPBUInitializePathwayUsecase,
     ],
     exports: [PDSPAInitializePathwayService],
 })
@@ -19,9 +19,9 @@ import { InitializePathwayController } from './controller/initialize-pathway.con
 export class PDSPIAInitializePathwayInterfaceAdaptersModule {
     private static imports: Array<Type | DynamicModule> = [];
 
-    static withInfrastructure(infrastructureModule: Type | DynamicModule) {
+    static withPersistence(persistenceModule: Type | DynamicModule) {
         PDSPIAInitializePathwayInterfaceAdaptersModule.imports.push(
-            infrastructureModule
+            persistenceModule
         );
         return PDSPIAInitializePathwayInterfaceAdaptersModule;
     }

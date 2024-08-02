@@ -11,7 +11,7 @@ import { PDSPBUChangeTitlePathwayUseCase } from './change-title-pathway.usecase'
 export default class ControllerSteps {
     private PDSPBUchangeTitlePathwayUseCase =
         new PDSPBUChangeTitlePathwayUseCase();
-    private PDSPBEpathwayEntity: PDSPBEPathwayEntity =
+    private pDSPBEPathwayEntity: PDSPBEPathwayEntity =
         new PDSPBEPathwayEntity();
     private error: Error | undefined;
 
@@ -19,7 +19,7 @@ export default class ControllerSteps {
     public givenIHaveAPathway(dataTable: DataTable) {
         const firstRow = dataTable.hashes()[0] as PathwayInitDto;
 
-        this.PDSPBEpathwayEntity = PDSPBFpathwayFactory({
+        this.pDSPBEPathwayEntity = PDSPBFpathwayFactory({
             title: firstRow.title,
             description: firstRow.description,
             researchField: firstRow.researchField,
@@ -30,7 +30,7 @@ export default class ControllerSteps {
     public whenIChangeTheTitleOfThePathwayTo(title: string) {
         try {
             this.PDSPBUchangeTitlePathwayUseCase.execute({
-                pathway: this.PDSPBEpathwayEntity,
+                pathway: this.pDSPBEPathwayEntity,
                 title,
             });
         } catch (error) {
@@ -40,7 +40,7 @@ export default class ControllerSteps {
 
     @then('I should see the title of the pathway changed to {string}')
     public thenIShouldSeeTheTitleOfThePathwayChangedTo(title: string) {
-        assert.equal(this.PDSPBEpathwayEntity?.title?.value, title);
+        assert.equal(this.pDSPBEPathwayEntity?.title?.value, title);
     }
 
     @then('I should see an error message {string} during the title change')

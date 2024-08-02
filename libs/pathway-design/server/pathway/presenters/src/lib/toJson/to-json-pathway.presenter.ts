@@ -1,11 +1,13 @@
 import type {
     PDSPBEPathwayEntity,
-    PDSPBPHttpPathwayPort,
+    PDSPBPToJsonPathwayPresenterPort,
 } from '@bewoak/pathway-design-server-pathway-business';
 import { Injectable } from '@nestjs/common';
 
 @Injectable()
-export class PDSPPHttpPathwayPresenter implements PDSPBPHttpPathwayPort {
+export class ToJsonPathwayPresenter
+    implements PDSPBPToJsonPathwayPresenterPort
+{
     present(pDSPBEPathwayEntity: PDSPBEPathwayEntity) {
         return {
             description: pDSPBEPathwayEntity.description?.value ?? '',

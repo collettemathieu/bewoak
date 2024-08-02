@@ -1,5 +1,5 @@
 import {
-    PDSPAInitPathwayCommand,
+    PDSPAInitializePathwayCommand,
     PDSPAInitializePathwayService,
 } from '@bewoak/pathway-design-server-pathway-application';
 import { Body, Controller, Inject, Post } from '@nestjs/common';
@@ -17,7 +17,7 @@ export class InitializePathwayController {
         @Body() initializePathwayRequestBodyDto: InitializePathwayRequestBodyDto
     ) {
         return this.pDSPAInitializePathwayService.init(
-            new PDSPAInitPathwayCommand(
+            new PDSPAInitializePathwayCommand(
                 initializePathwayRequestBodyDto.description,
                 initializePathwayRequestBodyDto.researchField,
                 initializePathwayRequestBodyDto.title
