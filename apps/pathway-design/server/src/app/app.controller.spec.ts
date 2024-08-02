@@ -17,7 +17,9 @@ describe('AppController', () => {
     describe('getData', () => {
         test('should return "Hello API"', () => {
             const appController = app.get<AppController>(AppController);
-            expect(appController.getData()).toEqual({ message: 'Hello API' });
+            expect(appController.getData()).toStrictEqual({
+                message: 'Hello API',
+            });
         });
     });
 });

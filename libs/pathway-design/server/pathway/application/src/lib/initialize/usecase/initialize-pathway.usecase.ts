@@ -1,9 +1,10 @@
-import { PDSPBFpathwayFactory } from '../../factories/pathway';
+import {
+    type PDSPBPInitializePathwayPersistencePort,
+    type PDSPBPToJsonPathwayPresenterPort,
+    pDSPBFPathwayFactory,
+} from '@bewoak/pathway-design-server-pathway-business';
 
-import type { PDSPBPInitializePathwayPersistencePort } from '@bewoak/pathway-design-server-pathway-business';
-import type { PDSPBPToJsonPathwayPresenterPort } from '../../ports/presenters/to-json-pathway.port';
-
-export class PDSPBUInitializePathwayUsecase {
+export class PDSPAIUInitializePathwayUsecase {
     async execute(
         pDSPBPInitializePathwayPersistencePort: PDSPBPInitializePathwayPersistencePort,
         pDSPBPToJsonPathwayPresenterPort: PDSPBPToJsonPathwayPresenterPort,
@@ -17,7 +18,7 @@ export class PDSPBUInitializePathwayUsecase {
             researchField: string;
         }
     ) {
-        const pathway = PDSPBFpathwayFactory({
+        const pathway = pDSPBFPathwayFactory({
             title,
             description,
             researchField,

@@ -8,13 +8,11 @@ Feature: Initiate a pathway
       | title       | description      | researchField |
       | My Pathway  | A test pathway   | biology |
 
-
   Scenario: I want to initialize a pathway with an empty title
     When I want to initialize a pathway with these data
       | title       | description      | researchField |
       |             | A test pathway   | biology |
     Then I should see an error message "Title is required" during initialization of the pathway
-
 
   Scenario: I want to initialize a pathway with an empty description
     When I want to initialize a pathway with these data

@@ -1,4 +1,4 @@
-export class TitleValueObjects {
+export class PDSPBVOTitleValueObjects {
     constructor(private title: string) {
         if (this.isEmpty(title)) {
             throw new Error('Title is required');
@@ -9,7 +9,7 @@ export class TitleValueObjects {
         return this.title;
     }
 
-    equals(title: TitleValueObjects) {
+    equals(title: PDSPBVOTitleValueObjects) {
         return this.title === title.value;
     }
 

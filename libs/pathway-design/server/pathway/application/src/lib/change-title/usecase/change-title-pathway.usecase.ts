@@ -1,5 +1,7 @@
-import type { PDSPBEPathwayEntity } from '../../entities/pathway';
-import { TitleValueObjects } from '../../value-objects/title.value-object';
+import {
+    type PDSPBEPathwayEntity,
+    PDSPBVOTitleValueObjects,
+} from '@bewoak/pathway-design-server-pathway-business';
 
 export class PDSPBUChangeTitlePathwayUseCase {
     execute({
@@ -9,7 +11,7 @@ export class PDSPBUChangeTitlePathwayUseCase {
         pathway: PDSPBEPathwayEntity;
         title: string;
     }) {
-        const newTitle = new TitleValueObjects(title);
+        const newTitle = new PDSPBVOTitleValueObjects(title);
         pathway.changeTitle(newTitle);
     }
 }

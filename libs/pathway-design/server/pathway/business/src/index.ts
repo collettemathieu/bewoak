@@ -1,5 +1,6 @@
 export { PDSPBEPathwayEntity } from './lib/entities/pathway';
-export { PDSPBFpathwayFactory } from './lib/factories/pathway';
+export { pDSPBFPathwayFactory } from './lib/factories/pathway';
+export { type PDSPBFPathwayFactoryParams } from './lib/factories/pathway.types';
 export {
     PDSPBP_INITIALIZE_PATHWAY_PERSISTENCE_PORT,
     type PDSPBPInitializePathwayPersistencePort,
@@ -9,4 +10,4 @@ export {
     type PDSPBPToJsonPathwayPresenterPort,
     type PDSPBPToJsonPathwayPresenterPortOutput,
 } from './lib/ports/presenters/to-json-pathway.port';
-export { PDSPBUInitializePathwayUsecase } from './lib/usecases/initialize/initialize-pathway.usecase';
+export { PDSPBVOTitleValueObjects } from './lib/value-objects/title.value-object';

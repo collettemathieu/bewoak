@@ -1,15 +1,15 @@
 import { strict as assert } from 'node:assert';
 
-import type { PDSPBPInitializePathwayPersistencePort } from '@bewoak/pathway-design-server-pathway-business';
-import type { DataTable } from '@cucumber/cucumber';
-import { binding, then, when } from 'cucumber-tsflow';
-import type { PDSPBEPathwayEntity } from '../../entities/pathway';
-import type { PathwayInitDto } from '../../factories/pathway.dto';
 import type {
+    PDSPBEPathwayEntity,
+    PDSPBFPathwayFactoryParams,
+    PDSPBPInitializePathwayPersistencePort,
     PDSPBPToJsonPathwayPresenterPort,
     PDSPBPToJsonPathwayPresenterPortOutput,
-} from '../../ports/presenters/to-json-pathway.port';
-import { PDSPBUInitializePathwayUsecase } from './initialize-pathway.usecase';
+} from '@bewoak/pathway-design-server-pathway-business';
+import type { DataTable } from '@cucumber/cucumber';
+import { binding, then, when } from 'cucumber-tsflow';
+import { PDSPAIUInitializePathwayUsecase } from './initialize-pathway.usecase';
 
 class InitializePathwayPersistence
     implements PDSPBPInitializePathwayPersistencePort
@@ -32,14 +32,15 @@ class ToJsonPathwayPresenter implements PDSPBPToJsonPathwayPresenterPort {
 
 @binding()
 export default class ControllerSteps {
-    private pDSPBUInitPathwayUseCase = new PDSPBUInitializePathwayUsecase();
+    private pDSPBUInitPathwayUseCase = new PDSPAIUInitializePathwayUsecase();
     private result: PDSPBPToJsonPathwayPresenterPortOutput | undefined;
     private error: Error | undefined;
 
     @when('I want to initialize a pathway with these data')
     public async whenIInitiateAPathway(dataTable: DataTable) {
         try {
-            const firstRow = dataTable.hashes()[0] as PathwayInitDto;
+            const firstRow =
+                dataTable.hashes()[0] as PDSPBFPathwayFactoryParams;
 
             this.result = await this.pDSPBUInitPathwayUseCase.execute(
                 new InitializePathwayPersistence(),
@@ -57,11 +58,11 @@ export default class ControllerSteps {
 
     @then('I should receive the attributes of the pathway')
     public thenIShouldReceiveAttributesPathway(dataTable: DataTable) {
-        const firstRow = dataTable.hashes()[0] as PathwayInitDto;
+        const firstRow = dataTable.hashes()[0] as PDSPBFPathwayFactoryParams;
 
-        assert.equal(this.result?.title, firstRow.title);
-        assert.equal(this.result?.description, firstRow.description);
-        assert.equal(this.result?.researchField, firstRow.researchField);
+        assert.strictEqual(this.result?.title, firstRow.title);
+        assert.strictEqual(this.result?.description, firstRow.description);
+        assert.strictEqual(this.result?.researchField, firstRow.researchField);
     }
 
     @then(
@@ -69,6 +70,6 @@ export default class ControllerSteps {
     )
     public thenIShouldSeeAnErrorMessage(errorMessage: string) {
         assert.notEqual(this.error, undefined);
-        assert.equal(this.error?.message, errorMessage);
+        assert.strictEqual(this.error?.message, errorMessage);
     }
 }

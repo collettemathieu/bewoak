@@ -1,10 +1,10 @@
+import { beforeEach, describe, expect, spyOn, test } from 'bun:test';
 import {
     type PDSPBEPathwayEntity,
-    PDSPBFpathwayFactory,
+    pDSPBFPathwayFactory,
 } from '@bewoak/pathway-design-server-pathway-business';
 import { NotFoundException } from '@nestjs/common';
 import { Test } from '@nestjs/testing';
-import { beforeEach, describe, expect, spyOn, test } from 'bun:test';
 import { PathwayInMemoryRepository } from '../../common/in-memory/repositories/in-memory-pathway.repository';
 import { InitializePathwayInMemoryPersistence } from './initialize-pathway-in-memory.persistence';
 
@@ -32,7 +32,7 @@ describe('InitializePathwayInMemoryPersistence', () => {
                 PathwayInMemoryRepository
             );
 
-            pDSPBEPathwayEntity = PDSPBFpathwayFactory({
+            pDSPBEPathwayEntity = pDSPBFPathwayFactory({
                 description: 'pathway description',
                 researchField: 'pathway research field',
                 title: 'pathway title',
@@ -61,14 +61,15 @@ describe('InitializePathwayInMemoryPersistence', () => {
 
             expect(result.id).not.toBeUndefined();
             expect(result).not.toBe(pDSPBEPathwayEntity);
-            expect(
-                result.equals({
-                    description: pDSPBEPathwayEntity.description?.value ?? '',
-                    researchField:
-                        pDSPBEPathwayEntity.researchField?.value ?? '',
-                    title: pDSPBEPathwayEntity.title?.value ?? '',
-                })
-            ).toBe(true);
+            expect(result.title?.value).toStrictEqual(
+                pDSPBEPathwayEntity.title?.value as string
+            );
+            expect(result.description?.value).toStrictEqual(
+                pDSPBEPathwayEntity.description?.value as string
+            );
+            expect(result.researchField?.value).toStrictEqual(
+                pDSPBEPathwayEntity.researchField?.value as string
+            );
         });
     });
 
@@ -100,7 +101,7 @@ describe('InitializePathwayInMemoryPersistence', () => {
                 PathwayInMemoryRepository
             );
 
-            pDSPBEPathwayEntity = PDSPBFpathwayFactory({
+            pDSPBEPathwayEntity = pDSPBFPathwayFactory({
                 description: 'pathway description',
                 researchField: 'pathway research field',
                 title: 'pathway title',

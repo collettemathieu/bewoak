@@ -53,9 +53,15 @@ class ControllerSteps {
     public thenIShouldSeeAPathwayInitiated(dataTable: DataTable) {
         const firstRow = dataTable.hashes()[0];
 
-        assert.equal(this.response.body.title, firstRow.title);
-        assert.equal(this.response.body.description, firstRow.description);
-        assert.equal(this.response.body.researchField, firstRow.researchField);
+        assert.strictEqual(this.response.body.title, firstRow.title);
+        assert.strictEqual(
+            this.response.body.description,
+            firstRow.description
+        );
+        assert.strictEqual(
+            this.response.body.researchField,
+            firstRow.researchField
+        );
     }
 
     @then('The pathway should be have a unique identifier')

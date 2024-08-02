@@ -30,7 +30,7 @@ class ControllerSteps {
 
     @then('la réponse doit avoir un statut {int}')
     public thenTheResponseStatusShouldBe(status: number) {
-        assert.equal(this.response.status, status);
+        assert.strictEqual(this.response.status, status);
     }
 
     @then('la réponse doit contenir {string}')

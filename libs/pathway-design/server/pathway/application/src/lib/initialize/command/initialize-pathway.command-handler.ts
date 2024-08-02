@@ -8,7 +8,7 @@ import {
 import { Inject } from '@nestjs/common';
 import { CommandHandler, type ICommandHandler } from '@nestjs/cqrs';
 
-import { PDSPBUInitializePathwayUsecase } from '@bewoak/pathway-design-server-pathway-business';
+import { PDSPAIUInitializePathwayUsecase } from '../usecase/initialize-pathway.usecase';
 import { PDSPAInitializePathwayCommand } from './initialize-pathway.command';
 
 @CommandHandler(PDSPAInitializePathwayCommand)
@@ -16,8 +16,8 @@ export class PDSPAInitializePathwayCommandHandler
     implements ICommandHandler<PDSPAInitializePathwayCommand>
 {
     constructor(
-        @Inject(PDSPBUInitializePathwayUsecase)
-        private readonly pDSPBUInitializePathwayUsecase: PDSPBUInitializePathwayUsecase,
+        @Inject(PDSPAIUInitializePathwayUsecase)
+        private readonly pDSPAIUInitializePathwayUsecase: PDSPAIUInitializePathwayUsecase,
         @Inject(PDSPBP_INITIALIZE_PATHWAY_PERSISTENCE_PORT)
         private readonly pDSPBPInitializePathwayPersistencePort: PDSPBPInitializePathwayPersistencePort,
         @Inject(PDSPBP_TO_JSON_PATHWAY_PRESENTER_PORT)
@@ -25,7 +25,7 @@ export class PDSPAInitializePathwayCommandHandler
     ) {}
 
     execute(pDSPAInitializePathwayCommand: PDSPAInitializePathwayCommand) {
-        return this.pDSPBUInitializePathwayUsecase.execute(
+        return this.pDSPAIUInitializePathwayUsecase.execute(
             this.pDSPBPInitializePathwayPersistencePort,
             this.pDSPBPToJsonPathwayPresenterPort,
             {

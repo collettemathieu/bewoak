@@ -1,29 +1,29 @@
 import { beforeAll, describe, expect, test } from 'bun:test';
-import { TitleValueObjects } from './title.value-object';
+import { PDSPBVOTitleValueObjects } from './title.value-object';
 
-describe('TitleValueObjects', () => {
-    let title1: TitleValueObjects;
-    let title2: TitleValueObjects;
+describe('PDSPBVOTitleValueObjects', () => {
+    let title1: PDSPBVOTitleValueObjects;
+    let title2: PDSPBVOTitleValueObjects;
 
     beforeAll(() => {
-        title1 = new TitleValueObjects('Test Title');
-        title2 = new TitleValueObjects('Different Title');
+        title1 = new PDSPBVOTitleValueObjects('Test Title');
+        title2 = new PDSPBVOTitleValueObjects('Different Title');
     });
 
     test('should create an instance with a valid title', () => {
-        const title = new TitleValueObjects('Test Title');
+        const title = new PDSPBVOTitleValueObjects('Test Title');
         expect(title.value).toBe('Test Title');
     });
 
     test('should throw an error if the title is empty', () => {
-        expect(() => new TitleValueObjects('')).toThrowError(
+        expect(() => new PDSPBVOTitleValueObjects('')).toThrowError(
             'Title is required'
         );
     });
 
     test('should return true when comparing two equal titles', () => {
-        const sameTitle1 = new TitleValueObjects('Test Title');
-        const sameTitle2 = new TitleValueObjects('Test Title');
+        const sameTitle1 = new PDSPBVOTitleValueObjects('Test Title');
+        const sameTitle2 = new PDSPBVOTitleValueObjects('Test Title');
         expect(sameTitle1.equals(sameTitle2)).toBe(true);
     });
 

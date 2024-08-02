@@ -3,19 +3,19 @@ import { PDSPBEPathwayEntity } from '../entities/pathway';
 import { DescriptionValueObject } from '../value-objects/description.value-object';
 import { PathwayIdValueObject } from '../value-objects/pathway-id.value-object';
 import { ResearchFieldValueObjects } from '../value-objects/research-field.value-object';
-import { TitleValueObjects } from '../value-objects/title.value-object';
-import type { PathwayInitDto } from './pathway.dto';
+import { PDSPBVOTitleValueObjects } from '../value-objects/title.value-object';
+import type { PDSPBFPathwayFactoryParams } from './pathway.types';
 
-export const PDSPBFpathwayFactory = ({
+export const pDSPBFPathwayFactory = ({
     description: descriptionValue,
     id: idValue,
     researchField: researchFieldValue,
     title: titleValue,
-}: PathwayInitDto) => {
+}: PDSPBFPathwayFactoryParams) => {
     const description = new DescriptionValueObject(descriptionValue);
     const pathway = new PDSPBEPathwayEntity();
     const researchField = new ResearchFieldValueObjects(researchFieldValue);
-    const title = new TitleValueObjects(titleValue);
+    const title = new PDSPBVOTitleValueObjects(titleValue);
 
     const uuid = idValue ?? randomUUID();
     const id = new PathwayIdValueObject(uuid);

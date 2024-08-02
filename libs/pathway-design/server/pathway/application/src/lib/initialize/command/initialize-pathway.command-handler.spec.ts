@@ -7,10 +7,10 @@ import {
     PDSPBP_TO_JSON_PATHWAY_PRESENTER_PORT,
 } from '@bewoak/pathway-design-server-pathway-business';
 
-import { Test } from '@nestjs/testing';
 import { beforeEach, describe, expect, spyOn, test } from 'bun:test';
+import { Test } from '@nestjs/testing';
 
-import { PDSPBUInitializePathwayUsecase } from '@bewoak/pathway-design-server-pathway-business';
+import { PDSPAIUInitializePathwayUsecase } from '../usecase/initialize-pathway.usecase';
 import { PDSPAInitializePathwayCommand } from './initialize-pathway.command';
 import { PDSPAInitializePathwayCommandHandler } from './initialize-pathway.command-handler';
 
@@ -34,7 +34,7 @@ class ToJsonPathwayPresenter implements PDSPBPToJsonPathwayPresenterPort {
 
 describe('PDSPAInitializePathwayCommandHandler', () => {
     let pDSPAInitializePathwayCommandHandler: PDSPAInitializePathwayCommandHandler;
-    let pDSPBUInitializePathwayUsecase: PDSPBUInitializePathwayUsecase;
+    let pDSPAIUInitializePathwayUsecase: PDSPAIUInitializePathwayUsecase;
     let initializePathwayPersistence: PDSPBPInitializePathwayPersistencePort;
     let toJsonPathwayPresenter: PDSPBPToJsonPathwayPresenterPort;
 
@@ -51,7 +51,7 @@ describe('PDSPAInitializePathwayCommandHandler', () => {
                     provide: PDSPBP_TO_JSON_PATHWAY_PRESENTER_PORT,
                     useClass: ToJsonPathwayPresenter,
                 },
-                PDSPBUInitializePathwayUsecase,
+                PDSPAIUInitializePathwayUsecase,
             ],
         }).compile();
 
@@ -59,9 +59,9 @@ describe('PDSPAInitializePathwayCommandHandler', () => {
             module.get<PDSPAInitializePathwayCommandHandler>(
                 PDSPAInitializePathwayCommandHandler
             );
-        pDSPBUInitializePathwayUsecase =
-            module.get<PDSPBUInitializePathwayUsecase>(
-                PDSPBUInitializePathwayUsecase
+        pDSPAIUInitializePathwayUsecase =
+            module.get<PDSPAIUInitializePathwayUsecase>(
+                PDSPAIUInitializePathwayUsecase
             );
         initializePathwayPersistence =
             module.get<PDSPBPInitializePathwayPersistencePort>(
@@ -85,16 +85,18 @@ describe('PDSPAInitializePathwayCommandHandler', () => {
         let result: PDSPBPToJsonPathwayPresenterPortOutput;
 
         beforeEach(async () => {
-            spyOn(pDSPBUInitializePathwayUsecase, 'execute');
+            spyOn(pDSPAIUInitializePathwayUsecase, 'execute');
             result =
                 await pDSPAInitializePathwayCommandHandler.execute(command);
         });
 
         test('should call the usecase in order to initiate the pathway', () => {
             expect(
-                pDSPBUInitializePathwayUsecase.execute
+                pDSPAIUInitializePathwayUsecase.execute
             ).toHaveBeenCalledTimes(1);
-            expect(pDSPBUInitializePathwayUsecase.execute).toHaveBeenCalledWith(
+            expect(
+                pDSPAIUInitializePathwayUsecase.execute
+            ).toHaveBeenCalledWith(
                 initializePathwayPersistence,
                 toJsonPathwayPresenter,
                 {
@@ -106,6 +108,13 @@ describe('PDSPAInitializePathwayCommandHandler', () => {
         });
 
         test('should receive the attributes of the pathway', () => {
+            expect(result).toBeDefined();
+            expect(result.title).toBe(command.title);
+            expect(result.description).toBe(command.description);
+            expect(result.researchField).toBe(command.researchField);
+        });
+
+        test('should send an event in the event bus', () => {
             expect(result).toBeDefined();
             expect(result.title).toBe(command.title);
             expect(result.description).toBe(command.description);

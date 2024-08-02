@@ -1,4 +1,4 @@
-export type PathwayInitDto = {
+export type PDSPBFPathwayFactoryParams = {
     description: string;
     id?: string;
     researchField: string;

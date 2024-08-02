@@ -1,10 +1,12 @@
 import { strict as assert } from 'node:assert';
 
+import {
+    PDSPBEPathwayEntity,
+    type PDSPBFPathwayFactoryParams,
+    pDSPBFPathwayFactory,
+} from '@bewoak/pathway-design-server-pathway-business';
 import type { DataTable } from '@cucumber/cucumber';
 import { binding, given, then, when } from 'cucumber-tsflow';
-import { PDSPBEPathwayEntity } from '../../entities/pathway';
-import { PDSPBFpathwayFactory } from '../../factories/pathway';
-import type { PathwayInitDto } from '../../factories/pathway.dto';
 import { PDSPBUChangeTitlePathwayUseCase } from './change-title-pathway.usecase';
 
 @binding()
@@ -17,9 +19,9 @@ export default class ControllerSteps {
 
     @given('I have a pathway with these data')
     public givenIHaveAPathway(dataTable: DataTable) {
-        const firstRow = dataTable.hashes()[0] as PathwayInitDto;
+        const firstRow = dataTable.hashes()[0] as PDSPBFPathwayFactoryParams;
 
-        this.pDSPBEPathwayEntity = PDSPBFpathwayFactory({
+        this.pDSPBEPathwayEntity = pDSPBFPathwayFactory({
             title: firstRow.title,
             description: firstRow.description,
             researchField: firstRow.researchField,
@@ -40,12 +42,12 @@ export default class ControllerSteps {
 
     @then('I should see the title of the pathway changed to {string}')
     public thenIShouldSeeTheTitleOfThePathwayChangedTo(title: string) {
-        assert.equal(this.pDSPBEPathwayEntity?.title?.value, title);
+        assert.strictEqual(this.pDSPBEPathwayEntity?.title?.value, title);
     }
 
     @then('I should see an error message {string} during the title change')
     public thenIShouldSeeAnErrorMessage(errorMessage: string) {
         assert.notEqual(this.error, undefined);
-        assert.equal(this.error?.message, errorMessage);
+        assert.strictEqual(this.error?.message, errorMessage);
     }
 }
