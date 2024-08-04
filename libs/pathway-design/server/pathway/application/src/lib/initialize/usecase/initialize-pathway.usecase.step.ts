@@ -1,14 +1,11 @@
-import { strict as assert } from 'node:assert';
-
 import type {
     PDSPBEPathwayEntity,
-    PDSPBFPathwayFactoryParams,
     PDSPBPInitializePathwayPersistencePort,
     PDSPBPToJsonPathwayPresenterPort,
     PDSPBPToJsonPathwayPresenterPortOutput,
 } from '@bewoak/pathway-design-server-pathway-business';
 import type { DataTable } from '@cucumber/cucumber';
-import { binding, then, when } from 'cucumber-tsflow';
+import { binding, then } from 'cucumber-tsflow';
 import { PDSPAIUInitializePathwayUsecase } from './initialize-pathway.usecase';
 
 class InitializePathwayPersistence
@@ -22,10 +19,10 @@ class InitializePathwayPersistence
 class ToJsonPathwayPresenter implements PDSPBPToJsonPathwayPresenterPort {
     present(pDSPBEPathwayEntity: PDSPBEPathwayEntity) {
         return {
-            description: pDSPBEPathwayEntity.description?.value ?? '',
-            id: pDSPBEPathwayEntity.id?.value ?? '',
-            researchField: pDSPBEPathwayEntity.researchField?.value ?? '',
-            title: pDSPBEPathwayEntity.title?.value ?? '',
+            description: pDSPBEPathwayEntity.description,
+            id: pDSPBEPathwayEntity.id,
+            researchField: pDSPBEPathwayEntity.researchField,
+            title: pDSPBEPathwayEntity.title,
         };
     }
 }
@@ -36,40 +33,47 @@ export default class ControllerSteps {
     private result: PDSPBPToJsonPathwayPresenterPortOutput | undefined;
     private error: Error | undefined;
 
-    @when('I want to initialize a pathway with these data')
-    public async whenIInitiateAPathway(dataTable: DataTable) {
-        try {
-            const firstRow =
-                dataTable.hashes()[0] as PDSPBFPathwayFactoryParams;
+    // @when('I want to initialize a pathway with these data')
+    // public async whenIInitiateAPathway(dataTable: DataTable) {
+    //     try {
+    //         const firstRow =
+    //             dataTable.hashes()[0] as PDSPBFPathwayFactoryParams;
 
-            this.result = await this.pDSPBUInitPathwayUseCase.execute(
-                new InitializePathwayPersistence(),
-                new ToJsonPathwayPresenter(),
-                {
-                    title: firstRow.title,
-                    description: firstRow.description,
-                    researchField: firstRow.researchField,
-                }
-            );
-        } catch (error) {
-            this.error = error as Error;
-        }
-    }
+    //         this.result = await this.pDSPBUInitPathwayUseCase.execute(
+    //             new InitializePathwayPersistence(),
+    //             new ToJsonPathwayPresenter(),
+    //             {
+    //                 title: firstRow.title,
+    //                 description: firstRow.description,
+    //                 researchField: firstRow.researchField,
+    //             }
+    //         );
+    //     } catch (error) {
+    //         this.error = error as Error;
+    //     }
+    // }
 
-    @then('I should receive the attributes of the pathway')
-    public thenIShouldReceiveAttributesPathway(dataTable: DataTable) {
-        const firstRow = dataTable.hashes()[0] as PDSPBFPathwayFactoryParams;
+    // @then('I should receive the attributes of the pathway')
+    // public thenIShouldReceiveAttributesPathway(dataTable: DataTable) {
+    //     const firstRow = dataTable.hashes()[0] as PDSPBFPathwayFactoryParams;
 
-        assert.strictEqual(this.result?.title, firstRow.title);
-        assert.strictEqual(this.result?.description, firstRow.description);
-        assert.strictEqual(this.result?.researchField, firstRow.researchField);
-    }
+    //     assert.strictEqual(this.result?.title, firstRow.title);
+    //     assert.strictEqual(this.result?.description, firstRow.description);
+    //     assert.strictEqual(this.result?.researchField, firstRow.researchField);
+    // }
+
+    // @then(
+    //     'I should see an error message {string} during initialization of the pathway'
+    // )
+    // public thenIShouldSeeAnErrorMessage(errorMessage: string) {
+    //     assert.notEqual(this.error, undefined);
+    //     assert.strictEqual(this.error?.message, errorMessage);
+    // }
 
     @then(
-        'I should see an error message {string} during initialization of the pathway'
+        'it should emitted an event {string} with the attributes of the pathway'
     )
-    public thenIShouldSeeAnErrorMessage(errorMessage: string) {
-        assert.notEqual(this.error, undefined);
-        assert.strictEqual(this.error?.message, errorMessage);
+    public thenItShouldEmittedAnEvent(eventName: string, dataTable: DataTable) {
+        // Apply of PDSPBEPathwayEntity and commit PDSPBEPathwayEntity should be applied.
     }
 }

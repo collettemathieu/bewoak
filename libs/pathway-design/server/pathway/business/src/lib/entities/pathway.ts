@@ -11,19 +11,19 @@ export class PDSPBEPathwayEntity {
     #title: PDSPBVOTitleValueObjects | undefined;
 
     get description() {
-        return this.#description;
+        return this.#description?.value ?? '';
     }
 
     get id() {
-        return this.#id;
+        return this.#id?.value ?? '';
     }
 
     get researchField() {
-        return this.#researchField;
+        return this.#researchField?.value ?? '';
     }
 
     get title() {
-        return this.#title;
+        return this.#title?.value ?? '';
     }
 
     init({ id, title, description, researchField }: InitializePathwayParams) {

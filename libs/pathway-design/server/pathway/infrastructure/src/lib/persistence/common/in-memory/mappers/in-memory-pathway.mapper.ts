@@ -8,10 +8,10 @@ export const mapPathwayEntityToInMemoryPersistence = (
     pathway: PDSPBEPathwayEntity
 ): PathwayInMemoryEntity => {
     const pathwayInMemoryEntity = new PathwayInMemoryEntity(
-        pathway.id?.value ?? '',
-        pathway.description?.value ?? '',
-        pathway.researchField?.value ?? '',
-        pathway.title?.value ?? ''
+        pathway.id,
+        pathway.description,
+        pathway.researchField,
+        pathway.title
     );
 
     return pathwayInMemoryEntity;

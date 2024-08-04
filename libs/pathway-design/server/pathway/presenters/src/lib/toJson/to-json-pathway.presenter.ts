@@ -10,10 +10,10 @@ export class ToJsonPathwayPresenter
 {
     present(pDSPBEPathwayEntity: PDSPBEPathwayEntity) {
         return {
-            description: pDSPBEPathwayEntity.description?.value ?? '',
-            id: pDSPBEPathwayEntity.id?.value ?? '',
-            researchField: pDSPBEPathwayEntity.researchField?.value ?? '',
-            title: pDSPBEPathwayEntity.title?.value ?? '',
+            description: pDSPBEPathwayEntity.description,
+            id: pDSPBEPathwayEntity.id,
+            researchField: pDSPBEPathwayEntity.researchField,
+            title: pDSPBEPathwayEntity.title,
         };
     }
 }

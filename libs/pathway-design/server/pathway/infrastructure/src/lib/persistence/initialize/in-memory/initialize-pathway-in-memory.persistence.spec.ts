@@ -1,10 +1,10 @@
-import { beforeEach, describe, expect, spyOn, test } from 'bun:test';
 import {
     type PDSPBEPathwayEntity,
     pDSPBFPathwayFactory,
 } from '@bewoak/pathway-design-server-pathway-business';
 import { NotFoundException } from '@nestjs/common';
 import { Test } from '@nestjs/testing';
+import { beforeEach, describe, expect, spyOn, test } from 'bun:test';
 import { PathwayInMemoryRepository } from '../../common/in-memory/repositories/in-memory-pathway.repository';
 import { InitializePathwayInMemoryPersistence } from './initialize-pathway-in-memory.persistence';
 
@@ -59,16 +59,14 @@ describe('InitializePathwayInMemoryPersistence', () => {
             expect(pathwayInMemoryRepository.add).toHaveBeenCalledTimes(1);
             expect(pathwayInMemoryRepository.get).toHaveBeenCalledTimes(1);
 
-            expect(result.id).not.toBeUndefined();
+            expect(result.id).not.toBeEmpty();
             expect(result).not.toBe(pDSPBEPathwayEntity);
-            expect(result.title?.value).toStrictEqual(
-                pDSPBEPathwayEntity.title?.value as string
+            expect(result.title).toStrictEqual(pDSPBEPathwayEntity.title);
+            expect(result.description).toStrictEqual(
+                pDSPBEPathwayEntity.description
             );
-            expect(result.description?.value).toStrictEqual(
-                pDSPBEPathwayEntity.description?.value as string
-            );
-            expect(result.researchField?.value).toStrictEqual(
-                pDSPBEPathwayEntity.researchField?.value as string
+            expect(result.researchField).toStrictEqual(
+                pDSPBEPathwayEntity.researchField
             );
         });
     });

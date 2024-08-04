@@ -1,6 +1,6 @@
 export { PDSPBEPathwayEntity } from './lib/entities/pathway';
-export { pDSPBFPathwayFactory } from './lib/factories/pathway';
-export { type PDSPBFPathwayFactoryParams } from './lib/factories/pathway.types';
+export { pDSPBFPathwayFactory } from './lib/factories/pathway.factory';
+export { type PDSPBFPathwayFactoryParams } from './lib/factories/pathway.factory.types';
 export {
     PDSPBP_INITIALIZE_PATHWAY_PERSISTENCE_PORT,
     type PDSPBPInitializePathwayPersistencePort,

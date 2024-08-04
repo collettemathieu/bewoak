@@ -4,7 +4,7 @@ import { DescriptionValueObject } from '../value-objects/description.value-objec
 import { PathwayIdValueObject } from '../value-objects/pathway-id.value-object';
 import { ResearchFieldValueObjects } from '../value-objects/research-field.value-object';
 import { PDSPBVOTitleValueObjects } from '../value-objects/title.value-object';
-import type { PDSPBFPathwayFactoryParams } from './pathway.types';
+import type { PDSPBFPathwayFactoryParams } from './pathway.factory.types';
 
 export const pDSPBFPathwayFactory = ({
     description: descriptionValue,

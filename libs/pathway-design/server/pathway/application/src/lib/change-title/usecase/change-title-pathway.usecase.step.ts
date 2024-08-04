@@ -42,7 +42,7 @@ export default class ControllerSteps {
 
     @then('I should see the title of the pathway changed to {string}')
     public thenIShouldSeeTheTitleOfThePathwayChangedTo(title: string) {
-        assert.strictEqual(this.pDSPBEPathwayEntity?.title?.value, title);
+        assert.strictEqual(this.pDSPBEPathwayEntity.title, title);
     }
 
     @then('I should see an error message {string} during the title change')
