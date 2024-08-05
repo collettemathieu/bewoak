@@ -6,7 +6,7 @@ export {
 } from './lib/ports/persistences/initialize/initialize-pathway-persitence.port';
 export {
     PDSPBP_PATHWAY_PRESENTER_PORT,
-    type PDSPBPPathwayPresenter,
     type PDSPBPPathwayPresenterPort,
+    type PDSPBPPathwayPresenters,
 } from './lib/ports/presenters/pathway-presenter.port';
 export { PDSPBVOTitleValueObjects } from './lib/value-objects/title.value-object';

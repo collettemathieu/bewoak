@@ -1,7 +1,9 @@
+import { BadRequestException } from '../exceptions';
+
 export class DescriptionValueObject {
     constructor(private description: string) {
         if (this.isEmpty(description)) {
-            throw new Error('Description is required');
+            throw new BadRequestException('Description is required');
         }
     }
     get value() {
@@ -16,7 +18,7 @@ export class DescriptionValueObject {
         return this.description;
     }
 
-    private isEmpty(name: string) {
-        return name.length === 0;
+    private isEmpty(name: string | undefined) {
+        return name === undefined || name.length === 0;
     }
 }

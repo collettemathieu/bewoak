@@ -1,7 +1,9 @@
+import { BadRequestException } from '../exceptions';
+
 export class PDSPBVOTitleValueObjects {
     constructor(private title: string) {
         if (this.isEmpty(title)) {
-            throw new Error('Title is required');
+            throw new BadRequestException('Title is required');
         }
     }
 
@@ -17,7 +19,7 @@ export class PDSPBVOTitleValueObjects {
         return this.title;
     }
 
-    private isEmpty(title: string) {
-        return title.length === 0;
+    private isEmpty(title: string | undefined) {
+        return title === undefined || title.length === 0;
     }
 }

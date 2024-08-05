@@ -1,4 +1,4 @@
-import type { PDSPBPPathwayPresenter } from '@bewoak/pathway-design-server-pathway-business';
+import type { PDSPBPPathwayPresenters } from '@bewoak/pathway-design-server-pathway-business';
 import { Inject, Injectable } from '@nestjs/common';
 import { CommandBus } from '@nestjs/cqrs';
 import type { PDSPAInitializePathwayCommand } from '../command/initialize-pathway.command';
@@ -10,7 +10,7 @@ export class PDSPAInitializePathwayService {
     init(pDSPAInitializePathwayCommand: PDSPAInitializePathwayCommand) {
         return this.commandBus.execute<
             PDSPAInitializePathwayCommand,
-            PDSPBPPathwayPresenter
+            PDSPBPPathwayPresenters
         >(pDSPAInitializePathwayCommand);
     }
 }

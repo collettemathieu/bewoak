@@ -1,7 +1,9 @@
+import { BadRequestException } from '../exceptions';
+
 export class ResearchFieldValueObjects {
     constructor(private researchField: string) {
         if (this.isEmpty(researchField)) {
-            throw new Error('Research field is required');
+            throw new BadRequestException('Research field is required');
         }
     }
     get value() {
@@ -16,7 +18,7 @@ export class ResearchFieldValueObjects {
         return this.researchField;
     }
 
-    private isEmpty(name: string) {
-        return name.length === 0;
+    private isEmpty(researchField: string | undefined) {
+        return researchField === undefined || researchField.length === 0;
     }
 }

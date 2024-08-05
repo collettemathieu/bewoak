@@ -1,7 +1,9 @@
+import { BadRequestException } from '../exceptions';
+
 export class PathwayIdValueObject {
     constructor(private id: string) {
         if (!this.isUuid(id)) {
-            throw new Error('Pathway id must be a valid uuid');
+            throw new BadRequestException('Pathway id must be a valid uuid');
         }
     }
     get value() {

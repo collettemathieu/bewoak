@@ -2,8 +2,8 @@ import { strict as assert } from 'node:assert';
 import type {
     PDSPBEPathwayEntity,
     PDSPBPInitializePathwayPersistencePort,
-    PDSPBPPathwayPresenter,
     PDSPBPPathwayPresenterPort,
+    PDSPBPPathwayPresenters,
 } from '@bewoak/pathway-design-server-pathway-business';
 import type { DataTable } from '@cucumber/cucumber';
 import type { EventPublisher } from '@nestjs/cqrs';
@@ -45,7 +45,7 @@ class FakeEventPublisher {
 @binding()
 export default class ControllerSteps {
     private pDSPBUInitPathwayUseCase = new PDSPAIUInitializePathwayUsecase();
-    private result: PDSPBPPathwayPresenter | undefined;
+    private result: PDSPBPPathwayPresenters | undefined;
     private fakeInitializePathwayPersistence =
         new FakeInitializePathwayPersistence();
     private fakePathwayPresenter = new FakePathwayPresenter();

@@ -47,3 +47,27 @@ Feature: Manage Pathway Entity
       | id | title | description | researchField |
       |    |       |             |               |
     Then I should see an error message "Pathway id must be a valid uuid"
+
+  Scenario: I want to initialize a pathway with missing id
+    When I initialize a pathway with these data
+      | title      | description     | researchField |
+      | My Pathway | A test pathway  | biology       |
+    Then I should see an error message "Pathway id must be a valid uuid"
+
+  Scenario: I want to initialize a pathway with missing title
+    When I initialize a pathway with these data
+      | id                                   | description     | researchField |
+      | f7703737-186c-4c7c-8d46-925111c7c7c1 | A test pathway  | biology       |
+    Then I should see an error message "Title is required"
+
+  Scenario: I want to initialize a pathway with missing description
+    When I initialize a pathway with these data
+      | id                                   | title      | researchField |
+      | f7703737-186c-4c7c-8d46-925111c7c7c1 | My Pathway | biology       |
+    Then I should see an error message "Description is required"
+
+  Scenario: I want to initialize a pathway with missing research field
+    When I initialize a pathway with these data
+      | id                                   | title      | description     |
+      | f7703737-186c-4c7c-8d46-925111c7c7c1 | My Pathway | A test pathway  |
+    Then I should see an error message "Research field is required"
