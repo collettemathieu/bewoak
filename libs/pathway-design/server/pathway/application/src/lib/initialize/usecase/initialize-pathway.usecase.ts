@@ -1,13 +1,15 @@
 import {
     type PDSPBPInitializePathwayPersistencePort,
-    type PDSPBPToJsonPathwayPresenterPort,
+    type PDSPBPPathwayPresenterPort,
     pDSPBFPathwayFactory,
 } from '@bewoak/pathway-design-server-pathway-business';
+import type { EventPublisher } from '@nestjs/cqrs';
 
 export class PDSPAIUInitializePathwayUsecase {
     async execute(
         pDSPBPInitializePathwayPersistencePort: PDSPBPInitializePathwayPersistencePort,
-        pDSPBPToJsonPathwayPresenterPort: PDSPBPToJsonPathwayPresenterPort,
+        pDSPBPPathwayPresenterPort: PDSPBPPathwayPresenterPort,
+        eventPublisher: EventPublisher,
         {
             title,
             description,
@@ -27,6 +29,9 @@ export class PDSPAIUInitializePathwayUsecase {
         const pathwayFromPersistence =
             await pDSPBPInitializePathwayPersistencePort.save(pathway);
 
-        return pDSPBPToJsonPathwayPresenterPort.present(pathwayFromPersistence);
+        eventPublisher.mergeObjectContext(pathway);
+        pathway.commit();
+
+        return pDSPBPPathwayPresenterPort.present(pathwayFromPersistence);
     }
 }

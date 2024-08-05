@@ -1,12 +1,16 @@
 import {
     type PDSPBPInitializePathwayPersistencePort,
-    type PDSPBPToJsonPathwayPresenterPort,
+    type PDSPBPPathwayPresenterPort,
     PDSPBP_INITIALIZE_PATHWAY_PERSISTENCE_PORT,
-    PDSPBP_TO_JSON_PATHWAY_PRESENTER_PORT,
+    PDSPBP_PATHWAY_PRESENTER_PORT,
 } from '@bewoak/pathway-design-server-pathway-business';
 
 import { Inject } from '@nestjs/common';
-import { CommandHandler, type ICommandHandler } from '@nestjs/cqrs';
+import {
+    CommandHandler,
+    EventPublisher,
+    type ICommandHandler,
+} from '@nestjs/cqrs';
 
 import { PDSPAIUInitializePathwayUsecase } from '../usecase/initialize-pathway.usecase';
 import { PDSPAInitializePathwayCommand } from './initialize-pathway.command';
@@ -20,14 +24,16 @@ export class PDSPAInitializePathwayCommandHandler
         private readonly pDSPAIUInitializePathwayUsecase: PDSPAIUInitializePathwayUsecase,
         @Inject(PDSPBP_INITIALIZE_PATHWAY_PERSISTENCE_PORT)
         private readonly pDSPBPInitializePathwayPersistencePort: PDSPBPInitializePathwayPersistencePort,
-        @Inject(PDSPBP_TO_JSON_PATHWAY_PRESENTER_PORT)
-        private readonly pDSPBPToJsonPathwayPresenterPort: PDSPBPToJsonPathwayPresenterPort
+        @Inject(PDSPBP_PATHWAY_PRESENTER_PORT)
+        private readonly pDSPBPPathwayPresenterPort: PDSPBPPathwayPresenterPort,
+        @Inject(EventPublisher) private readonly eventPublisher: EventPublisher
     ) {}
 
     execute(pDSPAInitializePathwayCommand: PDSPAInitializePathwayCommand) {
         return this.pDSPAIUInitializePathwayUsecase.execute(
             this.pDSPBPInitializePathwayPersistencePort,
-            this.pDSPBPToJsonPathwayPresenterPort,
+            this.pDSPBPPathwayPresenterPort,
+            this.eventPublisher,
             {
                 title: pDSPAInitializePathwayCommand.title,
                 description: pDSPAInitializePathwayCommand.description,

@@ -1,3 +1,5 @@
+import { strict as assert } from 'node:assert';
+import type { Http2Server } from 'node:http2';
 import { PDSPIInitializePathwayPersistenceInfrastructureModule } from '@bewoak/pathway-design-server-pathway-infrastructure';
 import { PDSPIAInitializePathwayInterfaceAdaptersModule } from '@bewoak/pathway-design-server-pathway-interface-adapters';
 import { PDSPPPathwayPresentersModule } from '@bewoak/pathway-design-server-pathway-presenters';
@@ -6,8 +8,6 @@ import type { INestApplication } from '@nestjs/common';
 import { CqrsModule } from '@nestjs/cqrs';
 import { Test } from '@nestjs/testing';
 import { binding, given, then, when } from 'cucumber-tsflow';
-import { strict as assert } from 'node:assert';
-import type { Http2Server } from 'node:http2';
 import request from 'supertest';
 
 @binding()
@@ -25,7 +25,7 @@ class ControllerSteps {
                         'inMemory'
                     )
                 )
-                    .withPresenter(PDSPPPathwayPresentersModule.use('http'))
+                    .withPresenter(PDSPPPathwayPresentersModule.use('toJson'))
                     .build(),
                 CqrsModule.forRoot(),
             ],

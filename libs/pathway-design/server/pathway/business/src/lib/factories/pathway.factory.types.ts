@@ -1,4 +1,4 @@
-export type PDSPBFPathwayFactoryParams = {
+export type PathwayFactoryParams = {
     description: string;
     id?: string;
     researchField: string;

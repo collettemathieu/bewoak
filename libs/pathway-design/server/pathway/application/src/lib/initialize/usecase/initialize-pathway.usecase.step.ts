@@ -1,14 +1,17 @@
+import { strict as assert } from 'node:assert';
 import type {
     PDSPBEPathwayEntity,
     PDSPBPInitializePathwayPersistencePort,
-    PDSPBPToJsonPathwayPresenterPort,
-    PDSPBPToJsonPathwayPresenterPortOutput,
+    PDSPBPPathwayPresenter,
+    PDSPBPPathwayPresenterPort,
 } from '@bewoak/pathway-design-server-pathway-business';
 import type { DataTable } from '@cucumber/cucumber';
-import { binding, then } from 'cucumber-tsflow';
+import type { EventPublisher } from '@nestjs/cqrs';
+import { before, binding, then, when } from 'cucumber-tsflow';
+import sinon from 'sinon';
 import { PDSPAIUInitializePathwayUsecase } from './initialize-pathway.usecase';
 
-class InitializePathwayPersistence
+class FakeInitializePathwayPersistence
     implements PDSPBPInitializePathwayPersistencePort
 {
     save(pDSPBEPathwayEntity: PDSPBEPathwayEntity) {
@@ -16,7 +19,7 @@ class InitializePathwayPersistence
     }
 }
 
-class ToJsonPathwayPresenter implements PDSPBPToJsonPathwayPresenterPort {
+class FakePathwayPresenter implements PDSPBPPathwayPresenterPort {
     present(pDSPBEPathwayEntity: PDSPBEPathwayEntity) {
         return {
             description: pDSPBEPathwayEntity.description,
@@ -27,53 +30,85 @@ class ToJsonPathwayPresenter implements PDSPBPToJsonPathwayPresenterPort {
     }
 }
 
+class FakeEventPublisher {
+    static isEventPublished = false;
+
+    mergeObjectContext(object: PDSPBEPathwayEntity) {
+        object.publishAll = () => {
+            FakeEventPublisher.isEventPublished = true;
+        };
+
+        return object;
+    }
+}
+
 @binding()
 export default class ControllerSteps {
     private pDSPBUInitPathwayUseCase = new PDSPAIUInitializePathwayUsecase();
-    private result: PDSPBPToJsonPathwayPresenterPortOutput | undefined;
-    private error: Error | undefined;
+    private result: PDSPBPPathwayPresenter | undefined;
+    private fakeInitializePathwayPersistence =
+        new FakeInitializePathwayPersistence();
+    private fakePathwayPresenter = new FakePathwayPresenter();
+    private fakeEventPublisher = new FakeEventPublisher();
+    private persistenceSpy: sinon.SinonSpy | undefined;
+    private presenterSpy: sinon.SinonSpy | undefined;
 
-    // @when('I want to initialize a pathway with these data')
-    // public async whenIInitiateAPathway(dataTable: DataTable) {
-    //     try {
-    //         const firstRow =
-    //             dataTable.hashes()[0] as PDSPBFPathwayFactoryParams;
+    @before()
+    public before() {
+        this.persistenceSpy = sinon.spy(
+            this.fakeInitializePathwayPersistence,
+            'save'
+        );
+        this.presenterSpy = sinon.spy(this.fakePathwayPresenter, 'present');
+    }
 
-    //         this.result = await this.pDSPBUInitPathwayUseCase.execute(
-    //             new InitializePathwayPersistence(),
-    //             new ToJsonPathwayPresenter(),
-    //             {
-    //                 title: firstRow.title,
-    //                 description: firstRow.description,
-    //                 researchField: firstRow.researchField,
-    //             }
-    //         );
-    //     } catch (error) {
-    //         this.error = error as Error;
-    //     }
-    // }
+    @when('I initialize a pathway with these data')
+    public async whenIInitiateAPathway(dataTable: DataTable) {
+        const firstRow = dataTable.hashes()[0] as {
+            title: string;
+            description: string;
+            researchField: string;
+        };
 
-    // @then('I should receive the attributes of the pathway')
-    // public thenIShouldReceiveAttributesPathway(dataTable: DataTable) {
-    //     const firstRow = dataTable.hashes()[0] as PDSPBFPathwayFactoryParams;
+        this.result = await this.pDSPBUInitPathwayUseCase.execute(
+            this.fakeInitializePathwayPersistence,
+            this.fakePathwayPresenter,
+            this.fakeEventPublisher as EventPublisher,
+            {
+                title: firstRow.title,
+                description: firstRow.description,
+                researchField: firstRow.researchField,
+            }
+        );
+    }
 
-    //     assert.strictEqual(this.result?.title, firstRow.title);
-    //     assert.strictEqual(this.result?.description, firstRow.description);
-    //     assert.strictEqual(this.result?.researchField, firstRow.researchField);
-    // }
+    @then('I should receive the attributes of the pathway')
+    public thenIShouldReceivePathwayAttributes(dataTable: DataTable) {
+        const firstRow = dataTable.hashes()[0] as {
+            title: string;
+            description: string;
+            researchField: string;
+        };
 
-    // @then(
-    //     'I should see an error message {string} during initialization of the pathway'
-    // )
-    // public thenIShouldSeeAnErrorMessage(errorMessage: string) {
-    //     assert.notEqual(this.error, undefined);
-    //     assert.strictEqual(this.error?.message, errorMessage);
-    // }
+        assert.strictEqual(this.result?.title, firstRow.title);
+        assert.strictEqual(this.result?.description, firstRow.description);
+        assert.strictEqual(this.result?.researchField, firstRow.researchField);
+    }
+
+    @then('It should call the persistence layer to save the pathway')
+    public thenItShouldCallThePersistenceLayerToSaveThePathway() {
+        assert(this.persistenceSpy?.calledOnce);
+    }
+
+    @then('It should call the presenter to present the pathway')
+    public thenItShouldCallThePresenterToPresentThePathway() {
+        assert(this.presenterSpy?.calledOnce);
+    }
 
     @then(
-        'it should emitted an event {string} with the attributes of the pathway'
+        'It should emit an event indicating that the pathway has been initialized'
     )
-    public thenItShouldEmittedAnEvent(eventName: string, dataTable: DataTable) {
-        // Apply of PDSPBEPathwayEntity and commit PDSPBEPathwayEntity should be applied.
+    public thenItShouldEmitAnEventIndicatingThatThePathwayHasBeenInitialized() {
+        assert.ok(FakeEventPublisher.isEventPublished);
     }
 }

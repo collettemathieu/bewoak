@@ -4,7 +4,8 @@ Feature: Manage Pathway Entity
     When I initialize a pathway with these data
       | id                                   | title      | description     | researchField |
       | f7703737-186c-4c7c-8d46-925111c7c7c1 | My Pathway | A test pathway  | biology       |
-    Then I should retrieve the attributes of the pathway
+    Then It should apply an event indicating that the pathway has been initialized
+    And I should retrieve the attributes of the pathway
       | id                                   | title      | description     | researchField |
       | f7703737-186c-4c7c-8d46-925111c7c7c1 | My Pathway | A test pathway  | biology       |
 

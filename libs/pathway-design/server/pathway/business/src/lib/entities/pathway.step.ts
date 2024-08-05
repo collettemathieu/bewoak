@@ -1,6 +1,8 @@
+import { strict as assert } from 'node:assert';
 import type { DataTable } from '@cucumber/cucumber';
 import { binding, given, then, when } from 'cucumber-tsflow';
-import { strict as assert } from 'node:assert';
+import sinon from 'sinon';
+import { PDSPBEPathwayInitializedEvent } from '../events/pathway-initialized.event';
 import { DescriptionValueObject } from '../value-objects/description.value-object';
 import { PathwayIdValueObject } from '../value-objects/pathway-id.value-object';
 import { ResearchFieldValueObjects } from '../value-objects/research-field.value-object';
@@ -11,6 +13,7 @@ import { PDSPBEPathwayEntity } from './pathway';
 export default class PathwaySteps {
     private pathway: PDSPBEPathwayEntity | undefined;
     private error: Error | undefined;
+    private applySpy: sinon.SinonSpy | undefined;
 
     @given('I have initialized a pathway with these data')
     public givenIHaveInitializedAPathway(dataTable: DataTable) {
@@ -48,6 +51,8 @@ export default class PathwaySteps {
             );
 
             this.pathway = new PDSPBEPathwayEntity();
+            this.applySpy = sinon.spy(this.pathway, 'apply');
+
             this.pathway.init({ id, title, description, researchField });
         } catch (error) {
             this.error = error as Error;
@@ -73,6 +78,19 @@ export default class PathwaySteps {
         assert.strictEqual(this.pathway?.title, data.title);
         assert.strictEqual(this.pathway?.description, data.description);
         assert.strictEqual(this.pathway?.researchField, data.researchField);
+    }
+
+    @then(
+        'It should apply an event indicating that the pathway has been initialized'
+    )
+    public thenItShouldApplyAnEvent() {
+        const expectedEvent = new PDSPBEPathwayInitializedEvent(
+            this.pathway as PDSPBEPathwayEntity
+        );
+        const callArgs = this.applySpy?.getCall(0).args[0];
+
+        assert(this.applySpy?.calledOnce);
+        assert.deepStrictEqual(callArgs, expectedEvent);
     }
 
     @then('I should see an error message {string}')

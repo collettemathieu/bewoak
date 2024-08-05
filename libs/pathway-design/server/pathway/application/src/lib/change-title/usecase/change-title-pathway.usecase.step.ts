@@ -2,7 +2,6 @@ import { strict as assert } from 'node:assert';
 
 import {
     PDSPBEPathwayEntity,
-    type PDSPBFPathwayFactoryParams,
     pDSPBFPathwayFactory,
 } from '@bewoak/pathway-design-server-pathway-business';
 import type { DataTable } from '@cucumber/cucumber';
@@ -19,7 +18,11 @@ export default class ControllerSteps {
 
     @given('I have a pathway with these data')
     public givenIHaveAPathway(dataTable: DataTable) {
-        const firstRow = dataTable.hashes()[0] as PDSPBFPathwayFactoryParams;
+        const firstRow = dataTable.hashes()[0] as {
+            title: string;
+            description: string;
+            researchField: string;
+        };
 
         this.pDSPBEPathwayEntity = pDSPBFPathwayFactory({
             title: firstRow.title,

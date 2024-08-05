@@ -4,14 +4,14 @@ import { DescriptionValueObject } from '../value-objects/description.value-objec
 import { PathwayIdValueObject } from '../value-objects/pathway-id.value-object';
 import { ResearchFieldValueObjects } from '../value-objects/research-field.value-object';
 import { PDSPBVOTitleValueObjects } from '../value-objects/title.value-object';
-import type { PDSPBFPathwayFactoryParams } from './pathway.factory.types';
+import type { PathwayFactoryParams } from './pathway.factory.types';
 
 export const pDSPBFPathwayFactory = ({
     description: descriptionValue,
     id: idValue,
     researchField: researchFieldValue,
     title: titleValue,
-}: PDSPBFPathwayFactoryParams) => {
+}: PathwayFactoryParams) => {
     const description = new DescriptionValueObject(descriptionValue);
     const pathway = new PDSPBEPathwayEntity();
     const researchField = new ResearchFieldValueObjects(researchFieldValue);
