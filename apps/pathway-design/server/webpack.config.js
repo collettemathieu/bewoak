@@ -15,20 +15,6 @@ module.exports = {
             optimization: process.env.BUN_ENV === 'production',
             outputHashing:
                 process.env.BUN_ENV === 'production' ? 'all' : 'none',
-            transformers: [
-                {
-                    name: '@nestjs/swagger/plugin',
-                    options: {
-                        classValidatorShim: true,
-                        dtoFileNameSuffix: [
-                            '.dto.ts',
-                            '.entity.ts',
-                            '.schema.ts',
-                        ],
-                        introspectComments: true,
-                    },
-                },
-            ],
         }),
     ],
 };

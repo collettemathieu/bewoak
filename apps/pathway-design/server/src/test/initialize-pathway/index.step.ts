@@ -50,7 +50,7 @@ class ControllerSteps {
     }
 
     @then('I should retrieve a pathway initialized with its data')
-    public thenIShouldSeeAPathwayInitiated(dataTable: DataTable) {
+    public thenIShouldRetrieveAPathwayInitiated(dataTable: DataTable) {
         const firstRow = dataTable.hashes()[0];
 
         assert.strictEqual(this.response.body.title, firstRow.title);

@@ -10,17 +10,10 @@ import {
     UsePipes,
     ValidationPipe,
 } from '@nestjs/common';
-import { ApiBearerAuth, ApiTags } from '@nestjs/swagger';
 import type { InitializePathwayRequestBodyDto } from '../dtos/request/body/index.dto';
 import type { InitializedPathwayResponseBodyDto } from '../dtos/response/body/index.dto';
 
-@ApiTags('Pathway')
-@UsePipes(
-    new ValidationPipe({
-        whitelist: true,
-        forbidNonWhitelisted: true,
-    })
-)
+@UsePipes(new ValidationPipe())
 @Controller({
     path: 'pathway',
 })
@@ -31,7 +24,6 @@ export class InitializePathwayController {
     ) {}
 
     @Post('init')
-    @ApiBearerAuth('access-token')
     execute(
         @Body() initializePathwayRequestBodyDto: InitializePathwayRequestBodyDto
     ): Promise<InitializedPathwayResponseBodyDto> {

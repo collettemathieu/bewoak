@@ -1,15 +1,12 @@
-export class InitializePathwayRequestBodyDto
-    implements IInitializePathwayRequestBodyDto
-{
-    readonly title!: string;
+import { IsString } from 'class-validator';
 
-    readonly description!: string;
+export class InitializePathwayRequestBodyDto {
+    @IsString()
+    title!: string;
 
-    readonly researchField!: string;
-}
+    @IsString()
+    description!: string;
 
-export interface IInitializePathwayRequestBodyDto {
-    description: string;
-    researchField: string;
-    title: string;
+    @IsString()
+    researchField!: string;
 }
