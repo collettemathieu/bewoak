@@ -1,7 +1,4 @@
-import type {
-    PDSPBEPathwayEntity,
-    PDSPBPPathwayPresenterPort,
-} from '@bewoak/pathway-design-server-pathway-business';
+import type { PDSPBEPathwayEntity, PDSPBPPathwayPresenterPort } from '@bewoak/pathway-design-server-pathway-business';
 import { Injectable } from '@nestjs/common';
 
 @Injectable()

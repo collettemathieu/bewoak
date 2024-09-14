@@ -3,9 +3,7 @@ import { CTSEBadRequestException } from '@bewoak/common-tools-server-http-except
 export class PathwayIdValueObject {
     constructor(private id: string) {
         if (!this.isUuid(id)) {
-            throw new CTSEBadRequestException(
-                'Pathway id must be a valid uuid'
-            );
+            throw new CTSEBadRequestException('Pathway id must be a valid uuid');
         }
     }
     get value() {
@@ -21,8 +19,7 @@ export class PathwayIdValueObject {
     }
 
     private isUuid(id: string) {
-        const uuidV4Regex =
-            /^[0-9a-f]{8}-[0-9a-f]{4}-4[0-9a-f]{3}-[89ab][0-9a-f]{3}-[0-9a-f]{12}$/i;
+        const uuidV4Regex = /^[0-9a-f]{8}-[0-9a-f]{4}-4[0-9a-f]{3}-[89ab][0-9a-f]{3}-[0-9a-f]{12}$/i;
 
         return uuidV4Regex.test(id);
     }

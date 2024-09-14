@@ -8,28 +8,20 @@ import { InitializePathwayController } from './controller/initialize-pathway.con
 
 @Module({
     controllers: [InitializePathwayController],
-    providers: [
-        PDSPAInitializePathwayCommandHandler,
-        PDSPAInitializePathwayService,
-        PDSPAIUInitializePathwayUsecase,
-    ],
+    providers: [PDSPAInitializePathwayCommandHandler, PDSPAInitializePathwayService, PDSPAIUInitializePathwayUsecase],
     exports: [PDSPAInitializePathwayService],
 })
 // biome-ignore lint/complexity/noStaticOnlyClass: not pertinent here because this is a module
 export class PDSPIAInitializePathwayInterfaceAdaptersModule {
     private static imports: Array<Type | DynamicModule> = [];
 
-    static withPersistence(persistenceModule: Type | DynamicModule) {
-        PDSPIAInitializePathwayInterfaceAdaptersModule.imports.push(
-            persistenceModule
-        );
+    static withPresenter(presenterModule: Type | DynamicModule) {
+        PDSPIAInitializePathwayInterfaceAdaptersModule.imports.push(presenterModule);
         return PDSPIAInitializePathwayInterfaceAdaptersModule;
     }
 
-    static withPresenter(presenterModule: Type | DynamicModule) {
-        PDSPIAInitializePathwayInterfaceAdaptersModule.imports.push(
-            presenterModule
-        );
+    static withPersistence(persistenceModule: Type | DynamicModule) {
+        PDSPIAInitializePathwayInterfaceAdaptersModule.imports.push(persistenceModule);
         return PDSPIAInitializePathwayInterfaceAdaptersModule;
     }
 
@@ -37,6 +29,7 @@ export class PDSPIAInitializePathwayInterfaceAdaptersModule {
         return {
             module: PDSPIAInitializePathwayInterfaceAdaptersModule,
             imports: PDSPIAInitializePathwayInterfaceAdaptersModule.imports,
+            exports: [PDSPIAInitializePathwayInterfaceAdaptersModule],
         };
     }
 }

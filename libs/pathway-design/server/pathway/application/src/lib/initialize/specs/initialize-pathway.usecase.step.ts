@@ -1,3 +1,4 @@
+import { strict as assert } from 'node:assert';
 import type {
     PDSPBEPathwayEntity,
     PDSPBPInitializePathwayPersistencePort,
@@ -7,13 +8,10 @@ import type {
 import type { DataTable } from '@cucumber/cucumber';
 import type { EventPublisher } from '@nestjs/cqrs';
 import { before, binding, then, when } from 'cucumber-tsflow';
-import { strict as assert } from 'node:assert';
 import sinon from 'sinon';
 import { PDSPAIUInitializePathwayUsecase } from '../usecase/initialize-pathway.usecase';
 
-class FakeInitializePathwayPersistence
-    implements PDSPBPInitializePathwayPersistencePort
-{
+class FakeInitializePathwayPersistence implements PDSPBPInitializePathwayPersistencePort {
     save(pDSPBEPathwayEntity: PDSPBEPathwayEntity) {
         return Promise.resolve(pDSPBEPathwayEntity);
     }
@@ -44,25 +42,21 @@ class FakeEventPublisher {
 
 @binding()
 export default class ControllerSteps {
-    private pDSPBUInitPathwayUseCase = new PDSPAIUInitializePathwayUsecase();
-    private result: PDSPBPPathwayPresenters | undefined;
-    private fakeInitializePathwayPersistence =
-        new FakeInitializePathwayPersistence();
-    private fakePathwayPresenter = new FakePathwayPresenter();
     private fakeEventPublisher = new FakeEventPublisher();
+    private fakeInitializePathwayPersistence = new FakeInitializePathwayPersistence();
+    private fakePathwayPresenter = new FakePathwayPresenter();
+    private pDSPBUInitPathwayUseCase = new PDSPAIUInitializePathwayUsecase();
     private persistenceSpy: sinon.SinonSpy | undefined;
     private presenterSpy: sinon.SinonSpy | undefined;
+    private result: PDSPBPPathwayPresenters | undefined;
 
     @before()
     public before() {
-        this.persistenceSpy = sinon.spy(
-            this.fakeInitializePathwayPersistence,
-            'save'
-        );
+        this.persistenceSpy = sinon.spy(this.fakeInitializePathwayPersistence, 'save');
         this.presenterSpy = sinon.spy(this.fakePathwayPresenter, 'present');
     }
 
-    @when('I initialize a pathway with these data')
+    @when('I initialize a pathway in application with these data')
     public async whenIInitiateAPathway(dataTable: DataTable) {
         const firstRow = dataTable.hashes()[0] as {
             title: string;
@@ -105,9 +99,7 @@ export default class ControllerSteps {
         assert(this.presenterSpy?.calledOnce);
     }
 
-    @then(
-        'It should emit an event indicating that the pathway has been initialized'
-    )
+    @then('It should emit an event indicating that the pathway has been initialized')
     public thenItShouldEmitAnEventIndicatingThatThePathwayHasBeenInitialized() {
         assert.ok(FakeEventPublisher.isEventPublished);
     }

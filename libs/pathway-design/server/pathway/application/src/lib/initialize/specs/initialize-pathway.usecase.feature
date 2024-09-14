@@ -1,7 +1,7 @@
-Feature: Initiate a pathway
+Feature: Application - Initialize a new pathway
 
-  Scenario: When I initiliaze a pathway, an event should be emitted
-    When I initialize a pathway with these data
+  Scenario: When I initiliaze a pathway in application, an event should be emitted
+    When I initialize a pathway in application with these data
       | title       | description      | researchField |
       | My Pathway  | A test pathway   | biology |
     Then It should call the persistence layer to save the pathway

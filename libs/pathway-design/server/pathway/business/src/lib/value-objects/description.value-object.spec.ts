@@ -16,9 +16,7 @@ describe('DescriptionValueObject', () => {
     });
 
     test('should throw an error if the description is empty', () => {
-        expect(() => new DescriptionValueObject('')).toThrowError(
-            'Description is required'
-        );
+        expect(() => new DescriptionValueObject('')).toThrowError('Description is required');
     });
 
     test('should return true when comparing two equal descriptions', () => {

@@ -1,6 +1,6 @@
 {
     "name": "common-tools-server-http-exceptions",
-    "$schema": "../../../../../../../node_modules/nx/schemas/project-schema.json",
+    "$schema": "../../../../../node_modules/nx/schemas/project-schema.json",
     "sourceRoot": "libs/common/tools/server/http-exceptions/src",
     "projectType": "library",
     "targets": {

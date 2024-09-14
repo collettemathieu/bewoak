@@ -7,20 +7,14 @@ import {
 
 import { Inject } from '@nestjs/common';
 // biome-ignore lint/style/useImportType: <explanation>
-import {
-    CommandHandler,
-    EventPublisher,
-    type ICommandHandler,
-} from '@nestjs/cqrs';
+import { CommandHandler, EventPublisher, type ICommandHandler } from '@nestjs/cqrs';
 
 // biome-ignore lint/style/useImportType: <explanation>
 import { PDSPAIUInitializePathwayUsecase } from '../usecase/initialize-pathway.usecase';
 import { PDSPAInitializePathwayCommand } from './initialize-pathway.command';
 
 @CommandHandler(PDSPAInitializePathwayCommand)
-export class PDSPAInitializePathwayCommandHandler
-    implements ICommandHandler<PDSPAInitializePathwayCommand>
-{
+export class PDSPAInitializePathwayCommandHandler implements ICommandHandler<PDSPAInitializePathwayCommand> {
     constructor(
         private readonly pDSPAIUInitializePathwayUsecase: PDSPAIUInitializePathwayUsecase,
         @Inject(PDSPBP_INITIALIZE_PATHWAY_PERSISTENCE_PORT)

@@ -11,9 +11,9 @@ import { PDSPBVOTitleValueObjects } from '../../value-objects/title.value-object
 
 @binding()
 export default class PathwaySteps {
-    private pathway: PDSPBEPathwayEntity | undefined;
+    private pDSPBEPathwayEntity: PDSPBEPathwayEntity | undefined;
     private error: Error | undefined;
-    private applySpy: sinon.SinonSpy | undefined;
+    private applyMethodSpy: sinon.SinonSpy | undefined;
 
     @given('I have initialized a pathway with these data')
     public givenIHaveInitializedAPathway(dataTable: DataTable) {
@@ -29,8 +29,13 @@ export default class PathwaySteps {
         const description = new DescriptionValueObject(data.description);
         const researchField = new ResearchFieldValueObjects(data.researchField);
 
-        this.pathway = new PDSPBEPathwayEntity();
-        this.pathway.init({ id, title, description, researchField });
+        this.pDSPBEPathwayEntity = new PDSPBEPathwayEntity();
+        this.pDSPBEPathwayEntity.init({
+            id,
+            title,
+            description,
+            researchField,
+        });
     }
 
     @when('I initialize a pathway with these data')
@@ -46,23 +51,20 @@ export default class PathwaySteps {
             const id = new PathwayIdValueObject(data.id);
             const title = new PDSPBVOTitleValueObjects(data.title);
             const description = new DescriptionValueObject(data.description);
-            const researchField = new ResearchFieldValueObjects(
-                data.researchField
-            );
+            const researchField = new ResearchFieldValueObjects(data.researchField);
 
-            this.pathway = new PDSPBEPathwayEntity();
-            this.applySpy = sinon.spy(this.pathway, 'apply');
+            this.pDSPBEPathwayEntity = new PDSPBEPathwayEntity();
+            this.applyMethodSpy = sinon.spy(this.pDSPBEPathwayEntity, 'apply');
 
-            this.pathway.init({ id, title, description, researchField });
+            this.pDSPBEPathwayEntity.init({
+                id,
+                title,
+                description,
+                researchField,
+            });
         } catch (error) {
             this.error = error as Error;
         }
-    }
-
-    @when('I change the title to {string}')
-    public whenIChangeTheTitle(newTitle: string) {
-        const title = new PDSPBVOTitleValueObjects(newTitle);
-        this.pathway?.changeTitle(title);
     }
 
     @then('I should retrieve the attributes of the pathway')
@@ -74,27 +76,23 @@ export default class PathwaySteps {
             researchField: string;
         };
 
-        assert.strictEqual(this.pathway?.id, data.id);
-        assert.strictEqual(this.pathway?.title, data.title);
-        assert.strictEqual(this.pathway?.description, data.description);
-        assert.strictEqual(this.pathway?.researchField, data.researchField);
+        assert.strictEqual(this.pDSPBEPathwayEntity?.id, data.id);
+        assert.strictEqual(this.pDSPBEPathwayEntity?.title, data.title);
+        assert.strictEqual(this.pDSPBEPathwayEntity?.description, data.description);
+        assert.strictEqual(this.pDSPBEPathwayEntity?.researchField, data.researchField);
     }
 
-    @then(
-        'It should apply an event indicating that the pathway has been initialized'
-    )
+    @then('It should apply an event indicating that the pathway has been initialized')
     public thenItShouldApplyAnEvent() {
-        const expectedEvent = new PDSPBEPathwayInitializedEvent(
-            this.pathway as PDSPBEPathwayEntity
-        );
-        const callArgs = this.applySpy?.getCall(0).args[0];
+        const expectedEvent = new PDSPBEPathwayInitializedEvent(this.pDSPBEPathwayEntity as PDSPBEPathwayEntity);
+        const callArgs = this.applyMethodSpy?.getCall(0).args[0];
 
-        assert(this.applySpy?.calledOnce);
+        assert(this.applyMethodSpy?.calledOnce);
         assert.deepStrictEqual(callArgs, expectedEvent);
     }
 
-    @then('I should see an error message {string}')
-    public thenIShouldSeeAnErrorMessage(errorMessage: string) {
+    @then('I should see an error message {string} during the initialization')
+    public thenIShouldSeeAnErrorMessageDuringInitialization(errorMessage: string) {
         assert.notEqual(this.error, undefined);
         assert.strictEqual(this.error?.message, errorMessage);
     }

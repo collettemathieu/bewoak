@@ -7,31 +7,21 @@ describe('ResearchFieldValueObjects', () => {
 
     beforeAll(() => {
         researchField1 = new ResearchFieldValueObjects('Test researchField');
-        researchField2 = new ResearchFieldValueObjects(
-            'Different researchField'
-        );
+        researchField2 = new ResearchFieldValueObjects('Different researchField');
     });
 
     test('should create an instance with a valid researchField', () => {
-        const researchField = new ResearchFieldValueObjects(
-            'Test researchField'
-        );
+        const researchField = new ResearchFieldValueObjects('Test researchField');
         expect(researchField.value).toBe('Test researchField');
     });
 
     test('should throw an error if the researchField is empty', () => {
-        expect(() => new ResearchFieldValueObjects('')).toThrowError(
-            'Research field is required'
-        );
+        expect(() => new ResearchFieldValueObjects('')).toThrowError('Research field is required');
     });
 
     test('should return true when comparing two equal researchFields', () => {
-        const sameresearchField1 = new ResearchFieldValueObjects(
-            'Test researchField'
-        );
-        const sameresearchField2 = new ResearchFieldValueObjects(
-            'Test researchField'
-        );
+        const sameresearchField1 = new ResearchFieldValueObjects('Test researchField');
+        const sameresearchField2 = new ResearchFieldValueObjects('Test researchField');
         expect(sameresearchField1.equals(sameresearchField2)).toBe(true);
     });
 

@@ -1,8 +1,5 @@
 import { beforeEach, describe, expect, spyOn, test } from 'bun:test';
-import {
-    type PDSPBEPathwayEntity,
-    pDSPBFPathwayFactory,
-} from '@bewoak/pathway-design-server-pathway-business';
+import { type PDSPBEPathwayEntity, pDSPBFPathwayFactory } from '@bewoak/pathway-design-server-pathway-business';
 import { NotFoundException } from '@nestjs/common';
 import { Test } from '@nestjs/testing';
 import { PathwayInMemoryRepository } from '../../common/in-memory/repositories/in-memory-pathway.repository';
@@ -17,20 +14,14 @@ describe('InitializePathwayInMemoryPersistence', () => {
 
         beforeEach(async () => {
             const module = await Test.createTestingModule({
-                providers: [
-                    InitializePathwayInMemoryPersistence,
-                    PathwayInMemoryRepository,
-                ],
+                providers: [InitializePathwayInMemoryPersistence, PathwayInMemoryRepository],
             }).compile();
 
-            initializePathwayInMemoryPersistence =
-                module.get<InitializePathwayInMemoryPersistence>(
-                    InitializePathwayInMemoryPersistence
-                );
-
-            pathwayInMemoryRepository = module.get<PathwayInMemoryRepository>(
-                PathwayInMemoryRepository
+            initializePathwayInMemoryPersistence = module.get<InitializePathwayInMemoryPersistence>(
+                InitializePathwayInMemoryPersistence
             );
+
+            pathwayInMemoryRepository = module.get<PathwayInMemoryRepository>(PathwayInMemoryRepository);
 
             pDSPBEPathwayEntity = pDSPBFPathwayFactory({
                 description: 'pathway description',
@@ -42,17 +33,12 @@ describe('InitializePathwayInMemoryPersistence', () => {
             spyOn(pathwayInMemoryRepository, 'add');
             spyOn(pathwayInMemoryRepository, 'get');
 
-            result =
-                await initializePathwayInMemoryPersistence.save(
-                    pDSPBEPathwayEntity
-                );
+            result = await initializePathwayInMemoryPersistence.save(pDSPBEPathwayEntity);
         });
 
         test('should call the save method with the pathway in parameter', () => {
             expect(initializePathwayInMemoryPersistence).toBeDefined();
-            expect(
-                initializePathwayInMemoryPersistence.save
-            ).toHaveBeenCalledWith(pDSPBEPathwayEntity);
+            expect(initializePathwayInMemoryPersistence.save).toHaveBeenCalledWith(pDSPBEPathwayEntity);
         });
 
         test('should save the pathway in memory and return the pathway saved', () => {
@@ -62,18 +48,13 @@ describe('InitializePathwayInMemoryPersistence', () => {
             expect(result.id).not.toBeEmpty();
             expect(result).not.toBe(pDSPBEPathwayEntity);
             expect(result.title).toStrictEqual(pDSPBEPathwayEntity.title);
-            expect(result.description).toStrictEqual(
-                pDSPBEPathwayEntity.description
-            );
-            expect(result.researchField).toStrictEqual(
-                pDSPBEPathwayEntity.researchField
-            );
+            expect(result.description).toStrictEqual(pDSPBEPathwayEntity.description);
+            expect(result.researchField).toStrictEqual(pDSPBEPathwayEntity.researchField);
         });
     });
 
     describe('When I want to save a pathway but the pathway is not recovered in memory', () => {
         let initializePathwayInMemoryPersistence: InitializePathwayInMemoryPersistence;
-        let pathwayInMemoryRepository: PathwayInMemoryRepository;
         let pDSPBEPathwayEntity: PDSPBEPathwayEntity;
 
         beforeEach(async () => {
@@ -90,13 +71,8 @@ describe('InitializePathwayInMemoryPersistence', () => {
                 ],
             }).compile();
 
-            initializePathwayInMemoryPersistence =
-                module.get<InitializePathwayInMemoryPersistence>(
-                    InitializePathwayInMemoryPersistence
-                );
-
-            pathwayInMemoryRepository = module.get<PathwayInMemoryRepository>(
-                PathwayInMemoryRepository
+            initializePathwayInMemoryPersistence = module.get<InitializePathwayInMemoryPersistence>(
+                InitializePathwayInMemoryPersistence
             );
 
             pDSPBEPathwayEntity = pDSPBFPathwayFactory({
@@ -104,22 +80,14 @@ describe('InitializePathwayInMemoryPersistence', () => {
                 researchField: 'pathway research field',
                 title: 'pathway title',
             });
-
-            spyOn(initializePathwayInMemoryPersistence, 'save');
-            spyOn(pathwayInMemoryRepository, 'add');
-            spyOn(pathwayInMemoryRepository, 'get');
         });
 
         test('should throw an error', async () => {
             try {
-                await initializePathwayInMemoryPersistence.save(
-                    pDSPBEPathwayEntity
-                );
+                await initializePathwayInMemoryPersistence.save(pDSPBEPathwayEntity);
             } catch (error) {
                 expect(error).toBeInstanceOf(NotFoundException);
-                expect((error as NotFoundException).message).toBe(
-                    'Pathway not found in memory'
-                );
+                expect((error as NotFoundException).message).toBe('Pathway not found in memory');
             }
         });
     });

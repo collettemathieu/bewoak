@@ -1,6 +1,6 @@
 import { strict as assert } from 'node:assert';
 import type { Http2Server } from 'node:http2';
-import { PDSPIInitializePathwayPersistenceInfrastructureModule } from '@bewoak/pathway-design-server-pathway-infrastructure';
+import { PDSPIPPathwayPersistenceInfrastructureModule } from '@bewoak/pathway-design-server-pathway-infrastructure';
 import { PDSPIAInitializePathwayInterfaceAdaptersModule } from '@bewoak/pathway-design-server-pathway-interface-adapters';
 import { PDSPPPathwayPresentersModule } from '@bewoak/pathway-design-server-pathway-presenters';
 import type { DataTable } from '@cucumber/cucumber';
@@ -13,25 +13,22 @@ import request from 'supertest';
 @binding()
 class ControllerSteps {
     private app: INestApplication;
-    private response: request.Response;
     private httpServer: Http2Server;
+    private response: request.Response;
 
-    @given('I am authenticated on the platform')
-    public async givenAmIAuthenticatedOnThePlatform() {
-        const module = await Test.createTestingModule({
+    @given('I am authenticated on the platform for initialize a pathway in memory persistence and json presenter')
+    public async withInMemoryPeristenceAndJsonPresenter() {
+        const testingModule = await Test.createTestingModule({
             imports: [
-                PDSPIAInitializePathwayInterfaceAdaptersModule.withPersistence(
-                    PDSPIInitializePathwayPersistenceInfrastructureModule.use(
-                        'inMemory'
-                    )
-                )
-                    .withPresenter(PDSPPPathwayPresentersModule.use('toJson'))
+                PDSPIAInitializePathwayInterfaceAdaptersModule.withPresenter(PDSPPPathwayPresentersModule.use('toJson'))
+                    .withPersistence(PDSPIPPathwayPersistenceInfrastructureModule.use('inMemory'))
                     .build(),
                 CqrsModule.forRoot(),
             ],
+            exports: [],
         }).compile();
 
-        this.app = module.createNestApplication();
+        this.app = testingModule.createNestApplication();
         await this.app.init();
         this.httpServer = this.app.getHttpServer();
     }
@@ -40,13 +37,11 @@ class ControllerSteps {
     public async whenIInitiateAPathway(dataTable: DataTable) {
         const firstRow = dataTable.hashes()[0];
 
-        this.response = await request(this.httpServer)
-            .post('/pathway/init')
-            .send({
-                title: firstRow.title,
-                description: firstRow.description,
-                researchField: firstRow.researchField,
-            });
+        this.response = await request(this.httpServer).post('/pathway/init').send({
+            title: firstRow.title,
+            description: firstRow.description,
+            researchField: firstRow.researchField,
+        });
     }
 
     @then('I should retrieve a pathway initialized with its data')
@@ -54,14 +49,8 @@ class ControllerSteps {
         const firstRow = dataTable.hashes()[0];
 
         assert.strictEqual(this.response.body.title, firstRow.title);
-        assert.strictEqual(
-            this.response.body.description,
-            firstRow.description
-        );
-        assert.strictEqual(
-            this.response.body.researchField,
-            firstRow.researchField
-        );
+        assert.strictEqual(this.response.body.description, firstRow.description);
+        assert.strictEqual(this.response.body.researchField, firstRow.researchField);
     }
 
     @then('The pathway should be have a unique identifier')

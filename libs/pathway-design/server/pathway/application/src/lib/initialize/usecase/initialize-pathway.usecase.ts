@@ -26,8 +26,7 @@ export class PDSPAIUInitializePathwayUsecase {
             researchField,
         });
 
-        const pathwayFromPersistence =
-            await pDSPBPInitializePathwayPersistencePort.save(pathway);
+        const pathwayFromPersistence = await pDSPBPInitializePathwayPersistencePort.save(pathway);
 
         eventPublisher.mergeObjectContext(pathway);
         pathway.commit();

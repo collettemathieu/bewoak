@@ -1,7 +1,7 @@
 export class PathwayInMemoryEntity {
     constructor(
-        public id: string,
         public description: string,
+        public id: string,
         public researchField: string,
         public title: string
     ) {}

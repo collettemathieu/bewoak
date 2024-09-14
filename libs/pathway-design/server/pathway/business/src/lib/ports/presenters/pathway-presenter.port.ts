@@ -10,11 +10,7 @@ export interface PDSPBPJsonPathwayPresenter {
 export type PDSPBPPathwayPresenters = PDSPBPJsonPathwayPresenter;
 
 export interface PDSPBPPathwayPresenterPort {
-    present: (
-        pDSPBEpathwayEntity: PDSPBEPathwayEntity
-    ) => PDSPBPPathwayPresenters;
+    present: (pDSPBEpathwayEntity: PDSPBEPathwayEntity) => PDSPBPPathwayPresenters;
 }
 
-export const PDSPBP_PATHWAY_PRESENTER_PORT = Symbol(
-    'PDSPBPPathwayPresenterPort'
-);
+export const PDSPBP_PATHWAY_PRESENTER_PORT = Symbol('PDSPBPPathwayPresenterPort');

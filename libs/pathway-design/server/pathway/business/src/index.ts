@@ -1,6 +1,10 @@
 export { PDSPBEPathwayEntity } from './lib/entities/pathway';
 export { pDSPBFPathwayFactory } from './lib/factories/pathway.factory';
 export {
+    PDSPBP_CHANGE_TITLE_PATHWAY_PERSISTENCE_PORT,
+    type PDSPBPChangeTitlePathwayPersistencePort,
+} from './lib/ports/persistences/change-title/change-title-pathway-persitence.port';
+export {
     PDSPBP_INITIALIZE_PATHWAY_PERSISTENCE_PORT,
     type PDSPBPInitializePathwayPersistencePort,
 } from './lib/ports/persistences/initialize/initialize-pathway-persitence.port';

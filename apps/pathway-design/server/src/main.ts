@@ -18,14 +18,11 @@ async function bootstrap() {
     // Setting up Swagger document
     const options = new DocumentBuilder()
         .setTitle('Pathway design Application')
-        .setDescription(
-            'Application Programming Interface (API) of Pathway design Application'
-        )
+        .setDescription('Application Programming Interface (API) of Pathway design Application')
         .setVersion('1.0')
         .addBearerAuth(
             {
-                description:
-                    'Please enter token in following format: Bearer <JWT>',
+                description: 'Please enter token in following format: Bearer <JWT>',
                 name: 'Authorization',
                 bearerFormat: 'Bearer',
                 scheme: 'Bearer',
@@ -40,9 +37,7 @@ async function bootstrap() {
     SwaggerModule.setup('api', app, document);
 
     await app.listen(port);
-    Logger.log(
-        `🚀 Application is running on: http://localhost:${port}/${globalPrefix}`
-    );
+    Logger.log(`🚀 Application is running on: http://localhost:${port}/${globalPrefix}`);
 }
 
 bootstrap();

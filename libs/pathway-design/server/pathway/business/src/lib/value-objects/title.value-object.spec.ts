@@ -16,9 +16,7 @@ describe('PDSPBVOTitleValueObjects', () => {
     });
 
     test('should throw an error if the title is empty', () => {
-        expect(() => new PDSPBVOTitleValueObjects('')).toThrowError(
-            'Title is required'
-        );
+        expect(() => new PDSPBVOTitleValueObjects('')).toThrowError('Title is required');
     });
 
     test('should return true when comparing two equal titles', () => {

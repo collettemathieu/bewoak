@@ -1,5 +1,6 @@
 import { AggregateRoot } from '@nestjs/cqrs';
 import { PDSPBEPathwayInitializedEvent } from '../events/pathway-initialized.event';
+import { PDSPBEPathwayTitleChangedEvent } from '../events/pathway-title-changed.event';
 import type { DescriptionValueObject } from '../value-objects/description.value-object';
 import type { PathwayIdValueObject } from '../value-objects/pathway-id.value-object';
 import type { ResearchFieldValueObjects } from '../value-objects/research-field.value-object';
@@ -41,5 +42,15 @@ export class PDSPBEPathwayEntity extends AggregateRoot {
 
     changeTitle(title: PDSPBVOTitleValueObjects) {
         this.#title = title;
+
+        this.apply(
+            new PDSPBEPathwayTitleChangedEvent(this.id, {
+                pathwayId: this.id,
+                title: title.value,
+            }),
+            {
+                skipHandler: true,
+            }
+        );
     }
 }

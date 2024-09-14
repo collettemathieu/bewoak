@@ -1,17 +1,27 @@
-import {
-    type PDSPBEPathwayEntity,
-    PDSPBVOTitleValueObjects,
+import type {
+    PDSPBPChangeTitlePathwayPersistencePort,
+    PDSPBPPathwayPresenterPort,
 } from '@bewoak/pathway-design-server-pathway-business';
+import type { EventPublisher } from '@nestjs/cqrs';
 
-export class PDSPBUChangeTitlePathwayUseCase {
-    execute({
-        pathway,
-        title,
-    }: {
-        pathway: PDSPBEPathwayEntity;
-        title: string;
-    }) {
-        const newTitle = new PDSPBVOTitleValueObjects(title);
-        pathway.changeTitle(newTitle);
+export class PDSPACUChangeTitlePathwayUseCase {
+    async execute(
+        pDSPBPChangeTitlePathwayPersistencePort: PDSPBPChangeTitlePathwayPersistencePort,
+        pDSPBPPathwayPresenterPort: PDSPBPPathwayPresenterPort,
+        eventPublisher: EventPublisher,
+        {
+            pathwayId,
+            title,
+        }: {
+            pathwayId: string;
+            title: string;
+        }
+    ) {
+        const pathwayFromPersistence = await pDSPBPChangeTitlePathwayPersistencePort.changeTitle(pathwayId, title);
+
+        eventPublisher.mergeObjectContext(pathwayFromPersistence);
+        pathwayFromPersistence.commit();
+
+        return pDSPBPPathwayPresenterPort.present(pathwayFromPersistence);
     }
 }

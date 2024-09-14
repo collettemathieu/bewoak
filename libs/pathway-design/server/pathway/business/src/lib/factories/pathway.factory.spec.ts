@@ -39,9 +39,7 @@ describe('pDSPBFPathwayFactory', () => {
             researchField: 'biology',
         };
 
-        expect(() => pDSPBFPathwayFactory(params)).toThrow(
-            'Description is required'
-        );
+        expect(() => pDSPBFPathwayFactory(params)).toThrow('Description is required');
     });
 
     it('should throw an error for an empty research field', () => {
@@ -52,9 +50,7 @@ describe('pDSPBFPathwayFactory', () => {
             researchField: '',
         };
 
-        expect(() => pDSPBFPathwayFactory(params)).toThrow(
-            'Research field is required'
-        );
+        expect(() => pDSPBFPathwayFactory(params)).toThrow('Research field is required');
     });
 
     it('should throw an error for an invalid UUID', () => {
@@ -65,9 +61,7 @@ describe('pDSPBFPathwayFactory', () => {
             researchField: 'biology',
         };
 
-        expect(() => pDSPBFPathwayFactory(params)).toThrow(
-            'Pathway id must be a valid uuid'
-        );
+        expect(() => pDSPBFPathwayFactory(params)).toThrow('Pathway id must be a valid uuid');
     });
 
     it('should generate a valid UUID if none is provided', () => {
@@ -79,9 +73,7 @@ describe('pDSPBFPathwayFactory', () => {
         const pathway = pDSPBFPathwayFactory(params);
 
         expect(pathway).toBeInstanceOf(PDSPBEPathwayEntity);
-        expect(pathway.id).toMatch(
-            /^[0-9a-f]{8}-[0-9a-f]{4}-4[0-9a-f]{3}-[89ab][0-9a-f]{3}-[0-9a-f]{12}$/i
-        );
+        expect(pathway.id).toMatch(/^[0-9a-f]{8}-[0-9a-f]{4}-4[0-9a-f]{3}-[89ab][0-9a-f]{3}-[0-9a-f]{12}$/i);
         expect(pathway.title).toBe(params.title);
         expect(pathway.description).toBe(params.description);
         expect(pathway.researchField).toBe(params.researchField);

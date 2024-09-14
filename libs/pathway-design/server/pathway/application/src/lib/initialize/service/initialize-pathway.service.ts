@@ -9,9 +9,6 @@ export class PDSPAInitializePathwayService {
     constructor(private readonly commandBus: CommandBus) {}
 
     init(pDSPAInitializePathwayCommand: PDSPAInitializePathwayCommand) {
-        return this.commandBus.execute<
-            PDSPAInitializePathwayCommand,
-            PDSPBPPathwayPresenters
-        >(pDSPAInitializePathwayCommand);
+        return this.commandBus.execute<PDSPAInitializePathwayCommand, PDSPBPPathwayPresenters>(pDSPAInitializePathwayCommand);
     }
 }

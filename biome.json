@@ -4,31 +4,15 @@
         "attributePosition": "auto",
         "enabled": true,
         "formatWithErrors": false,
-        "ignore": [
-            "dist",
-            "coverage",
-            ".nx",
-            ".vscode",
-            "node_modules",
-            "tmp",
-            ".angular"
-        ],
+        "ignore": ["dist", "coverage", ".nx", ".vscode", "node_modules", "tmp", ".angular"],
         "indentStyle": "space",
         "indentWidth": 4,
         "lineEnding": "lf",
-        "lineWidth": 80
+        "lineWidth": 130
     },
     "linter": {
         "enabled": true,
-        "ignore": [
-            "dist",
-            "coverage",
-            ".nx",
-            ".vscode",
-            "node_modules",
-            "tmp",
-            ".angular"
-        ],
+        "ignore": ["dist", "coverage", ".nx", ".vscode", "node_modules", "tmp", ".angular"],
         "rules": {
             "recommended": true,
             "suspicious": {

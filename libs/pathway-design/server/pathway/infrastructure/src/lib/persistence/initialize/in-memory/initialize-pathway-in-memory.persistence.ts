@@ -1,7 +1,4 @@
-import type {
-    PDSPBEPathwayEntity,
-    PDSPBPInitializePathwayPersistencePort,
-} from '@bewoak/pathway-design-server-pathway-business';
+import type { PDSPBEPathwayEntity, PDSPBPInitializePathwayPersistencePort } from '@bewoak/pathway-design-server-pathway-business';
 import { Inject, Injectable, NotFoundException } from '@nestjs/common';
 import {
     mapPathwayEntityToInMemoryPersistence,
@@ -10,22 +7,17 @@ import {
 import { PathwayInMemoryRepository } from '../../../persistence/common/in-memory/repositories/in-memory-pathway.repository';
 
 @Injectable()
-export class InitializePathwayInMemoryPersistence
-    implements PDSPBPInitializePathwayPersistencePort
-{
+export class InitializePathwayInMemoryPersistence implements PDSPBPInitializePathwayPersistencePort {
     constructor(
         @Inject(PathwayInMemoryRepository)
         private pathwayInMemoryRepository: PathwayInMemoryRepository
     ) {}
 
     async save(pDSPBEPathwayEntity: PDSPBEPathwayEntity) {
-        const peristenceModel =
-            mapPathwayEntityToInMemoryPersistence(pDSPBEPathwayEntity);
+        const peristenceModel = mapPathwayEntityToInMemoryPersistence(pDSPBEPathwayEntity);
         await this.pathwayInMemoryRepository.add(peristenceModel);
 
-        const pathwayInMemory = await this.pathwayInMemoryRepository.get(
-            peristenceModel.id
-        );
+        const pathwayInMemory = await this.pathwayInMemoryRepository.get(peristenceModel.id);
 
         if (pathwayInMemory === undefined) {
             throw new NotFoundException('Pathway not found in memory');

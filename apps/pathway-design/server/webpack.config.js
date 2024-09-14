@@ -13,8 +13,7 @@ module.exports = {
             tsConfig: './tsconfig.app.json',
             assets: ['./src/assets'],
             optimization: process.env.BUN_ENV === 'production',
-            outputHashing:
-                process.env.BUN_ENV === 'production' ? 'all' : 'none',
+            outputHashing: process.env.BUN_ENV === 'production' ? 'all' : 'none',
             transformers: [{ name: '@nestjs/swagger/plugin' }],
         }),
     ],

@@ -1,10 +1,7 @@
 import { Module } from '@nestjs/common';
 import { ToJsonPathwayPresenterModule } from './toJson/to-json-pathway-presenter.module';
 
-const presenterModuleMap: Record<
-    'toJson',
-    typeof ToJsonPathwayPresenterModule
-> = {
+const presenterModuleMap: Record<'toJson', typeof ToJsonPathwayPresenterModule> = {
     toJson: ToJsonPathwayPresenterModule,
 };
 
