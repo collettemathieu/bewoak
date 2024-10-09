@@ -1,275 +1,226 @@
-"Mathieu Collette <collettemathieu@jsonata.com>,Wed Sep 4 17:32:55 2024 +0200"
-66	66	package.json
-
-"Mathieu Collette <collettemathieu@jsonata.com>,Wed Sep 4 17:32:33 2024 +0200"
-25	0	apps/pathway-design/server/src/main.ts
-1	0	apps/pathway-design/server/webpack.config.js
+"Mathieu Collette <collettemathieu@jsonata.com>,Sat Sep 14 15:29:45 2024 +0200	3e4a5edcc2aa4cee558971e8876d01ad672d91a0,feat: implement change title"
+1	1	.hooks/commit-msg
+2	2	apps/pathway-design/server/cucumber.js
+11	8	apps/pathway-design/server/src/app/app.module.ts
+3	8	apps/pathway-design/server/src/main.ts
+12	0	apps/pathway-design/server/src/specs/change-title-pathway/index.feature
+67	0	apps/pathway-design/server/src/specs/change-title-pathway/index.step.ts
+2	11	apps/pathway-design/server/src/specs/initialize-pathway/index.feature
+16	27	apps/pathway-design/server/src/specs/initialize-pathway/index.step.ts
+1	2	apps/pathway-design/server/webpack.config.js
+3	19	biome.json
 -	-	bun.lockb
-16	1	libs/pathway-design/server/pathway/interface-adapters/src/lib/initialize/controller/initialize-pathway.controller.ts
-66	64	package.json
-
-"Mathieu Collette <collettemathieu@jsonata.com>,Wed Sep 4 17:03:00 2024 +0200"
-6	1	.vscode/settings.json
-3	2	libs/pathway-design/server/pathway/application/src/lib/initialize/command/initialize-pathway.command-handler.ts
-3	2	libs/pathway-design/server/pathway/application/src/lib/initialize/service/initialize-pathway.service.ts
-1	1	libs/pathway-design/server/pathway/infrastructure/src/lib/persistence/initialize/in-memory/initialize-pathway-in-memory.persistence.spec.ts
-9	4	libs/pathway-design/server/pathway/interface-adapters/src/lib/initialize/controller/initialize-pathway.controller.ts
-
-"Mathieu Collette <collettemathieu@jsonata.com>,Tue Aug 6 10:48:09 2024 +0200"
-0	24	apps/pathway-design/server/src/main.ts
-1	1	apps/pathway-design/server/src/test/initialize-pathway/index.step.ts
-0	14	apps/pathway-design/server/webpack.config.js
--	-	bun.lockb
-1	9	libs/pathway-design/server/pathway/interface-adapters/src/lib/initialize/controller/initialize-pathway.controller.ts
-8	11	libs/pathway-design/server/pathway/interface-adapters/src/lib/initialize/dtos/request/body/index.dto.ts
-9	11	package.json
-
-"Mathieu Collette <collettemathieu@jsonata.com>,Mon Aug 5 19:13:34 2024 +0200"
-66	66	package.json
-
-"Mathieu Collette <collettemathieu@jsonata.com>,Mon Aug 5 19:13:04 2024 +0200"
-0	25	apps/pathway-design/server/src/app/app.controller.spec.ts
-0	13	apps/pathway-design/server/src/app/app.controller.ts
-16	5	apps/pathway-design/server/src/app/app.module.ts
-0	22	apps/pathway-design/server/src/app/app.service.spec.ts
-0	8	apps/pathway-design/server/src/app/app.service.ts
-26	1	apps/pathway-design/server/src/main.ts
-0	7	apps/pathway-design/server/src/test/index.feature
-0	42	apps/pathway-design/server/src/test/index.step.ts
-15	1	apps/pathway-design/server/webpack.config.js
--	-	bun.lockb
-2	2	libs/pathway-design/server/pathway/application/src/lib/initialize/service/initialize-pathway.service.ts
-2	2	libs/pathway-design/server/pathway/application/src/lib/initialize/usecase/initialize-pathway.usecase.step.ts
-1	1	libs/pathway-design/server/pathway/business/src/index.ts
-24	0	libs/pathway-design/server/pathway/business/src/lib/entities/pathway.feature
-62	0	libs/pathway-design/server/pathway/business/src/lib/exceptions.ts
-2	2	libs/pathway-design/server/pathway/business/src/lib/ports/presenters/pathway-presenter.port.ts
-5	3	libs/pathway-design/server/pathway/business/src/lib/value-objects/description.value-object.ts
-3	1	libs/pathway-design/server/pathway/business/src/lib/value-objects/pathway-id.value-object.ts
-5	3	libs/pathway-design/server/pathway/business/src/lib/value-objects/research-field.value-object.ts
-5	3	libs/pathway-design/server/pathway/business/src/lib/value-objects/title.value-object.ts
-23	4	libs/pathway-design/server/pathway/interface-adapters/src/lib/initialize/controller/initialize-pathway.controller.ts
-15	0	libs/pathway-design/server/pathway/interface-adapters/src/lib/initialize/dtos/request/body/index.dto.ts
-0	16	libs/pathway-design/server/pathway/interface-adapters/src/lib/initialize/dtos/request/body/initialize-pathway-request-body.dto.ts
-10	0	libs/pathway-design/server/pathway/interface-adapters/src/lib/initialize/dtos/response/body/index.dto.ts
-66	65	package.json
-
-"Mathieu Collette <collettemathieu@jsonata.com>,Mon Aug 5 15:44:40 2024 +0200"
-3	3	apps/pathway-design/server/src/test/initialize-pathway/index.step.ts
--	-	bun.lockb
-5	2	libs/pathway-design/server/pathway/application/src/lib/change-title/usecase/change-title-pathway.usecase.step.ts
-12	6	libs/pathway-design/server/pathway/application/src/lib/initialize/command/initialize-pathway.command-handler.ts
-2	2	libs/pathway-design/server/pathway/application/src/lib/initialize/service/initialize-pathway.service.ts
-10	34	libs/pathway-design/server/pathway/application/src/lib/initialize/usecase/initialize-pathway.usecase.feature
-77	42	libs/pathway-design/server/pathway/application/src/lib/initialize/usecase/initialize-pathway.usecase.step.ts
-8	3	libs/pathway-design/server/pathway/application/src/lib/initialize/usecase/initialize-pathway.usecase.ts
-4	5	libs/pathway-design/server/pathway/business/src/index.ts
-2	1	libs/pathway-design/server/pathway/business/src/lib/entities/pathway.feature
-19	1	libs/pathway-design/server/pathway/business/src/lib/entities/pathway.step.ts
-7	1	libs/pathway-design/server/pathway/business/src/lib/entities/pathway.ts
-5	0	libs/pathway-design/server/pathway/business/src/lib/events/pathway-initialized.event.ts
-8	24	libs/pathway-design/server/pathway/business/src/lib/factories/pathway.factory.spec.ts
-2	2	libs/pathway-design/server/pathway/business/src/lib/factories/pathway.factory.ts
-1	1	libs/pathway-design/server/pathway/business/src/lib/factories/pathway.factory.types.ts
-20	0	libs/pathway-design/server/pathway/business/src/lib/ports/presenters/pathway-presenter.port.ts
-0	17	libs/pathway-design/server/pathway/business/src/lib/ports/presenters/to-json-pathway.port.ts
-1	1	libs/pathway-design/server/pathway/infrastructure/src/lib/persistence/initialize/in-memory/initialize-pathway-in-memory.persistence.spec.ts
-6	4	libs/pathway-design/server/pathway/presenters/src/lib/pathway-presenters.module.ts
-3	3	libs/pathway-design/server/pathway/presenters/src/lib/toJson/to-json-pathway-presenter.module.ts
-2	4	libs/pathway-design/server/pathway/presenters/src/lib/toJson/to-json-pathway.presenter.ts
-2	0	package.json
-
-"Mathieu Collette <collettemathieu@jsonata.com>,Sun Aug 4 15:43:54 2024 +0200"
-11	0	apps/pathway-design/server/src/test/initialize-pathway/index.feature
-3	2	apps/pathway-design/server/src/test/initialize-pathway/index.step.ts
-1	1	libs/pathway-design/server/pathway/application/src/lib/change-title/usecase/change-title-pathway.usecase.step.ts
-0	145	libs/pathway-design/server/pathway/application/src/lib/initialize/command/initialize-pathway.command-handler.spec.ts
-0	54	libs/pathway-design/server/pathway/application/src/lib/initialize/service/initialize-pathway.service.spec.ts
-30	22	libs/pathway-design/server/pathway/application/src/lib/initialize/usecase/initialize-pathway.usecase.feature
-41	37	libs/pathway-design/server/pathway/application/src/lib/initialize/usecase/initialize-pathway.usecase.step.ts
-2	2	libs/pathway-design/server/pathway/business/src/index.ts
-48	0	libs/pathway-design/server/pathway/business/src/lib/entities/pathway.feature
-83	0	libs/pathway-design/server/pathway/business/src/lib/entities/pathway.step.ts
-4	4	libs/pathway-design/server/pathway/business/src/lib/entities/pathway.ts
-105	0	libs/pathway-design/server/pathway/business/src/lib/factories/pathway.factory.spec.ts
-1	1	libs/pathway-design/server/pathway/business/src/lib/factories/{pathway.ts => pathway.factory.ts}
-0	0	libs/pathway-design/server/pathway/business/src/lib/factories/{pathway.types.ts => pathway.factory.types.ts}
-4	4	libs/pathway-design/server/pathway/infrastructure/src/lib/persistence/common/in-memory/mappers/in-memory-pathway.mapper.ts
-7	9	libs/pathway-design/server/pathway/infrastructure/src/lib/persistence/initialize/in-memory/initialize-pathway-in-memory.persistence.spec.ts
-4	4	libs/pathway-design/server/pathway/presenters/src/lib/toJson/to-json-pathway.presenter.ts
-
-"Mathieu Collette <collettemathieu@jsonata.com>,Fri Aug 2 18:08:31 2024 +0200"
-3	1	apps/pathway-design/server/src/app/app.controller.spec.ts
-1	1	apps/pathway-design/server/src/app/app.service.spec.ts
-1	1	apps/pathway-design/server/src/test/index.step.ts
-9	3	apps/pathway-design/server/src/test/initialize-pathway/index.step.ts
-1	0	libs/pathway-design/server/pathway/application/src/index.ts
-0	0	libs/pathway-design/server/pathway/{business/src/lib/usecases/change-title => application/src/lib/change-title/usecase}/change-title-pathway.usecase.feature
-9	7	libs/pathway-design/server/pathway/{business/src/lib/usecases/change-title => application/src/lib/change-title/usecase}/change-title-pathway.usecase.step.ts
-5	3	libs/pathway-design/server/pathway/{business/src/lib/usecases/change-title => application/src/lib/change-title/usecase}/change-title-pathway.usecase.ts
-19	10	libs/pathway-design/server/pathway/application/src/lib/initialize/command/initialize-pathway.command-handler.spec.ts
-4	4	libs/pathway-design/server/pathway/application/src/lib/initialize/command/initialize-pathway.command-handler.ts
-0	2	libs/pathway-design/server/pathway/{business/src/lib/usecases/initialize => application/src/lib/initialize/usecase}/initialize-pathway.usecase.feature
-15	14	libs/pathway-design/server/pathway/{business/src/lib/usecases/initialize => application/src/lib/initialize/usecase}/initialize-pathway.usecase.step.ts
-7	6	libs/pathway-design/server/pathway/{business/src/lib/usecases/initialize => application/src/lib/initialize/usecase}/initialize-pathway.usecase.ts
-3	2	libs/pathway-design/server/pathway/business/src/index.ts
-5	21	libs/pathway-design/server/pathway/business/src/lib/entities/pathway.ts
-3	3	libs/pathway-design/server/pathway/business/src/lib/entities/pathway.types.ts
-5	5	libs/pathway-design/server/pathway/business/src/lib/factories/pathway.ts
-1	1	libs/pathway-design/server/pathway/business/src/lib/factories/{pathway.dto.ts => pathway.types.ts}
-10	10	libs/pathway-design/server/pathway/business/src/lib/value-objects/title.value-object.spec.ts
-2	2	libs/pathway-design/server/pathway/business/src/lib/value-objects/title.value-object.ts
-2	2	libs/pathway-design/server/pathway/infrastructure/src/lib/persistence/common/in-memory/mappers/in-memory-pathway.mapper.ts
-13	12	libs/pathway-design/server/pathway/infrastructure/src/lib/persistence/initialize/in-memory/initialize-pathway-in-memory.persistence.spec.ts
-2	2	libs/pathway-design/server/pathway/interface-adapters/src/lib/initialize/initialize-pathway-interface-adapters.module.ts
-
-"Mathieu Collette <collettemathieu@jsonata.com>,Fri Aug 2 12:26:42 2024 +0200"
-5	5	.vscode/extensions.json
-3	5	.vscode/settings.json
-5	3	apps/pathway-design/server/src/test/initialize-pathway/index.step.ts
-3	3	libs/pathway-design/server/pathway/application/src/index.ts
-0	137	libs/pathway-design/server/pathway/application/src/lib/initialize/command/init-pathway.command-handler.spec.ts
-0	41	libs/pathway-design/server/pathway/application/src/lib/initialize/command/init-pathway.command-handler.ts
-136	0	libs/pathway-design/server/pathway/application/src/lib/initialize/command/initialize-pathway.command-handler.spec.ts
-38	0	libs/pathway-design/server/pathway/application/src/lib/initialize/command/initialize-pathway.command-handler.ts
-1	1	libs/pathway-design/server/pathway/application/src/lib/initialize/command/{init-pathway.command.ts => initialize-pathway.command.ts}
-4	4	libs/pathway-design/server/pathway/application/src/lib/initialize/service/{init-pathway.service.spec.ts => initialize-pathway.service.spec.ts}
-4	4	libs/pathway-design/server/pathway/application/src/lib/initialize/service/{init-pathway.service.ts => initialize-pathway.service.ts}
-8	8	libs/pathway-design/server/pathway/business/src/index.ts
-0	15	libs/pathway-design/server/pathway/business/src/lib/ports/http/http-pathway.port.ts
-0	12	libs/pathway-design/server/pathway/business/src/lib/ports/initialize/init-port-memory.port.ts
-11	0	libs/pathway-design/server/pathway/business/src/lib/ports/persistences/initialize/initialize-pathway-persitence.port.ts
-17	0	libs/pathway-design/server/pathway/business/src/lib/ports/presenters/to-json-pathway.port.ts
-4	4	libs/pathway-design/server/pathway/business/src/lib/usecases/change-title/change-title-pathway.usecase.step.ts
-0	30	libs/pathway-design/server/pathway/business/src/lib/usecases/initialize/init-pathway.usecase.ts
-0	0	libs/pathway-design/server/pathway/business/src/lib/usecases/initialize/{init-pathway.usecase.feature => initialize-pathway.usecase.feature}
-26	27	libs/pathway-design/server/pathway/business/src/lib/usecases/initialize/{init-pathway.usecase.step.ts => initialize-pathway.usecase.step.ts}
-31	0	libs/pathway-design/server/pathway/business/src/lib/usecases/initialize/initialize-pathway.usecase.ts
-1	1	libs/pathway-design/server/pathway/infrastructure/src/index.ts
-0	31	libs/pathway-design/server/pathway/infrastructure/src/lib/common/persistence/in-memory/mappers/in-memory-pathway.mapper.ts
-0	13	libs/pathway-design/server/pathway/infrastructure/src/lib/common/persistence/in-memory/repositories/in-memory-pathway.repository.ts
-0	18	libs/pathway-design/server/pathway/infrastructure/src/lib/initialize/persistence/in-memory/init-pathway-in-memory-persistence.module.ts
-0	137	libs/pathway-design/server/pathway/infrastructure/src/lib/initialize/persistence/in-memory/init-pathway-in-memory.persistence.spec.ts
-0	37	libs/pathway-design/server/pathway/infrastructure/src/lib/initialize/persistence/in-memory/init-pathway-in-memory.persistence.ts
-1	1	libs/pathway-design/server/pathway/infrastructure/src/lib/{common/persistence => persistence/common}/in-memory/entities/in-memory-pathway.entity.ts
-31	0	libs/pathway-design/server/pathway/infrastructure/src/lib/persistence/common/in-memory/mappers/in-memory-pathway.mapper.ts
-13	0	libs/pathway-design/server/pathway/infrastructure/src/lib/persistence/common/in-memory/repositories/in-memory-pathway.repository.ts
-0	0	libs/pathway-design/server/pathway/infrastructure/src/lib/{common/persistence => persistence/common}/orm/.keep
-18	0	libs/pathway-design/server/pathway/infrastructure/src/lib/persistence/initialize/in-memory/initialize-pathway-in-memory-persistence.module.ts
-127	0	libs/pathway-design/server/pathway/infrastructure/src/lib/persistence/initialize/in-memory/initialize-pathway-in-memory.persistence.spec.ts
-36	0	libs/pathway-design/server/pathway/infrastructure/src/lib/persistence/initialize/in-memory/initialize-pathway-in-memory.persistence.ts
-5	5	libs/pathway-design/server/pathway/infrastructure/src/lib/{pathway-infrastructure.module.ts => persistence/initialize/initialize-pathway-persistence-infrastructure.module.ts}
-0	0	libs/pathway-design/server/pathway/infrastructure/src/lib/{initialize/persistence => persistence/initialize}/orm/.keep
-2	2	libs/pathway-design/server/pathway/interface-adapters/src/lib/initialize/controller/initialize-pathway.controller.ts
-3	3	libs/pathway-design/server/pathway/interface-adapters/src/lib/initialize/dtos/request/body/initialize-pathway-request-body.dto.ts
-6	6	libs/pathway-design/server/pathway/interface-adapters/src/lib/initialize/initialize-pathway-interface-adapters.module.ts
-0	15	libs/pathway-design/server/pathway/presenters/src/lib/http/http-pathway-presenters.module.ts
-8	10	libs/pathway-design/server/pathway/presenters/src/lib/pathway-presenters.module.ts
-15	0	libs/pathway-design/server/pathway/presenters/src/lib/toJson/to-json-pathway-presenter.module.ts
-4	2	libs/pathway-design/server/pathway/presenters/src/lib/{http/http-pathway.presenter.ts => toJson/to-json-pathway.presenter.ts}
-
-"Mathieu Collette <collettemathieu@jsonata.com>,Thu Aug 1 22:39:04 2024 +0200"
-3	3	libs/pathway-design/server/pathway/application/src/index.ts
-0	0	libs/pathway-design/server/pathway/{infrastructure/src/lib/initialize-pathway/persistence/orm => application/src/lib/change-title/command}/.keep
+22	0	libs/common/events/.swcrc
+17	0	libs/common/events/biome.json
+11	0	libs/common/events/cucumber.js
+9	0	libs/common/events/package.json
+50	0	libs/common/events/project.json
+2	0	libs/common/events/src/index.ts
+8	0	libs/common/events/src/lib/constants.ts
+10	0	libs/common/events/src/lib/types.ts
+22	0	libs/common/events/tsconfig.json
+11	0	libs/common/events/tsconfig.lib.json
+10	0	libs/common/events/tsconfig.spec.json
+2	6	libs/common/tools/server/http-exceptions/cucumber.js
+1	1	libs/common/tools/server/http-exceptions/project.json
+9	1	libs/common/tools/server/http-exceptions/tsconfig.json
+3	1	libs/common/tools/server/http-exceptions/tsconfig.lib.json
+3	1	libs/common/tools/server/http-exceptions/tsconfig.spec.json
+0	0	libs/pathway-design/server/{pathway/business/src/lib/specs/change-name => article/business}/.gitkeep
+2	6	libs/pathway-design/server/pathway/application/cucumber.js
+5	0	libs/pathway-design/server/pathway/application/src/index.ts
+38	0	libs/pathway-design/server/pathway/application/src/lib/change-title/command/change-title-pathway.command-handler.ts
+6	0	libs/pathway-design/server/pathway/application/src/lib/change-title/command/change-title-pathway.command.ts
 0	0	libs/pathway-design/server/pathway/application/src/lib/change-title/service/.keep
-0	0	libs/pathway-design/server/pathway/application/src/lib/{initialize-pathway/commands => initialize/command}/init-pathway.command-handler.spec.ts
-0	0	libs/pathway-design/server/pathway/application/src/lib/{initialize-pathway/commands => initialize/command}/init-pathway.command-handler.ts
-0	0	libs/pathway-design/server/pathway/application/src/lib/{initialize-pathway/commands => initialize/command}/init-pathway.command.ts
-2	2	libs/pathway-design/server/pathway/application/src/lib/{initialize-pathway/services => initialize/service}/init-pathway.service.spec.ts
-1	1	libs/pathway-design/server/pathway/application/src/lib/{initialize-pathway/services => initialize/service}/init-pathway.service.ts
-8	1	libs/pathway-design/server/pathway/application/tsconfig.json
-1	1	libs/pathway-design/server/pathway/business/src/index.ts
-0	0	libs/pathway-design/server/pathway/business/src/lib/usecases/{intialize => initialize}/init-pathway.usecase.feature
-0	0	libs/pathway-design/server/pathway/business/src/lib/usecases/{intialize => initialize}/init-pathway.usecase.step.ts
-0	0	libs/pathway-design/server/pathway/business/src/lib/usecases/{intialize => initialize}/init-pathway.usecase.ts
-8	1	libs/pathway-design/server/pathway/business/tsconfig.json
-0	0	libs/pathway-design/server/pathway/infrastructure/src/lib/common/persistence/orm/.keep
-0	0	libs/pathway-design/server/pathway/infrastructure/src/lib/{initialize-pathway => initialize}/persistence/in-memory/init-pathway-in-memory-persistence.module.ts
-0	0	libs/pathway-design/server/pathway/infrastructure/src/lib/{initialize-pathway => initialize}/persistence/in-memory/init-pathway-in-memory.persistence.spec.ts
-0	0	libs/pathway-design/server/pathway/infrastructure/src/lib/{initialize-pathway => initialize}/persistence/in-memory/init-pathway-in-memory.persistence.ts
-0	0	libs/pathway-design/server/pathway/infrastructure/src/lib/initialize/persistence/orm/.keep
-1	1	libs/pathway-design/server/pathway/infrastructure/src/lib/pathway-infrastructure.module.ts
-8	1	libs/pathway-design/server/pathway/infrastructure/tsconfig.json
-1	1	libs/pathway-design/server/pathway/interface-adapters/src/index.ts
+14	0	libs/pathway-design/server/pathway/application/src/lib/change-title/service/change-title-pathway.service.ts
+10	12	libs/pathway-design/server/pathway/application/src/lib/change-title/specs/change-title-pathway.usecase.feature
+114	25	libs/pathway-design/server/pathway/application/src/lib/change-title/specs/change-title-pathway.usecase.step.ts
+23	13	libs/pathway-design/server/pathway/application/src/lib/change-title/usecase/change-title-pathway.usecase.ts
+2	8	libs/pathway-design/server/pathway/application/src/lib/initialize/command/initialize-pathway.command-handler.ts
+1	4	libs/pathway-design/server/pathway/application/src/lib/initialize/service/initialize-pathway.service.ts
+3	3	libs/pathway-design/server/pathway/application/src/lib/initialize/specs/initialize-pathway.usecase.feature
+9	17	libs/pathway-design/server/pathway/application/src/lib/initialize/specs/initialize-pathway.usecase.step.ts
+1	2	libs/pathway-design/server/pathway/application/src/lib/initialize/usecase/initialize-pathway.usecase.ts
+9	1	libs/pathway-design/server/pathway/application/tsconfig.json
+3	1	libs/pathway-design/server/pathway/application/tsconfig.lib.json
+3	1	libs/pathway-design/server/pathway/application/tsconfig.spec.json
+2	6	libs/pathway-design/server/pathway/business/cucumber.js
+4	0	libs/pathway-design/server/pathway/business/src/index.ts
+11	0	libs/pathway-design/server/pathway/business/src/lib/entities/pathway.ts
+11	0	libs/pathway-design/server/pathway/business/src/lib/events/pathway-title-changed.event.ts
+4	12	libs/pathway-design/server/pathway/business/src/lib/factories/pathway.factory.spec.ts
+7	0	libs/pathway-design/server/pathway/business/src/lib/ports/persistences/change-title/change-title-pathway-persitence.port.ts
+2	6	libs/pathway-design/server/pathway/business/src/lib/ports/persistences/initialize/initialize-pathway-persitence.port.ts
+2	6	libs/pathway-design/server/pathway/business/src/lib/ports/presenters/pathway-presenter.port.ts
+16	0	libs/pathway-design/server/pathway/business/src/lib/specs/change-name/change-title-pathway.feature
+76	0	libs/pathway-design/server/pathway/business/src/lib/specs/change-name/change-title-pathway.step.ts
+9	18	libs/pathway-design/server/pathway/business/src/lib/specs/initialize/{pathway.feature => initialize-pathway.feature}
+28	30	libs/pathway-design/server/pathway/business/src/lib/specs/initialize/{pathway.step.ts => initialize-pathway.step.ts}
+1	3	libs/pathway-design/server/pathway/business/src/lib/value-objects/description.value-object.spec.ts
+7	21	libs/pathway-design/server/pathway/business/src/lib/value-objects/pathway-id.value-object.spec.ts
+2	5	libs/pathway-design/server/pathway/business/src/lib/value-objects/pathway-id.value-object.ts
+5	15	libs/pathway-design/server/pathway/business/src/lib/value-objects/research-field.value-object.spec.ts
+1	3	libs/pathway-design/server/pathway/business/src/lib/value-objects/title.value-object.spec.ts
+9	1	libs/pathway-design/server/pathway/business/tsconfig.json
+3	1	libs/pathway-design/server/pathway/business/tsconfig.lib.json
+3	1	libs/pathway-design/server/pathway/business/tsconfig.spec.json
+2	6	libs/pathway-design/server/pathway/infrastructure/cucumber.js
+1	1	libs/pathway-design/server/pathway/infrastructure/src/index.ts
+134	0	libs/pathway-design/server/pathway/infrastructure/src/lib/persistence/change-title/in-memory/change-title-pathway-in-memory.persistence.spec.ts
+28	0	libs/pathway-design/server/pathway/infrastructure/src/lib/persistence/change-title/in-memory/change-title-pathway-in-memory.persistence.ts
+0	0	libs/pathway-design/server/pathway/{application/src/lib/change-title/command => infrastructure/src/lib/persistence/change-title/orm}/.keep
+1	1	libs/pathway-design/server/pathway/infrastructure/src/lib/persistence/common/in-memory/entities/in-memory-pathway.entity.ts
+4	11	libs/pathway-design/server/pathway/infrastructure/src/lib/persistence/common/in-memory/mappers/in-memory-pathway.mapper.ts
+19	1	libs/pathway-design/server/pathway/infrastructure/src/lib/persistence/common/in-memory/repositories/in-memory-pathway.repository.ts
+5	0	libs/pathway-design/server/pathway/infrastructure/src/lib/persistence/common/in-memory/types/in-memory-pathway.types.ts
+0	18	libs/pathway-design/server/pathway/infrastructure/src/lib/persistence/initialize/in-memory/initialize-pathway-in-memory-persistence.module.ts
+14	46	libs/pathway-design/server/pathway/infrastructure/src/lib/persistence/initialize/in-memory/initialize-pathway-in-memory.persistence.spec.ts
+4	12	libs/pathway-design/server/pathway/infrastructure/src/lib/persistence/initialize/in-memory/initialize-pathway-in-memory.persistence.ts
+0	25	libs/pathway-design/server/pathway/infrastructure/src/lib/persistence/initialize/initialize-pathway-persistence-infrastructure.module.ts
+41	0	libs/pathway-design/server/pathway/infrastructure/src/lib/persistence/pathway-persistence-infrastructure.module.ts
+9	1	libs/pathway-design/server/pathway/infrastructure/tsconfig.json
+3	1	libs/pathway-design/server/pathway/infrastructure/tsconfig.lib.json
+3	1	libs/pathway-design/server/pathway/infrastructure/tsconfig.spec.json
+2	6	libs/pathway-design/server/pathway/interface-adapters/cucumber.js
+1	0	libs/pathway-design/server/pathway/interface-adapters/src/index.ts
+35	0	libs/pathway-design/server/pathway/interface-adapters/src/lib/change-title/change-title-pathway-interface-adapters.module.ts
 0	0	libs/pathway-design/server/pathway/interface-adapters/src/lib/change-title/controller/.keep
+47	0	libs/pathway-design/server/pathway/interface-adapters/src/lib/change-title/controller/change-title-pathway.controller.ts
 0	0	libs/pathway-design/server/pathway/interface-adapters/src/lib/change-title/dtos/.keep
-1	1	libs/pathway-design/server/pathway/interface-adapters/src/lib/{initialize-pathway => initialize}/controller/initialize-pathway.controller.ts
-0	0	libs/pathway-design/server/pathway/interface-adapters/src/lib/{initialize-pathway/dtos/request/body/initialize-pathway.dto.ts => initialize/dtos/request/body/initialize-pathway-request-body.dto.ts}
-0	0	libs/pathway-design/server/pathway/interface-adapters/src/lib/{initialize-pathway => initialize}/initialize-pathway-interface-adapters.module.ts
-9	2	libs/pathway-design/server/pathway/interface-adapters/tsconfig.json
-8	1	libs/pathway-design/server/pathway/presenters/tsconfig.json
+6	0	libs/pathway-design/server/pathway/interface-adapters/src/lib/change-title/dtos/request/body/request-body.dto.ts
+3	0	libs/pathway-design/server/pathway/interface-adapters/src/lib/change-title/dtos/request/params/request-params.dto.ts
+8	0	libs/pathway-design/server/pathway/interface-adapters/src/lib/change-title/dtos/response/body/response-body.dto.ts
+4	20	libs/pathway-design/server/pathway/interface-adapters/src/lib/initialize/controller/initialize-pathway.controller.ts
+1	3	libs/pathway-design/server/pathway/interface-adapters/src/lib/initialize/dtos/response/body/response-body.dto.ts
+6	13	libs/pathway-design/server/pathway/interface-adapters/src/lib/initialize/initialize-pathway-interface-adapters.module.ts
+9	1	libs/pathway-design/server/pathway/interface-adapters/tsconfig.json
+3	1	libs/pathway-design/server/pathway/interface-adapters/tsconfig.lib.json
+3	1	libs/pathway-design/server/pathway/interface-adapters/tsconfig.spec.json
+2	6	libs/pathway-design/server/pathway/presenters/cucumber.js
+1	4	libs/pathway-design/server/pathway/presenters/src/lib/pathway-presenters.module.ts
+1	4	libs/pathway-design/server/pathway/presenters/src/lib/toJson/to-json-pathway.presenter.ts
+9	1	libs/pathway-design/server/pathway/presenters/tsconfig.json
+3	1	libs/pathway-design/server/pathway/presenters/tsconfig.lib.json
+3	1	libs/pathway-design/server/pathway/presenters/tsconfig.spec.json
+5	12	tsconfig.base.json
 
-"Mathieu Collette <collettemathieu@jsonata.com>,Thu Aug 1 22:00:11 2024 +0200"
-1	1	apps/pathway-design/server/src/main.ts
-38	30	libs/pathway-design/server/pathway/application/src/lib/initialize-pathway/commands/init-pathway.command-handler.spec.ts
-6	1	libs/pathway-design/server/pathway/application/src/lib/initialize-pathway/commands/init-pathway.command-handler.ts
-1	8	libs/pathway-design/server/pathway/application/tsconfig.json
-1	0	libs/pathway-design/server/pathway/business/src/index.ts
-9	6	libs/pathway-design/server/pathway/business/src/lib/ports/http/http-pathway.port.ts
-4	4	libs/pathway-design/server/pathway/business/src/lib/usecases/intialize/init-pathway.usecase.feature
-36	23	libs/pathway-design/server/pathway/business/src/lib/usecases/intialize/init-pathway.usecase.step.ts
-6	1	libs/pathway-design/server/pathway/business/src/lib/usecases/intialize/init-pathway.usecase.ts
-1	8	libs/pathway-design/server/pathway/business/tsconfig.json
-1	8	libs/pathway-design/server/pathway/infrastructure/tsconfig.json
-3	11	libs/pathway-design/server/pathway/interface-adapters/src/lib/initialize-pathway/controller/initialize-pathway.controller.ts
-1	8	libs/pathway-design/server/pathway/interface-adapters/tsconfig.json
-1	8	libs/pathway-design/server/pathway/presenters/tsconfig.json
-
-"Mathieu Collette <collettemathieu@jsonata.com>,Wed Jul 24 18:33:35 2024 +0200"
-11	0	apps/pathway-design/server/src/test/initialize-pathway/index.feature
-65	0	apps/pathway-design/server/src/test/initialize-pathway/index.step.ts
+"Mathieu Collette <collettemathieu@jsonata.com>,Wed Jul 10 21:38:54 2024 +0200	7a093ab8773a53a2b6646fa63fb8b3afd934016f,feat: first implementation of pathway design"
+52	0	.detective/config.json
+1	0	.detective/hash
+483	0	.detective/log
+19	5	.github/workflows/ci.yml
+2	2	.hooks/commit-msg
+28	0	.verdaccio/config.yml
+5	2	.vscode/extensions.json
+15	5	.vscode/settings.json
+35	51	README.md
+0	30	apps/bewoak-api/project.json
+0	23	apps/bewoak-api/src/app/app.controller.spec.ts
+0	13	apps/bewoak-api/src/app/app.controller.ts
+0	11	apps/bewoak-api/src/app/app.module.ts
+0	22	apps/bewoak-api/src/app/app.service.spec.ts
+0	8	apps/bewoak-api/src/app/app.service.ts
+0	22	apps/bewoak-api/src/main.ts
+2	2	apps/{bewoak-api => pathway-design/server}/biome.json
+11	0	apps/pathway-design/server/cucumber.js
+42	0	apps/pathway-design/server/project.json
+22	0	apps/pathway-design/server/src/app/app.module.ts
+0	0	apps/{bewoak-api => pathway-design/server}/src/assets/.gitkeep
+48	0	apps/pathway-design/server/src/main.ts
+22	0	apps/pathway-design/server/src/specs/initialize-pathway/index.feature
+74	0	apps/pathway-design/server/src/specs/initialize-pathway/index.step.ts
+4	4	apps/{bewoak-api => pathway-design/server}/tsconfig.app.json
+5	2	apps/{bewoak-api => pathway-design/server}/tsconfig.json
+8	0	apps/pathway-design/server/tsconfig.spec.json
+3	2	apps/{bewoak-api => pathway-design/server}/webpack.config.js
+0	0	apps/pathway-navigator/client/.keep
+0	0	apps/pathway-navigator/server/.keep
+0	0	apps/pathway-progress/.keep
+0	0	apps/register/.keep
+0	0	apps/scientific-discovery/.keep
+0	0	apps/search/.keep
+9	0	biome.json
 -	-	bun.lockb
-3	1	libs/pathway-design/server/pathway/application/src/index.ts
-0	141	libs/pathway-design/server/pathway/application/src/lib/initialize-pathway/commands/index.command-handler.spec.ts
-0	33	libs/pathway-design/server/pathway/application/src/lib/initialize-pathway/commands/index.command-handler.ts
-129	0	libs/pathway-design/server/pathway/application/src/lib/initialize-pathway/commands/init-pathway.command-handler.spec.ts
-36	0	libs/pathway-design/server/pathway/application/src/lib/initialize-pathway/commands/init-pathway.command-handler.ts
-1	1	libs/pathway-design/server/pathway/application/src/lib/initialize-pathway/commands/{index.command.ts => init-pathway.command.ts}
-0	16	libs/pathway-design/server/pathway/application/src/lib/initialize-pathway/services/index.service.ts
-16	12	libs/pathway-design/server/pathway/application/src/lib/initialize-pathway/services/{index.service.spec.ts => init-pathway.service.spec.ts}
-16	0	libs/pathway-design/server/pathway/application/src/lib/initialize-pathway/services/init-pathway.service.ts
-0	10	libs/pathway-design/server/pathway/application/src/lib/pathway-application.module.ts
-10	5	libs/pathway-design/server/pathway/business/src/index.ts
-47	12	libs/pathway-design/server/pathway/business/src/lib/entities/pathway.ts
-5	3	libs/pathway-design/server/pathway/business/src/lib/entities/pathway.types.ts
-1	0	libs/pathway-design/server/pathway/business/src/lib/factories/pathway.dto.ts
-15	8	libs/pathway-design/server/pathway/business/src/lib/factories/pathway.ts
-12	0	libs/pathway-design/server/pathway/business/src/lib/ports/http/http-pathway.port.ts
-0	11	libs/pathway-design/server/pathway/business/src/lib/ports/initialize/index.memory.ts
-12	0	libs/pathway-design/server/pathway/business/src/lib/ports/initialize/init-port-memory.port.ts
-0	0	libs/pathway-design/server/pathway/business/src/lib/usecases/change-title/{index.feature => change-title-pathway.usecase.feature}
-51	0	libs/pathway-design/server/pathway/business/src/lib/usecases/change-title/change-title-pathway.usecase.step.ts
-15	0	libs/pathway-design/server/pathway/business/src/lib/usecases/change-title/change-title-pathway.usecase.ts
-0	60	libs/pathway-design/server/pathway/business/src/lib/usecases/change-title/index.step.ts
-0	15	libs/pathway-design/server/pathway/business/src/lib/usecases/change-title/index.usecase.ts
-0	77	libs/pathway-design/server/pathway/business/src/lib/usecases/intialize/index.step.ts
-0	27	libs/pathway-design/server/pathway/business/src/lib/usecases/intialize/index.usecase.ts
-0	0	libs/pathway-design/server/pathway/business/src/lib/usecases/intialize/{index.feature => init-pathway.usecase.feature}
-62	0	libs/pathway-design/server/pathway/business/src/lib/usecases/intialize/init-pathway.usecase.step.ts
-25	0	libs/pathway-design/server/pathway/business/src/lib/usecases/intialize/init-pathway.usecase.ts
-1	1	libs/pathway-design/server/pathway/business/src/lib/value-objects/{description.spec.ts => description.value-object.spec.ts}
-4	4	libs/pathway-design/server/pathway/business/src/lib/value-objects/{description.ts => description.value-object.ts}
+58	0	docs/business/domain.md
+21	0	docs/business/subdomain.md
+23	0	docs/nx/generators.md
+22	0	libs/common/tools/server/http-exceptions/.swcrc
+17	0	libs/common/tools/server/http-exceptions/biome.json
+15	0	libs/common/tools/server/http-exceptions/cucumber.js
+9	0	libs/common/tools/server/http-exceptions/package.json
+50	0	libs/common/tools/server/http-exceptions/project.json
+1	0	libs/common/tools/server/http-exceptions/src/index.ts
+13	0	libs/common/tools/server/http-exceptions/src/lib/exceptions.ts
+50	0	libs/common/tools/server/http-exceptions/src/lib/types.ts
+14	0	libs/common/tools/server/http-exceptions/tsconfig.json
+9	0	libs/common/tools/server/http-exceptions/tsconfig.lib.json
+8	0	libs/common/tools/server/http-exceptions/tsconfig.spec.json
+0	0	libs/pathway-design/client/.keep
+0	0	libs/pathway-design/server/common/.keep
+22	0	libs/pathway-design/server/pathway/application/.swcrc
+17	0	libs/pathway-design/server/pathway/application/biome.json
+15	0	libs/pathway-design/server/pathway/application/cucumber.js
+9	0	libs/pathway-design/server/pathway/application/package.json
+50	0	libs/pathway-design/server/pathway/application/project.json
+4	0	libs/pathway-design/server/pathway/application/src/index.ts
+0	0	libs/pathway-design/server/pathway/application/src/lib/change-title/command/.keep
+0	0	libs/pathway-design/server/pathway/application/src/lib/change-title/service/.keep
+15	0	libs/pathway-design/server/pathway/application/src/lib/change-title/specs/change-title-pathway.usecase.feature
+56	0	libs/pathway-design/server/pathway/application/src/lib/change-title/specs/change-title-pathway.usecase.step.ts
+17	0	libs/pathway-design/server/pathway/application/src/lib/change-title/usecase/change-title-pathway.usecase.ts
+45	0	libs/pathway-design/server/pathway/application/src/lib/initialize/command/initialize-pathway.command-handler.ts
+7	0	libs/pathway-design/server/pathway/application/src/lib/initialize/command/initialize-pathway.command.ts
+17	0	libs/pathway-design/server/pathway/application/src/lib/initialize/service/initialize-pathway.service.ts
+12	0	libs/pathway-design/server/pathway/application/src/lib/initialize/specs/initialize-pathway.usecase.feature
+114	0	libs/pathway-design/server/pathway/application/src/lib/initialize/specs/initialize-pathway.usecase.step.ts
+37	0	libs/pathway-design/server/pathway/application/src/lib/initialize/usecase/initialize-pathway.usecase.ts
+14	0	libs/pathway-design/server/pathway/application/tsconfig.json
+9	0	libs/pathway-design/server/pathway/application/tsconfig.lib.json
+8	0	libs/pathway-design/server/pathway/application/tsconfig.spec.json
+22	0	libs/pathway-design/server/pathway/business/.swcrc
+17	0	libs/pathway-design/server/pathway/business/biome.json
+15	0	libs/pathway-design/server/pathway/business/cucumber.js
+9	0	libs/pathway-design/server/pathway/business/package.json
+50	0	libs/pathway-design/server/pathway/business/project.json
+12	0	libs/pathway-design/server/pathway/business/src/index.ts
+45	0	libs/pathway-design/server/pathway/business/src/lib/entities/pathway.ts
+11	0	libs/pathway-design/server/pathway/business/src/lib/entities/pathway.types.ts
+5	0	libs/pathway-design/server/pathway/business/src/lib/events/pathway-initialized.event.ts
+89	0	libs/pathway-design/server/pathway/business/src/lib/factories/pathway.factory.spec.ts
+31	0	libs/pathway-design/server/pathway/business/src/lib/factories/pathway.factory.ts
+6	0	libs/pathway-design/server/pathway/business/src/lib/factories/pathway.factory.types.ts
+11	0	libs/pathway-design/server/pathway/business/src/lib/ports/persistences/initialize/initialize-pathway-persitence.port.ts
+20	0	libs/pathway-design/server/pathway/business/src/lib/ports/presenters/pathway-presenter.port.ts
+0	0	libs/pathway-design/server/pathway/business/src/lib/specs/change-name/.gitkeep
+73	0	libs/pathway-design/server/pathway/business/src/lib/specs/initialize/pathway.feature
+101	0	libs/pathway-design/server/pathway/business/src/lib/specs/initialize/pathway.step.ts
+37	0	libs/pathway-design/server/pathway/business/src/lib/value-objects/description.value-object.spec.ts
+24	0	libs/pathway-design/server/pathway/business/src/lib/value-objects/description.value-object.ts
 48	0	libs/pathway-design/server/pathway/business/src/lib/value-objects/pathway-id.value-object.spec.ts
-25	0	libs/pathway-design/server/pathway/business/src/lib/value-objects/pathway-id.value-object.ts
-1	1	libs/pathway-design/server/pathway/business/src/lib/value-objects/{research-field.spec.ts => research-field.value-object.spec.ts}
-4	4	libs/pathway-design/server/pathway/business/src/lib/value-objects/{research-field.ts => research-field.value-object.ts}
-1	1	libs/pathway-design/server/pathway/business/src/lib/value-objects/{title.spec.ts => title.value-object.spec.ts}
-4	4	libs/pathway-design/server/pathway/business/src/lib/value-objects/{title.ts => title.value-object.ts}
+29	0	libs/pathway-design/server/pathway/business/src/lib/value-objects/pathway-id.value-object.ts
+45	0	libs/pathway-design/server/pathway/business/src/lib/value-objects/research-field.value-object.spec.ts
+24	0	libs/pathway-design/server/pathway/business/src/lib/value-objects/research-field.value-object.ts
+37	0	libs/pathway-design/server/pathway/business/src/lib/value-objects/title.value-object.spec.ts
+25	0	libs/pathway-design/server/pathway/business/src/lib/value-objects/title.value-object.ts
+14	0	libs/pathway-design/server/pathway/business/tsconfig.json
+9	0	libs/pathway-design/server/pathway/business/tsconfig.lib.json
+8	0	libs/pathway-design/server/pathway/business/tsconfig.spec.json
 22	0	libs/pathway-design/server/pathway/infrastructure/.swcrc
 17	0	libs/pathway-design/server/pathway/infrastructure/biome.json
 15	0	libs/pathway-design/server/pathway/infrastructure/cucumber.js
 9	0	libs/pathway-design/server/pathway/infrastructure/package.json
 50	0	libs/pathway-design/server/pathway/infrastructure/project.json
 1	0	libs/pathway-design/server/pathway/infrastructure/src/index.ts
-8	0	libs/pathway-design/server/pathway/infrastructure/src/lib/common/persistence/in-memory/entities/in-memory-pathway.entity.ts
-31	0	libs/pathway-design/server/pathway/infrastructure/src/lib/common/persistence/in-memory/mappers/in-memory-pathway.mapper.ts
-13	0	libs/pathway-design/server/pathway/infrastructure/src/lib/common/persistence/in-memory/repositories/in-memory-pathway.repository.ts
-18	0	libs/pathway-design/server/pathway/infrastructure/src/lib/initialize-pathway/persistence/in-memory/init-pathway-in-memory-persistence.module.ts
-137	0	libs/pathway-design/server/pathway/infrastructure/src/lib/initialize-pathway/persistence/in-memory/init-pathway-in-memory.persistence.spec.ts
-37	0	libs/pathway-design/server/pathway/infrastructure/src/lib/initialize-pathway/persistence/in-memory/init-pathway-in-memory.persistence.ts
-0	0	libs/pathway-design/server/pathway/infrastructure/{ => src/lib/initialize-pathway/persistence/orm}/.keep
-25	0	libs/pathway-design/server/pathway/infrastructure/src/lib/pathway-infrastructure.module.ts
-22	0	libs/pathway-design/server/pathway/infrastructure/tsconfig.json
+8	0	libs/pathway-design/server/pathway/infrastructure/src/lib/persistence/common/in-memory/entities/in-memory-pathway.entity.ts
+31	0	libs/pathway-design/server/pathway/infrastructure/src/lib/persistence/common/in-memory/mappers/in-memory-pathway.mapper.ts
+13	0	libs/pathway-design/server/pathway/infrastructure/src/lib/persistence/common/in-memory/repositories/in-memory-pathway.repository.ts
+0	0	libs/pathway-design/server/pathway/infrastructure/src/lib/persistence/common/orm/.keep
+18	0	libs/pathway-design/server/pathway/infrastructure/src/lib/persistence/initialize/in-memory/initialize-pathway-in-memory-persistence.module.ts
+126	0	libs/pathway-design/server/pathway/infrastructure/src/lib/persistence/initialize/in-memory/initialize-pathway-in-memory.persistence.spec.ts
+36	0	libs/pathway-design/server/pathway/infrastructure/src/lib/persistence/initialize/in-memory/initialize-pathway-in-memory.persistence.ts
+25	0	libs/pathway-design/server/pathway/infrastructure/src/lib/persistence/initialize/initialize-pathway-persistence-infrastructure.module.ts
+0	0	libs/pathway-design/server/pathway/infrastructure/src/lib/persistence/initialize/orm/.keep
+14	0	libs/pathway-design/server/pathway/infrastructure/tsconfig.json
 9	0	libs/pathway-design/server/pathway/infrastructure/tsconfig.lib.json
 8	0	libs/pathway-design/server/pathway/infrastructure/tsconfig.spec.json
 22	0	libs/pathway-design/server/pathway/interface-adapters/.swcrc
@@ -278,182 +229,39 @@
 9	0	libs/pathway-design/server/pathway/interface-adapters/package.json
 50	0	libs/pathway-design/server/pathway/interface-adapters/project.json
 1	0	libs/pathway-design/server/pathway/interface-adapters/src/index.ts
-35	0	libs/pathway-design/server/pathway/interface-adapters/src/lib/initialize-pathway/controller/initialize-pathway.controller.ts
-16	0	libs/pathway-design/server/pathway/interface-adapters/src/lib/initialize-pathway/dtos/request/body/initialize-pathway.dto.ts
-42	0	libs/pathway-design/server/pathway/interface-adapters/src/lib/initialize-pathway/initialize-pathway-interface-adapters.module.ts
-22	0	libs/pathway-design/server/pathway/interface-adapters/tsconfig.json
+0	0	libs/pathway-design/server/pathway/interface-adapters/src/lib/change-title/controller/.keep
+0	0	libs/pathway-design/server/pathway/interface-adapters/src/lib/change-title/dtos/.keep
+58	0	libs/pathway-design/server/pathway/interface-adapters/src/lib/initialize/controller/initialize-pathway.controller.ts
+12	0	libs/pathway-design/server/pathway/interface-adapters/src/lib/initialize/dtos/request/body/request-body.dto.ts
+10	0	libs/pathway-design/server/pathway/interface-adapters/src/lib/initialize/dtos/response/body/response-body.dto.ts
+42	0	libs/pathway-design/server/pathway/interface-adapters/src/lib/initialize/initialize-pathway-interface-adapters.module.ts
+14	0	libs/pathway-design/server/pathway/interface-adapters/tsconfig.json
 9	0	libs/pathway-design/server/pathway/interface-adapters/tsconfig.lib.json
 8	0	libs/pathway-design/server/pathway/interface-adapters/tsconfig.spec.json
 22	0	libs/pathway-design/server/pathway/presenters/.swcrc
 17	0	libs/pathway-design/server/pathway/presenters/biome.json
 15	0	libs/pathway-design/server/pathway/presenters/cucumber.js
 9	0	libs/pathway-design/server/pathway/presenters/package.json
-0	9	libs/pathway-design/server/pathway/presenters/pathway.module.ts
 50	0	libs/pathway-design/server/pathway/presenters/project.json
 1	0	libs/pathway-design/server/pathway/presenters/src/index.ts
-15	0	libs/pathway-design/server/pathway/presenters/src/lib/http/http-pathway-presenters.module.ts
-17	0	libs/pathway-design/server/pathway/presenters/src/lib/http/http-pathway.presenter.ts
 25	0	libs/pathway-design/server/pathway/presenters/src/lib/pathway-presenters.module.ts
-22	0	libs/pathway-design/server/pathway/presenters/tsconfig.json
+15	0	libs/pathway-design/server/pathway/presenters/src/lib/toJson/to-json-pathway-presenter.module.ts
+17	0	libs/pathway-design/server/pathway/presenters/src/lib/toJson/to-json-pathway.presenter.ts
+14	0	libs/pathway-design/server/pathway/presenters/tsconfig.json
 9	0	libs/pathway-design/server/pathway/presenters/tsconfig.lib.json
 8	0	libs/pathway-design/server/pathway/presenters/tsconfig.spec.json
-4	0	package.json
-9	0	tsconfig.base.json
-
-"Mathieu Collette <collettemathieu@jsonata.com>,Tue Jul 16 16:41:13 2024 +0200"
-1	1	.github/workflows/ci.yml
-28	0	.verdaccio/config.yml
-3	2	.vscode/extensions.json
-3	2	.vscode/settings.json
-0	11	apps/learning-design/cucumber.js
-0	36	apps/learning-design/project.json
-2	2	apps/{learning-design => pathway-design/server}/biome.json
-11	0	apps/pathway-design/server/cucumber.js
-42	0	apps/pathway-design/server/project.json
-0	0	apps/{learning-design => pathway-design/server}/src/app/app.controller.spec.ts
-0	0	apps/{learning-design => pathway-design/server}/src/app/app.controller.ts
-0	0	apps/{learning-design => pathway-design/server}/src/app/app.module.ts
-0	0	apps/{learning-design => pathway-design/server}/src/app/app.service.spec.ts
-0	0	apps/{learning-design => pathway-design/server}/src/app/app.service.ts
-0	0	apps/{learning-design => pathway-design/server}/src/assets/.gitkeep
-0	0	apps/{learning-design => pathway-design/server}/src/main.ts
-0	0	apps/{learning-design/src/tests => pathway-design/server/src/test}/index.feature
-2	2	apps/{learning-design/src/tests/step.ts => pathway-design/server/src/test/index.step.ts}
-4	4	apps/{learning-design => pathway-design/server}/tsconfig.app.json
-5	2	apps/{learning-design => pathway-design/server}/tsconfig.json
-3	2	tsconfig.json => apps/pathway-design/server/tsconfig.spec.json
-1	1	apps/{learning-design => pathway-design/server}/webpack.config.js
-0	0	apps/{learning-journey => pathway-navigator/client}/.keep
-0	0	apps/{learning-navigator => pathway-navigator/server}/.keep
-0	0	{libs/learning-design => apps/pathway-progress}/.keep
-9	0	biome.json
--	-	bun.lockb
-4	4	docs/{ => business}/domain.md
-4	4	docs/{ => business}/subdomain.md
-23	0	docs/nx/generators.md
-0	0	libs/{learning-journey => pathway-design/client}/.keep
-0	0	libs/{learning-navigator => pathway-design/server/common}/.keep
-22	0	libs/pathway-design/server/pathway/application/.swcrc
-17	0	libs/pathway-design/server/pathway/application/biome.json
-15	0	libs/pathway-design/server/pathway/application/cucumber.js
-9	0	libs/pathway-design/server/pathway/application/package.json
-50	0	libs/pathway-design/server/pathway/application/project.json
-1	0	libs/pathway-design/server/pathway/application/src/index.ts
-141	0	libs/pathway-design/server/pathway/application/src/lib/initialize-pathway/commands/index.command-handler.spec.ts
-33	0	libs/pathway-design/server/pathway/application/src/lib/initialize-pathway/commands/index.command-handler.ts
-7	0	libs/pathway-design/server/pathway/application/src/lib/initialize-pathway/commands/index.command.ts
-50	0	libs/pathway-design/server/pathway/application/src/lib/initialize-pathway/services/index.service.spec.ts
-16	0	libs/pathway-design/server/pathway/application/src/lib/initialize-pathway/services/index.service.ts
-10	0	libs/pathway-design/server/pathway/application/src/lib/pathway-application.module.ts
-22	0	libs/pathway-design/server/pathway/application/tsconfig.json
-9	0	libs/pathway-design/server/pathway/application/tsconfig.lib.json
-8	0	libs/pathway-design/server/pathway/application/tsconfig.spec.json
-22	0	libs/pathway-design/server/pathway/business/.swcrc
-17	0	libs/pathway-design/server/pathway/business/biome.json
-15	0	libs/pathway-design/server/pathway/business/cucumber.js
-9	0	libs/pathway-design/server/pathway/business/package.json
-50	0	libs/pathway-design/server/pathway/business/project.json
-6	0	libs/pathway-design/server/pathway/business/src/index.ts
-20	0	libs/pathway-design/server/pathway/business/src/lib/entities/pathway.ts
-9	0	libs/pathway-design/server/pathway/business/src/lib/entities/pathway.types.ts
-5	0	libs/pathway-design/server/pathway/business/src/lib/factories/pathway.dto.ts
-24	0	libs/pathway-design/server/pathway/business/src/lib/factories/pathway.ts
-11	0	libs/pathway-design/server/pathway/business/src/lib/ports/initialize/index.memory.ts
-15	0	libs/pathway-design/server/pathway/business/src/lib/usecases/change-title/index.feature
-60	0	libs/pathway-design/server/pathway/business/src/lib/usecases/change-title/index.step.ts
-15	0	libs/pathway-design/server/pathway/business/src/lib/usecases/change-title/index.usecase.ts
-30	0	libs/pathway-design/server/pathway/business/src/lib/usecases/intialize/index.feature
-77	0	libs/pathway-design/server/pathway/business/src/lib/usecases/intialize/index.step.ts
-27	0	libs/pathway-design/server/pathway/business/src/lib/usecases/intialize/index.usecase.ts
-37	0	libs/pathway-design/server/pathway/business/src/lib/value-objects/description.spec.ts
-22	0	libs/pathway-design/server/pathway/business/src/lib/value-objects/description.ts
-45	0	libs/pathway-design/server/pathway/business/src/lib/value-objects/research-field.spec.ts
-22	0	libs/pathway-design/server/pathway/business/src/lib/value-objects/research-field.ts
-37	0	libs/pathway-design/server/pathway/business/src/lib/value-objects/title.spec.ts
-23	0	libs/pathway-design/server/pathway/business/src/lib/value-objects/title.ts
-22	0	libs/pathway-design/server/pathway/business/tsconfig.json
-9	0	libs/pathway-design/server/pathway/business/tsconfig.lib.json
-8	0	libs/pathway-design/server/pathway/business/tsconfig.spec.json
-0	0	libs/pathway-design/server/pathway/infrastructure/.keep
-9	0	libs/pathway-design/server/pathway/presenters/pathway.module.ts
 0	0	libs/pathway-navigator/dashboard/.keep
 0	0	libs/pathway-navigator/learning/.keep
 0	0	libs/pathway-progress/.keep
-19	6	nx.json
-10	6	package.json
-14	0	project.json
-28	9	tsconfig.base.json
-
-"Mathieu Collette <collettemathieu@jsonata.com>,Mon Jul 15 18:24:13 2024 +0200"
-3	2	.vscode/extensions.json
-2	2	.vscode/settings.json
-0	11	apps/bewoak-api/cucumber.js
-0	0	apps/{bewoak-api => learning-design}/biome.json
-11	0	apps/learning-design/cucumber.js
-6	6	apps/{bewoak-api => learning-design}/project.json
-1	1	apps/{bewoak-api => learning-design}/src/app/app.controller.spec.ts
-0	0	apps/{bewoak-api => learning-design}/src/app/app.controller.ts
-0	0	apps/{bewoak-api => learning-design}/src/app/app.module.ts
-1	1	apps/{bewoak-api => learning-design}/src/app/app.service.spec.ts
-0	0	apps/{bewoak-api => learning-design}/src/app/app.service.ts
-0	0	apps/{bewoak-api => learning-design}/src/assets/.gitkeep
-0	0	apps/{bewoak-api => learning-design}/src/main.ts
-0	0	apps/{bewoak-api => learning-design}/src/tests/index.feature
-2	2	apps/{bewoak-api => learning-design}/src/tests/step.ts
-0	0	apps/{bewoak-api => learning-design}/tsconfig.app.json
-0	0	apps/{bewoak-api => learning-design}/tsconfig.json
-1	1	apps/{bewoak-api => learning-design}/webpack.config.js
-0	0	apps/learning-journey/.keep
-0	0	apps/learning-navigator/.keep
-0	0	apps/register/.keep
-0	0	apps/scientific-discovery/.keep
-0	0	apps/search/.keep
-0	0	libs/common/.keep
-0	0	libs/learning-design/.keep
-0	0	libs/learning-journey/.keep
-0	0	libs/learning-navigator/.keep
 0	0	libs/register/.keep
 0	0	libs/scientific-discovery/.keep
 0	0	libs/search/.keep
-1	1	package.json
+19	6	nx.json
+32	13	package.json
+14	0	project.json
+40	9	tsconfig.base.json
 
-"Mathieu Collette <collettemathieu@jsonata.com>,Mon Jul 15 18:00:35 2024 +0200"
-35	51	README.md
-58	0	docs/domain.md
-21	0	docs/subdomain.md
-
-"Mathieu Collette <collettemathieu@jsonata.com>,Sun Jul 14 18:06:14 2024 +0200"
-10	11	.vscode/settings.json
-4	1	apps/bewoak-api/cucumber.js
-0	0	apps/bewoak-api/src/tests/{index.step.ts => step.ts}
-
-"Mathieu Collette <collettemathieu@jsonata.com>,Sun Jul 14 18:04:26 2024 +0200"
-6	11	.github/workflows/ci.yml
-
-"Mathieu Collette <collettemathieu@jsonata.com>,Sun Jul 14 17:57:48 2024 +0200"
-19	2	.github/workflows/ci.yml
-
-"Mathieu Collette <collettemathieu@jsonata.com>,Sun Jul 14 17:43:58 2024 +0200"
-3	1	.github/workflows/ci.yml
--	-	bun.lockb
-2	0	package.json
-
-"Mathieu Collette <collettemathieu@jsonata.com>,Fri Jul 12 22:01:30 2024 +0200"
-2	1	.vscode/extensions.json
-8	1	.vscode/settings.json
-8	0	apps/bewoak-api/cucumber.js
-6	0	apps/bewoak-api/project.json
-7	0	apps/bewoak-api/src/tests/index.feature
-42	0	apps/bewoak-api/src/tests/index.step.ts
--	-	bun.lockb
-5	0	package.json
-1	1	tsconfig.base.json
-7	0	tsconfig.json
-
-"Mathieu Collette <collettemathieu@jsonata.com>,Wed Jul 10 21:38:54 2024 +0200"
-2	2	.hooks/commit-msg
-
-"Mathieu Collette <collettemathieu@jsonata.com>,Wed Jul 10 21:37:38 2024 +0200"
+"Mathieu Collette <collettemathieu@jsonata.com>,Wed Jul 10 21:37:38 2024 +0200	70ebc0d9cb3e4058564c663cb2c2bad85a2c4176,Initial commit"
 13	0	.editorconfig
 37	0	.github/workflows/ci.yml
 42	0	.gitignore

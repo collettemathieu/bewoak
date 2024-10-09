@@ -1,4 +1,3 @@
-import { strict as assert } from 'node:assert';
 import type {
     PDSPBEPathwayEntity,
     PDSPBPInitializePathwayPersistencePort,
@@ -8,6 +7,7 @@ import type {
 import type { DataTable } from '@cucumber/cucumber';
 import type { EventPublisher } from '@nestjs/cqrs';
 import { before, binding, then, when } from 'cucumber-tsflow';
+import { strict as assert } from 'node:assert';
 import sinon from 'sinon';
 import { PDSPAIUInitializePathwayUsecase } from '../usecase/initialize-pathway.usecase';
 
@@ -42,10 +42,10 @@ class FakeEventPublisher {
 
 @binding()
 export default class ControllerSteps {
-    private fakeEventPublisher = new FakeEventPublisher();
-    private fakeInitializePathwayPersistence = new FakeInitializePathwayPersistence();
-    private fakePathwayPresenter = new FakePathwayPresenter();
-    private pDSPBUInitPathwayUseCase = new PDSPAIUInitializePathwayUsecase();
+    private readonly fakeEventPublisher = new FakeEventPublisher();
+    private readonly fakeInitializePathwayPersistence = new FakeInitializePathwayPersistence();
+    private readonly fakePathwayPresenter = new FakePathwayPresenter();
+    private readonly pDSPBUInitPathwayUseCase = new PDSPAIUInitializePathwayUsecase();
     private persistenceSpy: sinon.SinonSpy | undefined;
     private presenterSpy: sinon.SinonSpy | undefined;
     private result: PDSPBPPathwayPresenters | undefined;
@@ -76,7 +76,7 @@ export default class ControllerSteps {
         );
     }
 
-    @then('I should receive the attributes of the pathway')
+    @then('I should receive the attributes of the pathway initialized')
     public thenIShouldReceivePathwayAttributes(dataTable: DataTable) {
         const firstRow = dataTable.hashes()[0] as {
             title: string;
@@ -90,17 +90,17 @@ export default class ControllerSteps {
     }
 
     @then('It should call the persistence layer to save the pathway')
-    public thenItShouldCallThePersistenceLayerToSaveThePathway() {
+    public thenThePersistenceLayerShouldBeCalled() {
         assert(this.persistenceSpy?.calledOnce);
     }
 
-    @then('It should call the presenter to present the pathway')
-    public thenItShouldCallThePresenterToPresentThePathway() {
+    @then('It should call the presenter to present the pathway initialized')
+    public thenThePresenterShouldBeCalled() {
         assert(this.presenterSpy?.calledOnce);
     }
 
     @then('It should emit an event indicating that the pathway has been initialized')
-    public thenItShouldEmitAnEventIndicatingThatThePathwayHasBeenInitialized() {
+    public thenAnEventShouldBeEmitted() {
         assert.ok(FakeEventPublisher.isEventPublished);
     }
 }

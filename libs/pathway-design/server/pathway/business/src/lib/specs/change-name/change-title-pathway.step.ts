@@ -1,6 +1,6 @@
-import { strict as assert } from 'node:assert';
 import type { DataTable } from '@cucumber/cucumber';
 import { binding, given, then, when } from 'cucumber-tsflow';
+import { strict as assert } from 'node:assert';
 import sinon from 'sinon';
 import type { PDSPBEPathwayEntity } from '../../entities/pathway';
 import { PDSPBEPathwayTitleChangedEvent } from '../../events/pathway-title-changed.event';
@@ -13,7 +13,7 @@ export default class ControllerSteps {
     private error: Error | undefined;
     private applyMethodSpy: sinon.SinonSpy | undefined;
 
-    @given('I have a pathway with these data')
+    @given('I have a pathway in business with these data')
     public givenIHaveAPathway(dataTable: DataTable) {
         const firstRow = dataTable.hashes()[0] as {
             title: string;
@@ -28,7 +28,7 @@ export default class ControllerSteps {
         });
     }
 
-    @when('I change the title of the pathway to {string}')
+    @when('I change the title of the pathway in business to {string}')
     public whenIChangeTheTitleOfPathway(newTitle: string) {
         if (this.pDSPBEPathwayEntity === undefined) {
             throw new Error('Pathway is not initialized');
@@ -59,7 +59,7 @@ export default class ControllerSteps {
         assert.deepStrictEqual(callArgs, expectedEvent);
     }
 
-    @then('I should see the title of the pathway changed to {string}')
+    @then('I should see the title of the pathway in business changed to {string}')
     public thenIShouldSeeTheTitleOfThePathwayChangedTo(title: string) {
         if (this.pDSPBEPathwayEntity === undefined) {
             throw new Error('Pathway is not initialized');
@@ -68,7 +68,7 @@ export default class ControllerSteps {
         assert.strictEqual(this.pDSPBEPathwayEntity.title, title);
     }
 
-    @then('I should see an error message {string} during the title change')
+    @then('I should see an error message from business {string} during the title change')
     public thenIShouldSeeAnErrorMessageDuringTitleChange(errorMessage: string) {
         assert.notEqual(this.error, undefined);
         assert.strictEqual(this.error?.message, errorMessage);

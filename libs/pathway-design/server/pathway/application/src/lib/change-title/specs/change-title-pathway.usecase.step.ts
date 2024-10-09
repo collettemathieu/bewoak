@@ -64,11 +64,11 @@ class FakeEventPublisher {
 
 @binding()
 export default class ControllerSteps {
-    private pDSPACUchangeTitlePathwayUseCase = new PDSPACUChangeTitlePathwayUseCase();
+    private readonly pDSPACUchangeTitlePathwayUseCase = new PDSPACUChangeTitlePathwayUseCase();
     private pDSPBEPathwayEntity: PDSPBEPathwayEntity | undefined;
-    private fakeEventPublisher = new FakeEventPublisher();
-    private fakeChangeTitlePathwayPersistence = new FakeChangeTitlePathwayPersistence();
-    private fakePathwayPresenter = new FakePathwayPresenter();
+    private readonly fakeEventPublisher = new FakeEventPublisher();
+    private readonly fakeChangeTitlePathwayPersistence = new FakeChangeTitlePathwayPersistence();
+    private readonly fakePathwayPresenter = new FakePathwayPresenter();
     private persistenceSpy: sinon.SinonSpy | undefined;
     private presenterSpy: sinon.SinonSpy | undefined;
     private result: PDSPBPPathwayPresenters | undefined;
@@ -114,22 +114,22 @@ export default class ControllerSteps {
     }
 
     @then('It should call the persistence layer to modify the title of the pathway')
-    public thenItShouldCallThePersistenceLayerToModifyTheTitleOfThePathway() {
+    public thenPersistenceLayerShouldBeCalled() {
         assert(this.persistenceSpy?.calledOnce);
     }
 
-    @then('It should call the presenter to return the new title of the pathway')
-    public thenItShouldCallThePresenterToPresentThePathway() {
+    @then('It should call the presenter to present the pathway with its new title')
+    public thenPresenterShouldBeCalled() {
         assert(this.presenterSpy?.calledOnce);
     }
 
     @then('It should emit an event indicating that the title of the pathway has been changed')
-    public thenItShouldEmitAnEventIndicatingThatTheTitlePathwayHasBeenChanged() {
+    public thenAnEventShouldBeEmitted() {
         assert.ok(FakeEventPublisher.isEventPublished);
     }
 
-    @then('I should receive the new title of the pathway')
-    public thenIShouldReceiveTheNewTitleOfPathway(dataTable: DataTable) {
+    @then('I should receive the pathway with its new title')
+    public thenIShouldReceiveThePathway(dataTable: DataTable) {
         if (this.pDSPBEPathwayEntity === undefined) {
             throw new Error('Pathway is not initialized');
         }

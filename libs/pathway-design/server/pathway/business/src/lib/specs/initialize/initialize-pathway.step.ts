@@ -1,6 +1,6 @@
-import { strict as assert } from 'node:assert';
 import type { DataTable } from '@cucumber/cucumber';
 import { binding, given, then, when } from 'cucumber-tsflow';
+import { strict as assert } from 'node:assert';
 import sinon from 'sinon';
 import { PDSPBEPathwayEntity } from '../../entities/pathway';
 import { PDSPBEPathwayInitializedEvent } from '../../events/pathway-initialized.event';
@@ -38,7 +38,7 @@ export default class PathwaySteps {
         });
     }
 
-    @when('I initialize a pathway with these data')
+    @when('I initialize a pathway in business with these data')
     public async whenIInitializeAPathway(dataTable: DataTable) {
         const data = dataTable.hashes()[0] as {
             id: string;
@@ -67,7 +67,7 @@ export default class PathwaySteps {
         }
     }
 
-    @then('I should retrieve the attributes of the pathway')
+    @then('I should retrieve the attributes of the pathway from business')
     public thenIShouldRetrieveAttributesPathway(dataTable: DataTable) {
         const data = dataTable.hashes()[0] as {
             id: string;
@@ -91,7 +91,7 @@ export default class PathwaySteps {
         assert.deepStrictEqual(callArgs, expectedEvent);
     }
 
-    @then('I should see an error message {string} during the initialization')
+    @then('I should see an error message from business {string} during the initialization')
     public thenIShouldSeeAnErrorMessageDuringInitialization(errorMessage: string) {
         assert.notEqual(this.error, undefined);
         assert.strictEqual(this.error?.message, errorMessage);

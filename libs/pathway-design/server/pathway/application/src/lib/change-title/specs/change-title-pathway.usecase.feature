@@ -6,8 +6,8 @@ Feature: Application - Change the title of a pathway
       | My Pathway  | A test pathway   | biology |
     When I want to change the title of the pathway in application to "My New Pathway"
     Then It should call the persistence layer to modify the title of the pathway
-    And It should call the presenter to return the new title of the pathway
+    And It should call the presenter to present the pathway with its new title
     And It should emit an event indicating that the title of the pathway has been changed
-    And I should receive the new title of the pathway
+    And I should receive the pathway with its new title
       | title          |
       | My New Pathway |

@@ -1,52 +1,27 @@
 {
-    "scopes": [
-        "libs/pathway-design/server/pathway/business/src/lib/entities",
-        "libs/pathway-design/server/pathway/business/src/lib/events",
-        "libs/pathway-design/server/pathway/business/src/lib/factories",
-        "libs/pathway-design/server/pathway/business/src/lib/ports",
-        "libs/pathway-design/server/pathway/business/src/lib/value-objects",
-        "libs/pathway-design/server/pathway/infrastructure/src/lib/persistence/common",
-        "libs/pathway-design/server/pathway/infrastructure/src/lib/persistence/initialize/in-memory",
-        "libs/pathway-design/server/pathway/interface-adapters/src/lib/initialize/controller",
-        "libs/pathway-design/server/pathway/interface-adapters/src/lib/initialize/dtos",
-        "libs/pathway-design/server/pathway/presenters/src/lib/toJson",
-        "apps/pathway-design/server/src/app",
-        "libs/pathway-design/server/pathway/application/src/lib/initialize/command",
-        "libs/pathway-design/server/pathway/application/src/lib/initialize/usecase",
-        "libs/pathway-design/server/pathway/application/src/lib/initialize/service"
+  "scopes": [
+    "apps/pathway-design/server",
+    "libs/common/events",
+    "libs/common/tools",
+    "libs/pathway-design/server/pathway"
+  ],
+  "groups": [
+    "apps/pathway-design",
+    "apps",
+    "libs/common",
+    "libs/pathway-design/server",
+    "libs/pathway-design",
+    "libs"
+  ],
+  "entries": [],
+  "teams": {
+    "example-team-a": [
+      "John Doe",
+      "Jane Doe"
     ],
-    "groups": [
-        "apps/pathway-design/server/src",
-        "apps/pathway-design/server",
-        "apps/pathway-design",
-        "apps",
-        "libs/pathway-design/server/pathway/application/src/lib/initialize",
-        "libs/pathway-design/server/pathway/application/src/lib",
-        "libs/pathway-design/server/pathway/application/src",
-        "libs/pathway-design/server/pathway/application",
-        "libs/pathway-design/server/pathway/business/src/lib",
-        "libs/pathway-design/server/pathway/business/src",
-        "libs/pathway-design/server/pathway/business",
-        "libs/pathway-design/server/pathway/infrastructure/src/lib/persistence/initialize",
-        "libs/pathway-design/server/pathway/infrastructure/src/lib/persistence",
-        "libs/pathway-design/server/pathway/infrastructure/src/lib",
-        "libs/pathway-design/server/pathway/infrastructure/src",
-        "libs/pathway-design/server/pathway/infrastructure",
-        "libs/pathway-design/server/pathway/interface-adapters/src/lib/initialize",
-        "libs/pathway-design/server/pathway/interface-adapters/src/lib",
-        "libs/pathway-design/server/pathway/interface-adapters/src",
-        "libs/pathway-design/server/pathway/interface-adapters",
-        "libs/pathway-design/server/pathway/presenters/src/lib",
-        "libs/pathway-design/server/pathway/presenters/src",
-        "libs/pathway-design/server/pathway/presenters",
-        "libs/pathway-design/server/pathway",
-        "libs/pathway-design/server",
-        "libs/pathway-design",
-        "libs"
-    ],
-    "entries": [],
-    "teams": {
-        "example-team-a": ["John Doe", "Jane Doe"],
-        "example-team-b": ["Max Muster", "Susi Sorglos"]
-    }
+    "example-team-b": [
+      "Max Muster",
+      "Susi Sorglos"
+    ]
+  }
 }

@@ -1,5 +1,3 @@
-import { strict as assert } from 'node:assert';
-import type { Http2Server } from 'node:http2';
 import { PDSPIPPathwayPersistenceInfrastructureModule } from '@bewoak/pathway-design-server-pathway-infrastructure';
 import { PDSPIAInitializePathwayInterfaceAdaptersModule } from '@bewoak/pathway-design-server-pathway-interface-adapters';
 import { PDSPPPathwayPresentersModule } from '@bewoak/pathway-design-server-pathway-presenters';
@@ -8,6 +6,8 @@ import type { INestApplication } from '@nestjs/common';
 import { CqrsModule } from '@nestjs/cqrs';
 import { Test } from '@nestjs/testing';
 import { binding, given, then, when } from 'cucumber-tsflow';
+import { strict as assert } from 'node:assert';
+import type { Http2Server } from 'node:http2';
 import request from 'supertest';
 
 @binding()
@@ -17,7 +17,7 @@ class ControllerSteps {
     private response: request.Response;
 
     @given('I am authenticated on the platform for initialize a pathway in memory persistence and json presenter')
-    public async withInMemoryPeristenceAndJsonPresenter() {
+    public async connectToServer() {
         const testingModule = await Test.createTestingModule({
             imports: [
                 PDSPIAInitializePathwayInterfaceAdaptersModule.withPresenter(PDSPPPathwayPresentersModule.use('toJson'))
@@ -33,7 +33,7 @@ class ControllerSteps {
         this.httpServer = this.app.getHttpServer();
     }
 
-    @when('I want to initialize a pathway with these data')
+    @when('I want to initialize on the platform a pathway with these data')
     public async whenIInitiateAPathway(dataTable: DataTable) {
         const firstRow = dataTable.hashes()[0];
 
@@ -44,7 +44,7 @@ class ControllerSteps {
         });
     }
 
-    @then('I should retrieve a pathway initialized with its data')
+    @then('I should retrieve from the platform a pathway initialized with its data')
     public thenIShouldRetrieveAPathwayInitiated(dataTable: DataTable) {
         const firstRow = dataTable.hashes()[0];
 
@@ -53,7 +53,7 @@ class ControllerSteps {
         assert.strictEqual(this.response.body.researchField, firstRow.researchField);
     }
 
-    @then('The pathway should be have a unique identifier')
+    @then('The pathway received from the platform should be have a unique identifier')
     public thenThePathwayIdentifierShouldBeUnique() {
         assert.notEqual(this.response.body.id, undefined);
         assert.notEqual(this.response.body.id, '');
