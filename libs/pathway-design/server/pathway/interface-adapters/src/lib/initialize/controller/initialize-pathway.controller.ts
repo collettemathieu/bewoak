@@ -1,5 +1,5 @@
 // biome-ignore lint/style/useImportType: <explanation>
-import { PDSPAInitializePathwayCommand, PDSPAInitializePathwayService } from '@bewoak/pathway-design-server-pathway-application';
+import { PDSPAInitializePathwayCommand, PDSPA_InitializePathwayService } from '@bewoak/pathway-design-server-pathway-application';
 import { Body, Controller, HttpStatus, Post, UsePipes, ValidationPipe } from '@nestjs/common';
 import { ApiBadRequestResponse, ApiCreatedResponse, ApiTags } from '@nestjs/swagger';
 // biome-ignore lint/style/useImportType: <explanation>
@@ -17,7 +17,7 @@ import { InitializedPathwayResponseBodyDto } from '../dtos/response/body/respons
     path: 'pathway',
 })
 export class InitializePathwayController {
-    constructor(private readonly pDSPAInitializePathwayService: PDSPAInitializePathwayService) {}
+    constructor(private readonly pDSPAInitializePathwayService: PDSPA_InitializePathwayService) {}
 
     @Post('init')
     @ApiCreatedResponse({

@@ -1,32 +1,11 @@
-import { Module, type Provider } from '@nestjs/common';
+import { Module } from '@nestjs/common';
 
 import {
     PDSPBP_CHANGE_TITLE_PATHWAY_PERSISTENCE_PORT,
     PDSPBP_INITIALIZE_PATHWAY_PERSISTENCE_PORT,
 } from '@bewoak/pathway-design-server-pathway-business';
-import { ChangeTitlePathwayInMemoryPersistence } from './change-title/in-memory/change-title-pathway-in-memory.persistence';
-import { PathwayInMemoryRepository } from './common/in-memory/repositories/in-memory-pathway.repository';
-import { InitializePathwayInMemoryPersistence } from './initialize/in-memory/initialize-pathway-in-memory.persistence';
-
-const persistenceProvidersMap: Record<'inMemory', Provider[]> = {
-    inMemory: [
-        InitializePathwayInMemoryPersistence,
-        {
-            provide: PDSPBP_INITIALIZE_PATHWAY_PERSISTENCE_PORT,
-            useExisting: InitializePathwayInMemoryPersistence,
-        },
-        ChangeTitlePathwayInMemoryPersistence,
-        {
-            provide: PDSPBP_CHANGE_TITLE_PATHWAY_PERSISTENCE_PORT,
-            useExisting: ChangeTitlePathwayInMemoryPersistence,
-        },
-        PathwayInMemoryRepository,
-    ],
-};
-
-export const pDSPIPPersistenceKeys = Object.keys(persistenceProvidersMap) as [PDSPIPPersistenceDriverAuthorized];
-
-export type PDSPIPPersistenceDriverAuthorized = keyof typeof persistenceProvidersMap;
+import { persistenceProvidersMap } from './pathway-persistence-infrastructure.constants';
+import type { PDSPIPPersistenceDriverAuthorized } from './pathway-persistence-infrastructure.types';
 
 @Module({})
 // biome-ignore lint/complexity/noStaticOnlyClass: not pertinent here because this is a module
