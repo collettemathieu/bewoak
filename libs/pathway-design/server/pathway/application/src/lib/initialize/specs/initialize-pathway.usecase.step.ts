@@ -1,3 +1,4 @@
+import { strict as assert } from 'node:assert';
 import type {
     PDSPBEPathwayEntity,
     PDSPBPInitializePathwayPersistencePort,
@@ -7,7 +8,6 @@ import type {
 import type { DataTable } from '@cucumber/cucumber';
 import type { EventPublisher } from '@nestjs/cqrs';
 import { before, binding, then, when } from 'cucumber-tsflow';
-import { strict as assert } from 'node:assert';
 import sinon from 'sinon';
 import { PDSPAIUInitializePathwayUsecase } from '../usecase/initialize-pathway.usecase';
 

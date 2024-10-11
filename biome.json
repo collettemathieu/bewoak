@@ -26,6 +26,9 @@
                 "noVoidTypeReturn": {
                     "level": "error"
                 }
+            },
+            "complexity": {
+                "noForEach": "off"
             }
         }
     },

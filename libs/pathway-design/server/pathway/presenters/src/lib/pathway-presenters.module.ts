@@ -5,12 +5,14 @@ const presenterModuleMap: Record<'toJson', typeof ToJsonPathwayPresenterModule> 
     toJson: ToJsonPathwayPresenterModule,
 };
 
-type PresenterDriverAuthorized = keyof typeof presenterModuleMap;
+export const pDSPPPresenterKeys = Object.keys(presenterModuleMap) as [PDSPPPresenterDriverAuthorized];
+
+export type PDSPPPresenterDriverAuthorized = keyof typeof presenterModuleMap;
 
 @Module({})
 // biome-ignore lint/complexity/noStaticOnlyClass: not pertinent here because this is a module
 export class PDSPPPathwayPresentersModule {
-    static use(driver: PresenterDriverAuthorized) {
+    static use(driver: PDSPPPresenterDriverAuthorized) {
         const presenterModule = presenterModuleMap[driver];
 
         return {

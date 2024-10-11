@@ -13,7 +13,8 @@
         "rxjs": "^7.8.0",
         "swagger-ui-express": "^5.0.1",
         "swc-loader": "^0.2.6",
-        "tslib": "^2.3.0"
+        "tslib": "^2.3.0",
+        "zod": "^3.23.8"
     },
     "devDependencies": {
         "@biomejs/biome": "^1.8.3",
@@ -61,7 +62,7 @@
         "lint": "nx run-many --target=lint --parallel=4",
         "nx": "nx",
         "postinstall": "chmod +x .hooks/* && git config core.hooksPath .hooks",
-        "start": "nx serve pathway-design-server",
+        "start:pathway-design:app": "PORT=3000 GLOBAL_PREFIX=api PERSISTENCE_DRIVER=inMemory PRESENTER_DRIVER=toJson nx serve pathway-design-server",
         "test": "nx run-many --target=test --parallel=4",
         "test:feature": "nx run-many --target=test-feature --parallel=4",
         "tools:autocanon": "autocannon -c 10 -d 10s http://localhost:3000/api/pathway/initialize",

@@ -10,6 +10,8 @@
         "module": "ES2022",
         "moduleResolution": "node",
         "paths": {
+            "@bewoak/common-configs-server-env": ["libs/common/configs/server/env/src/index.ts"],
+            "@bewoak/common-configs-server-swagger": ["libs/common/configs/server/swagger/src/index.ts"],
             "@bewoak/common-events": ["libs/common/events/src/index.ts"],
             "@bewoak/common-tools-server-http-exceptions": ["libs/common/tools/server/http-exceptions/src/index.ts"],
             "@bewoak/pathway-design-server-pathway-application": ["libs/pathway-design/server/pathway/application/src/index.ts"],

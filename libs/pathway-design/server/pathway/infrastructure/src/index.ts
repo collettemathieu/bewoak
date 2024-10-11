@@ -1,1 +1,5 @@
-export { PDSPIPPathwayPersistenceInfrastructureModule } from './lib/persistence/pathway-persistence-infrastructure.module';
+export {
+    PDSPIPPathwayPersistenceInfrastructureModule,
+    PDSPIPPersistenceDriverAuthorized,
+    pDSPIPPersistenceKeys,
+} from './lib/persistence/pathway-persistence-infrastructure.module';

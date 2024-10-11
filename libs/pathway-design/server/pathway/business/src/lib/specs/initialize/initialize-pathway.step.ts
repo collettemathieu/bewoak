@@ -1,6 +1,6 @@
+import { strict as assert } from 'node:assert';
 import type { DataTable } from '@cucumber/cucumber';
 import { binding, given, then, when } from 'cucumber-tsflow';
-import { strict as assert } from 'node:assert';
 import sinon from 'sinon';
 import { PDSPBEPathwayEntity } from '../../entities/pathway';
 import { PDSPBEPathwayInitializedEvent } from '../../events/pathway-initialized.event';
@@ -84,7 +84,16 @@ export default class PathwaySteps {
 
     @then('It should apply an event indicating that the pathway has been initialized')
     public thenItShouldApplyAnEvent() {
-        const expectedEvent = new PDSPBEPathwayInitializedEvent(this.pDSPBEPathwayEntity as PDSPBEPathwayEntity);
+        if (this.pDSPBEPathwayEntity === undefined) {
+            throw new Error('Pathway is not initialized');
+        }
+
+        const expectedEvent = new PDSPBEPathwayInitializedEvent(this.pDSPBEPathwayEntity.id, {
+            pathwayId: this.pDSPBEPathwayEntity.id,
+            title: this.pDSPBEPathwayEntity.title,
+            description: this.pDSPBEPathwayEntity.description,
+            researchField: this.pDSPBEPathwayEntity.researchField,
+        });
         const callArgs = this.applyMethodSpy?.getCall(0).args[0];
 
         assert(this.applyMethodSpy?.calledOnce);

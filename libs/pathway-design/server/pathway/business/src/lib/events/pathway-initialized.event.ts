@@ -1,5 +1,11 @@
-import type { PDSPBEPathwayEntity } from '../entities/pathway';
+import { type CEEvent, CE_EVENT_TYPE_PATHWAY_INITIALIZED, CE_EVENT_VERSION } from '@bewoak/common-events';
 
-export class PDSPBEPathwayInitializedEvent {
-    constructor(public readonly pathway: PDSPBEPathwayEntity) {}
+export class PDSPBEPathwayInitializedEvent implements CEEvent {
+    public readonly eventType = CE_EVENT_TYPE_PATHWAY_INITIALIZED;
+    public readonly version = CE_EVENT_VERSION;
+
+    constructor(
+        public readonly aggregateId: string,
+        public readonly payload: Record<string, unknown>
+    ) {}
 }

@@ -35,9 +35,17 @@ export class PDSPBEPathwayEntity extends AggregateRoot {
         this.#researchField = researchField;
         this.#title = title;
 
-        this.apply(new PDSPBEPathwayInitializedEvent(this), {
-            skipHandler: true,
-        });
+        this.apply(
+            new PDSPBEPathwayInitializedEvent(this.id, {
+                pathwayId: this.id,
+                title: this.title,
+                description: this.description,
+                researchField: this.researchField,
+            }),
+            {
+                skipHandler: true,
+            }
+        );
     }
 
     changeTitle(title: PDSPBVOTitleValueObjects) {

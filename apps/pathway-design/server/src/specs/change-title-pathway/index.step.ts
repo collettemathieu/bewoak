@@ -1,16 +1,22 @@
-import { PDSPIPPathwayPersistenceInfrastructureModule } from '@bewoak/pathway-design-server-pathway-infrastructure';
+import { strict as assert } from 'node:assert';
+import type { Http2Server } from 'node:http2';
+import {
+    PDSPIPPathwayPersistenceInfrastructureModule,
+    type PDSPIPPersistenceDriverAuthorized,
+} from '@bewoak/pathway-design-server-pathway-infrastructure';
 import {
     PDSPIAChangeTitlePathwayInterfaceAdaptersModule,
     PDSPIAInitializePathwayInterfaceAdaptersModule,
 } from '@bewoak/pathway-design-server-pathway-interface-adapters';
-import { PDSPPPathwayPresentersModule } from '@bewoak/pathway-design-server-pathway-presenters';
+import {
+    PDSPPPathwayPresentersModule,
+    type PDSPPPresenterDriverAuthorized,
+} from '@bewoak/pathway-design-server-pathway-presenters';
 import type { DataTable } from '@cucumber/cucumber';
 import type { INestApplication } from '@nestjs/common';
 import { CqrsModule } from '@nestjs/cqrs';
 import { Test } from '@nestjs/testing';
 import { binding, given, then, when } from 'cucumber-tsflow';
-import { strict as assert } from 'node:assert';
-import type { Http2Server } from 'node:http2';
 import request from 'supertest';
 
 @binding()
@@ -19,15 +25,15 @@ class ControllerSteps {
     private httpServer: Http2Server;
     private response: request.Response;
 
-    @given('I am authenticated on the platform for change the title of the pathway in memory persistence and json presenter')
-    public async connectToPlatform() {
+    @given('I am authenticated on the platform for change the title of the pathway with {string} and {string}')
+    public async connectToPlatform(presenter: PDSPPPresenterDriverAuthorized, persistence: PDSPIPPersistenceDriverAuthorized) {
         const testingModule = await Test.createTestingModule({
             imports: [
-                PDSPIAChangeTitlePathwayInterfaceAdaptersModule.withPresenter(PDSPPPathwayPresentersModule.use('toJson'))
-                    .withPersistence(PDSPIPPathwayPersistenceInfrastructureModule.use('inMemory'))
+                PDSPIAChangeTitlePathwayInterfaceAdaptersModule.withPresenter(PDSPPPathwayPresentersModule.use(presenter))
+                    .withPersistence(PDSPIPPathwayPersistenceInfrastructureModule.use(persistence))
                     .build(),
-                PDSPIAInitializePathwayInterfaceAdaptersModule.withPresenter(PDSPPPathwayPresentersModule.use('toJson'))
-                    .withPersistence(PDSPIPPathwayPersistenceInfrastructureModule.use('inMemory'))
+                PDSPIAInitializePathwayInterfaceAdaptersModule.withPresenter(PDSPPPathwayPresentersModule.use(presenter))
+                    .withPersistence(PDSPIPPathwayPersistenceInfrastructureModule.use(persistence))
                     .build(),
                 CqrsModule.forRoot(),
             ],
@@ -38,7 +44,7 @@ class ControllerSteps {
         this.httpServer = this.app.getHttpServer();
     }
 
-    @given('I have a pathway on the platform recorded in memory with these data')
+    @given('I have a pathway on the platform with these data')
     public async givenIHaveAPathwayRecordedInMemroy(dataTable: DataTable) {
         const firstRow = dataTable.hashes()[0];
 

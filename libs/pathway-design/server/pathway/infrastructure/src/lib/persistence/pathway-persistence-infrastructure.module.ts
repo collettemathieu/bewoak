@@ -24,12 +24,14 @@ const persistenceProvidersMap: Record<'inMemory', Provider[]> = {
     ],
 };
 
-type PersistenceDriverAuthorized = keyof typeof persistenceProvidersMap;
+export const pDSPIPPersistenceKeys = Object.keys(persistenceProvidersMap) as [PDSPIPPersistenceDriverAuthorized];
+
+export type PDSPIPPersistenceDriverAuthorized = keyof typeof persistenceProvidersMap;
 
 @Module({})
 // biome-ignore lint/complexity/noStaticOnlyClass: not pertinent here because this is a module
 export class PDSPIPPathwayPersistenceInfrastructureModule {
-    static use(driver: PersistenceDriverAuthorized) {
+    static use(driver: PDSPIPPersistenceDriverAuthorized) {
         const persistenceProviders = persistenceProvidersMap[driver];
 
         return {
