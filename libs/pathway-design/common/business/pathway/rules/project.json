@@ -1,16 +1,16 @@
 {
     "name": "pathway-design-common-business-pathway-rules",
     "$schema": "../../../../../../../node_modules/nx/schemas/project-schema.json",
-    "sourceRoot": "libs/pathway-design/common-business/pathway/rules/src",
+    "sourceRoot": "libs/pathway-design/common/business/pathway/rules/src",
     "projectType": "library",
     "targets": {
         "build": {
             "executor": "@nx/js:swc",
             "outputs": ["{options.outputPath}"],
             "options": {
-                "outputPath": "dist/libs/pathway-design/common-business/pathway/rules",
-                "main": "libs/pathway-design/common-business/pathway/rules/src/index.ts",
-                "tsConfig": "libs/pathway-design/common-business/pathway/rules/tsconfig.lib.json",
+                "outputPath": "dist/libs/pathway-design/common/business/pathway/rules",
+                "main": "libs/pathway-design/common/business/pathway/rules/src/index.ts",
+                "tsConfig": "libs/pathway-design/common/business/pathway/rules/tsconfig.lib.json",
                 "assets": []
             }
         },
