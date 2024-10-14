@@ -1,7 +1,7 @@
 import { CTSEBadRequestException } from '@bewoak/common-tools-server-http-exceptions';
 
 export class PathwayIdValueObject {
-    constructor(private id: string) {
+    constructor(private readonly id: string) {
         if (!this.isUuid(id)) {
             throw new CTSEBadRequestException('Pathway id must be a valid uuid');
         }

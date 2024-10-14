@@ -1,7 +1,7 @@
 import { CTSEBadRequestException } from '@bewoak/common-tools-server-http-exceptions';
 
 export class DescriptionValueObject {
-    constructor(private description: string) {
+    constructor(private readonly description: string) {
         if (this.isEmpty(description)) {
             throw new CTSEBadRequestException('Description is required');
         }

@@ -14,6 +14,9 @@
             "@bewoak/common-configs-server-swagger": ["libs/common/configs/server/swagger/src/index.ts"],
             "@bewoak/common-events": ["libs/common/events/src/index.ts"],
             "@bewoak/common-tools-server-http-exceptions": ["libs/common/tools/server/http-exceptions/src/index.ts"],
+            "@bewoak/pathway-design-common-business-pathway-rules": [
+                "libs/pathway-design/common/business/pathway/rules/src/index.ts"
+            ],
             "@bewoak/pathway-design-server-pathway-application": ["libs/pathway-design/server/pathway/application/src/index.ts"],
             "@bewoak/pathway-design-server-pathway-business": ["libs/pathway-design/server/pathway/business/src/index.ts"],
             "@bewoak/pathway-design-server-pathway-infrastructure": [

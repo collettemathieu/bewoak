@@ -1,7 +1,7 @@
 import { CTSEBadRequestException } from '@bewoak/common-tools-server-http-exceptions';
 
 export class ResearchFieldValueObjects {
-    constructor(private researchField: string) {
+    constructor(private readonly researchField: string) {
         if (this.isEmpty(researchField)) {
             throw new CTSEBadRequestException('Research field is required');
         }

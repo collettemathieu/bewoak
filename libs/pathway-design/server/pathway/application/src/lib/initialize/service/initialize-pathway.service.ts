@@ -5,7 +5,7 @@ import { CommandBus } from '@nestjs/cqrs';
 import type { PDSPAInitializePathwayCommand } from '../command/initialize-pathway.command';
 
 @Injectable()
-export class PDSPA_InitializePathwayService {
+export class PDSPAInitializePathwayService {
     constructor(private readonly commandBus: CommandBus) {}
 
     init(pDSPAInitializePathwayCommand: PDSPAInitializePathwayCommand) {
