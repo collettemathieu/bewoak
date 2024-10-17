@@ -1,5 +1,3 @@
-import { strict as assert } from 'node:assert';
-import type { Http2Server } from 'node:http2';
 import {
     PDSPIPPathwayPersistenceInfrastructureModule,
     type PDSPIPPersistenceDriverAuthorized,
@@ -15,8 +13,11 @@ import {
 import type { DataTable } from '@cucumber/cucumber';
 import type { INestApplication } from '@nestjs/common';
 import { CqrsModule } from '@nestjs/cqrs';
+import { EventEmitterModule } from '@nestjs/event-emitter';
 import { Test } from '@nestjs/testing';
 import { binding, given, then, when } from 'cucumber-tsflow';
+import { strict as assert } from 'node:assert';
+import type { Http2Server } from 'node:http2';
 import request from 'supertest';
 
 @binding()
@@ -36,6 +37,15 @@ class ControllerSteps {
                     .withPersistence(PDSPIPPathwayPersistenceInfrastructureModule.use(persistence))
                     .build(),
                 CqrsModule.forRoot(),
+                EventEmitterModule.forRoot({
+                    wildcard: false,
+                    delimiter: '.',
+                    newListener: false,
+                    removeListener: false,
+                    maxListeners: 10,
+                    verboseMemoryLeak: true,
+                    ignoreErrors: false,
+                }),
             ],
         }).compile();
 

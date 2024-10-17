@@ -1,4 +1,5 @@
 export { PDSPBEPathwayEntity } from './lib/entities/pathway';
+export { PDSPBEPathwayInitializedEvent } from './lib/events/pathway-initialized.event';
 export { pDSPBFPathwayFactory } from './lib/factories/pathway.factory';
 export {
     PDSPBP_CHANGE_TITLE_PATHWAY_PERSISTENCE_PORT,

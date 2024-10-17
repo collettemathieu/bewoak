@@ -1,6 +1,7 @@
 import {
     PDSPAIUInitializePathwayUsecase,
     PDSPAInitializePathwayCommandHandler,
+    PDSPAInitializePathwayEventHandler,
     PDSPAInitializePathwayService,
 } from '@bewoak/pathway-design-server-pathway-application';
 import { type DynamicModule, Module, type Type } from '@nestjs/common';
@@ -8,7 +9,12 @@ import { InitializePathwayController } from './controller/initialize-pathway.con
 
 @Module({
     controllers: [InitializePathwayController],
-    providers: [PDSPAInitializePathwayCommandHandler, PDSPAInitializePathwayService, PDSPAIUInitializePathwayUsecase],
+    providers: [
+        PDSPAIUInitializePathwayUsecase,
+        PDSPAInitializePathwayCommandHandler,
+        PDSPAInitializePathwayEventHandler,
+        PDSPAInitializePathwayService,
+    ],
     exports: [PDSPAInitializePathwayService],
 })
 // biome-ignore lint/complexity/noStaticOnlyClass: not pertinent here because this is a module

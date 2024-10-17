@@ -13,6 +13,7 @@ import {
     type PDSPPPresenterDriverAuthorized,
 } from '@bewoak/pathway-design-server-pathway-presenters';
 import { CqrsModule } from '@nestjs/cqrs';
+import { EventEmitterModule } from '@nestjs/event-emitter';
 
 interface ApplicationBootstrapOptions {
     persistenceDriver: PDSPIPPersistenceDriverAuthorized;
@@ -37,7 +38,15 @@ export class AppModule {
                     .withPersistence(PDSPIPPathwayPersistenceInfrastructureModule.use(options.persistenceDriver))
                     .build(),
                 CqrsModule.forRoot(),
-                CqrsModule.forRoot(),
+                EventEmitterModule.forRoot({
+                    wildcard: false,
+                    delimiter: '.',
+                    newListener: false,
+                    removeListener: false,
+                    maxListeners: 10,
+                    verboseMemoryLeak: true,
+                    ignoreErrors: false,
+                }),
             ],
         };
     }
