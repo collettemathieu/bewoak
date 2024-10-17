@@ -1,4 +1,5 @@
 import { beforeAll, describe, expect, test } from 'bun:test';
+import { pDCBPRResearchFieldRules } from '@bewoak/pathway-design-common-business-pathway-rules';
 import { ResearchFieldValueObjects } from './research-field.value-object';
 
 describe('ResearchFieldValueObjects', () => {
@@ -15,8 +16,8 @@ describe('ResearchFieldValueObjects', () => {
         expect(researchField.value).toBe('Test researchField');
     });
 
-    test('should throw an error if the researchField is empty', () => {
-        expect(() => new ResearchFieldValueObjects('')).toThrowError('Research field is required');
+    test('should throw an error if the researchField is invalid', () => {
+        expect(() => new ResearchFieldValueObjects('')).toThrowError(pDCBPRResearchFieldRules.textError());
     });
 
     test('should return true when comparing two equal researchFields', () => {

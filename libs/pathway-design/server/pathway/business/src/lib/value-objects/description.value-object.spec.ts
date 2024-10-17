@@ -1,4 +1,5 @@
 import { beforeAll, describe, expect, test } from 'bun:test';
+import { pDCBPRDescriptionRules } from '@bewoak/pathway-design-common-business-pathway-rules';
 import { DescriptionValueObject } from './description.value-object';
 
 describe('DescriptionValueObject', () => {
@@ -15,8 +16,8 @@ describe('DescriptionValueObject', () => {
         expect(description.value).toBe('Test description');
     });
 
-    test('should throw an error if the description is empty', () => {
-        expect(() => new DescriptionValueObject('')).toThrowError('Description is required');
+    test('should throw an error if the description is invalid', () => {
+        expect(() => new DescriptionValueObject('')).toThrowError(pDCBPRDescriptionRules.textError());
     });
 
     test('should return true when comparing two equal descriptions', () => {

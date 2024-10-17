@@ -1,6 +1,6 @@
 import type { Rules } from '../types';
 
-export const pDCBPRTitleRules: Rules<string | null | undefined> = {
+export const pDCBPRDescriptionRules: Rules<string | null | undefined> = {
     isValid: function (value) {
         return (
             value !== undefined &&
@@ -14,6 +14,6 @@ export const pDCBPRTitleRules: Rules<string | null | undefined> = {
     maxLength: 100,
     minLength: 1,
     textError: function () {
-        return `The title is required and it must be between ${this.minLength} and ${this.maxLength} characters long.`;
+        return `The description is required and it must be between ${this.minLength} and ${this.maxLength} characters long.`;
     },
 };

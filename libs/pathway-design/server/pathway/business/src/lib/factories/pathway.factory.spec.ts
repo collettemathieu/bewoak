@@ -20,50 +20,6 @@ describe('pDSPBFPathwayFactory', () => {
         expect(pathway.researchField).toBe(params.researchField);
     });
 
-    it('should throw an error for an empty title', () => {
-        const params: PathwayFactoryParams = {
-            id: 'f7703737-186c-4c7c-8d46-925111c7c7c1',
-            title: '',
-            description: 'A test pathway',
-            researchField: 'biology',
-        };
-
-        expect(() => pDSPBFPathwayFactory(params)).toThrow('Title is required');
-    });
-
-    it('should throw an error for an empty description', () => {
-        const params: PathwayFactoryParams = {
-            id: 'f7703737-186c-4c7c-8d46-925111c7c7c1',
-            title: 'My Pathway',
-            description: '',
-            researchField: 'biology',
-        };
-
-        expect(() => pDSPBFPathwayFactory(params)).toThrow('Description is required');
-    });
-
-    it('should throw an error for an empty research field', () => {
-        const params: PathwayFactoryParams = {
-            id: 'f7703737-186c-4c7c-8d46-925111c7c7c1',
-            title: 'My Pathway',
-            description: 'A test pathway',
-            researchField: '',
-        };
-
-        expect(() => pDSPBFPathwayFactory(params)).toThrow('Research field is required');
-    });
-
-    it('should throw an error for an invalid UUID', () => {
-        const params: PathwayFactoryParams = {
-            id: 'invalid-uuid',
-            title: 'My Pathway',
-            description: 'A test pathway',
-            researchField: 'biology',
-        };
-
-        expect(() => pDSPBFPathwayFactory(params)).toThrow('Pathway id must be a valid uuid');
-    });
-
     it('should generate a valid UUID if none is provided', () => {
         const params: PathwayFactoryParams = {
             title: 'My Pathway',

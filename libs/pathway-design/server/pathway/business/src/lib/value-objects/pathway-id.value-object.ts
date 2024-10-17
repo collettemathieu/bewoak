@@ -1,9 +1,10 @@
 import { CTSEBadRequestException } from '@bewoak/common-tools-server-http-exceptions';
+import { pDCBPRPathwayIdRules } from '@bewoak/pathway-design-common-business-pathway-rules';
 
 export class PathwayIdValueObject {
     constructor(private readonly id: string) {
-        if (!this.isUuid(id)) {
-            throw new CTSEBadRequestException('Pathway id must be a valid uuid');
+        if (pDCBPRPathwayIdRules.isValid(id) === false) {
+            throw new CTSEBadRequestException(pDCBPRPathwayIdRules.textError());
         }
     }
     get value() {
@@ -16,11 +17,5 @@ export class PathwayIdValueObject {
 
     toString() {
         return this.id.toString();
-    }
-
-    private isUuid(id: string) {
-        const uuidV4Regex = /^[0-9a-f]{8}-[0-9a-f]{4}-4[0-9a-f]{3}-[89ab][0-9a-f]{3}-[0-9a-f]{12}$/i;
-
-        return uuidV4Regex.test(id);
     }
 }

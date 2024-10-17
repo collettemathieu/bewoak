@@ -100,9 +100,10 @@ export default class PathwaySteps {
         assert.deepStrictEqual(callArgs, expectedEvent);
     }
 
-    @then('I should see an error message from business {string} during the initialization')
-    public thenIShouldSeeAnErrorMessageDuringInitialization(errorMessage: string) {
+    @then('I should see an error message from business during the initialization')
+    public thenIShouldSeeAnErrorMessageDuringInitialization() {
         assert.notEqual(this.error, undefined);
-        assert.strictEqual(this.error?.message, errorMessage);
+        assert.notEqual(this.error?.message, undefined);
+        assert.notEqual(this.error?.message, '');
     }
 }

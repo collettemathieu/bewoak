@@ -1,4 +1,5 @@
 import { beforeAll, describe, expect, test } from 'bun:test';
+import { pDCBPRPathwayIdRules } from '@bewoak/pathway-design-common-business-pathway-rules';
 import { PathwayIdValueObject } from './pathway-id.value-object';
 
 describe('PathwayIdValueObject', () => {
@@ -16,8 +17,8 @@ describe('PathwayIdValueObject', () => {
         expect(pathwayIdValueObject1.value).toBe('e24054b9-92ca-4a22-be67-cf14cc94e6f8');
     });
 
-    test('should throw an error if the id is not a uuid', () => {
-        expect(() => new PathwayIdValueObject('12345')).toThrowError('Pathway id must be a valid uuid');
+    test('should throw an error if the pathway id is invalid', () => {
+        expect(() => new PathwayIdValueObject('12345')).toThrowError(pDCBPRPathwayIdRules.textError());
     });
 
     test('should return true when comparing two equal pathway id', () => {

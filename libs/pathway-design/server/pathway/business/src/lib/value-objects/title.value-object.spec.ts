@@ -1,4 +1,5 @@
 import { beforeAll, describe, expect, test } from 'bun:test';
+import { pDCBPRTitleRules } from '@bewoak/pathway-design-common-business-pathway-rules';
 import { PDSPBVOTitleValueObjects } from './title.value-object';
 
 describe('PDSPBVOTitleValueObjects', () => {
@@ -15,8 +16,8 @@ describe('PDSPBVOTitleValueObjects', () => {
         expect(title.value).toBe('Test Title');
     });
 
-    test('should throw an error if the title is empty', () => {
-        expect(() => new PDSPBVOTitleValueObjects('')).toThrowError('Title is required');
+    test('should throw an error if the title is not valid', () => {
+        expect(() => new PDSPBVOTitleValueObjects('')).toThrowError(pDCBPRTitleRules.textError());
     });
 
     test('should return true when comparing two equal titles', () => {

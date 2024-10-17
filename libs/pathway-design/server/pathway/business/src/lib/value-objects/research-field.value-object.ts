@@ -1,9 +1,10 @@
 import { CTSEBadRequestException } from '@bewoak/common-tools-server-http-exceptions';
+import { pDCBPRResearchFieldRules } from '@bewoak/pathway-design-common-business-pathway-rules';
 
 export class ResearchFieldValueObjects {
     constructor(private readonly researchField: string) {
-        if (this.isEmpty(researchField)) {
-            throw new CTSEBadRequestException('Research field is required');
+        if (pDCBPRResearchFieldRules.isValid(researchField) === false) {
+            throw new CTSEBadRequestException(pDCBPRResearchFieldRules.textError());
         }
     }
     get value() {

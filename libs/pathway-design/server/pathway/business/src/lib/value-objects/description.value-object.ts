@@ -1,9 +1,10 @@
 import { CTSEBadRequestException } from '@bewoak/common-tools-server-http-exceptions';
+import { pDCBPRDescriptionRules } from '@bewoak/pathway-design-common-business-pathway-rules';
 
 export class DescriptionValueObject {
     constructor(private readonly description: string) {
-        if (this.isEmpty(description)) {
-            throw new CTSEBadRequestException('Description is required');
+        if (pDCBPRDescriptionRules.isValid(description) === false) {
+            throw new CTSEBadRequestException(pDCBPRDescriptionRules.textError());
         }
     }
     get value() {
@@ -16,9 +17,5 @@ export class DescriptionValueObject {
 
     toString() {
         return this.description;
-    }
-
-    private isEmpty(name: string | undefined) {
-        return name === undefined || name.length === 0;
     }
 }

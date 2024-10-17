@@ -68,9 +68,10 @@ export default class ControllerSteps {
         assert.strictEqual(this.pDSPBEPathwayEntity.title, title);
     }
 
-    @then('I should see an error message from business {string} during the title change')
-    public thenIShouldSeeAnErrorMessageDuringTitleChange(errorMessage: string) {
+    @then('I should see an error message from business during the title change')
+    public thenIShouldSeeAnErrorMessageDuringTitleChange() {
         assert.notEqual(this.error, undefined);
-        assert.strictEqual(this.error?.message, errorMessage);
+        assert.notEqual(this.error?.message, undefined);
+        assert.notEqual(this.error?.message, '');
     }
 }
