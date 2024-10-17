@@ -30,7 +30,7 @@ export default class PathwaySteps {
         const researchField = new ResearchFieldValueObjects(data.researchField);
 
         this.pDSPBEPathwayEntity = new PDSPBEPathwayEntity();
-        this.pDSPBEPathwayEntity.init({
+        this.pDSPBEPathwayEntity.initialize({
             id,
             title,
             description,
@@ -56,7 +56,7 @@ export default class PathwaySteps {
             this.pDSPBEPathwayEntity = new PDSPBEPathwayEntity();
             this.applyMethodSpy = sinon.spy(this.pDSPBEPathwayEntity, 'apply');
 
-            this.pDSPBEPathwayEntity.init({
+            this.pDSPBEPathwayEntity.initialize({
                 id,
                 title,
                 description,

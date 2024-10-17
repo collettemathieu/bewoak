@@ -8,6 +8,7 @@ Feature: Platform - Initialize a Pathway
     Then I should retrieve from the platform a pathway initialized with its data
       | title       | description      | researchField |
       | My Pathway  | A test pathway   | biology |
+    Then The platform should send an event to the event bus with the pathway initialized
     Then The pathway received from the platform should be have a unique identifier
     
     Examples:

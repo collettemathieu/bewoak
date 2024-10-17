@@ -8,7 +8,7 @@ import type { PDSPAInitializePathwayCommand } from '../command/initialize-pathwa
 export class PDSPAInitializePathwayService {
     constructor(private readonly commandBus: CommandBus) {}
 
-    init(pDSPAInitializePathwayCommand: PDSPAInitializePathwayCommand) {
+    initialize(pDSPAInitializePathwayCommand: PDSPAInitializePathwayCommand) {
         return this.commandBus.execute<PDSPAInitializePathwayCommand, PDSPBPPathwayPresenters>(pDSPAInitializePathwayCommand);
     }
 }

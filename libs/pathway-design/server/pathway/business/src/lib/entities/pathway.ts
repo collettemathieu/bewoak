@@ -29,7 +29,7 @@ export class PDSPBEPathwayEntity extends AggregateRoot {
         return this.#title?.value ?? '';
     }
 
-    init({ id, title, description, researchField }: InitializePathwayParams) {
+    initialize({ id, title, description, researchField }: InitializePathwayParams) {
         this.#description = description;
         this.#id = id;
         this.#researchField = researchField;
@@ -37,10 +37,10 @@ export class PDSPBEPathwayEntity extends AggregateRoot {
 
         this.apply(
             new PDSPBEPathwayInitializedEvent(this.id, {
-                pathwayId: this.id,
-                title: this.title,
                 description: this.description,
+                pathwayId: this.id,
                 researchField: this.researchField,
+                title: this.title,
             }),
             {
                 skipHandler: true,

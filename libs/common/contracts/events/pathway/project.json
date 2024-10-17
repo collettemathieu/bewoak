@@ -1,16 +1,16 @@
 {
-    "name": "pathway-design-server-pathway-application",
+    "name": "common-contracts-events-pathway",
     "$schema": "../../../../../node_modules/nx/schemas/project-schema.json",
-    "sourceRoot": "libs/pathway-design/server/pathway/application/src",
+    "sourceRoot": "libs/common/contracts/events/pathway/src",
     "projectType": "library",
     "targets": {
         "build": {
             "executor": "@nx/js:swc",
             "outputs": ["{options.outputPath}"],
             "options": {
-                "outputPath": "dist/libs/pathway-design/server/pathway/application",
-                "main": "libs/pathway-design/server/pathway/application/src/index.ts",
-                "tsConfig": "libs/pathway-design/server/pathway/application/tsconfig.lib.json",
+                "outputPath": "dist/libs/common/contracts/events/pathway",
+                "main": "libs/common/contracts/events/pathway/src/index.ts",
+                "tsConfig": "libs/common/contracts/events/pathway/tsconfig.lib.json",
                 "assets": []
             }
         },
@@ -25,20 +25,20 @@
                 "command": "bun run biome check --write {projectRoot} --config-path={projectRoot}/biome.json"
             }
         },
-        "test-feature": {
-            "executor": "nx:run-commands",
-            "options": {
-                "command": "TS_NODE_PROJECT='{projectRoot}/tsconfig.spec.json' bun run cucumber-js --config={projectRoot}/cucumber.js"
-            }
-        },
         "test": {
             "executor": "nx:run-commands",
             "options": {
                 "command": "bun test --coverage --coverage-dir=dist/reports/{projectRoot}/coverage --coverage-reporter=lcov {projectRoot}"
             }
+        },
+        "test-feature": {
+            "executor": "nx:run-commands",
+            "options": {
+                "command": "TS_NODE_PROJECT='{projectRoot}/tsconfig.spec.json' bun run cucumber-js --config={projectRoot}/cucumber.js"
+            }
         }
     },
-    "tags": ["type:pathway-design:server:pathway:application"],
+    "tags": ["type:common:configs:server:swagger"],
     "release": {
         "version": {
             "generatorOptions": {

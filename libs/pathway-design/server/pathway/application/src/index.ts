@@ -7,3 +7,4 @@ export { PDSPAChangeTitlePathwayCommand } from './lib/change-title/command/chang
 export { PDSPAChangeTitlePathwayCommandHandler } from './lib/change-title/command/change-title-pathway.command-handler';
 export { PDSPAChangeTitlePathwayService } from './lib/change-title/service/change-title-pathway.service';
 export { PDSPACUChangeTitlePathwayUseCase } from './lib/change-title/usecase/change-title-pathway.usecase';
+export { PDSPAInitializePathwayEventHandler } from './lib/initialize/event-handler/initialize-pathway.event-handler';

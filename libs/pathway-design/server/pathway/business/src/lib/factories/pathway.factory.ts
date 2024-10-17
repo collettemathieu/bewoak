@@ -20,7 +20,7 @@ export const pDSPBFPathwayFactory = ({
     const uuid = idValue ?? randomUUID();
     const id = new PathwayIdValueObject(uuid);
 
-    pathway.init({
+    pathway.initialize({
         id,
         title,
         description,

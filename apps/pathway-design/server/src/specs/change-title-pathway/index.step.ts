@@ -15,6 +15,7 @@ import {
 import type { DataTable } from '@cucumber/cucumber';
 import type { INestApplication } from '@nestjs/common';
 import { CqrsModule } from '@nestjs/cqrs';
+import { EventEmitterModule } from '@nestjs/event-emitter';
 import { Test } from '@nestjs/testing';
 import { binding, given, then, when } from 'cucumber-tsflow';
 import request from 'supertest';
@@ -36,6 +37,15 @@ class ControllerSteps {
                     .withPersistence(PDSPIPPathwayPersistenceInfrastructureModule.use(persistence))
                     .build(),
                 CqrsModule.forRoot(),
+                EventEmitterModule.forRoot({
+                    wildcard: false,
+                    delimiter: '.',
+                    newListener: false,
+                    removeListener: false,
+                    maxListeners: 10,
+                    verboseMemoryLeak: true,
+                    ignoreErrors: false,
+                }),
             ],
         }).compile();
 

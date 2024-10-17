@@ -31,7 +31,7 @@ export class InitializePathwayController {
     execute(
         @Body() initializePathwayRequestBodyDto: InitializePathwayRequestBodyDto
     ): Promise<InitializedPathwayResponseBodyDto> {
-        return this.pDSPAInitializePathwayService.init(
+        return this.pDSPAInitializePathwayService.initialize(
             new PDSPAInitializePathwayCommand(
                 initializePathwayRequestBodyDto.description,
                 initializePathwayRequestBodyDto.researchField,

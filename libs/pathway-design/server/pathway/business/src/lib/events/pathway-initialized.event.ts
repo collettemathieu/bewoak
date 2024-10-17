@@ -6,6 +6,11 @@ export class PDSPBEPathwayInitializedEvent implements CEEvent {
 
     constructor(
         public readonly aggregateId: string,
-        public readonly payload: Record<string, unknown>
+        public readonly payload: {
+            description: string;
+            pathwayId: string;
+            researchField: string;
+            title: string;
+        }
     ) {}
 }
