@@ -1,6 +1,5 @@
 {
     "compilerOptions": {
-        "disableReferencedProjectLoad": true,
         "forceConsistentCasingInFileNames": true,
         "incremental": true,
         "module": "es2022",

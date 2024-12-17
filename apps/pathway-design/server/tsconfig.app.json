@@ -1,6 +1,5 @@
 {
     "compilerOptions": {
-        "disableReferencedProjectLoad": true,
         "emitDecoratorMetadata": true,
         "forceConsistentCasingInFileNames": true,
         "incremental": true,
