@@ -1,17 +1,22 @@
 {
-    "extends": "./tsconfig.json",
     "compilerOptions": {
-        "outDir": "../../../dist/out-tsc",
-        "module": "ES2022",
-        "types": ["node"],
+        "disableReferencedProjectLoad": true,
         "emitDecoratorMetadata": true,
-        "target": "es2022",
-        "strictNullChecks": true,
-        "noImplicitAny": true,
-        "strictBindCallApply": true,
         "forceConsistentCasingInFileNames": true,
-        "noFallthroughCasesInSwitch": true
+        "incremental": true,
+        "module": "ES2022",
+        "noFallthroughCasesInSwitch": true,
+        "noImplicitAny": true,
+        "noImplicitThis": true,
+        "outDir": "../../../dist/out-tsc",
+        "strict": true,
+        "strictBindCallApply": true,
+        "strictNullChecks": true,
+        "strictPropertyInitialization": true,
+        "target": "es2022",
+        "types": ["node"]
     },
     "exclude": ["src/**/*.spec.ts", "src/**/*.test.ts", "src/**/*.step.ts"],
+    "extends": "./tsconfig.json",
     "include": ["src/**/*.ts"]
 }

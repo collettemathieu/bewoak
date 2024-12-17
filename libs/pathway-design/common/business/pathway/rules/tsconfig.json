@@ -1,14 +1,20 @@
 {
-    "extends": "../../../../../../tsconfig.base.json",
     "compilerOptions": {
-        "module": "es2022",
+        "disableReferencedProjectLoad": true,
         "forceConsistentCasingInFileNames": true,
-        "strict": true,
+        "incremental": true,
+        "module": "es2022",
+        "noFallthroughCasesInSwitch": true,
+        "noImplicitAny": true,
         "noImplicitOverride": true,
-        "noPropertyAccessFromIndexSignature": true,
         "noImplicitReturns": true,
-        "noFallthroughCasesInSwitch": true
+        "noImplicitThis": true,
+        "noPropertyAccessFromIndexSignature": true,
+        "strict": true,
+        "strictNullChecks": true,
+        "strictPropertyInitialization": true
     },
+    "extends": "../../../../../../tsconfig.base.json",
     "files": [],
     "include": [],
     "references": [

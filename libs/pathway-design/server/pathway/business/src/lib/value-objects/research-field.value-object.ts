@@ -18,8 +18,4 @@ export class ResearchFieldValueObjects {
     toString() {
         return this.researchField;
     }
-
-    private isEmpty(researchField: string | undefined) {
-        return researchField === undefined || researchField.length === 0;
-    }
 }
