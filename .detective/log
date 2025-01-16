@@ -1,14 +1,167 @@
-"Mathieu Collette <collettemathieu@jsonata.com>,Thu Oct 17 12:05:45 2024 +0200	fd282696dc8ac4c83007497b5bfdfaee134e728b,refactor: extract business rules"
-4	1	libs/pathway-design/common/business/pathway/rules/src/index.ts
-19	0	libs/pathway-design/common/business/pathway/rules/src/lib/description/description.rules.ts
-52	0	libs/pathway-design/common/business/pathway/rules/src/lib/description/description.spec.ts
-10	0	libs/pathway-design/common/business/pathway/rules/src/lib/pathway-id/pathway-id.rules.ts
-22	0	libs/pathway-design/common/business/pathway/rules/src/lib/pathway-id/pathway-id.spec.ts
-19	0	libs/pathway-design/common/business/pathway/rules/src/lib/research-field/research-field.rules.ts
-52	0	libs/pathway-design/common/business/pathway/rules/src/lib/research-field/research-field.spec.ts
-13	6	libs/pathway-design/common/business/pathway/rules/src/lib/title/title.rules.ts
-26	12	libs/pathway-design/common/business/pathway/rules/src/lib/title/title.spec.ts
-4	3	libs/pathway-design/common/business/pathway/rules/src/lib/types.ts
+"Mathieu Collette <collettemathieu@jsonata.com>,Thu Jan 16 12:27:47 2025 +0100"
+5	1	.gitignore
+-	-	bun.lockb
+6	0	libs/pathway-design/common/pathway/business/rules/project.json
+3	7	libs/pathway-design/common/pathway/business/rules/src/lib/description/description.rules.ts
+8	13	libs/pathway-design/common/pathway/business/rules/src/lib/description/description.spec.ts
+24	0	libs/pathway-design/common/pathway/business/rules/stryker.config.json
+6	2	package.json
+
+"Mathieu Collette <collettemathieu@jsonata.com>,Thu Jan 16 09:39:58 2025 +0100"
+0	0	{libs/search/server/pathway => apps/search/client}/.gitkeep
+17	0	apps/search/server/biome.json
+11	0	apps/search/server/cucumber.js
+42	0	apps/search/server/project.json
+12	0	apps/search/server/src/app/app.module.ts
+0	0	apps/search/{.keep => server/src/assets/.gitkeep}
+6	0	apps/search/server/src/environment/env.schema.ts
+32	0	apps/search/server/src/main.ts
+5	0	apps/search/server/src/specs/index-new-pathway/index.feature
+42	0	apps/search/server/src/specs/index-new-pathway/index.step.ts
+10	0	apps/search/server/src/specs/read-many-pathway/index.feature
+37	0	apps/search/server/src/specs/read-many-pathway/index.step.ts
+17	0	apps/search/server/tsconfig.app.json
+16	0	apps/search/server/tsconfig.json
+8	0	apps/search/server/tsconfig.spec.json
+20	0	apps/search/server/webpack.config.js
+1	0	libs/pathway-design/server/pathway/application/src/lib/change-title/usecase/change-title-pathway.usecase.ts
+1	0	libs/pathway-design/server/pathway/application/src/lib/initialize/usecase/initialize-pathway.usecase.ts
+22	0	libs/search/server/pathway/application/.swcrc
+17	0	libs/search/server/pathway/application/biome.json
+11	0	libs/search/server/pathway/application/cucumber.js
+9	0	libs/search/server/pathway/application/package.json
+50	0	libs/search/server/pathway/application/project.json
+0	0	libs/search/server/pathway/application/src/index.ts
+0	0	libs/search/server/pathway/application/src/lib/index-new-pathway/Anti-corruption-layer/.gitkeep
+0	0	libs/search/server/pathway/application/src/lib/index-new-pathway/Service/.gitkeep
+8	0	libs/search/server/pathway/application/src/lib/index-new-pathway/index-new-pathway-application.module.ts
+12	0	libs/search/server/pathway/application/src/lib/index-new-pathway/spec/index-new-pathway.feature
+106	0	libs/search/server/pathway/application/src/lib/index-new-pathway/spec/index-new-pathway.step.ts
+0	0	libs/search/server/pathway/application/src/lib/read-many-pathway/Controller/.gitkeep
+0	0	libs/search/server/pathway/application/src/lib/read-many-pathway/Dtos/.gitkeep
+0	0	libs/search/server/pathway/application/src/lib/read-many-pathway/Service/.gitkeep
+8	0	libs/search/server/pathway/application/src/lib/read-many-pathway/read-many-pathway-application.module.ts
+27	0	libs/search/server/pathway/application/tsconfig.json
+11	0	libs/search/server/pathway/application/tsconfig.lib.json
+10	0	libs/search/server/pathway/application/tsconfig.spec.json
+22	0	libs/search/server/pathway/infrastructure/.swcrc
+17	0	libs/search/server/pathway/infrastructure/biome.json
+11	0	libs/search/server/pathway/infrastructure/cucumber.js
+9	0	libs/search/server/pathway/infrastructure/package.json
+50	0	libs/search/server/pathway/infrastructure/project.json
+3	0	libs/search/server/pathway/infrastructure/src/index.ts
+82	0	libs/search/server/pathway/infrastructure/src/lib/persistence/add/in-memory/add-pathway-in-memory.persistence.spec.ts
+28	0	libs/search/server/pathway/infrastructure/src/lib/persistence/add/in-memory/add-pathway-in-memory.persistence.ts
+0	0	libs/search/server/pathway/infrastructure/src/lib/persistence/add/orm/.keep
+8	0	libs/search/server/pathway/infrastructure/src/lib/persistence/common/in-memory/entities/in-memory-pathway.entity.ts
+24	0	libs/search/server/pathway/infrastructure/src/lib/persistence/common/in-memory/mappers/in-memory-pathway.mapper.ts
+17	0	libs/search/server/pathway/infrastructure/src/lib/persistence/common/in-memory/repositories/in-memory-pathway.repository.ts
+0	0	libs/search/server/pathway/infrastructure/src/lib/persistence/common/orm/.keep
+19	0	libs/search/server/pathway/infrastructure/src/lib/persistence/pathway-persistence-infrastructure.constants.ts
+19	0	libs/search/server/pathway/infrastructure/src/lib/persistence/pathway-persistence-infrastructure.module.ts
+1	0	libs/search/server/pathway/infrastructure/src/lib/persistence/pathway-persistence-infrastructure.types.ts
+27	0	libs/search/server/pathway/infrastructure/tsconfig.json
+11	0	libs/search/server/pathway/infrastructure/tsconfig.lib.json
+10	0	libs/search/server/pathway/infrastructure/tsconfig.spec.json
+22	0	libs/search/server/pathway/models/.swcrc
+17	0	libs/search/server/pathway/models/biome.json
+11	0	libs/search/server/pathway/models/cucumber.js
+9	0	libs/search/server/pathway/models/package.json
+50	0	libs/search/server/pathway/models/project.json
+5	0	libs/search/server/pathway/models/src/index.ts
+8	0	libs/search/server/pathway/models/src/lib/entities/pathway.ts
+7	0	libs/search/server/pathway/models/src/lib/ports/persistences/add/add-pathway-persitence.port.ts
+27	0	libs/search/server/pathway/models/tsconfig.json
+11	0	libs/search/server/pathway/models/tsconfig.lib.json
+10	0	libs/search/server/pathway/models/tsconfig.spec.json
+1	0	package.json
+4	1	tsconfig.base.json
+
+"Mathieu Collette <collettemathieu@jsonata.com>,Tue Dec 17 18:33:27 2024 +0100"
+0	1	apps/pathway-design/server/tsconfig.app.json
+0	1	libs/common/configs/server/env/tsconfig.json
+0	1	libs/common/configs/server/swagger/tsconfig.json
+0	1	libs/common/contracts/events/pathway/tsconfig.json
+0	1	libs/common/events/tsconfig.json
+0	1	libs/common/tools/server/http-exceptions/tsconfig.json
+0	1	libs/pathway-design/common/pathway/business/rules/tsconfig.json
+0	1	libs/pathway-design/server/pathway/application/tsconfig.json
+0	1	libs/pathway-design/server/pathway/business/tsconfig.json
+0	1	libs/pathway-design/server/pathway/infrastructure/tsconfig.json
+0	1	libs/pathway-design/server/pathway/interface-adapters/tsconfig.json
+0	1	libs/pathway-design/server/pathway/presenters/tsconfig.json
+
+"Mathieu Collette <collettemathieu@jsonata.com>,Tue Dec 17 18:27:51 2024 +0100"
+0	0	libs/pathway-design/server/pathway/application/src/lib/change-title/specs/{change-title-pathway.usecase.feature => change-title-pathway.feature}
+0	0	libs/pathway-design/server/pathway/application/src/lib/change-title/specs/{change-title-pathway.usecase.step.ts => change-title-pathway.step.ts}
+0	0	libs/pathway-design/server/pathway/application/src/lib/initialize/specs/{initialize-pathway.usecase.feature => initialize-pathway.feature}
+0	0	libs/pathway-design/server/pathway/application/src/lib/initialize/specs/{initialize-pathway.usecase.step.ts => initialize-pathway.step.ts}
+0	0	libs/pathway-design/server/pathway/business/src/lib/specs/{change-name => change-title}/change-title-pathway.feature
+0	0	libs/pathway-design/server/pathway/business/src/lib/specs/{change-name => change-title}/change-title-pathway.step.ts
+
+"Mathieu Collette <collettemathieu@jsonata.com>,Tue Dec 17 09:39:03 2024 +0100"
+13	8	apps/pathway-design/server/tsconfig.app.json
+11	5	libs/common/configs/server/env/tsconfig.json
+11	5	libs/common/configs/server/swagger/tsconfig.json
+11	5	libs/common/contracts/events/pathway/tsconfig.json
+11	5	libs/common/events/tsconfig.json
+11	5	libs/common/tools/server/http-exceptions/tsconfig.json
+11	5	libs/pathway-design/common/pathway/business/rules/tsconfig.json
+11	5	libs/pathway-design/server/pathway/application/tsconfig.json
+0	4	libs/pathway-design/server/pathway/business/src/lib/value-objects/research-field.value-object.ts
+11	5	libs/pathway-design/server/pathway/business/tsconfig.json
+11	5	libs/pathway-design/server/pathway/infrastructure/tsconfig.json
+11	5	libs/pathway-design/server/pathway/interface-adapters/tsconfig.json
+11	5	libs/pathway-design/server/pathway/presenters/tsconfig.json
+7	2	tsconfig.base.json
+
+"Mathieu Collette <collettemathieu@jsonata.com>,Thu Oct 17 18:19:43 2024 +0200"
+1	1	.detective/hash
+135	0	.detective/log
+0	0	apps/pathway-design/client/.gitkeep
+10	1	apps/pathway-design/server/src/app/app.module.ts
+10	0	apps/pathway-design/server/src/specs/change-title-pathway/index.step.ts
+1	0	apps/pathway-design/server/src/specs/initialize-pathway/index.feature
+35	0	apps/pathway-design/server/src/specs/initialize-pathway/index.step.ts
+-	-	bun.lockb
+22	0	libs/common/contracts/events/pathway/.swcrc
+17	0	libs/common/contracts/events/pathway/biome.json
+11	0	libs/common/contracts/events/pathway/cucumber.js
+9	0	libs/common/contracts/events/pathway/package.json
+50	0	libs/common/contracts/events/pathway/project.json
+1	0	libs/common/contracts/events/pathway/src/index.ts
+1	0	libs/common/contracts/events/pathway/src/lib/initialized/pathway-initialized.constants.ts
+12	0	libs/common/contracts/events/pathway/src/lib/initialized/pathway-initialized.event.ts
+22	0	libs/common/contracts/events/pathway/tsconfig.json
+11	0	libs/common/contracts/events/pathway/tsconfig.lib.json
+10	0	libs/common/contracts/events/pathway/tsconfig.spec.json
+0	0	libs/common/contracts/http/.gitkeep
+1	1	libs/pathway-design/server/pathway/application/project.json
+1	0	libs/pathway-design/server/pathway/application/src/index.ts
+20	0	libs/pathway-design/server/pathway/application/src/lib/initialize/event-handler/initialize-pathway.event-handler.ts
+1	1	libs/pathway-design/server/pathway/application/src/lib/initialize/service/initialize-pathway.service.ts
+1	0	libs/pathway-design/server/pathway/business/src/index.ts
+3	3	libs/pathway-design/server/pathway/business/src/lib/entities/pathway.ts
+6	1	libs/pathway-design/server/pathway/business/src/lib/events/pathway-initialized.event.ts
+1	1	libs/pathway-design/server/pathway/business/src/lib/factories/pathway.factory.ts
+2	2	libs/pathway-design/server/pathway/business/src/lib/specs/initialize/initialize-pathway.step.ts
+1	1	libs/pathway-design/server/pathway/interface-adapters/src/lib/initialize/controller/initialize-pathway.controller.ts
+7	1	libs/pathway-design/server/pathway/interface-adapters/src/lib/initialize/initialize-pathway-interface-adapters.module.ts
+4	0	libs/pathway-design/server/pathway/interface-adapters/src/lib/initialize/routes/initialize-pathway.route.ts
+1	0	package.json
+1	0	tsconfig.base.json
+
+"Mathieu Collette <collettemathieu@jsonata.com>,Thu Oct 17 12:05:45 2024 +0200"
+4	1	libs/pathway-design/common/pathway/business/rules/src/index.ts
+19	0	libs/pathway-design/common/pathway/business/rules/src/lib/description/description.rules.ts
+52	0	libs/pathway-design/common/pathway/business/rules/src/lib/description/description.spec.ts
+10	0	libs/pathway-design/common/pathway/business/rules/src/lib/pathway-id/pathway-id.rules.ts
+22	0	libs/pathway-design/common/pathway/business/rules/src/lib/pathway-id/pathway-id.spec.ts
+19	0	libs/pathway-design/common/pathway/business/rules/src/lib/research-field/research-field.rules.ts
+52	0	libs/pathway-design/common/pathway/business/rules/src/lib/research-field/research-field.spec.ts
+13	6	libs/pathway-design/common/pathway/business/rules/src/lib/title/title.rules.ts
+26	12	libs/pathway-design/common/pathway/business/rules/src/lib/title/title.spec.ts
+4	3	libs/pathway-design/common/pathway/business/rules/src/lib/types.ts
 0	44	libs/pathway-design/server/pathway/business/src/lib/factories/pathway.factory.spec.ts
 2	2	libs/pathway-design/server/pathway/business/src/lib/specs/change-name/change-title-pathway.feature
 4	3	libs/pathway-design/server/pathway/business/src/lib/specs/change-name/change-title-pathway.step.ts
@@ -23,23 +176,23 @@
 3	2	libs/pathway-design/server/pathway/business/src/lib/value-objects/title.value-object.spec.ts
 3	3	libs/pathway-design/server/pathway/business/src/lib/value-objects/title.value-object.ts
 
-"Mathieu Collette <collettemathieu@jsonata.com>,Mon Oct 14 18:42:15 2024 +0200	84773010de01b55d429b7696c29c3056e9aaa362,fix: business rules"
-4	4	libs/pathway-design/common/business/pathway/rules/project.json
-2	2	libs/pathway-design/common/business/pathway/rules/src/lib/title/title.rules.ts
+"Mathieu Collette <collettemathieu@jsonata.com>,Mon Oct 14 18:42:15 2024 +0200"
+4	4	libs/pathway-design/common/pathway/business/rules/project.json
+2	2	libs/pathway-design/common/pathway/business/rules/src/lib/title/title.rules.ts
 
-"Mathieu Collette <collettemathieu@jsonata.com>,Mon Oct 14 18:30:13 2024 +0200	c12202b6e7f740b6a3fdf59c61b4b05f22531e92,refactor: pathway rules"
-22	0	libs/pathway-design/common/business/pathway/rules/.swcrc
-17	0	libs/pathway-design/common/business/pathway/rules/biome.json
-11	0	libs/pathway-design/common/business/pathway/rules/cucumber.js
-9	0	libs/pathway-design/common/business/pathway/rules/package.json
-50	0	libs/pathway-design/common/business/pathway/rules/project.json
-1	0	libs/pathway-design/common/business/pathway/rules/src/index.ts
-12	0	libs/pathway-design/common/business/pathway/rules/src/lib/title/title.rules.ts
-38	0	libs/pathway-design/common/business/pathway/rules/src/lib/title/title.spec.ts
-6	0	libs/pathway-design/common/business/pathway/rules/src/lib/types.ts
-22	0	libs/pathway-design/common/business/pathway/rules/tsconfig.json
-11	0	libs/pathway-design/common/business/pathway/rules/tsconfig.lib.json
-10	0	libs/pathway-design/common/business/pathway/rules/tsconfig.spec.json
+"Mathieu Collette <collettemathieu@jsonata.com>,Mon Oct 14 18:30:13 2024 +0200"
+22	0	libs/pathway-design/common/pathway/business/rules/.swcrc
+17	0	libs/pathway-design/common/pathway/business/rules/biome.json
+11	0	libs/pathway-design/common/pathway/business/rules/cucumber.js
+9	0	libs/pathway-design/common/pathway/business/rules/package.json
+50	0	libs/pathway-design/common/pathway/business/rules/project.json
+1	0	libs/pathway-design/common/pathway/business/rules/src/index.ts
+12	0	libs/pathway-design/common/pathway/business/rules/src/lib/title/title.rules.ts
+38	0	libs/pathway-design/common/pathway/business/rules/src/lib/title/title.spec.ts
+6	0	libs/pathway-design/common/pathway/business/rules/src/lib/types.ts
+22	0	libs/pathway-design/common/pathway/business/rules/tsconfig.json
+11	0	libs/pathway-design/common/pathway/business/rules/tsconfig.lib.json
+10	0	libs/pathway-design/common/pathway/business/rules/tsconfig.spec.json
 1	1	libs/pathway-design/server/pathway/application/src/index.ts
 1	1	libs/pathway-design/server/pathway/application/src/lib/initialize/service/initialize-pathway.service.ts
 1	1	libs/pathway-design/server/pathway/business/src/lib/value-objects/description.value-object.ts
@@ -52,7 +205,7 @@
 0	0	libs/search/{.keep => server/pathway/.gitkeep}
 3	0	tsconfig.base.json
 
-"Mathieu Collette <collettemathieu@jsonata.com>,Fri Oct 11 21:06:03 2024 +0200	a94f94a17feedff2481a42013c43c3eb097790d6,refactor: env variables"
+"Mathieu Collette <collettemathieu@jsonata.com>,Fri Oct 11 21:06:03 2024 +0200"
 1	1	libs/pathway-design/server/pathway/application/src/index.ts
 1	1	libs/pathway-design/server/pathway/application/src/lib/initialize/service/initialize-pathway.service.ts
 3	5	libs/pathway-design/server/pathway/infrastructure/src/index.ts
@@ -66,7 +219,7 @@
 2	9	libs/pathway-design/server/pathway/presenters/src/lib/pathway-presenters.module.ts
 1	0	libs/pathway-design/server/pathway/presenters/src/lib/pathway-presenters.types.ts
 
-"Mathieu Collette <collettemathieu@jsonata.com>,Fri Oct 11 18:10:50 2024 +0200	20f4ced81196ef5adf8ccfbfdcba870df16422cc,feat: choice presenter persistence"
+"Mathieu Collette <collettemathieu@jsonata.com>,Fri Oct 11 18:10:50 2024 +0200"
 36	17	apps/pathway-design/server/src/app/app.module.ts
 10	0	apps/pathway-design/server/src/environment/env.schema.ts
 27	30	apps/pathway-design/server/src/main.ts
@@ -110,10 +263,10 @@
 3	2	package.json
 2	0	tsconfig.base.json
 
-"Mathieu Collette <collettemathieu@jsonata.com>,Wed Oct 9 19:02:42 2024 +0200	bf2d801496fa76753b3d70350c4ab3a5b8efe71c,refactor: formatting"
+"Mathieu Collette <collettemathieu@jsonata.com>,Wed Oct 9 19:02:42 2024 +0200"
 8	26	.detective/config.json
 
-"Mathieu Collette <collettemathieu@jsonata.com>,Wed Oct 9 19:02:07 2024 +0200	6313b5bc062895cfb152c14a3b1d880c2369a8eb,refactor: feature tests"
+"Mathieu Collette <collettemathieu@jsonata.com>,Wed Oct 9 19:02:07 2024 +0200"
 25	50	.detective/config.json
 1	1	.detective/hash
 225	417	.detective/log
@@ -133,7 +286,7 @@
 4	4	libs/pathway-design/server/pathway/business/src/lib/specs/initialize/initialize-pathway.step.ts
 4	2	package.json
 
-"Mathieu Collette <collettemathieu@jsonata.com>,Sat Sep 14 15:29:45 2024 +0200	3e4a5edcc2aa4cee558971e8876d01ad672d91a0,feat: implement change title"
+"Mathieu Collette <collettemathieu@jsonata.com>,Sat Sep 14 15:29:45 2024 +0200"
 1	1	.hooks/commit-msg
 2	2	apps/pathway-design/server/cucumber.js
 11	8	apps/pathway-design/server/src/app/app.module.ts
@@ -239,7 +392,7 @@
 3	1	libs/pathway-design/server/pathway/presenters/tsconfig.spec.json
 5	12	tsconfig.base.json
 
-"Mathieu Collette <collettemathieu@jsonata.com>,Wed Jul 10 21:38:54 2024 +0200	7a093ab8773a53a2b6646fa63fb8b3afd934016f,feat: first implementation of pathway design"
+"Mathieu Collette <collettemathieu@jsonata.com>,Wed Jul 10 21:38:54 2024 +0200"
 52	0	.detective/config.json
 1	0	.detective/hash
 483	0	.detective/log
@@ -396,7 +549,7 @@
 14	0	project.json
 40	9	tsconfig.base.json
 
-"Mathieu Collette <collettemathieu@jsonata.com>,Wed Jul 10 21:37:38 2024 +0200	70ebc0d9cb3e4058564c663cb2c2bad85a2c4176,Initial commit"
+"Mathieu Collette <collettemathieu@jsonata.com>,Wed Jul 10 21:37:38 2024 +0200"
 13	0	.editorconfig
 37	0	.github/workflows/ci.yml
 42	0	.gitignore

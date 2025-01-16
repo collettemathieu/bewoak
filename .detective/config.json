@@ -1,9 +1,14 @@
 {
-    "scopes": ["apps/pathway-design/server", "libs/common/events", "libs/common/tools", "libs/pathway-design/server/pathway"],
-    "groups": ["apps/pathway-design", "apps", "libs/common", "libs/pathway-design/server", "libs/pathway-design", "libs"],
+    "scopes": ["apps/pathway-design", "libs/common", "libs/pathway-design"],
+    "groups": ["apps", "libs"],
     "entries": [],
+    "filter": {
+        "files": [],
+        "logs": []
+    },
+    "aliases": {},
     "teams": {
-        "example-team-a": ["John Doe", "Jane Doe"],
-        "example-team-b": ["Max Muster", "Susi Sorglos"]
+        "alpha": ["Mathieu Collette"],
+        "beta": ["Personne Inconnue"]
     }
 }
