@@ -43,3 +43,7 @@ Thumbs.db
 
 # Detective
 .detective/log
+
+# stryker temp files
+.stryker-tmp
+reports

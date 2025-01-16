@@ -2,13 +2,9 @@ import type { Rules } from '../types';
 
 export const pDCBPRDescriptionRules: Rules<string | null | undefined> = {
     isValid: function (value) {
-        return (
-            value !== undefined &&
-            value !== null &&
-            value.trim().length !== 0 &&
-            value.trim().length >= this.minLength &&
-            value.trim().length <= this.maxLength
-        );
+        const valueCleaned = value?.trim();
+
+        return valueCleaned !== undefined && valueCleaned.length >= this.minLength && valueCleaned.length <= this.maxLength;
     },
     isRequired: true,
     maxLength: 100,
