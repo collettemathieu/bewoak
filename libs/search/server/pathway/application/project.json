@@ -1,0 +1,50 @@
+{
+    "name": "search-server-pathway-application",
+    "$schema": "../../../../../node_modules/nx/schemas/project-schema.json",
+    "sourceRoot": "libs/search/server/pathway/application/src",
+    "projectType": "library",
+    "targets": {
+        "build": {
+            "executor": "@nx/js:swc",
+            "outputs": ["{options.outputPath}"],
+            "options": {
+                "outputPath": "dist/libs/search/server/pathway/application",
+                "main": "libs/search/server/pathway/application/src/index.ts",
+                "tsConfig": "libs/search/server/pathway/application/tsconfig.lib.json",
+                "assets": []
+            }
+        },
+        "nx-release-publish": {
+            "options": {
+                "packageRoot": "dist/{projectRoot}"
+            }
+        },
+        "lint": {
+            "executor": "nx:run-commands",
+            "options": {
+                "command": "bun run biome check --write {projectRoot} --config-path={projectRoot}/biome.json"
+            }
+        },
+        "test-feature": {
+            "executor": "nx:run-commands",
+            "options": {
+                "command": "TS_NODE_PROJECT='{projectRoot}/tsconfig.spec.json' bun run cucumber-js --config={projectRoot}/cucumber.js"
+            }
+        },
+        "test": {
+            "executor": "nx:run-commands",
+            "options": {
+                "command": "bun test --coverage --coverage-dir=dist/reports/{projectRoot}/coverage --coverage-reporter=lcov {projectRoot}"
+            }
+        }
+    },
+    "tags": ["type:search:server:pathway:application"],
+    "release": {
+        "version": {
+            "generatorOptions": {
+                "packageRoot": "dist/{projectRoot}",
+                "currentVersionResolver": "git-tag"
+            }
+        }
+    }
+}

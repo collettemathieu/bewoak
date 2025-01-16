@@ -17,6 +17,7 @@ export class PDSPACUChangeTitlePathwayUseCase {
             title: string;
         }
     ) {
+        // TODO: pattern transactional outbox should be implemented here => https://microservices.io/patterns/data/transactional-outbox.html
         const pathwayFromPersistence = await pDSPBPChangeTitlePathwayPersistencePort.changeTitle(pathwayId, title);
 
         eventPublisher.mergeObjectContext(pathwayFromPersistence);

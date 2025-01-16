@@ -64,6 +64,7 @@
         "nx": "nx",
         "postinstall": "chmod +x .hooks/* && git config core.hooksPath .hooks",
         "start:pathway-design:app": "PORT=3000 GLOBAL_PREFIX=api PERSISTENCE_DRIVER=inMemory PRESENTER_DRIVER=toJson nx serve pathway-design-server",
+        "start:search:app": "PORT=3000 GLOBAL_PREFIX=api nx serve search-server",
         "test": "nx run-many --target=test --parallel=4",
         "test:feature": "nx run-many --target=test-feature --parallel=4",
         "tools:autocanon": "autocannon -c 10 -d 10s http://localhost:3000/api/pathway/initialize",

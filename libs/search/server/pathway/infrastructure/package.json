@@ -1,0 +1,9 @@
+{
+    "name": "@bewoak/search-server-pathway-infrastructure",
+    "version": "0.0.1",
+    "dependencies": {
+        "@swc/helpers": "~0.5.11"
+    },
+    "main": "./src/index.js",
+    "typings": "./src/index.d.ts"
+}
