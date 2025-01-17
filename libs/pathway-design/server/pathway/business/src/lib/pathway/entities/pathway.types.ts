@@ -9,3 +9,8 @@ export interface InitializePathwayParams {
     researchField: PathwayResearchFieldValueObject;
     title: PathwayTitleValueObject;
 }
+
+export interface AddArticleParams {
+    articleTitle: string;
+    resourceUrl: string;
+}

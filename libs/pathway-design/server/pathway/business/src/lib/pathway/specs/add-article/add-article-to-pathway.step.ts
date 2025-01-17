@@ -1,9 +1,6 @@
 import type { DataTable } from '@cucumber/cucumber';
 import { binding, given, then, when } from 'cucumber-tsflow';
 import { strict as assert } from 'node:assert';
-import { ArticleEntity } from '../../../article/entities/article';
-import { ArticleTitleValueObject } from '../../../article/value-objects/article-title.value-object';
-import { ResourceUrlValueObject } from '../../../resource/value-objects/resource-url.value-object';
 import type { PDSPBEPathwayEntity } from '../../entities/pathway';
 import { pDSPBFPathwayFactory } from '../../factories/pathway.factory';
 
@@ -39,12 +36,10 @@ export default class PathwaySteps {
         }
 
         try {
-            const article = new ArticleEntity();
-            article.initialize({
-                title: new ArticleTitleValueObject(data.titleOfArticle),
-                url: new ResourceUrlValueObject(data.urlOfResource),
+            this.pDSPBEPathwayEntity.addArticle({
+                articleTitle: data.titleOfArticle,
+                resourceUrl: data.urlOfResource,
             });
-            this.pDSPBEPathwayEntity.addArticle(article);
         } catch (error) {
             this.error = error as Error;
         }
@@ -65,5 +60,12 @@ export default class PathwaySteps {
         assert.equal(this.pDSPBEPathwayEntity.articleList.length, 1);
         assert.equal(this.pDSPBEPathwayEntity.articleList[0].title, data.titleOfArticle);
         assert.equal(this.pDSPBEPathwayEntity.articleList[0].resource?.url, data.urlOfResource);
+    }
+
+    @then('I should see an error message from business during the article addition')
+    public thenIShouldSeeAnErrorMessageDuringArticleAddition() {
+        assert.notEqual(this.error, undefined);
+        assert.notEqual(this.error?.message, undefined);
+        assert.notEqual(this.error?.message, '');
     }
 }
