@@ -14,6 +14,17 @@
     },
     "editor.defaultFormatter": "biomejs.biome",
     "editor.formatOnSave": true,
+    "search.exclude": {
+        "**/.detective": true,
+        "**/.git": true,
+        "**/.nx": true,
+        "**/bun.lockb": true,
+        "**/coverage": true,
+        "**/dist": true,
+        "**/node_modules": true,
+        "**/reports": true,
+        "**/tmp": true
+    },
     "workbench.colorCustomizations": {
         "tree.indentGuidesStroke": "#05ef3c"
     },

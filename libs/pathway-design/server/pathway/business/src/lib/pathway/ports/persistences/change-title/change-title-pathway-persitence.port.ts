@@ -1,4 +1,4 @@
-import type { PDSPBEPathwayEntity } from '../../../entities/pathway.entity';
+import type { PDSPBEPathwayEntity } from '../../../entities/pathway';
 
 export interface PDSPBPChangeTitlePathwayPersistencePort {
     changeTitle: (pathwayId: string, title: string) => Promise<PDSPBEPathwayEntity>;

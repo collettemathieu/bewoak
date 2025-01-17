@@ -1,4 +1,4 @@
-import type { PDSPBEPathwayEntity } from '../../../entities/pathway.entity';
+import type { PDSPBEPathwayEntity } from '../../../entities/pathway';
 
 export interface PDSPBPInitializePathwayPersistencePort {
     save: (pDSPBEPathwayEntity: PDSPBEPathwayEntity) => Promise<PDSPBEPathwayEntity>;

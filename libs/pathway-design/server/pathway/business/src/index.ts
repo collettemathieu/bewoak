@@ -1,4 +1,4 @@
-export { PDSPBEPathwayEntity } from './lib/pathway/entities/pathway.entity';
+export { PDSPBEPathwayEntity } from './lib/pathway/entities/pathway';
 export { PDSPBEPathwayInitializedEvent } from './lib/pathway/events/pathway-initialized.event';
 export { pDSPBFPathwayFactory } from './lib/pathway/factories/pathway.factory';
 export {

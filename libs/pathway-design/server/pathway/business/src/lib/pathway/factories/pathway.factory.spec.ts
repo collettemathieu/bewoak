@@ -1,5 +1,5 @@
 import { describe, expect, it } from 'bun:test';
-import { PDSPBEPathwayEntity } from '../entities/pathway.entity';
+import { PDSPBEPathwayEntity } from '../entities/pathway';
 import { pDSPBFPathwayFactory } from './pathway.factory';
 import type { PathwayFactoryParams } from './pathway.factory.types';
 

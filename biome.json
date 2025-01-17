@@ -4,36 +4,11 @@
         "attributePosition": "auto",
         "enabled": true,
         "formatWithErrors": false,
-        "ignore": ["dist", "coverage", ".nx", ".vscode", "node_modules", "tmp", ".angular"],
+        "ignore": [".angular", ".detective", ".nx", ".vscode", "coverage", "dist", "node_modules", "reports", "tmp"],
         "indentStyle": "space",
         "indentWidth": 4,
         "lineEnding": "lf",
         "lineWidth": 130
-    },
-    "linter": {
-        "enabled": true,
-        "ignore": ["dist", "coverage", ".nx", ".vscode", "node_modules", "tmp", ".angular"],
-        "rules": {
-            "recommended": true,
-            "suspicious": {
-                "noConsoleLog": "error"
-            },
-            "correctness": {
-                "noUnusedVariables": {
-                    "level": "error",
-                    "fix": "none"
-                },
-                "noVoidTypeReturn": {
-                    "level": "error"
-                }
-            },
-            "complexity": {
-                "noForEach": "off"
-            }
-        }
-    },
-    "organizeImports": {
-        "enabled": true
     },
     "javascript": {
         "formatter": {
@@ -59,5 +34,30 @@
             "allowComments": false,
             "allowTrailingCommas": true
         }
+    },
+    "linter": {
+        "enabled": true,
+        "ignore": ["dist", "coverage", ".nx", ".vscode", "node_modules", "tmp", ".angular"],
+        "rules": {
+            "complexity": {
+                "noForEach": "off"
+            },
+            "correctness": {
+                "noUnusedVariables": {
+                    "fix": "none",
+                    "level": "error"
+                },
+                "noVoidTypeReturn": {
+                    "level": "error"
+                }
+            },
+            "recommended": true,
+            "suspicious": {
+                "noConsoleLog": "error"
+            }
+        }
+    },
+    "organizeImports": {
+        "enabled": true
     }
 }

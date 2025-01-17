@@ -2,7 +2,7 @@ import type { DataTable } from '@cucumber/cucumber';
 import { binding, given, then, when } from 'cucumber-tsflow';
 import { strict as assert } from 'node:assert';
 import sinon from 'sinon';
-import { PDSPBEPathwayEntity } from '../../entities/pathway.entity';
+import { PDSPBEPathwayEntity } from '../../entities/pathway';
 import { PDSPBEPathwayInitializedEvent } from '../../events/pathway-initialized.event';
 import { DescriptionValueObject } from '../../value-objects/description.value-object';
 import { PathwayIdValueObject } from '../../value-objects/pathway-id.value-object';
