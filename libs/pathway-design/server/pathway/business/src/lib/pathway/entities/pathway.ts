@@ -1,17 +1,23 @@
 import { AggregateRoot } from '@nestjs/cqrs';
+import type { ArticleEntity } from '../../article/entities/article';
 import { PDSPBEPathwayInitializedEvent } from '../events/pathway-initialized.event';
 import { PDSPBEPathwayTitleChangedEvent } from '../events/pathway-title-changed.event';
-import type { DescriptionValueObject } from '../value-objects/description.value-object';
+import type { PathwayDescriptionValueObject } from '../value-objects/pathway-description.value-object';
 import type { PathwayIdValueObject } from '../value-objects/pathway-id.value-object';
-import type { ResearchFieldValueObjects } from '../value-objects/research-field.value-object';
-import type { PDSPBVOTitleValueObjects } from '../value-objects/title.value-object';
+import type { PathwayResearchFieldValueObject } from '../value-objects/pathway-research-field.value-object';
+import type { PathwayTitleValueObject } from '../value-objects/pathway-title.value-object';
 import type { InitializePathwayParams } from './pathway.types';
 
 export class PDSPBEPathwayEntity extends AggregateRoot {
-    #description: DescriptionValueObject | undefined;
+    #articleList: ArticleEntity[] = [];
+    #description: PathwayDescriptionValueObject | undefined;
     #id: PathwayIdValueObject | undefined;
-    #researchField: ResearchFieldValueObjects | undefined;
-    #title: PDSPBVOTitleValueObjects | undefined;
+    #researchField: PathwayResearchFieldValueObject | undefined;
+    #title: PathwayTitleValueObject | undefined;
+
+    get articleList() {
+        return this.#articleList;
+    }
 
     get description() {
         return this.#description?.value ?? '';
@@ -48,7 +54,7 @@ export class PDSPBEPathwayEntity extends AggregateRoot {
         );
     }
 
-    changeTitle(title: PDSPBVOTitleValueObjects) {
+    changeTitle(title: PathwayTitleValueObject) {
         this.#title = title;
 
         this.apply(
@@ -60,5 +66,9 @@ export class PDSPBEPathwayEntity extends AggregateRoot {
                 skipHandler: true,
             }
         );
+    }
+
+    addArticle(article: ArticleEntity) {
+        this.#articleList.push(article);
     }
 }

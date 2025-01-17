@@ -1,28 +1,28 @@
 import { pDCPBRPathwayDescriptionRules } from '@bewoak/pathway-design-common-pathway-business-rules';
 import { beforeAll, describe, expect, test } from 'bun:test';
-import { DescriptionValueObject } from './description.value-object';
+import { PathwayDescriptionValueObject } from './pathway-description.value-object';
 
-describe('DescriptionValueObject', () => {
-    let description1: DescriptionValueObject;
-    let description2: DescriptionValueObject;
+describe('PathwayDescriptionValueObject', () => {
+    let description1: PathwayDescriptionValueObject;
+    let description2: PathwayDescriptionValueObject;
 
     beforeAll(() => {
-        description1 = new DescriptionValueObject('Test description');
-        description2 = new DescriptionValueObject('Different description');
+        description1 = new PathwayDescriptionValueObject('Test description');
+        description2 = new PathwayDescriptionValueObject('Different description');
     });
 
     test('should create an instance with a valid description', () => {
-        const description = new DescriptionValueObject('Test description');
+        const description = new PathwayDescriptionValueObject('Test description');
         expect(description.value).toBe('Test description');
     });
 
     test('should throw an error if the description is invalid', () => {
-        expect(() => new DescriptionValueObject('')).toThrowError(pDCPBRPathwayDescriptionRules.textError());
+        expect(() => new PathwayDescriptionValueObject('')).toThrowError(pDCPBRPathwayDescriptionRules.textError());
     });
 
     test('should return true when comparing two equal descriptions', () => {
-        const samedescription1 = new DescriptionValueObject('Test description');
-        const samedescription2 = new DescriptionValueObject('Test description');
+        const samedescription1 = new PathwayDescriptionValueObject('Test description');
+        const samedescription2 = new PathwayDescriptionValueObject('Test description');
         expect(samedescription1.equals(samedescription2)).toBe(true);
     });
 

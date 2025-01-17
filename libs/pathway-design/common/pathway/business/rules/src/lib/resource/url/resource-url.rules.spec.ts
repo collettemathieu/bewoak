@@ -5,7 +5,6 @@ describe('Resource url business rules', () => {
     test('should return true for a valid url', () => {
         const validUrlList = [
             'http://example.com',
-            'example.com',
             'https://example.org',
             'https://sub.example.com',
             'https://a.b.c.example.co.uk',
@@ -20,6 +19,8 @@ describe('Resource url business rules', () => {
             'https://example.com/page#section1',
             'http://example.org/article#comments',
             'http://192.168.0.1',
+            'http://192.168.0.10',
+            'http://192.168.0.101',
             'https://10.0.0.1:443/path',
             'http://localhost',
             'https://localhost:8080/api',
@@ -36,6 +37,8 @@ describe('Resource url business rules', () => {
         expect(pDCPBRResourceUrlRules.isValid(null)).toBe(false);
         expect(pDCPBRResourceUrlRules.isValid(undefined)).toBe(false);
         expect(pDCPBRResourceUrlRules.isValid('ahttp://example.com')).toBe(false);
+        expect(pDCPBRResourceUrlRules.isValid('http://192.168.0.1112')).toBe(false);
+        expect(pDCPBRResourceUrlRules.isValid('http://admin:admin@example.com:8080/path?debug=true#info?abcde')).toBe(false);
     });
 
     test('should return correct error message textError', () => {

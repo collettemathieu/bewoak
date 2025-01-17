@@ -1,7 +1,7 @@
 import { CTSEBadRequestException } from '@bewoak/common-tools-server-http-exceptions';
 import { pDCPBRPathwayDescriptionRules } from '@bewoak/pathway-design-common-pathway-business-rules';
 
-export class DescriptionValueObject {
+export class PathwayDescriptionValueObject {
     constructor(private readonly description: string) {
         if (pDCPBRPathwayDescriptionRules.isValid(description) === false) {
             throw new CTSEBadRequestException(pDCPBRPathwayDescriptionRules.textError());
@@ -11,7 +11,7 @@ export class DescriptionValueObject {
         return this.description;
     }
 
-    equals(description: DescriptionValueObject) {
+    equals(description: PathwayDescriptionValueObject) {
         return this.description === description.value;
     }
 

@@ -14,4 +14,3 @@ export {
     type PDSPBPPathwayPresenterPort,
     type PDSPBPPathwayPresenters,
 } from './lib/pathway/ports/presenters/pathway-presenter.port';
-export { PDSPBVOTitleValueObjects } from './lib/pathway/value-objects/title.value-object';

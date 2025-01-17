@@ -5,7 +5,7 @@ import sinon from 'sinon';
 import type { PDSPBEPathwayEntity } from '../../entities/pathway';
 import { PDSPBEPathwayTitleChangedEvent } from '../../events/pathway-title-changed.event';
 import { pDSPBFPathwayFactory } from '../../factories/pathway.factory';
-import { PDSPBVOTitleValueObjects } from '../../value-objects/title.value-object';
+import { PathwayTitleValueObject } from '../../value-objects/pathway-title.value-object';
 
 @binding()
 export default class ControllerSteps {
@@ -35,7 +35,7 @@ export default class ControllerSteps {
         }
 
         try {
-            const title = new PDSPBVOTitleValueObjects(newTitle);
+            const title = new PathwayTitleValueObject(newTitle);
             this.applyMethodSpy = sinon.spy(this.pDSPBEPathwayEntity, 'apply');
             this.pDSPBEPathwayEntity.changeTitle(title);
         } catch (error) {

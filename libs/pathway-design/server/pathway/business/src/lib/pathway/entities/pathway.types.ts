@@ -1,11 +1,11 @@
-import type { DescriptionValueObject } from '../value-objects/description.value-object';
+import type { PathwayDescriptionValueObject } from '../value-objects/pathway-description.value-object';
 import type { PathwayIdValueObject } from '../value-objects/pathway-id.value-object';
-import type { ResearchFieldValueObjects } from '../value-objects/research-field.value-object';
-import type { PDSPBVOTitleValueObjects } from '../value-objects/title.value-object';
+import type { PathwayResearchFieldValueObject } from '../value-objects/pathway-research-field.value-object';
+import type { PathwayTitleValueObject } from '../value-objects/pathway-title.value-object';
 
 export interface InitializePathwayParams {
-    description: DescriptionValueObject;
+    description: PathwayDescriptionValueObject;
     id: PathwayIdValueObject;
-    researchField: ResearchFieldValueObjects;
-    title: PDSPBVOTitleValueObjects;
+    researchField: PathwayResearchFieldValueObject;
+    title: PathwayTitleValueObject;
 }
