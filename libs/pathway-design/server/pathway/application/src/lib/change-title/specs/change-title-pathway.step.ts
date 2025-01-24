@@ -2,8 +2,8 @@ import { strict as assert } from 'node:assert';
 
 import {
     type PDSPBEPathwayEntity,
-    type PDSPBPChangeTitlePathwayPersistencePort,
-    type PDSPBPPathwayPresenterPort,
+    type PDSPBPChangeTitlePathwayPersistence,
+    type PDSPBPPathwayPresenter,
     type PDSPBPPathwayPresenters,
     pDSPBFPathwayFactory,
 } from '@bewoak/pathway-design-server-pathway-business';
@@ -13,7 +13,7 @@ import { before, binding, given, then, when } from 'cucumber-tsflow';
 import sinon from 'sinon';
 import { PDSPACUChangeTitlePathwayUseCase } from '../usecase/change-title-pathway.usecase';
 
-class FakeChangeTitlePathwayPersistence implements PDSPBPChangeTitlePathwayPersistencePort {
+class FakeChangeTitlePathwayPersistence implements PDSPBPChangeTitlePathwayPersistence {
     private pDSPBEPathwayEntity: PDSPBEPathwayEntity | undefined;
 
     save(pDSPBEPathwayEntity: PDSPBEPathwayEntity) {
@@ -39,7 +39,7 @@ class FakeChangeTitlePathwayPersistence implements PDSPBPChangeTitlePathwayPersi
     }
 }
 
-class FakePathwayPresenter implements PDSPBPPathwayPresenterPort {
+class FakePathwayPresenter implements PDSPBPPathwayPresenter {
     present(pDSPBEPathwayEntity: PDSPBEPathwayEntity) {
         return {
             description: pDSPBEPathwayEntity.description,

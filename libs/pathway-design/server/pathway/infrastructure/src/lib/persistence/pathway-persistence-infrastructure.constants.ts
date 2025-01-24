@@ -1,6 +1,6 @@
 import {
-    PDSPBP_CHANGE_TITLE_PATHWAY_PERSISTENCE_PORT,
-    PDSPBP_INITIALIZE_PATHWAY_PERSISTENCE_PORT,
+    PDSPBP_CHANGE_TITLE_PATHWAY_PERSISTENCE,
+    PDSPBP_INITIALIZE_PATHWAY_PERSISTENCE,
 } from '@bewoak/pathway-design-server-pathway-business';
 import type { Provider } from '@nestjs/common';
 import { ChangeTitlePathwayInMemoryPersistence } from './change-title/in-memory/change-title-pathway-in-memory.persistence';
@@ -12,12 +12,12 @@ export const persistenceProvidersMap: Record<PDSPIPPersistenceDriverAuthorized, 
     inMemory: [
         InitializePathwayInMemoryPersistence,
         {
-            provide: PDSPBP_INITIALIZE_PATHWAY_PERSISTENCE_PORT,
+            provide: PDSPBP_INITIALIZE_PATHWAY_PERSISTENCE,
             useExisting: InitializePathwayInMemoryPersistence,
         },
         ChangeTitlePathwayInMemoryPersistence,
         {
-            provide: PDSPBP_CHANGE_TITLE_PATHWAY_PERSISTENCE_PORT,
+            provide: PDSPBP_CHANGE_TITLE_PATHWAY_PERSISTENCE,
             useExisting: ChangeTitlePathwayInMemoryPersistence,
         },
         PathwayInMemoryRepository,

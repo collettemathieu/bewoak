@@ -1,10 +1,10 @@
-import type { PDSPBPChangeTitlePathwayPersistencePort } from '@bewoak/pathway-design-server-pathway-business';
+import type { PDSPBPChangeTitlePathwayPersistence } from '@bewoak/pathway-design-server-pathway-business';
 import { Inject, Injectable, NotFoundException } from '@nestjs/common';
 import { mapPathwayInMemoryToPathwayEntity } from '../../common/in-memory/mappers/in-memory-pathway.mapper';
 import { PathwayInMemoryRepository } from '../../common/in-memory/repositories/in-memory-pathway.repository';
 
 @Injectable()
-export class ChangeTitlePathwayInMemoryPersistence implements PDSPBPChangeTitlePathwayPersistencePort {
+export class ChangeTitlePathwayInMemoryPersistence implements PDSPBPChangeTitlePathwayPersistence {
     constructor(
         @Inject(PathwayInMemoryRepository)
         private pathwayInMemoryRepository: PathwayInMemoryRepository

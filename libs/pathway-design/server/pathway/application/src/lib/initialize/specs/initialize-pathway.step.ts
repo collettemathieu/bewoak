@@ -1,23 +1,23 @@
-import { strict as assert } from 'node:assert';
 import type {
     PDSPBEPathwayEntity,
-    PDSPBPInitializePathwayPersistencePort,
-    PDSPBPPathwayPresenterPort,
+    PDSPBPInitializePathwayPersistence,
+    PDSPBPPathwayPresenter,
     PDSPBPPathwayPresenters,
 } from '@bewoak/pathway-design-server-pathway-business';
 import type { DataTable } from '@cucumber/cucumber';
 import type { EventPublisher } from '@nestjs/cqrs';
 import { before, binding, then, when } from 'cucumber-tsflow';
+import { strict as assert } from 'node:assert';
 import sinon from 'sinon';
 import { PDSPAIUInitializePathwayUsecase } from '../usecase/initialize-pathway.usecase';
 
-class FakeInitializePathwayPersistence implements PDSPBPInitializePathwayPersistencePort {
+class FakeInitializePathwayPersistence implements PDSPBPInitializePathwayPersistence {
     save(pDSPBEPathwayEntity: PDSPBEPathwayEntity) {
         return Promise.resolve(pDSPBEPathwayEntity);
     }
 }
 
-class FakePathwayPresenter implements PDSPBPPathwayPresenterPort {
+class FakePathwayPresenter implements PDSPBPPathwayPresenter {
     present(pDSPBEPathwayEntity: PDSPBEPathwayEntity) {
         return {
             description: pDSPBEPathwayEntity.description,

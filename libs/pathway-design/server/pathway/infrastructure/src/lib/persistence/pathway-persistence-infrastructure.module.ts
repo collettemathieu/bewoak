@@ -1,8 +1,8 @@
 import { Module } from '@nestjs/common';
 
 import {
-    PDSPBP_CHANGE_TITLE_PATHWAY_PERSISTENCE_PORT,
-    PDSPBP_INITIALIZE_PATHWAY_PERSISTENCE_PORT,
+    PDSPBP_CHANGE_TITLE_PATHWAY_PERSISTENCE,
+    PDSPBP_INITIALIZE_PATHWAY_PERSISTENCE,
 } from '@bewoak/pathway-design-server-pathway-business';
 import { persistenceProvidersMap } from './pathway-persistence-infrastructure.constants';
 import type { PDSPIPPersistenceDriverAuthorized } from './pathway-persistence-infrastructure.types';
@@ -16,7 +16,7 @@ export class PDSPIPPathwayPersistenceInfrastructureModule {
         return {
             module: PDSPIPPathwayPersistenceInfrastructureModule,
             providers: [...persistenceProviders],
-            exports: [PDSPBP_INITIALIZE_PATHWAY_PERSISTENCE_PORT, PDSPBP_CHANGE_TITLE_PATHWAY_PERSISTENCE_PORT],
+            exports: [PDSPBP_INITIALIZE_PATHWAY_PERSISTENCE, PDSPBP_CHANGE_TITLE_PATHWAY_PERSISTENCE],
         };
     }
 }

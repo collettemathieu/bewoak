@@ -1,4 +1,4 @@
-import type { PDSPBEPathwayEntity, PDSPBPInitializePathwayPersistencePort } from '@bewoak/pathway-design-server-pathway-business';
+import type { PDSPBEPathwayEntity, PDSPBPInitializePathwayPersistence } from '@bewoak/pathway-design-server-pathway-business';
 import { Inject, Injectable, NotFoundException } from '@nestjs/common';
 import {
     mapPathwayEntityToInMemoryPersistence,
@@ -7,7 +7,7 @@ import {
 import { PathwayInMemoryRepository } from '../../../persistence/common/in-memory/repositories/in-memory-pathway.repository';
 
 @Injectable()
-export class InitializePathwayInMemoryPersistence implements PDSPBPInitializePathwayPersistencePort {
+export class InitializePathwayInMemoryPersistence implements PDSPBPInitializePathwayPersistence {
     constructor(
         @Inject(PathwayInMemoryRepository)
         private pathwayInMemoryRepository: PathwayInMemoryRepository

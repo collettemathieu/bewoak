@@ -1,8 +1,8 @@
 import {
-    type PDSPBPChangeTitlePathwayPersistencePort,
-    type PDSPBPPathwayPresenterPort,
-    PDSPBP_CHANGE_TITLE_PATHWAY_PERSISTENCE_PORT,
-    PDSPBP_PATHWAY_PRESENTER_PORT,
+    type PDSPBPChangeTitlePathwayPersistence,
+    type PDSPBPPathwayPresenter,
+    PDSPBP_CHANGE_TITLE_PATHWAY_PERSISTENCE,
+    PDSPBP_PATHWAY_PRESENTER,
 } from '@bewoak/pathway-design-server-pathway-business';
 
 import { Inject } from '@nestjs/common';
@@ -17,17 +17,17 @@ import { PDSPAChangeTitlePathwayCommand } from './change-title-pathway.command';
 export class PDSPAChangeTitlePathwayCommandHandler implements ICommandHandler<PDSPAChangeTitlePathwayCommand> {
     constructor(
         private readonly pDSPACUChangeTitlePathwayUseCase: PDSPACUChangeTitlePathwayUseCase,
-        @Inject(PDSPBP_CHANGE_TITLE_PATHWAY_PERSISTENCE_PORT)
-        private readonly pDSPBPChangeTitlePathwayPersistencePort: PDSPBPChangeTitlePathwayPersistencePort,
-        @Inject(PDSPBP_PATHWAY_PRESENTER_PORT)
-        private readonly pDSPBPPathwayPresenterPort: PDSPBPPathwayPresenterPort,
+        @Inject(PDSPBP_CHANGE_TITLE_PATHWAY_PERSISTENCE)
+        private readonly pDSPBPChangeTitlePathwayPersistence: PDSPBPChangeTitlePathwayPersistence,
+        @Inject(PDSPBP_PATHWAY_PRESENTER)
+        private readonly pDSPBPPathwayPresenter: PDSPBPPathwayPresenter,
         private readonly eventPublisher: EventPublisher
     ) {}
 
     execute(pDSPAChangeTitlePathwayCommand: PDSPAChangeTitlePathwayCommand) {
         return this.pDSPACUChangeTitlePathwayUseCase.execute(
-            this.pDSPBPChangeTitlePathwayPersistencePort,
-            this.pDSPBPPathwayPresenterPort,
+            this.pDSPBPChangeTitlePathwayPersistence,
+            this.pDSPBPPathwayPresenter,
             this.eventPublisher,
             {
                 pathwayId: pDSPAChangeTitlePathwayCommand.pathwayId, // Il faut changer le nom de la propriété pathway en pathwayId

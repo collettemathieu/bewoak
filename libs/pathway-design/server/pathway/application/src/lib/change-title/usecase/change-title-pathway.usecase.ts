@@ -1,13 +1,10 @@
-import type {
-    PDSPBPChangeTitlePathwayPersistencePort,
-    PDSPBPPathwayPresenterPort,
-} from '@bewoak/pathway-design-server-pathway-business';
+import type { PDSPBPChangeTitlePathwayPersistence, PDSPBPPathwayPresenter } from '@bewoak/pathway-design-server-pathway-business';
 import type { EventPublisher } from '@nestjs/cqrs';
 
 export class PDSPACUChangeTitlePathwayUseCase {
     async execute(
-        pDSPBPChangeTitlePathwayPersistencePort: PDSPBPChangeTitlePathwayPersistencePort,
-        pDSPBPPathwayPresenterPort: PDSPBPPathwayPresenterPort,
+        pDSPBPChangeTitlePathwayPersistence: PDSPBPChangeTitlePathwayPersistence,
+        pDSPBPPathwayPresenter: PDSPBPPathwayPresenter,
         eventPublisher: EventPublisher,
         {
             pathwayId,
@@ -18,11 +15,11 @@ export class PDSPACUChangeTitlePathwayUseCase {
         }
     ) {
         // TODO: pattern transactional outbox should be implemented here => https://microservices.io/patterns/data/transactional-outbox.html
-        const pathwayFromPersistence = await pDSPBPChangeTitlePathwayPersistencePort.changeTitle(pathwayId, title);
+        const pathwayFromPersistence = await pDSPBPChangeTitlePathwayPersistence.changeTitle(pathwayId, title);
 
         eventPublisher.mergeObjectContext(pathwayFromPersistence);
         pathwayFromPersistence.commit();
 
-        return pDSPBPPathwayPresenterPort.present(pathwayFromPersistence);
+        return pDSPBPPathwayPresenter.present(pathwayFromPersistence);
     }
 }
