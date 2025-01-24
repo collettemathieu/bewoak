@@ -1,3 +1,5 @@
+import { strict as assert } from 'node:assert';
+import type { Http2Server } from 'node:http2';
 import { CCEPPathwayInitializedEvent } from '@bewoak/common-contracts-events-pathway';
 import {
     PDSPIPPathwayPersistenceInfrastructureModule,
@@ -14,8 +16,6 @@ import { CqrsModule } from '@nestjs/cqrs';
 import { EventEmitter2, EventEmitterModule } from '@nestjs/event-emitter';
 import { Test } from '@nestjs/testing';
 import { binding, given, then, when } from 'cucumber-tsflow';
-import { strict as assert } from 'node:assert';
-import type { Http2Server } from 'node:http2';
 import sinon from 'sinon';
 import request from 'supertest';
 

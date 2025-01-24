@@ -1,8 +1,8 @@
 import { strict as assert } from 'node:assert';
-import { randomUUID } from 'node:crypto';
 import type { DataTable } from '@cucumber/cucumber';
 import { binding, then, when } from 'cucumber-tsflow';
 import sinon from 'sinon';
+import { uuidv7 } from 'uuidv7';
 import { PDSPBEPathwayEntity } from '../../entities/pathway';
 import { PDSPBEPathwayInitializedEvent } from '../../events/pathway-initialized.event';
 import { PathwayDescriptionValueObject } from '../../value-objects/pathway-description.value-object';
@@ -24,7 +24,7 @@ export default class PathwaySteps {
             researchField: string;
         };
         try {
-            const pathwayId = new PathwayIdValueObject(randomUUID());
+            const pathwayId = new PathwayIdValueObject(uuidv7());
             const title = new PathwayTitleValueObject(data.title);
             const description = new PathwayDescriptionValueObject(data.description);
             const researchField = new PathwayResearchFieldValueObject(data.researchField);

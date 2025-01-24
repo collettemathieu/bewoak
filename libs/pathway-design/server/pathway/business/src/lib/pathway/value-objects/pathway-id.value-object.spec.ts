@@ -8,13 +8,13 @@ describe('PathwayIdValueObject', () => {
     let pathwayIdValueObjectSameAs2: PathwayIdValueObject;
 
     beforeAll(() => {
-        pathwayIdValueObject1 = new PathwayIdValueObject('e24054b9-92ca-4a22-be67-cf14cc94e6f8');
-        pathwayIdValueObject2 = new PathwayIdValueObject('7324ec70-2c17-4dac-ae10-b9eb4cd22fec');
-        pathwayIdValueObjectSameAs2 = new PathwayIdValueObject('7324ec70-2c17-4dac-ae10-b9eb4cd22fec');
+        pathwayIdValueObject1 = new PathwayIdValueObject('019499fa-989d-79cc-ab73-3b7bd4b476eb');
+        pathwayIdValueObject2 = new PathwayIdValueObject('019499fa-bc83-770f-8526-9bd418660952');
+        pathwayIdValueObjectSameAs2 = new PathwayIdValueObject('019499fa-bc83-770f-8526-9bd418660952');
     });
 
     test('should create an instance with a valid pathway id', () => {
-        expect(pathwayIdValueObject1.value).toBe('e24054b9-92ca-4a22-be67-cf14cc94e6f8');
+        expect(pathwayIdValueObject1.value).toBe('019499fa-989d-79cc-ab73-3b7bd4b476eb');
     });
 
     test('should throw an error if the pathway id is invalid', () => {
@@ -30,6 +30,6 @@ describe('PathwayIdValueObject', () => {
     });
 
     test('should return the pathway id as a string', () => {
-        expect(pathwayIdValueObject1.toString()).toBe('e24054b9-92ca-4a22-be67-cf14cc94e6f8');
+        expect(pathwayIdValueObject1.toString()).toBe('019499fa-989d-79cc-ab73-3b7bd4b476eb');
     });
 });

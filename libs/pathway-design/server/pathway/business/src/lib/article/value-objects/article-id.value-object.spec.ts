@@ -8,13 +8,13 @@ describe('ArticleIdValueObject', () => {
     let articleIdValueObjectSameAs2: ArticleIdValueObject;
 
     beforeAll(() => {
-        articleIdValueObject1 = new ArticleIdValueObject('e24054b9-92ca-4a22-be67-cf14cc94e6f8');
-        articleIdValueObject2 = new ArticleIdValueObject('7324ec70-2c17-4dac-ae10-b9eb4cd22fec');
-        articleIdValueObjectSameAs2 = new ArticleIdValueObject('7324ec70-2c17-4dac-ae10-b9eb4cd22fec');
+        articleIdValueObject1 = new ArticleIdValueObject('019499fa-f8b4-7459-a52b-09d7ebf39d4f');
+        articleIdValueObject2 = new ArticleIdValueObject('019499fb-18ef-758d-a6ad-5d951ce02ecc');
+        articleIdValueObjectSameAs2 = new ArticleIdValueObject('019499fb-18ef-758d-a6ad-5d951ce02ecc');
     });
 
     test('should create an instance with a valid article id', () => {
-        expect(articleIdValueObject1.value).toBe('e24054b9-92ca-4a22-be67-cf14cc94e6f8');
+        expect(articleIdValueObject1.value).toBe('019499fa-f8b4-7459-a52b-09d7ebf39d4f');
     });
 
     test('should throw an error if the article id is invalid', () => {
@@ -30,6 +30,6 @@ describe('ArticleIdValueObject', () => {
     });
 
     test('should return the article id as a string', () => {
-        expect(articleIdValueObject1.toString()).toBe('e24054b9-92ca-4a22-be67-cf14cc94e6f8');
+        expect(articleIdValueObject1.toString()).toBe('019499fa-f8b4-7459-a52b-09d7ebf39d4f');
     });
 });

@@ -1,4 +1,4 @@
-import { randomUUID } from 'node:crypto';
+import { uuidv7 } from 'uuidv7';
 import { PDSPBEPathwayEntity } from '../entities/pathway';
 import { PathwayDescriptionValueObject } from '../value-objects/pathway-description.value-object';
 import { PathwayIdValueObject } from '../value-objects/pathway-id.value-object';
@@ -17,7 +17,7 @@ export const pDSPBFPathwayFactory = ({
     const researchField = new PathwayResearchFieldValueObject(researchFieldValue);
     const title = new PathwayTitleValueObject(titleValue);
 
-    const uuid = pathwayIdValue ?? randomUUID();
+    const uuid = pathwayIdValue ?? uuidv7();
     const pathwayId = new PathwayIdValueObject(uuid);
 
     pathway.initialize({

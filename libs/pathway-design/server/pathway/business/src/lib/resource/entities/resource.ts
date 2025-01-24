@@ -1,14 +1,14 @@
-import { randomUUID } from 'crypto';
+import { uuidv7 } from 'uuidv7';
 import { ResourceIdValueObject } from '../value-objects/resource-id.value-object';
 import type { ResourceUrlValueObject } from '../value-objects/resource-url.value-object';
 import type { InitializeResourceParams } from './resource.types';
 
 export class ResourceEntity {
-    #id: ResourceIdValueObject | undefined;
+    #resourceId: ResourceIdValueObject | undefined;
     #url: ResourceUrlValueObject | undefined;
 
-    get id() {
-        return this.#id?.value ?? '';
+    get resourceId() {
+        return this.#resourceId?.value ?? '';
     }
 
     get url() {
@@ -16,7 +16,7 @@ export class ResourceEntity {
     }
 
     initialize({ url }: InitializeResourceParams) {
-        this.#id = new ResourceIdValueObject(randomUUID());
+        this.#resourceId = new ResourceIdValueObject(uuidv7());
         this.#url = url;
     }
 }

@@ -8,13 +8,13 @@ describe('ResourceIdValueObject', () => {
     let resourceIdValueObjectSameAs2: ResourceIdValueObject;
 
     beforeAll(() => {
-        resourceIdValueObject1 = new ResourceIdValueObject('e24054b9-92ca-4a22-be67-cf14cc94e6f8');
-        resourceIdValueObject2 = new ResourceIdValueObject('7324ec70-2c17-4dac-ae10-b9eb4cd22fec');
-        resourceIdValueObjectSameAs2 = new ResourceIdValueObject('7324ec70-2c17-4dac-ae10-b9eb4cd22fec');
+        resourceIdValueObject1 = new ResourceIdValueObject('019499f9-812d-7e22-84ca-fc22da1765db');
+        resourceIdValueObject2 = new ResourceIdValueObject('019499fa-2794-7460-ba23-5824bdc41522');
+        resourceIdValueObjectSameAs2 = new ResourceIdValueObject('019499fa-2794-7460-ba23-5824bdc41522');
     });
 
     test('should create an instance with a valid resource id', () => {
-        expect(resourceIdValueObject1.value).toBe('e24054b9-92ca-4a22-be67-cf14cc94e6f8');
+        expect(resourceIdValueObject1.value).toBe('019499f9-812d-7e22-84ca-fc22da1765db');
     });
 
     test('should throw an error if the resource id is invalid', () => {
@@ -30,6 +30,6 @@ describe('ResourceIdValueObject', () => {
     });
 
     test('should return the resource id as a string', () => {
-        expect(resourceIdValueObject1.toString()).toBe('e24054b9-92ca-4a22-be67-cf14cc94e6f8');
+        expect(resourceIdValueObject1.toString()).toBe('019499f9-812d-7e22-84ca-fc22da1765db');
     });
 });

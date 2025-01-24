@@ -8,11 +8,11 @@
         "@nestjs/swagger": "^7.4.0",
         "class-transformer": "^0.5.1",
         "class-validator": "^0.14.1",
-        "crypto": "^1.0.1",
         "reflect-metadata": "^0.1.13",
         "rxjs": "^7.8.0",
         "swagger-ui-express": "^5.0.1",
         "tslib": "^2.3.0",
+        "uuidv7": "^1.0.2",
         "zod": "^3.23.8"
     },
     "devDependencies": {
@@ -69,6 +69,7 @@
         "start:search:app": "PORT=3000 GLOBAL_PREFIX=api nx serve search-server",
         "stryker": "stryker",
         "test": "nx run-many --target=test --parallel=4",
+        "test:ci": "bun run test && bun run test:feature && bun run lint && bun run format && bun run build",
         "test:feature": "nx run-many --target=test-feature --parallel=4",
         "test:mutation": "nx run-many --target=mutation-testing --parallel=4",
         "tools:autocanon": "autocannon -c 10 -d 10s http://localhost:3000/api/pathway/initialize",

@@ -1,4 +1,4 @@
-import { randomUUID } from 'crypto';
+import { uuidv7 } from 'uuidv7';
 import { ResourceEntity } from '../../resource/entities/resource';
 import { ArticleIdValueObject } from '../value-objects/article-id.value-object';
 import type { ArticleTitleValueObject } from '../value-objects/article-title.value-object';
@@ -6,15 +6,15 @@ import type { InitializeArticleParams } from './article.types';
 
 export class ArticleEntity {
     #title: ArticleTitleValueObject | undefined;
-    #id: ArticleIdValueObject | undefined;
+    #articleId: ArticleIdValueObject | undefined;
     #resource: ResourceEntity | undefined;
 
     get title() {
         return this.#title?.value ?? '';
     }
 
-    get id() {
-        return this.#id?.value ?? '';
+    get articleId() {
+        return this.#articleId?.value ?? '';
     }
 
     get resource() {
@@ -22,7 +22,7 @@ export class ArticleEntity {
     }
 
     initialize({ title, url }: InitializeArticleParams) {
-        this.#id = new ArticleIdValueObject(randomUUID());
+        this.#articleId = new ArticleIdValueObject(uuidv7());
         this.#title = title;
 
         const resource = new ResourceEntity();
