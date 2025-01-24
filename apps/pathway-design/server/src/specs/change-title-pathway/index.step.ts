@@ -1,5 +1,3 @@
-import { strict as assert } from 'node:assert';
-import type { Http2Server } from 'node:http2';
 import {
     PDSPIPPathwayPersistenceInfrastructureModule,
     type PDSPIPPersistenceDriverAuthorized,
@@ -18,6 +16,8 @@ import { CqrsModule } from '@nestjs/cqrs';
 import { EventEmitterModule } from '@nestjs/event-emitter';
 import { Test } from '@nestjs/testing';
 import { binding, given, then, when } from 'cucumber-tsflow';
+import { strict as assert } from 'node:assert';
+import type { Http2Server } from 'node:http2';
 import request from 'supertest';
 
 @binding()
@@ -67,7 +67,7 @@ class ControllerSteps {
 
     @when('I want to change the title of the pathway on the platform {string}')
     public async whenIChangeTheTitleOfThePathwayTo(title: string) {
-        this.response = await request(this.httpServer).patch(`/pathway/change-title/${this.response.body.id}`).send({
+        this.response = await request(this.httpServer).patch(`/pathway/change-title/${this.response.body.pathwayId}`).send({
             title,
         });
     }

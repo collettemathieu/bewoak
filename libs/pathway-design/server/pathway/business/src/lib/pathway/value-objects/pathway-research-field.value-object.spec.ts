@@ -1,5 +1,5 @@
-import { pDCPBRPathwayResearchFieldRules } from '@bewoak/pathway-design-common-pathway-business-rules';
 import { beforeAll, describe, expect, test } from 'bun:test';
+import { pDCPBRPathwayResearchFieldRules } from '@bewoak/pathway-design-common-pathway-business-rules';
 import { PathwayResearchFieldValueObject } from './pathway-research-field.value-object';
 
 describe('PathwayResearchFieldValueObject', () => {

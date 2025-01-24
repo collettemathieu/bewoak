@@ -25,13 +25,13 @@ class FakeChangeTitlePathwayPersistence implements PDSPBPChangeTitlePathwayPersi
             throw new Error('Pathway is not initialized');
         }
 
-        if (this.pDSPBEPathwayEntity.id !== pathwayId) {
+        if (this.pDSPBEPathwayEntity.pathwayId !== pathwayId) {
             throw new Error('Pathway id does not match');
         }
 
         const pathwayWithTitleChanged = pDSPBFPathwayFactory({
             description: this.pDSPBEPathwayEntity.description,
-            id: this.pDSPBEPathwayEntity.id,
+            pathwayId: this.pDSPBEPathwayEntity.pathwayId,
             researchField: this.pDSPBEPathwayEntity.researchField,
             title,
         });
@@ -43,7 +43,7 @@ class FakePathwayPresenter implements PDSPBPPathwayPresenter {
     present(pDSPBEPathwayEntity: PDSPBEPathwayEntity) {
         return {
             description: pDSPBEPathwayEntity.description,
-            id: pDSPBEPathwayEntity.id,
+            pathwayId: pDSPBEPathwayEntity.pathwayId,
             researchField: pDSPBEPathwayEntity.researchField,
             title: pDSPBEPathwayEntity.title,
         };
@@ -107,7 +107,7 @@ export default class ControllerSteps {
             this.fakePathwayPresenter,
             this.fakeEventPublisher as EventPublisher,
             {
-                pathwayId: this.pDSPBEPathwayEntity.id,
+                pathwayId: this.pDSPBEPathwayEntity.pathwayId,
                 title,
             }
         );

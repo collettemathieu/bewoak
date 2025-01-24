@@ -6,7 +6,7 @@ export class ToJsonPathwayPresenter implements PDSPBPPathwayPresenter {
     present(pDSPBEPathwayEntity: PDSPBEPathwayEntity) {
         return {
             description: pDSPBEPathwayEntity.description,
-            id: pDSPBEPathwayEntity.id,
+            pathwayId: pDSPBEPathwayEntity.pathwayId,
             researchField: pDSPBEPathwayEntity.researchField,
             title: pDSPBEPathwayEntity.title,
         };

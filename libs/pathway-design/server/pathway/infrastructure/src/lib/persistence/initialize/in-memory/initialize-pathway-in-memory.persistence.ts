@@ -17,7 +17,7 @@ export class InitializePathwayInMemoryPersistence implements PDSPBPInitializePat
         const peristenceModel = mapPathwayEntityToInMemoryPersistence(pDSPBEPathwayEntity);
         await this.pathwayInMemoryRepository.add(peristenceModel);
 
-        const pathwayInMemory = await this.pathwayInMemoryRepository.get(peristenceModel.id);
+        const pathwayInMemory = await this.pathwayInMemoryRepository.getByPathwayId(peristenceModel.pathwayId);
 
         if (pathwayInMemory === undefined) {
             throw new NotFoundException('Pathway not found in memory');

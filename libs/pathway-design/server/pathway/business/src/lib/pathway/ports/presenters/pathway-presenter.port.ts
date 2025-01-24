@@ -2,7 +2,7 @@ import type { PDSPBEPathwayEntity } from '../../entities/pathway';
 
 export interface PDSPBPJsonPathwayPresenter {
     description: string;
-    id: string;
+    pathwayId: string;
     researchField: string;
     title: string;
 }

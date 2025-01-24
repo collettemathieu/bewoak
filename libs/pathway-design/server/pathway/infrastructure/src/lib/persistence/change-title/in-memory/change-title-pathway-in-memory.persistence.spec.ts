@@ -1,7 +1,8 @@
-import { beforeEach, describe, expect, spyOn, test } from 'bun:test';
 import { type PDSPBEPathwayEntity, pDSPBFPathwayFactory } from '@bewoak/pathway-design-server-pathway-business';
 import { NotFoundException } from '@nestjs/common';
 import { Test } from '@nestjs/testing';
+import { beforeEach, describe, expect, spyOn, test } from 'bun:test';
+import { mapPathwayEntityToInMemoryPersistence } from '../../common/in-memory/mappers/in-memory-pathway.mapper';
 import { PathwayInMemoryRepository } from '../../common/in-memory/repositories/in-memory-pathway.repository';
 import { ChangeTitlePathwayInMemoryPersistence } from './change-title-pathway-in-memory.persistence';
 
@@ -30,28 +31,28 @@ describe('ChangeTitlePathwayInMemoryPersistence', () => {
                 title: 'pathway title',
             });
 
-            pathwayInMemoryRepository.add(pDSPBEPathwayEntity);
+            const peristenceModel = mapPathwayEntityToInMemoryPersistence(pDSPBEPathwayEntity);
+            pathwayInMemoryRepository.add(peristenceModel);
 
             spyOn(changeTitlePathwayInMemoryPersistence, 'changeTitle');
             spyOn(pathwayInMemoryRepository, 'patch');
-            spyOn(pathwayInMemoryRepository, 'get');
+            spyOn(pathwayInMemoryRepository, 'getByPathwayId');
 
-            result = await changeTitlePathwayInMemoryPersistence.changeTitle(pDSPBEPathwayEntity.id, newTitle);
+            result = await changeTitlePathwayInMemoryPersistence.changeTitle(pDSPBEPathwayEntity.pathwayId, newTitle);
         });
 
         test('should call the change title method with the title of the pathway in parameter', () => {
             expect(changeTitlePathwayInMemoryPersistence).toBeDefined();
             expect(changeTitlePathwayInMemoryPersistence.changeTitle).toHaveBeenCalledWith(
-                pDSPBEPathwayEntity.id,
+                pDSPBEPathwayEntity.pathwayId,
                 'new pathway title'
             );
         });
 
         test('should save the pathway in memory and return the pathway saved', () => {
             expect(pathwayInMemoryRepository.patch).toHaveBeenCalledTimes(1);
-            expect(pathwayInMemoryRepository.get).toHaveBeenCalledTimes(1);
+            expect(pathwayInMemoryRepository.getByPathwayId).toHaveBeenCalledTimes(2);
 
-            expect(result.id).not.toBeEmpty();
             expect(result).not.toBe(pDSPBEPathwayEntity);
             expect(result.title).toStrictEqual(newTitle);
             expect(result.description).toStrictEqual(pDSPBEPathwayEntity.description);
@@ -82,7 +83,7 @@ describe('ChangeTitlePathwayInMemoryPersistence', () => {
 
         test('should throw an error', async () => {
             try {
-                await changeTitlePathwayInMemoryPersistence.changeTitle(pDSPBEPathwayEntity.id, newTitle);
+                await changeTitlePathwayInMemoryPersistence.changeTitle(pDSPBEPathwayEntity.pathwayId, newTitle);
             } catch (error) {
                 expect(error).toBeInstanceOf(NotFoundException);
                 expect((error as NotFoundException).message).toMatch(
@@ -105,7 +106,7 @@ describe('ChangeTitlePathwayInMemoryPersistence', () => {
                         provide: PathwayInMemoryRepository,
                         useValue: {
                             patch: () => undefined,
-                            get: () => undefined,
+                            getByPathwayId: () => undefined,
                         },
                     },
                 ],
@@ -124,7 +125,7 @@ describe('ChangeTitlePathwayInMemoryPersistence', () => {
 
         test('should throw an error', async () => {
             try {
-                await changeTitlePathwayInMemoryPersistence.changeTitle(pDSPBEPathwayEntity.id, newTitle);
+                await changeTitlePathwayInMemoryPersistence.changeTitle(pDSPBEPathwayEntity.pathwayId, newTitle);
             } catch (error) {
                 expect(error).toBeInstanceOf(NotFoundException);
                 expect((error as NotFoundException).message).toBe('Pathway not found in memory');

@@ -5,7 +5,7 @@ import type { PathwayTitleValueObject } from '../value-objects/pathway-title.val
 
 export interface InitializePathwayParams {
     description: PathwayDescriptionValueObject;
-    id: PathwayIdValueObject;
+    pathwayId: PathwayIdValueObject;
     researchField: PathwayResearchFieldValueObject;
     title: PathwayTitleValueObject;
 }

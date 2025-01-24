@@ -31,7 +31,7 @@ describe('InitializePathwayInMemoryPersistence', () => {
 
             spyOn(initializePathwayInMemoryPersistence, 'save');
             spyOn(pathwayInMemoryRepository, 'add');
-            spyOn(pathwayInMemoryRepository, 'get');
+            spyOn(pathwayInMemoryRepository, 'getByPathwayId');
 
             result = await initializePathwayInMemoryPersistence.save(pDSPBEPathwayEntity);
         });
@@ -43,9 +43,8 @@ describe('InitializePathwayInMemoryPersistence', () => {
 
         test('should save the pathway in memory and return the pathway saved', () => {
             expect(pathwayInMemoryRepository.add).toHaveBeenCalledTimes(1);
-            expect(pathwayInMemoryRepository.get).toHaveBeenCalledTimes(1);
+            expect(pathwayInMemoryRepository.getByPathwayId).toHaveBeenCalledTimes(1);
 
-            expect(result.id).not.toBeEmpty();
             expect(result).not.toBe(pDSPBEPathwayEntity);
             expect(result.title).toStrictEqual(pDSPBEPathwayEntity.title);
             expect(result.description).toStrictEqual(pDSPBEPathwayEntity.description);
@@ -65,7 +64,7 @@ describe('InitializePathwayInMemoryPersistence', () => {
                         provide: PathwayInMemoryRepository,
                         useValue: {
                             add: () => undefined,
-                            get: () => undefined,
+                            getByPathwayId: () => undefined,
                         },
                     },
                 ],

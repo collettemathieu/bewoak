@@ -4,7 +4,7 @@ import { PathwayInMemoryEntity } from '../entities/in-memory-pathway.entity';
 export const mapPathwayEntityToInMemoryPersistence = (pathway: PDSPBEPathwayEntity): PathwayInMemoryEntity => {
     const pathwayInMemoryEntity = new PathwayInMemoryEntity(
         pathway.description,
-        pathway.id,
+        pathway.pathwayId,
         pathway.researchField,
         pathway.title
     );
@@ -15,7 +15,7 @@ export const mapPathwayEntityToInMemoryPersistence = (pathway: PDSPBEPathwayEnti
 export const mapPathwayInMemoryToPathwayEntity = (pathwayInMemoryEntity: PathwayInMemoryEntity): PDSPBEPathwayEntity => {
     const pathway = pDSPBFPathwayFactory({
         description: pathwayInMemoryEntity.description,
-        id: pathwayInMemoryEntity.id,
+        pathwayId: pathwayInMemoryEntity.pathwayId,
         researchField: pathwayInMemoryEntity.researchField,
         title: pathwayInMemoryEntity.title,
     });

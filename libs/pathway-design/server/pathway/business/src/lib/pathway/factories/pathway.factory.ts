@@ -8,7 +8,7 @@ import type { PathwayFactoryParams } from './pathway.factory.types';
 
 export const pDSPBFPathwayFactory = ({
     description: descriptionValue,
-    id: idValue,
+    pathwayId: pathwayIdValue,
     researchField: researchFieldValue,
     title: titleValue,
 }: PathwayFactoryParams) => {
@@ -17,11 +17,11 @@ export const pDSPBFPathwayFactory = ({
     const researchField = new PathwayResearchFieldValueObject(researchFieldValue);
     const title = new PathwayTitleValueObject(titleValue);
 
-    const uuid = idValue ?? randomUUID();
-    const id = new PathwayIdValueObject(uuid);
+    const uuid = pathwayIdValue ?? randomUUID();
+    const pathwayId = new PathwayIdValueObject(uuid);
 
     pathway.initialize({
-        id,
+        pathwayId,
         title,
         description,
         researchField,

@@ -1,5 +1,5 @@
-import { pDCPBRPathwayTitleRules } from '@bewoak/pathway-design-common-pathway-business-rules';
 import { beforeAll, describe, expect, test } from 'bun:test';
+import { pDCPBRPathwayTitleRules } from '@bewoak/pathway-design-common-pathway-business-rules';
 import { PathwayTitleValueObject } from './pathway-title.value-object';
 
 describe('PathwayTitleValueObject', () => {

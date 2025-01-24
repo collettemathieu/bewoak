@@ -2,7 +2,7 @@ import type { PDSPBPPathwayPresenters } from '@bewoak/pathway-design-server-path
 
 export class InitializedPathwayResponseBodyDto implements PDSPBPPathwayPresenters {
     description!: string;
-    id!: string;
+    pathwayId!: string;
     researchField!: string;
     title!: string;
 }

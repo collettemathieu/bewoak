@@ -1,6 +1,6 @@
+import { strict as assert } from 'node:assert';
 import type { DataTable } from '@cucumber/cucumber';
 import { binding, given, then, when } from 'cucumber-tsflow';
-import { strict as assert } from 'node:assert';
 import type { PDSPBEPathwayEntity } from '../../entities/pathway';
 import { pDSPBFPathwayFactory } from '../../factories/pathway.factory';
 

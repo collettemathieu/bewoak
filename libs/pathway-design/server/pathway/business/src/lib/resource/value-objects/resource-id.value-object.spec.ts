@@ -1,5 +1,5 @@
-import { pDCPBRResourceIdRules } from '@bewoak/pathway-design-common-pathway-business-rules';
 import { beforeAll, describe, expect, test } from 'bun:test';
+import { pDCPBRResourceIdRules } from '@bewoak/pathway-design-common-pathway-business-rules';
 import { ResourceIdValueObject } from './resource-id.value-object';
 
 describe('ResourceIdValueObject', () => {

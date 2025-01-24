@@ -1,5 +1,5 @@
-import { pDCPBRArticleIdRules } from '@bewoak/pathway-design-common-pathway-business-rules';
 import { beforeAll, describe, expect, test } from 'bun:test';
+import { pDCPBRArticleIdRules } from '@bewoak/pathway-design-common-pathway-business-rules';
 import { ArticleIdValueObject } from './article-id.value-object';
 
 describe('ArticleIdValueObject', () => {

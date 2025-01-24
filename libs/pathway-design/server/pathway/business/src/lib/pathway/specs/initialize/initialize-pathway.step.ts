@@ -1,7 +1,7 @@
-import type { DataTable } from '@cucumber/cucumber';
-import { binding, then, when } from 'cucumber-tsflow';
 import { strict as assert } from 'node:assert';
 import { randomUUID } from 'node:crypto';
+import type { DataTable } from '@cucumber/cucumber';
+import { binding, then, when } from 'cucumber-tsflow';
 import sinon from 'sinon';
 import { PDSPBEPathwayEntity } from '../../entities/pathway';
 import { PDSPBEPathwayInitializedEvent } from '../../events/pathway-initialized.event';
@@ -24,7 +24,7 @@ export default class PathwaySteps {
             researchField: string;
         };
         try {
-            const id = new PathwayIdValueObject(randomUUID());
+            const pathwayId = new PathwayIdValueObject(randomUUID());
             const title = new PathwayTitleValueObject(data.title);
             const description = new PathwayDescriptionValueObject(data.description);
             const researchField = new PathwayResearchFieldValueObject(data.researchField);
@@ -33,7 +33,7 @@ export default class PathwaySteps {
             this.applyMethodSpy = sinon.spy(this.pDSPBEPathwayEntity, 'apply');
 
             this.pDSPBEPathwayEntity.initialize({
-                id,
+                pathwayId,
                 title,
                 description,
                 researchField,
@@ -66,8 +66,8 @@ export default class PathwaySteps {
             throw new Error('Pathway is not initialized');
         }
 
-        const expectedEvent = new PDSPBEPathwayInitializedEvent(this.pDSPBEPathwayEntity.id, {
-            pathwayId: this.pDSPBEPathwayEntity.id,
+        const expectedEvent = new PDSPBEPathwayInitializedEvent(this.pDSPBEPathwayEntity.pathwayId, {
+            pathwayId: this.pDSPBEPathwayEntity.pathwayId,
             title: this.pDSPBEPathwayEntity.title,
             description: this.pDSPBEPathwayEntity.description,
             researchField: this.pDSPBEPathwayEntity.researchField,

@@ -13,7 +13,7 @@ import type { AddArticleParams, InitializePathwayParams } from './pathway.types'
 export class PDSPBEPathwayEntity extends AggregateRoot {
     #articleList: ArticleEntity[] = [];
     #description: PathwayDescriptionValueObject | undefined;
-    #id: PathwayIdValueObject | undefined;
+    #pathwayId: PathwayIdValueObject | undefined;
     #researchField: PathwayResearchFieldValueObject | undefined;
     #title: PathwayTitleValueObject | undefined;
 
@@ -25,8 +25,8 @@ export class PDSPBEPathwayEntity extends AggregateRoot {
         return this.#description?.value ?? '';
     }
 
-    get id() {
-        return this.#id?.value ?? '';
+    get pathwayId() {
+        return this.#pathwayId?.value ?? '';
     }
 
     get researchField() {
@@ -37,16 +37,16 @@ export class PDSPBEPathwayEntity extends AggregateRoot {
         return this.#title?.value ?? '';
     }
 
-    initialize({ id, title, description, researchField }: InitializePathwayParams) {
+    initialize({ pathwayId, title, description, researchField }: InitializePathwayParams) {
         this.#description = description;
-        this.#id = id;
+        this.#pathwayId = pathwayId;
         this.#researchField = researchField;
         this.#title = title;
 
         this.apply(
-            new PDSPBEPathwayInitializedEvent(this.id, {
+            new PDSPBEPathwayInitializedEvent(this.pathwayId, {
                 description: this.description,
-                pathwayId: this.id,
+                pathwayId: this.pathwayId,
                 researchField: this.researchField,
                 title: this.title,
             }),
@@ -60,8 +60,8 @@ export class PDSPBEPathwayEntity extends AggregateRoot {
         this.#title = title;
 
         this.apply(
-            new PDSPBEPathwayTitleChangedEvent(this.id, {
-                pathwayId: this.id,
+            new PDSPBEPathwayTitleChangedEvent(this.pathwayId, {
+                pathwayId: this.pathwayId,
                 title: title.value,
             }),
             {

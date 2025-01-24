@@ -1,5 +1,3 @@
-import { strict as assert } from 'node:assert';
-import type { Http2Server } from 'node:http2';
 import { CCEPPathwayInitializedEvent } from '@bewoak/common-contracts-events-pathway';
 import {
     PDSPIPPathwayPersistenceInfrastructureModule,
@@ -16,6 +14,8 @@ import { CqrsModule } from '@nestjs/cqrs';
 import { EventEmitter2, EventEmitterModule } from '@nestjs/event-emitter';
 import { Test } from '@nestjs/testing';
 import { binding, given, then, when } from 'cucumber-tsflow';
+import { strict as assert } from 'node:assert';
+import type { Http2Server } from 'node:http2';
 import sinon from 'sinon';
 import request from 'supertest';
 
@@ -72,7 +72,7 @@ class ControllerSteps {
     public thenPlatformSendAnEventToEventBus() {
         const expectedEvent = new CCEPPathwayInitializedEvent(
             this.response.body.description,
-            this.response.body.id,
+            this.response.body.pathwayId,
             this.response.body.researchField,
             this.response.body.title
         );
@@ -96,8 +96,8 @@ class ControllerSteps {
 
     @then('The pathway received from the platform should be have a unique identifier')
     public thenThePathwayIdentifierShouldBeUnique() {
-        assert.notEqual(this.response.body.id, undefined);
-        assert.notEqual(this.response.body.id, '');
+        assert.notEqual(this.response.body.pathwayId, undefined);
+        assert.notEqual(this.response.body.pathwayId, '');
     }
 }
 

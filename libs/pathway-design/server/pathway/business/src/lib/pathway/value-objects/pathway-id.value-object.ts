@@ -2,20 +2,20 @@ import { CTSEBadRequestException } from '@bewoak/common-tools-server-http-except
 import { pDCPBRPathwayIdRules } from '@bewoak/pathway-design-common-pathway-business-rules';
 
 export class PathwayIdValueObject {
-    constructor(private readonly id: string) {
-        if (pDCPBRPathwayIdRules.isValid(id) === false) {
+    constructor(private readonly pathwayId: string) {
+        if (pDCPBRPathwayIdRules.isValid(pathwayId) === false) {
             throw new CTSEBadRequestException(pDCPBRPathwayIdRules.textError());
         }
     }
     get value() {
-        return this.id;
+        return this.pathwayId;
     }
 
     equals(pathwayIdValueObject: PathwayIdValueObject): boolean {
-        return this.id === pathwayIdValueObject.value;
+        return this.pathwayId === pathwayIdValueObject.value;
     }
 
     toString() {
-        return this.id.toString();
+        return this.pathwayId.toString();
     }
 }

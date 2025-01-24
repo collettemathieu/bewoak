@@ -1,3 +1,4 @@
+import { strict as assert } from 'node:assert';
 import type {
     PDSPBEPathwayEntity,
     PDSPBPInitializePathwayPersistence,
@@ -7,7 +8,6 @@ import type {
 import type { DataTable } from '@cucumber/cucumber';
 import type { EventPublisher } from '@nestjs/cqrs';
 import { before, binding, then, when } from 'cucumber-tsflow';
-import { strict as assert } from 'node:assert';
 import sinon from 'sinon';
 import { PDSPAIUInitializePathwayUsecase } from '../usecase/initialize-pathway.usecase';
 
@@ -21,7 +21,7 @@ class FakePathwayPresenter implements PDSPBPPathwayPresenter {
     present(pDSPBEPathwayEntity: PDSPBEPathwayEntity) {
         return {
             description: pDSPBEPathwayEntity.description,
-            id: pDSPBEPathwayEntity.id,
+            pathwayId: pDSPBEPathwayEntity.pathwayId,
             researchField: pDSPBEPathwayEntity.researchField,
             title: pDSPBEPathwayEntity.title,
         };

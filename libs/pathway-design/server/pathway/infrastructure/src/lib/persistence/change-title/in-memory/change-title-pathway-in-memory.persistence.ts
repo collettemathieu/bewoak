@@ -17,7 +17,7 @@ export class ChangeTitlePathwayInMemoryPersistence implements PDSPBPChangeTitleP
             throw new NotFoundException(`An error has occurred while changing the title of the pathway: ${error}`);
         }
 
-        const pathwayInMemory = await this.pathwayInMemoryRepository.get(pathwayId);
+        const pathwayInMemory = await this.pathwayInMemoryRepository.getByPathwayId(pathwayId);
 
         if (pathwayInMemory === undefined) {
             throw new NotFoundException('Pathway not found in memory');
