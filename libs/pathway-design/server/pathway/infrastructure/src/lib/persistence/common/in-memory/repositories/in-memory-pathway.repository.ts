@@ -3,11 +3,13 @@ import type { PathwayInMemoryPatchParameters } from '../types/in-memory-pathway.
 
 export class PathwayInMemoryRepository {
     #pathways = new Map<string, PathwayInMemoryEntity>();
+    #indexById = new Map<string, string>();
 
     async add(pathwayInMemoryEntity: PathwayInMemoryEntity) {
-        const id = this.getNextId();
+        const id = this.#getNextId();
         pathwayInMemoryEntity.id = id;
         this.#pathways.set(id, pathwayInMemoryEntity);
+        this.#indexById.set(pathwayInMemoryEntity.pathwayId, id);
     }
 
     async patch(pathwayId: string, { description, researchField, title }: PathwayInMemoryPatchParameters) {
@@ -28,24 +30,19 @@ export class PathwayInMemoryRepository {
         this.#pathways.set(pathway.id, newPathway);
     }
 
-    async getById(id: string) {
-        return this.#pathways.get(id);
-    }
-
     async getByPathwayId(pathwayId: string) {
-        const pathwayList = Array.from(this.#pathways.values());
-        const index = pathwayList.findIndex((pathway) => pathway.pathwayId === pathwayId);
+        const id = this.#indexById.get(pathwayId);
 
-        if (index === -1) {
+        if (id === undefined) {
             return undefined;
         }
 
-        const pathway = { id: (index + 1).toString(), ...pathwayList[index] };
+        const pathway = this.#pathways.get(id);
 
         return pathway;
     }
 
-    getNextId() {
+    #getNextId() {
         return (this.#pathways.size + 1).toString();
     }
 }
