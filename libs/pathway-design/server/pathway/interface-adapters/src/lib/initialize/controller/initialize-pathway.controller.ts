@@ -1,6 +1,6 @@
 // biome-ignore lint/style/useImportType: <explanation>
 import { PDSPAInitializePathwayCommand, PDSPAInitializePathwayService } from '@bewoak/pathway-design-server-pathway-application';
-import { Body, Controller, HttpStatus, Post, UsePipes, ValidationPipe } from '@nestjs/common';
+import { Body, Controller, Post, UsePipes, ValidationPipe } from '@nestjs/common';
 import { ApiBadRequestResponse, ApiCreatedResponse, ApiTags } from '@nestjs/swagger';
 // biome-ignore lint/style/useImportType: <explanation>
 import { InitializePathwayRequestBodyDto } from '../dtos/request/body/request-body.dto';
@@ -25,7 +25,6 @@ export class InitializePathwayController {
         type: InitializedPathwayResponseBodyDto,
     })
     @ApiBadRequestResponse({
-        status: HttpStatus.BAD_REQUEST,
         description: 'Cannot initiate pathway. Data are not valid.',
     })
     execute(

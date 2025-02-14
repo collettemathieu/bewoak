@@ -28,13 +28,16 @@ class ControllerSteps {
 
     @given('I am authenticated on the platform for change the title of the pathway with {string} and {string}')
     public async connectToPlatform(presenter: PDSPPPresenterDriverAuthorized, persistence: PDSPIPPersistenceDriverAuthorized) {
+        const persistenceModule = PDSPIPPathwayPersistenceInfrastructureModule.use(persistence);
+        const presenterModule = PDSPPPathwayPresentersModule.use(presenter);
+
         const testingModule = await Test.createTestingModule({
             imports: [
-                PDSPIAChangeTitlePathwayInterfaceAdaptersModule.withPresenter(PDSPPPathwayPresentersModule.use(presenter))
-                    .withPersistence(PDSPIPPathwayPersistenceInfrastructureModule.use(persistence))
+                PDSPIAChangeTitlePathwayInterfaceAdaptersModule.withPresenter(presenterModule)
+                    .withPersistence(persistenceModule)
                     .build(),
-                PDSPIAInitializePathwayInterfaceAdaptersModule.withPresenter(PDSPPPathwayPresentersModule.use(presenter))
-                    .withPersistence(PDSPIPPathwayPersistenceInfrastructureModule.use(persistence))
+                PDSPIAInitializePathwayInterfaceAdaptersModule.withPresenter(presenterModule)
+                    .withPersistence(persistenceModule)
                     .build(),
                 CqrsModule.forRoot(),
                 EventEmitterModule.forRoot({

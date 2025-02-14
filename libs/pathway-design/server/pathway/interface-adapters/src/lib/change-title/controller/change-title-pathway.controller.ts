@@ -3,7 +3,7 @@ import {
     PDSPAChangeTitlePathwayCommand,
     PDSPAChangeTitlePathwayService,
 } from '@bewoak/pathway-design-server-pathway-application';
-import { Body, Controller, HttpStatus, Param, Patch, UsePipes, ValidationPipe } from '@nestjs/common';
+import { Body, Controller, Param, Patch, UsePipes, ValidationPipe } from '@nestjs/common';
 import { ApiBadRequestResponse, ApiOkResponse, ApiTags } from '@nestjs/swagger';
 // biome-ignore lint/style/useImportType: <explanation>
 import { ChangeTitlePathwayRequestBodyDto } from '../dtos/request/body/request-body.dto';
@@ -30,7 +30,6 @@ export class ChangeTitlePathwayController {
         type: ChangeTitlePathwayResponseBodyDto,
     })
     @ApiBadRequestResponse({
-        status: HttpStatus.BAD_REQUEST,
         description: 'Cannot change the title of the pathway. Data are not valid.',
     })
     execute(

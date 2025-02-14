@@ -24,18 +24,17 @@ interface ApplicationBootstrapOptions {
 // biome-ignore lint/complexity/noStaticOnlyClass: <explanation>
 export class AppModule {
     static register(options: ApplicationBootstrapOptions) {
+        const persistenceModule = PDSPIPPathwayPersistenceInfrastructureModule.use(options.persistenceDriver);
+        const presenterModule = PDSPPPathwayPresentersModule.use(options.presenterDriver);
+
         return {
             module: AppModule,
             imports: [
-                PDSPIAChangeTitlePathwayInterfaceAdaptersModule.withPresenter(
-                    PDSPPPathwayPresentersModule.use(options.presenterDriver)
-                )
-                    .withPersistence(PDSPIPPathwayPersistenceInfrastructureModule.use(options.persistenceDriver))
+                PDSPIAChangeTitlePathwayInterfaceAdaptersModule.withPresenter(presenterModule)
+                    .withPersistence(persistenceModule)
                     .build(),
-                PDSPIAInitializePathwayInterfaceAdaptersModule.withPresenter(
-                    PDSPPPathwayPresentersModule.use(options.presenterDriver)
-                )
-                    .withPersistence(PDSPIPPathwayPersistenceInfrastructureModule.use(options.persistenceDriver))
+                PDSPIAInitializePathwayInterfaceAdaptersModule.withPresenter(presenterModule)
+                    .withPersistence(persistenceModule)
                     .build(),
                 CqrsModule.forRoot(),
                 EventEmitterModule.forRoot({
