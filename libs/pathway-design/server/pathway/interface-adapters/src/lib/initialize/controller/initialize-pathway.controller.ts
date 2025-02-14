@@ -19,7 +19,7 @@ import { InitializedPathwayResponseBodyDto } from '../dtos/response/body/respons
 export class InitializePathwayController {
     constructor(private readonly pDSPAInitializePathwayService: PDSPAInitializePathwayService) {}
 
-    @Post('init')
+    @Post('initialize')
     @ApiCreatedResponse({
         description: 'Pathway initialized.',
         type: InitializedPathwayResponseBodyDto,

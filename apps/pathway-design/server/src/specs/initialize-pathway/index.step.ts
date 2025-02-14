@@ -61,7 +61,7 @@ class ControllerSteps {
     public async whenIInitiateAPathway(dataTable: DataTable) {
         const firstRow = dataTable.hashes()[0];
 
-        this.response = await request(this.httpServer).post('/pathway/init').send({
+        this.response = await request(this.httpServer).post('/pathway/initialize').send({
             title: firstRow.title,
             description: firstRow.description,
             researchField: firstRow.researchField,
