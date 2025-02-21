@@ -10,16 +10,18 @@
         "lib": ["es2022", "dom"],
         "module": "esnext",
         "moduleResolution": "node",
+        "noEmitOnError": true,
         "noImplicitReturns": true,
         "noUnusedLocals": true,
         "noUnusedParameters": true,
-        "noEmitOnError": true,
         "paths": {
             "@bewoak/common-configs-server-env": ["libs/common/configs/server/env/src/index.ts"],
+            "@bewoak/common-configs-server-log": ["libs/common/configs/server/log/src/index.ts"],
             "@bewoak/common-configs-server-swagger": ["libs/common/configs/server/swagger/src/index.ts"],
             "@bewoak/common-contracts-events-pathway": ["libs/common/contracts/events/pathway/src/index.ts"],
             "@bewoak/common-events": ["libs/common/events/src/index.ts"],
             "@bewoak/common-tools-server-http-exceptions": ["libs/common/tools/server/http-exceptions/src/index.ts"],
+            "@bewoak/common-tools-types-result": ["libs/common/tools/types/result/src/index.ts"],
             "@bewoak/pathway-design-common-pathway-business-rules": [
                 "libs/pathway-design/common/pathway/business/rules/src/index.ts"
             ],

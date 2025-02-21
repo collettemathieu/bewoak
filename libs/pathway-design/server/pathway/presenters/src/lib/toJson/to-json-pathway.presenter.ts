@@ -3,6 +3,12 @@ import { Injectable } from '@nestjs/common';
 
 @Injectable()
 export class ToJsonPathwayPresenter implements PDSPBPPathwayPresenter {
+    error(message: string) {
+        return {
+            message,
+        };
+    }
+
     present(pDSPBEPathwayEntity: PDSPBEPathwayEntity) {
         return {
             description: pDSPBEPathwayEntity.description,

@@ -1,6 +1,6 @@
 import { beforeEach, describe, expect, spyOn, test } from 'bun:test';
+import { failureValue, successValue } from '@bewoak/common-tools-types-result';
 import { type PDSPBEPathwayEntity, pDSPBFPathwayFactory } from '@bewoak/pathway-design-server-pathway-business';
-import { NotFoundException } from '@nestjs/common';
 import { Test } from '@nestjs/testing';
 import { PathwayInMemoryRepository } from '../../common/in-memory/repositories/in-memory-pathway.repository';
 import { InitializePathwayInMemoryPersistence } from './initialize-pathway-in-memory.persistence';
@@ -33,7 +33,7 @@ describe('InitializePathwayInMemoryPersistence', () => {
             spyOn(pathwayInMemoryRepository, 'add');
             spyOn(pathwayInMemoryRepository, 'getByPathwayId');
 
-            result = await initializePathwayInMemoryPersistence.save(pDSPBEPathwayEntity);
+            result = successValue(await initializePathwayInMemoryPersistence.save(pDSPBEPathwayEntity));
         });
 
         test('should call the save method with the pathway in parameter', () => {
@@ -55,6 +55,7 @@ describe('InitializePathwayInMemoryPersistence', () => {
     describe('When I want to save a pathway but the pathway is not recovered in memory', () => {
         let initializePathwayInMemoryPersistence: InitializePathwayInMemoryPersistence;
         let pDSPBEPathwayEntity: PDSPBEPathwayEntity;
+        let result: string;
 
         beforeEach(async () => {
             const module = await Test.createTestingModule({
@@ -79,15 +80,12 @@ describe('InitializePathwayInMemoryPersistence', () => {
                 researchField: 'pathway research field',
                 title: 'pathway title',
             });
+
+            result = failureValue(await initializePathwayInMemoryPersistence.save(pDSPBEPathwayEntity));
         });
 
-        test('should throw an error', async () => {
-            try {
-                await initializePathwayInMemoryPersistence.save(pDSPBEPathwayEntity);
-            } catch (error) {
-                expect(error).toBeInstanceOf(NotFoundException);
-                expect((error as NotFoundException).message).toBe('Pathway not found in memory');
-            }
+        test('should send an error message', async () => {
+            expect(result).toBe('Pathway was not been added in memory');
         });
     });
 });

@@ -8,8 +8,13 @@ export interface PDSPBPJsonPathwayPresenter {
 }
 
 export type PDSPBPPathwayPresenters = PDSPBPJsonPathwayPresenter;
+export type PDSPBPPathwayPresenterError = {
+    message: string;
+};
+export type PDSPBPPathwayPresenterResult = PDSPBPPathwayPresenters | PDSPBPPathwayPresenterError;
 
 export interface PDSPBPPathwayPresenter {
+    error: (message: string) => PDSPBPPathwayPresenterError;
     present: (pDSPBEpathwayEntity: PDSPBEPathwayEntity) => PDSPBPPathwayPresenters;
 }
 

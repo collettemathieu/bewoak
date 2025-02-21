@@ -1,13 +1,15 @@
 import { Logger } from '@nestjs/common';
-import { NestFactory } from '@nestjs/core';
+import { HttpAdapterHost, NestFactory } from '@nestjs/core';
 
 import { AppModule } from './app/app.module';
 
 import { cCSECheckEnvironmentVariables, cCSEGetEnvironmentVariables } from '@bewoak/common-configs-server-env';
+import { LogHttpExceptionFilter, ServerLogger, runLogOtelInstrumentation } from '@bewoak/common-configs-server-log';
 import { cCSSSetupSwaggerDocument } from '@bewoak/common-configs-server-swagger';
 import { envSchema } from './environment/env.schema';
 
 async function bootstrap() {
+    runLogOtelInstrumentation();
     cCSECheckEnvironmentVariables(envSchema);
 
     const env = cCSEGetEnvironmentVariables(envSchema);
@@ -21,9 +23,15 @@ async function bootstrap() {
             persistenceDriver,
             presenterDriver,
         }),
-        { bufferLogs: true }
+        {
+            bufferLogs: true,
+            logger: new ServerLogger(),
+        }
     );
     app.setGlobalPrefix(globalPrefix);
+
+    const httpAdapter = app.get(HttpAdapterHost);
+    app.useGlobalFilters(new LogHttpExceptionFilter(httpAdapter));
 
     cCSSSetupSwaggerDocument(app, {
         description: 'API for Pathway Design',

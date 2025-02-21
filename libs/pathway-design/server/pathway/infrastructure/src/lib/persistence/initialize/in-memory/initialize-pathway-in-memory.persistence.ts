@@ -1,5 +1,6 @@
+import { failure, success } from '@bewoak/common-tools-types-result';
 import type { PDSPBEPathwayEntity, PDSPBPInitializePathwayPersistence } from '@bewoak/pathway-design-server-pathway-business';
-import { Inject, Injectable, NotFoundException } from '@nestjs/common';
+import { Inject, Injectable } from '@nestjs/common';
 import {
     mapPathwayEntityToInMemoryPersistence,
     mapPathwayInMemoryToPathwayEntity,
@@ -20,9 +21,9 @@ export class InitializePathwayInMemoryPersistence implements PDSPBPInitializePat
         const pathwayInMemory = await this.pathwayInMemoryRepository.getByPathwayId(peristenceModel.pathwayId);
 
         if (pathwayInMemory === undefined) {
-            throw new NotFoundException('Pathway not found in memory');
+            return failure('Pathway was not been added in memory');
         }
 
-        return mapPathwayInMemoryToPathwayEntity(pathwayInMemory);
+        return success(mapPathwayInMemoryToPathwayEntity(pathwayInMemory));
     }
 }

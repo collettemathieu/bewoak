@@ -1,8 +1,10 @@
 import { strict as assert } from 'node:assert';
+import { success } from '@bewoak/common-tools-types-result';
 import type {
     PDSPBEPathwayEntity,
     PDSPBPInitializePathwayPersistence,
     PDSPBPPathwayPresenter,
+    PDSPBPPathwayPresenterResult,
     PDSPBPPathwayPresenters,
 } from '@bewoak/pathway-design-server-pathway-business';
 import type { DataTable } from '@cucumber/cucumber';
@@ -13,11 +15,17 @@ import { PDSPAIUInitializePathwayUsecase } from '../usecase/initialize-pathway.u
 
 class FakeInitializePathwayPersistence implements PDSPBPInitializePathwayPersistence {
     save(pDSPBEPathwayEntity: PDSPBEPathwayEntity) {
-        return Promise.resolve(pDSPBEPathwayEntity);
+        return Promise.resolve(success(pDSPBEPathwayEntity));
     }
 }
 
 class FakePathwayPresenter implements PDSPBPPathwayPresenter {
+    error(message: string) {
+        return {
+            message,
+        };
+    }
+
     present(pDSPBEPathwayEntity: PDSPBEPathwayEntity) {
         return {
             description: pDSPBEPathwayEntity.description,
@@ -48,7 +56,7 @@ export default class ControllerSteps {
     private readonly pDSPBUInitPathwayUseCase = new PDSPAIUInitializePathwayUsecase();
     private persistenceSpy: sinon.SinonSpy | undefined;
     private presenterSpy: sinon.SinonSpy | undefined;
-    private result: PDSPBPPathwayPresenters | undefined;
+    private result: PDSPBPPathwayPresenterResult | undefined;
 
     @before()
     public before() {
@@ -84,9 +92,15 @@ export default class ControllerSteps {
             researchField: string;
         };
 
-        assert.strictEqual(this.result?.title, firstRow.title);
-        assert.strictEqual(this.result?.description, firstRow.description);
-        assert.strictEqual(this.result?.researchField, firstRow.researchField);
+        if (this.result === undefined) {
+            throw new Error('Result is undefined');
+        }
+
+        const result = this.result as PDSPBPPathwayPresenters;
+
+        assert.strictEqual(result.title, firstRow.title);
+        assert.strictEqual(result.description, firstRow.description);
+        assert.strictEqual(result.researchField, firstRow.researchField);
     }
 
     @then('It should call the persistence layer to save the pathway')

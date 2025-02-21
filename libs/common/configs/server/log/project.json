@@ -1,16 +1,16 @@
 {
-    "name": "common-tools-server-http-exceptions",
+    "name": "common-configs-server-log",
     "$schema": "../../../../../node_modules/nx/schemas/project-schema.json",
-    "sourceRoot": "libs/common/tools/server/http-exceptions/src",
+    "sourceRoot": "libs/common/configs/server/log/src",
     "projectType": "library",
     "targets": {
         "build": {
             "executor": "@nx/js:swc",
             "outputs": ["{options.outputPath}"],
             "options": {
-                "outputPath": "dist/libs/common/tools/server/http-exceptions",
-                "main": "libs/common/tools/server/http-exceptions/src/index.ts",
-                "tsConfig": "libs/common/tools/server/http-exceptions/tsconfig.lib.json",
+                "outputPath": "dist/libs/common/configs/server/log",
+                "main": "libs/common/configs/server/log/src/index.ts",
+                "tsConfig": "libs/common/configs/server/log/tsconfig.lib.json",
                 "assets": []
             }
         },
@@ -32,7 +32,7 @@
             }
         }
     },
-    "tags": ["type:common:tools:server:http-exceptions"],
+    "tags": ["type:common:configs:server:log"],
     "release": {
         "version": {
             "generatorOptions": {

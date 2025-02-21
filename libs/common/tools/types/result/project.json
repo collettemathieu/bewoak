@@ -1,16 +1,16 @@
 {
-    "name": "common-tools-server-http-exceptions",
+    "name": "common-tools-types-result",
     "$schema": "../../../../../node_modules/nx/schemas/project-schema.json",
-    "sourceRoot": "libs/common/tools/server/http-exceptions/src",
+    "sourceRoot": "libs/common/tools/types/result/src",
     "projectType": "library",
     "targets": {
         "build": {
             "executor": "@nx/js:swc",
             "outputs": ["{options.outputPath}"],
             "options": {
-                "outputPath": "dist/libs/common/tools/server/http-exceptions",
-                "main": "libs/common/tools/server/http-exceptions/src/index.ts",
-                "tsConfig": "libs/common/tools/server/http-exceptions/tsconfig.lib.json",
+                "outputPath": "dist/libs/common/tools/types/result",
+                "main": "libs/common/tools/types/result/src/index.ts",
+                "tsConfig": "libs/common/tools/types/result/tsconfig.lib.json",
                 "assets": []
             }
         },
@@ -32,7 +32,7 @@
             }
         }
     },
-    "tags": ["type:common:tools:server:http-exceptions"],
+    "tags": ["type:common:tools:types:result"],
     "release": {
         "version": {
             "generatorOptions": {
