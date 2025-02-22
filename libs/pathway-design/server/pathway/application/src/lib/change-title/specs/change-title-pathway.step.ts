@@ -40,6 +40,11 @@ class FakeChangeTitlePathwayPersistence implements PDSPBPChangeTitlePathwayPersi
 }
 
 class FakePathwayPresenter implements PDSPBPPathwayPresenter {
+    error(message: string) {
+        return {
+            message,
+        };
+    }
     present(pDSPBEPathwayEntity: PDSPBEPathwayEntity) {
         return {
             description: pDSPBEPathwayEntity.description,

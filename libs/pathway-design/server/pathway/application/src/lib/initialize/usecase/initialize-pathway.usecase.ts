@@ -5,7 +5,7 @@ import {
     pDSPBFPathwayFactory,
 } from '@bewoak/pathway-design-server-pathway-business';
 import type { EventPublisher } from '@nestjs/cqrs';
-import { firstValueFrom, iif, of, switchMap } from 'rxjs';
+import { firstValueFrom, of, switchMap } from 'rxjs';
 
 export class PDSPAIUInitializePathwayUsecase {
     execute(
@@ -38,11 +38,9 @@ export class PDSPAIUInitializePathwayUsecase {
                     return pDSPBPInitializePathwayPersistence.save(pathway);
                 }),
                 switchMap((result) =>
-                    iif(
-                        () => isSuccess(result),
-                        of(pDSPBPPathwayPresenter.present(successValue(result))),
-                        of(pDSPBPPathwayPresenter.error(failureValue(result)))
-                    )
+                    isSuccess(result)
+                        ? of(pDSPBPPathwayPresenter.present(successValue(result)))
+                        : of(pDSPBPPathwayPresenter.error(failureValue(result)))
                 )
             )
         );

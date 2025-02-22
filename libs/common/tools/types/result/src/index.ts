@@ -7,4 +7,4 @@ export {
     successValue,
     type AsyncResult,
     type Result,
-} from './lib/result.types';
+} from './lib/types';
