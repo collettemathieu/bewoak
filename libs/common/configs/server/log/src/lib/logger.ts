@@ -1,61 +1,67 @@
 import { Injectable, type LoggerService } from '@nestjs/common';
-import { SeverityNumber, logs } from '@opentelemetry/api-logs';
+import { type Logger, SeverityNumber, logs } from '@opentelemetry/api-logs';
+import { attributes } from './logger.helpers';
+import type { OptionalParams } from './logger.types';
 
 @Injectable()
 export class ServerLogger implements LoggerService {
-    #logger = logs.getLogger('example', '1.0.0');
+    #logger: Logger;
 
-    log(message: string, ...optionalParams: ({ [attributeKey: string]: string | number | boolean } | string)[]) {
+    constructor(name: string, version: string) {
+        this.#logger = logs.getLogger(name, version);
+    }
+
+    log(message: string, ...optionalParams: OptionalParams[]) {
         this.#logger.emit({
             severityNumber: SeverityNumber.INFO,
             severityText: 'INFO',
             body: message,
-            attributes: { optionalParams },
+            attributes: attributes(...optionalParams),
         });
     }
 
-    fatal(message: string, ...optionalParams: any[]) {
+    fatal(message: string, ...optionalParams: OptionalParams[]) {
         this.#logger.emit({
             severityNumber: SeverityNumber.FATAL,
             severityText: 'FATAL',
             body: message,
-            attributes: { optionalParams },
+            attributes: attributes(...optionalParams),
         });
     }
 
-    error(message: string, ...optionalParams: ({ [attributeKey: string]: string | number | boolean } | string)[]) {
+    error(message: string, ...optionalParams: OptionalParams[]) {
         this.#logger.emit({
             severityNumber: SeverityNumber.ERROR,
             severityText: 'ERROR',
             body: message,
-            attributes: { optionalParams },
+            attributes: attributes(...optionalParams),
         });
     }
 
-    warn(message: string, ...optionalParams: any[]) {
+    warn(message: string, ...optionalParams: OptionalParams[]) {
         this.#logger.emit({
             severityNumber: SeverityNumber.WARN,
             severityText: 'WARN',
             body: message,
-            attributes: { optionalParams },
+            attributes: attributes(...optionalParams),
         });
     }
 
-    debug(message: string, ...optionalParams: any[]) {
+    debug(message: string, ...optionalParams: OptionalParams[]) {
         this.#logger.emit({
             severityNumber: SeverityNumber.DEBUG,
             severityText: 'DEBUG',
             body: message,
-            attributes: { optionalParams },
+            attributes: attributes(...optionalParams),
         });
     }
 
-    verbose(message: string, ...optionalParams: any[]) {
+    verbose(message: string, ...optionalParams: OptionalParams[]) {
         this.#logger.emit({
             severityNumber: SeverityNumber.TRACE,
             severityText: 'TRACE',
             body: message,
-            attributes: { optionalParams },
+            attributes: attributes(...optionalParams),
         });
     }
 }

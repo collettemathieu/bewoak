@@ -4,8 +4,9 @@ import { HttpAdapterHost, NestFactory } from '@nestjs/core';
 import { AppModule } from './app/app.module';
 
 import { cCSECheckEnvironmentVariables, cCSEGetEnvironmentVariables } from '@bewoak/common-configs-server-env';
-import { LogHttpExceptionFilter, ServerLogger, runLogOtelInstrumentation } from '@bewoak/common-configs-server-log';
+import { ServerLogger, runLogOtelInstrumentation } from '@bewoak/common-configs-server-log';
 import { cCSSSetupSwaggerDocument } from '@bewoak/common-configs-server-swagger';
+import { LogHttpExceptionFilter } from '@bewoak/common-tools-server-http-exceptions';
 import { envSchema } from './environment/env.schema';
 
 async function bootstrap() {
@@ -25,7 +26,7 @@ async function bootstrap() {
         }),
         {
             bufferLogs: true,
-            logger: new ServerLogger(),
+            logger: new ServerLogger('PathwayDesignServer', '1.0.0'),
         }
     );
     app.setGlobalPrefix(globalPrefix);
