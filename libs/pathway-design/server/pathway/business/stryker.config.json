@@ -14,10 +14,10 @@
     "packageManager": "npm",
     "reporters": ["html", "progress", "json"],
     "jsonReporter": {
-        "fileName": "reports/mutation-testing/libs/pathway-design/server/pathway/business/index.json"
+        "fileName": "reports/test-mutation/libs/pathway-design/server/pathway/business/index.json"
     },
     "htmlReporter": {
-        "fileName": "reports/mutation-testing/libs/pathway-design/server/pathway/business/index.html"
+        "fileName": "reports/test-mutation/libs/pathway-design/server/pathway/business/index.html"
     },
     "testRunner": "command",
     "testRunner_comment": "Take a look at (missing 'homepage' URL in package.json) for information about the command plugin."

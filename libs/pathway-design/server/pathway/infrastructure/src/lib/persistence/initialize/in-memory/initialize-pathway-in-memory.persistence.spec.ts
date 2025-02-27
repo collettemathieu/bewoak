@@ -1,5 +1,6 @@
 import { beforeEach, describe, expect, spyOn, test } from 'bun:test';
 import type { CTSEInternalServerException } from '@bewoak/common-http-exceptions-server';
+import { ServerLogger } from '@bewoak/common-log-server';
 import { failureValue, successValue } from '@bewoak/common-types-result';
 import { type PDSPBEPathwayEntity, pDSPBFPathwayFactory } from '@bewoak/pathway-design-server-pathway-business';
 import { Test } from '@nestjs/testing';
@@ -9,14 +10,18 @@ import { InitializePathwayInMemoryPersistence } from './initialize-pathway-in-me
 describe('InitializePathwayInMemoryPersistence', () => {
     describe('When I want to save a pathway in memory and there is no error', () => {
         let initializePathwayInMemoryPersistence: InitializePathwayInMemoryPersistence;
-        let pathwayInMemoryRepository: PathwayInMemoryRepository;
         let pDSPBEPathwayEntity: PDSPBEPathwayEntity;
+        let pathwayInMemoryRepository: PathwayInMemoryRepository;
         let result: PDSPBEPathwayEntity;
+        let serverLogger: ServerLogger;
 
         beforeEach(async () => {
             const module = await Test.createTestingModule({
                 providers: [InitializePathwayInMemoryPersistence, PathwayInMemoryRepository],
             }).compile();
+
+            serverLogger = new ServerLogger('', '');
+            module.useLogger(serverLogger);
 
             initializePathwayInMemoryPersistence = module.get<InitializePathwayInMemoryPersistence>(
                 InitializePathwayInMemoryPersistence
@@ -30,11 +35,17 @@ describe('InitializePathwayInMemoryPersistence', () => {
                 title: 'pathway title',
             });
 
+            spyOn(serverLogger, 'error');
+
             spyOn(initializePathwayInMemoryPersistence, 'save');
             spyOn(pathwayInMemoryRepository, 'add');
             spyOn(pathwayInMemoryRepository, 'getByPathwayId');
 
             result = successValue(await initializePathwayInMemoryPersistence.save(pDSPBEPathwayEntity));
+        });
+
+        test('logger should not have been called', () => {
+            expect(serverLogger.error).not.toHaveBeenCalled();
         });
 
         test('should call the save method with the pathway in parameter', () => {
@@ -57,6 +68,7 @@ describe('InitializePathwayInMemoryPersistence', () => {
         let initializePathwayInMemoryPersistence: InitializePathwayInMemoryPersistence;
         let pDSPBEPathwayEntity: PDSPBEPathwayEntity;
         let result: CTSEInternalServerException;
+        let serverLogger: ServerLogger;
 
         beforeEach(async () => {
             const module = await Test.createTestingModule({
@@ -72,6 +84,11 @@ describe('InitializePathwayInMemoryPersistence', () => {
                 ],
             }).compile();
 
+            serverLogger = new ServerLogger('', '');
+            module.useLogger(serverLogger);
+
+            spyOn(serverLogger, 'error');
+
             initializePathwayInMemoryPersistence = module.get<InitializePathwayInMemoryPersistence>(
                 InitializePathwayInMemoryPersistence
             );
@@ -83,6 +100,16 @@ describe('InitializePathwayInMemoryPersistence', () => {
             });
 
             result = failureValue(await initializePathwayInMemoryPersistence.save(pDSPBEPathwayEntity));
+        });
+
+        test('logger should have been called', () => {
+            expect(serverLogger.error).toHaveBeenCalledTimes(1);
+            expect(serverLogger.error).toHaveBeenCalledWith(
+                result.message,
+                result,
+                { constructor: 'InitializePathwayInMemoryPersistence' },
+                { method: 'save' }
+            );
         });
 
         test('should send an error message', async () => {

@@ -22,6 +22,7 @@
             "@bewoak/common-events": ["libs/common/events/src/index.ts"],
             "@bewoak/common-http-exceptions-server": ["libs/common/http-exceptions/server/src/index.ts"],
             "@bewoak/common-interceptors-server": ["libs/common/interceptors/server/src/index.ts"],
+            "@bewoak/common-log-server": ["libs/common/log/server/src/index.ts"],
             "@bewoak/common-types-result": ["libs/common/types/result/src/index.ts"],
             "@bewoak/pathway-design-common-pathway-business-rules": [
                 "libs/pathway-design/common/pathway/business/rules/src/index.ts"

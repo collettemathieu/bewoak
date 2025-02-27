@@ -1,16 +1,16 @@
 {
-    "name": "pathway-design-server-pathway-business",
-    "$schema": "../../../../../../../node_modules/nx/schemas/project-schema.json",
-    "sourceRoot": "libs/pathway-design/server/pathway/business/src",
+    "name": "common-log-server",
+    "$schema": "../../../../node_modules/nx/schemas/project-schema.json",
+    "sourceRoot": "libs/common/log/server/src",
     "projectType": "library",
     "targets": {
         "build": {
             "executor": "@nx/js:swc",
             "outputs": ["{options.outputPath}"],
             "options": {
-                "outputPath": "dist/libs/pathway-design/server/pathway/business",
-                "main": "libs/pathway-design/server/pathway/business/src/index.ts",
-                "tsConfig": "libs/pathway-design/server/pathway/business/tsconfig.lib.json",
+                "outputPath": "dist/libs/common/log/server",
+                "main": "libs/common/log/server/src/index.ts",
+                "tsConfig": "libs/common/log/server/tsconfig.lib.json",
                 "assets": []
             }
         },
@@ -31,12 +31,6 @@
                 "command": "bun test --coverage --coverage-dir=dist/reports/{projectRoot}/coverage --coverage-reporter=lcov {projectRoot}"
             }
         },
-        "test-feature": {
-            "executor": "nx:run-commands",
-            "options": {
-                "command": "TS_NODE_PROJECT='{projectRoot}/tsconfig.spec.json' bun run cucumber-js --config={projectRoot}/cucumber.js"
-            }
-        },
         "test-mutation": {
             "executor": "nx:run-commands",
             "options": {
@@ -44,7 +38,7 @@
             }
         }
     },
-    "tags": ["type:pathway-design:server:pathway:business"],
+    "tags": ["type:common:configs:server:log"],
     "release": {
         "version": {
             "generatorOptions": {

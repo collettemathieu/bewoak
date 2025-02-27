@@ -37,10 +37,10 @@
                 "command": "TS_NODE_PROJECT='{projectRoot}/tsconfig.spec.json' bun run cucumber-js --config={projectRoot}/cucumber.js"
             }
         },
-        "mutation-testing": {
+        "test-mutation": {
             "executor": "nx:run-commands",
             "options": {
-                "command": "bun run stryker run {projectRoot}/stryker.config.json && bunx lite-server --baseDir=reports/mutation-testing/{projectRoot}"
+                "command": "bun run stryker run {projectRoot}/stryker.config.json && bunx lite-server --baseDir=reports/test-mutation/{projectRoot}"
             }
         }
     },

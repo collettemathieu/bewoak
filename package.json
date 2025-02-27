@@ -78,7 +78,7 @@
         "test:ci": "bun run test:unit && bun run test:feature && bun run lint && bun run format && bun run build",
         "test:feature": "nx run-many --target=test-feature --parallel=4",
         "test:load-testing": "nx run-many --target=load-testing --output-style=static",
-        "test:mutation": "nx run-many --target=mutation-testing --parallel=4",
+        "test:mutation": "nx run-many --target=test-mutation --parallel=4",
         "test:unit": "nx run-many --target=test --parallel=4",
         "tools:autocanon": "autocannon -c 10 -d 10s http://localhost:3000/api/pathway/initialize",
         "tools:detective": "detective"

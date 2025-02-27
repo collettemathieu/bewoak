@@ -1,0 +1,24 @@
+{
+    "$schema": "../../../../node_modules/@stryker-mutator/core/schema/stryker-schema.json",
+    "cleanTempDir": "always",
+    "commandRunner": {
+        "command": "bun test"
+    },
+    "coverageAnalysis": "off",
+    "logLevel": "debug",
+    "mutate": [
+        "libs/common/log/server/src/lib/logger.helpers.ts",
+        "libs/common/log/server/src/lib/logger.decorator.ts",
+        "!libs/common/log/server/src/lib/**/*.spec.ts"
+    ],
+    "packageManager": "npm",
+    "reporters": ["html", "progress", "json"],
+    "jsonReporter": {
+        "fileName": "reports/test-mutation/libs/common/log/server/index.json"
+    },
+    "htmlReporter": {
+        "fileName": "reports/test-mutation/libs/common/log/server/index.html"
+    },
+    "testRunner": "command",
+    "testRunner_comment": "Take a look at (missing 'homepage' URL in package.json) for information about the command plugin."
+}
