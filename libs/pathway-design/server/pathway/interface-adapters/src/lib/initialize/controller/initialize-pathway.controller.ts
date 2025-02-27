@@ -5,8 +5,8 @@ import { ApiBadRequestResponse, ApiCreatedResponse, ApiTags } from '@nestjs/swag
 // biome-ignore lint/style/useImportType: <explanation>
 import { InitializePathwayRequestBodyDto } from '../dtos/request/body/request-body.dto';
 import {
-    InitializedPathwayResponseBodyErrorDto,
-    InitializedPathwayResponseBodySuccessDto,
+    InitializedPathwayBadRequestExceptionBodyDto,
+    InitializedPathwayResponseBodyDto,
 } from '../dtos/response/body/response-body.dto';
 
 @ApiTags('Pathway')
@@ -25,15 +25,13 @@ export class InitializePathwayController {
     @Post('initialize')
     @ApiCreatedResponse({
         description: 'Pathway initialized.',
-        type: InitializedPathwayResponseBodySuccessDto,
+        type: InitializedPathwayResponseBodyDto,
     })
     @ApiBadRequestResponse({
         description: 'Cannot initiate pathway. Data are not valid.',
-        type: InitializedPathwayResponseBodyErrorDto,
+        type: InitializedPathwayBadRequestExceptionBodyDto,
     })
-    execute(
-        @Body() initializePathwayRequestBodyDto: InitializePathwayRequestBodyDto
-    ): Promise<InitializedPathwayResponseBodySuccessDto | InitializedPathwayResponseBodyErrorDto> {
+    execute(@Body() initializePathwayRequestBodyDto: InitializePathwayRequestBodyDto) {
         return this.pDSPAInitializePathwayService.initialize(
             new PDSPAInitializePathwayCommand(
                 initializePathwayRequestBodyDto.description,

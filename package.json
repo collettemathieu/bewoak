@@ -71,7 +71,7 @@
         "lint": "nx run-many --target=lint --parallel=4",
         "nx": "nx",
         "postinstall": "chmod +x .hooks/* && git config core.hooksPath .hooks",
-        "start:pathway-design:app": "PORT=3000 GLOBAL_PREFIX=api PERSISTENCE_DRIVER=inMemory PRESENTER_DRIVER=toJson nx serve pathway-design-server",
+        "start:pathway-design:app": "bun run nx reset && PORT=3000 GLOBAL_PREFIX=api PERSISTENCE_DRIVER=inMemory PRESENTER_DRIVER=toJson nx serve pathway-design-server",
         "start:search:app": "PORT=3000 GLOBAL_PREFIX=api nx serve search-server",
         "stryker": "stryker",
         "test": "rm -rf dist && rm -rf reports && bun run nx reset && bun run test:ci",

@@ -1,16 +1,16 @@
 {
-    "name": "common-tools-server-http-exceptions",
-    "$schema": "../../../../../node_modules/nx/schemas/project-schema.json",
-    "sourceRoot": "libs/common/tools/server/http-exceptions/src",
+    "name": "common-interceptors-server",
+    "$schema": "../../../../node_modules/nx/schemas/project-schema.json",
+    "sourceRoot": "libs/common/interceptors/server/src",
     "projectType": "library",
     "targets": {
         "build": {
             "executor": "@nx/js:swc",
             "outputs": ["{options.outputPath}"],
             "options": {
-                "outputPath": "dist/libs/common/tools/server/http-exceptions",
-                "main": "libs/common/tools/server/http-exceptions/src/index.ts",
-                "tsConfig": "libs/common/tools/server/http-exceptions/tsconfig.lib.json",
+                "outputPath": "dist/libs/common/interceptors/server",
+                "main": "libs/common/interceptors/server/src/index.ts",
+                "tsConfig": "libs/common/interceptors/server/tsconfig.lib.json",
                 "assets": []
             }
         },

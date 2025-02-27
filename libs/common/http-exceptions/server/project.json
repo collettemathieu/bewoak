@@ -1,0 +1,44 @@
+{
+    "name": "common-http-exceptions-server",
+    "$schema": "../../../../node_modules/nx/schemas/project-schema.json",
+    "sourceRoot": "libs/common/http-exceptions/server/src",
+    "projectType": "library",
+    "targets": {
+        "build": {
+            "executor": "@nx/js:swc",
+            "outputs": ["{options.outputPath}"],
+            "options": {
+                "outputPath": "dist/libs/common/http-exceptions/server",
+                "main": "libs/common/http-exceptions/server/src/index.ts",
+                "tsConfig": "libs/common/http-exceptions/server/tsconfig.lib.json",
+                "assets": []
+            }
+        },
+        "nx-release-publish": {
+            "options": {
+                "packageRoot": "dist/{projectRoot}"
+            }
+        },
+        "lint": {
+            "executor": "nx:run-commands",
+            "options": {
+                "command": "bun run biome check --write {projectRoot} --config-path={projectRoot}/biome.json"
+            }
+        },
+        "test": {
+            "executor": "nx:run-commands",
+            "options": {
+                "command": "bun test --coverage --coverage-dir=dist/reports/{projectRoot}/coverage --coverage-reporter=lcov {projectRoot}"
+            }
+        }
+    },
+    "tags": ["type:common:http-exceptions:server"],
+    "release": {
+        "version": {
+            "generatorOptions": {
+                "packageRoot": "dist/{projectRoot}",
+                "currentVersionResolver": "git-tag"
+            }
+        }
+    }
+}

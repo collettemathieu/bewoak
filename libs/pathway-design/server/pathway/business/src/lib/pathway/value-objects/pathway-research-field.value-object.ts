@@ -1,4 +1,4 @@
-import { CTSEBadRequestException } from '@bewoak/common-tools-server-http-exceptions';
+import { CTSEBadRequestException } from '@bewoak/common-http-exceptions-server';
 import { pDCPBRPathwayResearchFieldRules } from '@bewoak/pathway-design-common-pathway-business-rules';
 
 export class PathwayResearchFieldValueObject {

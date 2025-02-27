@@ -1,5 +1,6 @@
 import { beforeEach, describe, expect, spyOn, test } from 'bun:test';
-import { failureValue, successValue } from '@bewoak/common-tools-types-result';
+import type { CTSEInternalServerException } from '@bewoak/common-http-exceptions-server';
+import { failureValue, successValue } from '@bewoak/common-types-result';
 import { type PDSPBEPathwayEntity, pDSPBFPathwayFactory } from '@bewoak/pathway-design-server-pathway-business';
 import { Test } from '@nestjs/testing';
 import { PathwayInMemoryRepository } from '../../common/in-memory/repositories/in-memory-pathway.repository';
@@ -55,7 +56,7 @@ describe('InitializePathwayInMemoryPersistence', () => {
     describe('When I want to save a pathway but the pathway is not recovered in memory', () => {
         let initializePathwayInMemoryPersistence: InitializePathwayInMemoryPersistence;
         let pDSPBEPathwayEntity: PDSPBEPathwayEntity;
-        let result: string;
+        let result: CTSEInternalServerException;
 
         beforeEach(async () => {
             const module = await Test.createTestingModule({
@@ -85,7 +86,9 @@ describe('InitializePathwayInMemoryPersistence', () => {
         });
 
         test('should send an error message', async () => {
-            expect(result).toBe('Pathway was not been added in memory');
+            expect(result.message).toBe('Pathway was not been added in memory');
+            expect(result.statusCode).toBe(500);
+            expect(result.name).toBe('InternalServerErrorException');
         });
     });
 });

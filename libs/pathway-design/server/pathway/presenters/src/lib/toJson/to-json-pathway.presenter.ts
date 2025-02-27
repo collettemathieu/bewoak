@@ -1,12 +1,11 @@
+import type { CTSEException } from '@bewoak/common-http-exceptions-server';
 import type { PDSPBEPathwayEntity, PDSPBPPathwayPresenter } from '@bewoak/pathway-design-server-pathway-business';
 import { Injectable } from '@nestjs/common';
 
 @Injectable()
 export class ToJsonPathwayPresenter implements PDSPBPPathwayPresenter {
-    error(message: string) {
-        return {
-            message,
-        };
+    exception(exception: CTSEException) {
+        return exception;
     }
 
     present(pDSPBEPathwayEntity: PDSPBEPathwayEntity) {

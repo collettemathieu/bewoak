@@ -1,16 +1,16 @@
 {
-    "name": "common-tools-types-result",
-    "$schema": "../../../../../node_modules/nx/schemas/project-schema.json",
-    "sourceRoot": "libs/common/tools/types/result/src",
+    "name": "common-types-result",
+    "$schema": "../../../../node_modules/nx/schemas/project-schema.json",
+    "sourceRoot": "libs/common/types/result/src",
     "projectType": "library",
     "targets": {
         "build": {
             "executor": "@nx/js:swc",
             "outputs": ["{options.outputPath}"],
             "options": {
-                "outputPath": "dist/libs/common/tools/types/result",
-                "main": "libs/common/tools/types/result/src/index.ts",
-                "tsConfig": "libs/common/tools/types/result/tsconfig.lib.json",
+                "outputPath": "dist/libs/common/types/result",
+                "main": "libs/common/types/result/src/index.ts",
+                "tsConfig": "libs/common/types/result/tsconfig.lib.json",
                 "assets": []
             }
         },
@@ -32,7 +32,7 @@
             }
         }
     },
-    "tags": ["type:common:tools:types:result"],
+    "tags": ["type:common:types:result"],
     "release": {
         "version": {
             "generatorOptions": {

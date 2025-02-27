@@ -10,3 +10,9 @@ Feature: Application - Initialize a new pathway
     And I should receive the attributes of the pathway initialized
       | title       | description      | researchField |
       | My Pathway  | A test pathway   | biology |
+
+  Scenario: When I initiliaze a pathway in application, but an error occured during the process of saving the pathway
+    When I initialize a pathway in application with these data but the persistence layer fails
+      | title       | description      | researchField |
+      | My Pathway  | A test pathway   | biology |
+    Then It should return an error message indicating that the pathway could not be saved

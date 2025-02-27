@@ -1,5 +1,6 @@
 import { strict as assert } from 'node:assert';
-import { success } from '@bewoak/common-tools-types-result';
+import { type CTSEException, CTSEInternalServerException } from '@bewoak/common-http-exceptions-server';
+import { failure, success } from '@bewoak/common-types-result';
 import type {
     PDSPBEPathwayEntity,
     PDSPBPInitializePathwayPersistence,
@@ -13,19 +14,22 @@ import { before, binding, then, when } from 'cucumber-tsflow';
 import sinon from 'sinon';
 import { PDSPAIUInitializePathwayUsecase } from '../usecase/initialize-pathway.usecase';
 
-class FakeInitializePathwayPersistence implements PDSPBPInitializePathwayPersistence {
+class FakeSuccessInitializePathwayPersistence implements PDSPBPInitializePathwayPersistence {
     save(pDSPBEPathwayEntity: PDSPBEPathwayEntity) {
         return Promise.resolve(success(pDSPBEPathwayEntity));
     }
 }
 
-class FakePathwayPresenter implements PDSPBPPathwayPresenter {
-    error(message: string) {
-        return {
-            message,
-        };
+class FakeFailureInitializePathwayPersistence implements PDSPBPInitializePathwayPersistence {
+    save(_pDSPBEPathwayEntity: PDSPBEPathwayEntity) {
+        return Promise.resolve(failure(new CTSEInternalServerException('Pathway was not been added in memory')));
     }
+}
 
+class FakePathwayPresenter implements PDSPBPPathwayPresenter {
+    exception(exception: CTSEException) {
+        return exception;
+    }
     present(pDSPBEPathwayEntity: PDSPBEPathwayEntity) {
         return {
             description: pDSPBEPathwayEntity.description,
@@ -50,17 +54,18 @@ class FakeEventPublisher {
 
 @binding()
 export default class ControllerSteps {
-    private readonly fakeEventPublisher = new FakeEventPublisher();
-    private readonly fakeInitializePathwayPersistence = new FakeInitializePathwayPersistence();
-    private readonly fakePathwayPresenter = new FakePathwayPresenter();
-    private readonly pDSPBUInitPathwayUseCase = new PDSPAIUInitializePathwayUsecase();
     private persistenceSpy: sinon.SinonSpy | undefined;
     private presenterSpy: sinon.SinonSpy | undefined;
+    private readonly fakeEventPublisher = new FakeEventPublisher();
+    private readonly fakeFailureInitializePathwayPersistence = new FakeFailureInitializePathwayPersistence();
+    private readonly fakePathwayPresenter = new FakePathwayPresenter();
+    private readonly fakeSuccessInitializePathwayPersistence = new FakeSuccessInitializePathwayPersistence();
+    private readonly pDSPBUInitPathwayUseCase = new PDSPAIUInitializePathwayUsecase();
     private result: PDSPBPPathwayPresenterResult | undefined;
 
     @before()
     public before() {
-        this.persistenceSpy = sinon.spy(this.fakeInitializePathwayPersistence, 'save');
+        this.persistenceSpy = sinon.spy(this.fakeSuccessInitializePathwayPersistence, 'save');
         this.presenterSpy = sinon.spy(this.fakePathwayPresenter, 'present');
     }
 
@@ -73,7 +78,27 @@ export default class ControllerSteps {
         };
 
         this.result = await this.pDSPBUInitPathwayUseCase.execute(
-            this.fakeInitializePathwayPersistence,
+            this.fakeSuccessInitializePathwayPersistence,
+            this.fakePathwayPresenter,
+            this.fakeEventPublisher as EventPublisher,
+            {
+                title: firstRow.title,
+                description: firstRow.description,
+                researchField: firstRow.researchField,
+            }
+        );
+    }
+
+    @when('I initialize a pathway in application with these data but the persistence layer fails')
+    public async whenIInitiateAPathwayButPersistenceLayerFails(dataTable: DataTable) {
+        const firstRow = dataTable.hashes()[0] as {
+            title: string;
+            description: string;
+            researchField: string;
+        };
+
+        this.result = await this.pDSPBUInitPathwayUseCase.execute(
+            this.fakeFailureInitializePathwayPersistence,
             this.fakePathwayPresenter,
             this.fakeEventPublisher as EventPublisher,
             {
@@ -116,5 +141,18 @@ export default class ControllerSteps {
     @then('It should emit an event indicating that the pathway has been initialized')
     public thenAnEventShouldBeEmitted() {
         assert.ok(FakeEventPublisher.isEventPublished);
+    }
+
+    @then('It should return an error message indicating that the pathway could not be saved')
+    public thenReturnErrorMessageIndicatingPathwayNotSaved() {
+        if (this.result === undefined) {
+            throw new Error('Result is undefined');
+        }
+
+        const result = this.result as CTSEException;
+
+        assert.strictEqual(result.message, 'Pathway was not been added in memory');
+        assert.strictEqual(result.statusCode, 500);
+        assert.strictEqual(result.name, 'InternalServerErrorException');
     }
 }

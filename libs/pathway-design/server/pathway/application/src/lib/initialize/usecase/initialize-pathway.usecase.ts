@@ -1,4 +1,4 @@
-import { failureValue, isSuccess, successValue } from '@bewoak/common-tools-types-result';
+import { failureValue, isSuccess, successValue } from '@bewoak/common-types-result';
 import {
     type PDSPBPInitializePathwayPersistence,
     type PDSPBPPathwayPresenter,
@@ -40,7 +40,7 @@ export class PDSPAIUInitializePathwayUsecase {
                 switchMap((result) =>
                     isSuccess(result)
                         ? of(pDSPBPPathwayPresenter.present(successValue(result)))
-                        : of(pDSPBPPathwayPresenter.error(failureValue(result)))
+                        : of(pDSPBPPathwayPresenter.exception(failureValue(result)))
                 )
             )
         );

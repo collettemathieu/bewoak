@@ -12,7 +12,6 @@ export {
 export {
     PDSPBP_PATHWAY_PRESENTER,
     type PDSPBPPathwayPresenter,
-    type PDSPBPPathwayPresenterError,
     type PDSPBPPathwayPresenterResult,
     type PDSPBPPathwayPresenters,
 } from './lib/pathway/ports/presenters/pathway-presenter.port';

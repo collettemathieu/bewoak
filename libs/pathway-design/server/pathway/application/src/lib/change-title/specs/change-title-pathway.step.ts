@@ -1,5 +1,6 @@
 import { strict as assert } from 'node:assert';
 
+import type { CTSEException } from '@bewoak/common-http-exceptions-server';
 import {
     type PDSPBEPathwayEntity,
     type PDSPBPChangeTitlePathwayPersistence,
@@ -40,10 +41,8 @@ class FakeChangeTitlePathwayPersistence implements PDSPBPChangeTitlePathwayPersi
 }
 
 class FakePathwayPresenter implements PDSPBPPathwayPresenter {
-    error(message: string) {
-        return {
-            message,
-        };
+    exception(exception: CTSEException) {
+        return exception;
     }
     present(pDSPBEPathwayEntity: PDSPBEPathwayEntity) {
         return {

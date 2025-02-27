@@ -6,7 +6,8 @@ import { AppModule } from './app/app.module';
 import { cCSECheckEnvironmentVariables, cCSEGetEnvironmentVariables } from '@bewoak/common-configs-server-env';
 import { ServerLogger, runLogOtelInstrumentation } from '@bewoak/common-configs-server-log';
 import { cCSSSetupSwaggerDocument } from '@bewoak/common-configs-server-swagger';
-import { LogHttpExceptionFilter } from '@bewoak/common-tools-server-http-exceptions';
+import { LogHttpExceptionFilter } from '@bewoak/common-http-exceptions-server';
+import { HandleExceptionInterceptor } from '@bewoak/common-interceptors-server';
 import { envSchema } from './environment/env.schema';
 
 async function bootstrap() {
@@ -33,6 +34,8 @@ async function bootstrap() {
 
     const httpAdapter = app.get(HttpAdapterHost);
     app.useGlobalFilters(new LogHttpExceptionFilter(httpAdapter));
+
+    app.useGlobalInterceptors(new HandleExceptionInterceptor());
 
     cCSSSetupSwaggerDocument(app, {
         description: 'API for Pathway Design',

@@ -1,5 +1,5 @@
 {
-    "name": "@bewoak/common-tools-server-http-exceptions",
+    "name": "@bewoak/common-types-result",
     "version": "0.0.1",
     "dependencies": {
         "@swc/helpers": "~0.5.11"

@@ -1,3 +1,4 @@
+import type { CTSEException } from '@bewoak/common-http-exceptions-server';
 import type { PDSPBEPathwayEntity } from '../../entities/pathway';
 
 export interface PDSPBPJsonPathwayPresenter {
@@ -8,13 +9,11 @@ export interface PDSPBPJsonPathwayPresenter {
 }
 
 export type PDSPBPPathwayPresenters = PDSPBPJsonPathwayPresenter;
-export type PDSPBPPathwayPresenterError = {
-    message: string;
-};
-export type PDSPBPPathwayPresenterResult = PDSPBPPathwayPresenters | PDSPBPPathwayPresenterError;
+export type PDSPBPPathwayPresenterException = CTSEException;
+export type PDSPBPPathwayPresenterResult = PDSPBPPathwayPresenters | PDSPBPPathwayPresenterException;
 
 export interface PDSPBPPathwayPresenter {
-    error: (message: string) => PDSPBPPathwayPresenterError;
+    exception: (exception: CTSEException) => PDSPBPPathwayPresenterException;
     present: (pDSPBEpathwayEntity: PDSPBEPathwayEntity) => PDSPBPPathwayPresenters;
 }
 
