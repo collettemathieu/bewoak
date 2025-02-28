@@ -14,7 +14,7 @@ export const options = {
 };
 
 export default function () {
-    http.post('http://localhost:3000/api/pathway/init', {
+    http.post('http://localhost:3000/api/pathway/initialize', {
         title: 'arterial stiffness',
         description: 'Understand the role of the arterial stiffness',
         researchField: 'biomechanics',

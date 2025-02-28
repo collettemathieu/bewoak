@@ -1,16 +1,16 @@
 {
-    "name": "common-configs-server-log",
+    "name": "common-configs-server-otel",
     "$schema": "../../../../../node_modules/nx/schemas/project-schema.json",
-    "sourceRoot": "libs/common/configs/server/log/src",
+    "sourceRoot": "libs/common/configs/server/otel/src",
     "projectType": "library",
     "targets": {
         "build": {
             "executor": "@nx/js:swc",
             "outputs": ["{options.outputPath}"],
             "options": {
-                "outputPath": "dist/libs/common/configs/server/log",
-                "main": "libs/common/configs/server/log/src/index.ts",
-                "tsConfig": "libs/common/configs/server/log/tsconfig.lib.json",
+                "outputPath": "dist/libs/common/configs/server/otel",
+                "main": "libs/common/configs/server/otel/src/index.ts",
+                "tsConfig": "libs/common/configs/server/otel/tsconfig.lib.json",
                 "assets": []
             }
         },
@@ -32,7 +32,7 @@
             }
         }
     },
-    "tags": ["type:common:configs:server:log"],
+    "tags": ["type:common:configs:server:otel"],
     "release": {
         "version": {
             "generatorOptions": {

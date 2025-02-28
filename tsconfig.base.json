@@ -16,7 +16,7 @@
         "noUnusedParameters": true,
         "paths": {
             "@bewoak/common-configs-server-env": ["libs/common/configs/server/env/src/index.ts"],
-            "@bewoak/common-configs-server-log": ["libs/common/configs/server/log/src/index.ts"],
+            "@bewoak/common-configs-server-otel": ["libs/common/configs/server/otel/src/index.ts"],
             "@bewoak/common-configs-server-swagger": ["libs/common/configs/server/swagger/src/index.ts"],
             "@bewoak/common-contracts-events-pathway": ["libs/common/contracts/events/pathway/src/index.ts"],
             "@bewoak/common-events": ["libs/common/events/src/index.ts"],

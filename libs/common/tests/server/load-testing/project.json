@@ -16,7 +16,7 @@
                 "commands": [
                     "mkdir -p reports/load-testing/pathway-design",
                     "touch reports/load-testing/pathway-design/initialize-pathway.log",
-                    "k6 run {projectRoot}/src/lib/pathway-design/initialize-pathway.ts > dist/reports/load-testing/pathway-design/initialize-pathway.log 2>&1"
+                    "k6 run {projectRoot}/src/lib/pathway-design/initialize-pathway.ts > reports/load-testing/pathway-design/initialize-pathway.log 2>&1"
                 ],
                 "parallel": false
             }

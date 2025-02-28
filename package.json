@@ -7,8 +7,9 @@
         "@nestjs/platform-express": "11.0.9",
         "@nestjs/swagger": "11.0.3",
         "@opentelemetry/api": "^1.9.0",
-        "@opentelemetry/auto-instrumentations-node": "^0.56.0",
-        "@opentelemetry/instrumentation-nestjs-core": "^0.44.0",
+        "@opentelemetry/auto-instrumentations-node": "^0.56.1",
+        "@opentelemetry/exporter-prometheus": "^0.57.2",
+        "@opentelemetry/instrumentation-nestjs-core": "^0.44.1",
         "@opentelemetry/sdk-logs": "^0.57.2",
         "@opentelemetry/sdk-node": "^0.57.2",
         "class-transformer": "0.5.1",
@@ -81,7 +82,8 @@
         "test:mutation": "nx run-many --target=test-mutation --parallel=4",
         "test:unit": "nx run-many --target=test --parallel=4",
         "tools:autocanon": "autocannon -c 10 -d 10s http://localhost:3000/api/pathway/initialize",
-        "tools:detective": "detective"
+        "tools:detective": "detective",
+        "tools:otel:run": "docker compose -f ./docker/otel-instrumentation/docker-compose.yml up"
     },
     "version": "0.0.1"
 }
