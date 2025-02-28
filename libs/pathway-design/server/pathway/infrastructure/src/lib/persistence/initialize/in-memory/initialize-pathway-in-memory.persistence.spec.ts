@@ -29,11 +29,13 @@ describe('InitializePathwayInMemoryPersistence', () => {
 
             pathwayInMemoryRepository = module.get<PathwayInMemoryRepository>(PathwayInMemoryRepository);
 
-            pDSPBEPathwayEntity = pDSPBFPathwayFactory({
-                description: 'pathway description',
-                researchField: 'pathway research field',
-                title: 'pathway title',
-            });
+            pDSPBEPathwayEntity = successValue(
+                pDSPBFPathwayFactory({
+                    description: 'pathway description',
+                    researchField: 'pathway research field',
+                    title: 'pathway title',
+                })
+            );
 
             spyOn(serverLogger, 'error');
 
@@ -93,11 +95,13 @@ describe('InitializePathwayInMemoryPersistence', () => {
                 InitializePathwayInMemoryPersistence
             );
 
-            pDSPBEPathwayEntity = pDSPBFPathwayFactory({
-                description: 'pathway description',
-                researchField: 'pathway research field',
-                title: 'pathway title',
-            });
+            pDSPBEPathwayEntity = successValue(
+                pDSPBFPathwayFactory({
+                    description: 'pathway description',
+                    researchField: 'pathway research field',
+                    title: 'pathway title',
+                })
+            );
 
             result = failureValue(await initializePathwayInMemoryPersistence.save(pDSPBEPathwayEntity));
         });
@@ -108,14 +112,15 @@ describe('InitializePathwayInMemoryPersistence', () => {
                 result.message,
                 result,
                 { constructor: 'InitializePathwayInMemoryPersistence' },
-                { method: 'save' }
+                { method: 'save' },
+                { errors: {} }
             );
         });
 
         test('should send an error message', async () => {
             expect(result.message).toBe('Pathway was not been added in memory');
             expect(result.statusCode).toBe(500);
-            expect(result.name).toBe('InternalServerErrorException');
+            expect(result.name).toBe('InternalServerException');
         });
     });
 });

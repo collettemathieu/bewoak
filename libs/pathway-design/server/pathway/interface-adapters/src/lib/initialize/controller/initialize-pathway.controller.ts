@@ -1,11 +1,12 @@
 // biome-ignore lint/style/useImportType: <explanation>
 import { PDSPAInitializePathwayCommand, PDSPAInitializePathwayService } from '@bewoak/pathway-design-server-pathway-application';
 import { Body, Controller, Post, UsePipes, ValidationPipe } from '@nestjs/common';
-import { ApiBadRequestResponse, ApiCreatedResponse, ApiTags } from '@nestjs/swagger';
+import { ApiBadRequestResponse, ApiCreatedResponse, ApiInternalServerErrorResponse, ApiTags } from '@nestjs/swagger';
 // biome-ignore lint/style/useImportType: <explanation>
 import { InitializePathwayRequestBodyDto } from '../dtos/request/body/request-body.dto';
 import {
     InitializedPathwayBadRequestExceptionBodyDto,
+    InitializedPathwayInternalServerExceptionBodyDto,
     InitializedPathwayResponseBodyDto,
 } from '../dtos/response/body/response-body.dto';
 
@@ -30,6 +31,10 @@ export class InitializePathwayController {
     @ApiBadRequestResponse({
         description: 'Cannot initiate pathway. Data are not valid.',
         type: InitializedPathwayBadRequestExceptionBodyDto,
+    })
+    @ApiInternalServerErrorResponse({
+        description: 'Cannot initiate pathway. Internal server exception occured.',
+        type: InitializedPathwayInternalServerExceptionBodyDto,
     })
     execute(@Body() initializePathwayRequestBodyDto: InitializePathwayRequestBodyDto) {
         return this.pDSPAInitializePathwayService.initialize(

@@ -41,3 +41,14 @@ export const failureValue = <T, E>(result: Result<T, E>): E => {
 
     throw new Error('Result is not failure');
 };
+
+export const failureValueList = <T extends unknown[]>(
+    resultList: { [K in keyof T]: Result<unknown, T[K]> }
+): { [K in keyof T]: T[K] } =>
+    resultList.filter((result) => isFailure(result)).map((result) => result.value) as { [K in keyof T]: T[K] };
+
+export const successValueList = <T extends unknown[]>(
+    resultList: { [K in keyof T]: Result<T[K], unknown> }
+): { [K in keyof T]: T[K] } => {
+    return resultList.filter((result) => isSuccess(result)).map((result) => result.value) as { [K in keyof T]: T[K] };
+};

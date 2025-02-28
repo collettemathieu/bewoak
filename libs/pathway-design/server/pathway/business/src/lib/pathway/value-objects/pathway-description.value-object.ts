@@ -1,12 +1,17 @@
 import { CTSEBadRequestException } from '@bewoak/common-http-exceptions-server';
+import { type Result, failure, success } from '@bewoak/common-types-result';
 import { pDCPBRPathwayDescriptionRules } from '@bewoak/pathway-design-common-pathway-business-rules';
 
 export class PathwayDescriptionValueObject {
-    constructor(private readonly description: string) {
-        if (pDCPBRPathwayDescriptionRules.isValid(description) === false) {
-            throw new CTSEBadRequestException(pDCPBRPathwayDescriptionRules.textError());
+    private constructor(private readonly description: string) {}
+
+    static create(description: string): Result<PathwayDescriptionValueObject, CTSEBadRequestException> {
+        if (!pDCPBRPathwayDescriptionRules.isValid(description)) {
+            return failure(new CTSEBadRequestException(pDCPBRPathwayDescriptionRules.textError()));
         }
+        return success(new PathwayDescriptionValueObject(description));
     }
+
     get value() {
         return this.description;
     }

@@ -1,7 +1,8 @@
+import { successValue } from '@bewoak/common-types-result';
 import { type PDSPBEPathwayEntity, pDSPBFPathwayFactory } from '@bewoak/pathway-design-server-pathway-business';
 import { PathwayInMemoryEntity } from '../entities/in-memory-pathway.entity';
 
-export const mapPathwayEntityToInMemoryPersistence = (pathway: PDSPBEPathwayEntity): PathwayInMemoryEntity => {
+export const mapPathwayEntityToInMemoryPersistence = (pathway: PDSPBEPathwayEntity) => {
     const pathwayInMemoryEntity = new PathwayInMemoryEntity(
         pathway.description,
         pathway.pathwayId,
@@ -12,7 +13,7 @@ export const mapPathwayEntityToInMemoryPersistence = (pathway: PDSPBEPathwayEnti
     return pathwayInMemoryEntity;
 };
 
-export const mapPathwayInMemoryToPathwayEntity = (pathwayInMemoryEntity: PathwayInMemoryEntity): PDSPBEPathwayEntity => {
+export const mapPathwayInMemoryToPathwayEntity = (pathwayInMemoryEntity: PathwayInMemoryEntity) => {
     const pathway = pDSPBFPathwayFactory({
         description: pathwayInMemoryEntity.description,
         pathwayId: pathwayInMemoryEntity.pathwayId,
@@ -20,5 +21,5 @@ export const mapPathwayInMemoryToPathwayEntity = (pathwayInMemoryEntity: Pathway
         title: pathwayInMemoryEntity.title,
     });
 
-    return pathway;
+    return successValue(pathway);
 };

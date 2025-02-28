@@ -1,4 +1,5 @@
 import { strict as assert } from 'node:assert';
+import { successValue } from '@bewoak/common-types-result';
 import type { DataTable } from '@cucumber/cucumber';
 import { binding, given, then, when } from 'cucumber-tsflow';
 import type { PDSPBEPathwayEntity } from '../../entities/pathway';
@@ -17,11 +18,13 @@ export default class PathwaySteps {
             researchField: string;
         };
 
-        this.pDSPBEPathwayEntity = pDSPBFPathwayFactory({
-            title: data.title,
-            description: data.description,
-            researchField: data.researchField,
-        });
+        this.pDSPBEPathwayEntity = successValue(
+            pDSPBFPathwayFactory({
+                title: data.title,
+                description: data.description,
+                researchField: data.researchField,
+            })
+        );
     }
 
     @when('I add an article to the pathway in business with these data')

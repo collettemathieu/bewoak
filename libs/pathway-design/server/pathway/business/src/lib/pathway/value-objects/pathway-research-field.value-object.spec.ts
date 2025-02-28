@@ -1,4 +1,6 @@
 import { beforeAll, describe, expect, test } from 'bun:test';
+import { CTSEBadRequestException } from '@bewoak/common-http-exceptions-server';
+import { failureValue, successValue } from '@bewoak/common-types-result';
 import { pDCPBRPathwayResearchFieldRules } from '@bewoak/pathway-design-common-pathway-business-rules';
 import { PathwayResearchFieldValueObject } from './pathway-research-field.value-object';
 
@@ -7,22 +9,24 @@ describe('PathwayResearchFieldValueObject', () => {
     let researchField2: PathwayResearchFieldValueObject;
 
     beforeAll(() => {
-        researchField1 = new PathwayResearchFieldValueObject('Test researchField');
-        researchField2 = new PathwayResearchFieldValueObject('Different researchField');
+        researchField1 = successValue(PathwayResearchFieldValueObject.create('Test researchField'));
+        researchField2 = successValue(PathwayResearchFieldValueObject.create('Different researchField'));
     });
 
     test('should create an instance with a valid researchField', () => {
-        const researchField = new PathwayResearchFieldValueObject('Test researchField');
+        const researchField = successValue(PathwayResearchFieldValueObject.create('Test researchField'));
         expect(researchField.value).toBe('Test researchField');
     });
 
-    test('should throw an error if the researchField is invalid', () => {
-        expect(() => new PathwayResearchFieldValueObject('')).toThrowError(pDCPBRPathwayResearchFieldRules.textError());
+    test('should generate an error if the researchField is invalid', () => {
+        const failure = failureValue(PathwayResearchFieldValueObject.create(''));
+        expect(failure).toBeInstanceOf(CTSEBadRequestException);
+        expect(failure.message).toBe(pDCPBRPathwayResearchFieldRules.textError());
     });
 
     test('should return true when comparing two equal researchFields', () => {
-        const sameresearchField1 = new PathwayResearchFieldValueObject('Test researchField');
-        const sameresearchField2 = new PathwayResearchFieldValueObject('Test researchField');
+        const sameresearchField1 = successValue(PathwayResearchFieldValueObject.create('Test researchField'));
+        const sameresearchField2 = successValue(PathwayResearchFieldValueObject.create('Test researchField'));
         expect(sameresearchField1.equals(sameresearchField2)).toBe(true);
     });
 

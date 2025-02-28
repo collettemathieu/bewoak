@@ -15,7 +15,19 @@ export function ErrorLog() {
                     result.value.message,
                     result.value,
                     { constructor: target.constructor.name },
-                    { method: propertyKey }
+                    { method: propertyKey },
+                    { errors: { ...result.value.errors } }
+                );
+            }
+
+            if (result instanceof CTSEException) {
+                const logger = new Logger();
+                logger.error(
+                    result.message,
+                    result,
+                    { constructor: target.constructor.name },
+                    { method: propertyKey },
+                    { errors: { ...result.errors } }
                 );
             }
 
@@ -24,7 +36,7 @@ export function ErrorLog() {
     };
 }
 
-export function Log() {
+export function Log(message: string) {
     // biome-ignore lint/complexity/noBannedTypes: <explanation>
     return (target: Object, propertyKey: string | symbol, descriptor: PropertyDescriptor) => {
         const originalMethod = descriptor.value;
@@ -33,7 +45,8 @@ export function Log() {
             const result = await originalMethod.apply(this, args);
 
             const logger = new Logger();
-            logger.error(result.value.message, result.value, { constructor: target.constructor.name }, { method: propertyKey });
+
+            logger.log(message, result, { constructor: target.constructor.name }, { method: propertyKey });
 
             return result;
         };

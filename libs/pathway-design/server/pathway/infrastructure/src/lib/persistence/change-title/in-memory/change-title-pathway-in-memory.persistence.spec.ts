@@ -1,4 +1,5 @@
 import { beforeEach, describe, expect, spyOn, test } from 'bun:test';
+import { successValue } from '@bewoak/common-types-result';
 import { type PDSPBEPathwayEntity, pDSPBFPathwayFactory } from '@bewoak/pathway-design-server-pathway-business';
 import { NotFoundException } from '@nestjs/common';
 import { Test } from '@nestjs/testing';
@@ -25,11 +26,13 @@ describe('ChangeTitlePathwayInMemoryPersistence', () => {
 
             pathwayInMemoryRepository = module.get<PathwayInMemoryRepository>(PathwayInMemoryRepository);
 
-            pDSPBEPathwayEntity = pDSPBFPathwayFactory({
-                description: 'pathway description',
-                researchField: 'pathway research field',
-                title: 'pathway title',
-            });
+            pDSPBEPathwayEntity = successValue(
+                pDSPBFPathwayFactory({
+                    description: 'pathway description',
+                    researchField: 'pathway research field',
+                    title: 'pathway title',
+                })
+            );
 
             const peristenceModel = mapPathwayEntityToInMemoryPersistence(pDSPBEPathwayEntity);
             pathwayInMemoryRepository.add(peristenceModel);
@@ -74,11 +77,13 @@ describe('ChangeTitlePathwayInMemoryPersistence', () => {
                 ChangeTitlePathwayInMemoryPersistence
             );
 
-            pDSPBEPathwayEntity = pDSPBFPathwayFactory({
-                description: 'pathway description',
-                researchField: 'pathway research field',
-                title: 'pathway title',
-            });
+            pDSPBEPathwayEntity = successValue(
+                pDSPBFPathwayFactory({
+                    description: 'pathway description',
+                    researchField: 'pathway research field',
+                    title: 'pathway title',
+                })
+            );
         });
 
         test('should throw an error', async () => {
@@ -116,11 +121,13 @@ describe('ChangeTitlePathwayInMemoryPersistence', () => {
                 ChangeTitlePathwayInMemoryPersistence
             );
 
-            pDSPBEPathwayEntity = pDSPBFPathwayFactory({
-                description: 'pathway description',
-                researchField: 'pathway research field',
-                title: 'pathway title',
-            });
+            pDSPBEPathwayEntity = successValue(
+                pDSPBFPathwayFactory({
+                    description: 'pathway description',
+                    researchField: 'pathway research field',
+                    title: 'pathway title',
+                })
+            );
         });
 
         test('should throw an error', async () => {

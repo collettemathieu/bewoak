@@ -1,4 +1,5 @@
 import { strict as assert } from 'node:assert';
+import { successValue } from '@bewoak/common-types-result';
 import type { DataTable } from '@cucumber/cucumber';
 import { binding, given, then, when } from 'cucumber-tsflow';
 import sinon from 'sinon';
@@ -9,9 +10,9 @@ import { PathwayTitleValueObject } from '../../value-objects/pathway-title.value
 
 @binding()
 export default class ControllerSteps {
-    private pDSPBEPathwayEntity: PDSPBEPathwayEntity | undefined;
-    private error: Error | undefined;
     private applyMethodSpy: sinon.SinonSpy | undefined;
+    private error: Error | undefined;
+    private pDSPBEPathwayEntity: PDSPBEPathwayEntity | undefined;
 
     @given('I have a pathway in business with these data')
     public givenIHaveAPathway(dataTable: DataTable) {
@@ -21,11 +22,13 @@ export default class ControllerSteps {
             researchField: string;
         };
 
-        this.pDSPBEPathwayEntity = pDSPBFPathwayFactory({
-            title: firstRow.title,
-            description: firstRow.description,
-            researchField: firstRow.researchField,
-        });
+        this.pDSPBEPathwayEntity = successValue(
+            pDSPBFPathwayFactory({
+                title: firstRow.title,
+                description: firstRow.description,
+                researchField: firstRow.researchField,
+            })
+        );
     }
 
     @when('I change the title of the pathway in business to {string}')
@@ -35,7 +38,7 @@ export default class ControllerSteps {
         }
 
         try {
-            const title = new PathwayTitleValueObject(newTitle);
+            const title = successValue(PathwayTitleValueObject.create(newTitle));
             this.applyMethodSpy = sinon.spy(this.pDSPBEPathwayEntity, 'apply');
             this.pDSPBEPathwayEntity.changeTitle(title);
         } catch (error) {

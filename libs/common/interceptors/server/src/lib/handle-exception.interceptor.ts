@@ -12,11 +12,12 @@ export class HandleExceptionInterceptor implements NestInterceptor {
                 if (data instanceof CTSEException) {
                     const response = context.switchToHttp().getResponse<Response>();
 
-                    const { statusCode, message, name } = data;
+                    const { errors, message, name, statusCode } = data;
 
                     response.status(statusCode);
 
                     return {
+                        errors,
                         message,
                         name,
                         statusCode,

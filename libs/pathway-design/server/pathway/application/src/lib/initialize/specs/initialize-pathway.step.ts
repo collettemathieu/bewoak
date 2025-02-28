@@ -1,5 +1,5 @@
 import { strict as assert } from 'node:assert';
-import { type CTSEException, CTSEInternalServerException } from '@bewoak/common-http-exceptions-server';
+import { type CTSEException, CTSEInternalServerException, HttpStatus } from '@bewoak/common-http-exceptions-server';
 import { failure, success } from '@bewoak/common-types-result';
 import type {
     PDSPBEPathwayEntity,
@@ -109,6 +109,26 @@ export default class ControllerSteps {
         );
     }
 
+    @when('I initialize a pathway in application with these invalid data')
+    public async whenIInitiateAPathwayWithInvalidData(dataTable: DataTable) {
+        const firstRow = dataTable.hashes()[0] as {
+            title: string;
+            description: string;
+            researchField: string;
+        };
+
+        this.result = await this.pDSPBUInitPathwayUseCase.execute(
+            this.fakeSuccessInitializePathwayPersistence,
+            this.fakePathwayPresenter,
+            this.fakeEventPublisher as EventPublisher,
+            {
+                title: firstRow.title,
+                description: firstRow.description,
+                researchField: firstRow.researchField,
+            }
+        );
+    }
+
     @then('I should receive the attributes of the pathway initialized')
     public thenIShouldReceivePathwayAttributes(dataTable: DataTable) {
         const firstRow = dataTable.hashes()[0] as {
@@ -143,8 +163,8 @@ export default class ControllerSteps {
         assert.ok(FakeEventPublisher.isEventPublished);
     }
 
-    @then('It should return an error message indicating that the pathway could not be saved')
-    public thenReturnErrorMessageIndicatingPathwayNotSaved() {
+    @then('It should return an exception message indicating that the pathway could not be saved')
+    public thenReturnExceptionMessageIndicatingPathwayNotSaved() {
         if (this.result === undefined) {
             throw new Error('Result is undefined');
         }
@@ -152,7 +172,20 @@ export default class ControllerSteps {
         const result = this.result as CTSEException;
 
         assert.strictEqual(result.message, 'Pathway was not been added in memory');
-        assert.strictEqual(result.statusCode, 500);
-        assert.strictEqual(result.name, 'InternalServerErrorException');
+        assert.strictEqual(result.statusCode, HttpStatus.INTERNAL_SERVER_ERROR);
+        assert.strictEqual(result.name, 'InternalServerException');
+    }
+
+    @then('It should return an exception message indicating why data are invalid')
+    public thenReturnExceptionMessageIndicatingDataAreInvalid() {
+        if (this.result === undefined) {
+            throw new Error('Result is undefined');
+        }
+
+        const result = this.result as CTSEException;
+
+        assert.strictEqual(result.message, 'Invalid pathway data');
+        assert.strictEqual(result.statusCode, HttpStatus.BAD_REQUEST);
+        assert.strictEqual(result.name, 'BadRequestException');
     }
 }

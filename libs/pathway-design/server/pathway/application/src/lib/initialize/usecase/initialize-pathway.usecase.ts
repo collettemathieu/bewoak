@@ -1,3 +1,4 @@
+import { ErrorLog, Log } from '@bewoak/common-log-server';
 import { failureValue, isSuccess, successValue } from '@bewoak/common-types-result';
 import {
     type PDSPBPInitializePathwayPersistence,
@@ -5,9 +6,11 @@ import {
     pDSPBFPathwayFactory,
 } from '@bewoak/pathway-design-server-pathway-business';
 import type { EventPublisher } from '@nestjs/cqrs';
-import { firstValueFrom, of, switchMap } from 'rxjs';
+import { firstValueFrom, from, of, switchMap } from 'rxjs';
 
 export class PDSPAIUInitializePathwayUsecase {
+    @ErrorLog()
+    @Log('Initialize pathway')
     execute(
         pDSPBPInitializePathwayPersistence: PDSPBPInitializePathwayPersistence,
         pDSPBPPathwayPresenter: PDSPBPPathwayPresenter,
@@ -30,18 +33,25 @@ export class PDSPAIUInitializePathwayUsecase {
                     researchField,
                 })
             ).pipe(
-                switchMap((pathway) => {
-                    // TODO: pattern transactional outbox should be implemented here => https://microservices.io/patterns/data/transactional-outbox.html
+                switchMap((result) => {
+                    if (isSuccess(result)) {
+                        const pathway = successValue(result);
+                        // TODO: pattern transactional outbox should be implemented here => https://microservices.io/patterns/data/transactional-outbox.html
 
-                    eventPublisher.mergeObjectContext(pathway);
-                    pathway.commit();
-                    return pDSPBPInitializePathwayPersistence.save(pathway);
-                }),
-                switchMap((result) =>
-                    isSuccess(result)
-                        ? of(pDSPBPPathwayPresenter.present(successValue(result)))
-                        : of(pDSPBPPathwayPresenter.exception(failureValue(result)))
-                )
+                        eventPublisher.mergeObjectContext(pathway);
+                        pathway.commit();
+
+                        return from(pDSPBPInitializePathwayPersistence.save(pathway)).pipe(
+                            switchMap((result) =>
+                                isSuccess(result)
+                                    ? of(pDSPBPPathwayPresenter.present(successValue(result)))
+                                    : of(pDSPBPPathwayPresenter.exception(failureValue(result)))
+                            )
+                        );
+                    }
+
+                    return of(pDSPBPPathwayPresenter.exception(failureValue(result)));
+                })
             )
         );
     }

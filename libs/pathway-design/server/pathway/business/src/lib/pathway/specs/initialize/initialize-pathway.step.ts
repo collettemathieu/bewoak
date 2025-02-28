@@ -1,4 +1,5 @@
 import { strict as assert } from 'node:assert';
+import { successValue } from '@bewoak/common-types-result';
 import type { DataTable } from '@cucumber/cucumber';
 import { binding, then, when } from 'cucumber-tsflow';
 import sinon from 'sinon';
@@ -12,9 +13,9 @@ import { PathwayTitleValueObject } from '../../value-objects/pathway-title.value
 
 @binding()
 export default class PathwaySteps {
-    private pDSPBEPathwayEntity: PDSPBEPathwayEntity | undefined;
-    private error: Error | undefined;
     private applyMethodSpy: sinon.SinonSpy | undefined;
+    private error: Error | undefined;
+    private pDSPBEPathwayEntity: PDSPBEPathwayEntity | undefined;
 
     @when('I initialize a pathway in business with these data')
     public async whenIInitializeAPathway(dataTable: DataTable) {
@@ -24,10 +25,10 @@ export default class PathwaySteps {
             researchField: string;
         };
         try {
-            const pathwayId = new PathwayIdValueObject(uuidv7());
-            const title = new PathwayTitleValueObject(data.title);
-            const description = new PathwayDescriptionValueObject(data.description);
-            const researchField = new PathwayResearchFieldValueObject(data.researchField);
+            const pathwayId = successValue(PathwayIdValueObject.create(uuidv7()));
+            const title = successValue(PathwayTitleValueObject.create(data.title));
+            const description = PathwayDescriptionValueObject.create(data.description);
+            const researchField = successValue(PathwayResearchFieldValueObject.create(data.researchField));
 
             this.pDSPBEPathwayEntity = new PDSPBEPathwayEntity();
             this.applyMethodSpy = sinon.spy(this.pDSPBEPathwayEntity, 'apply');
@@ -35,7 +36,7 @@ export default class PathwaySteps {
             this.pDSPBEPathwayEntity.initialize({
                 pathwayId,
                 title,
-                description,
+                description: successValue(description),
                 researchField,
             });
         } catch (error) {

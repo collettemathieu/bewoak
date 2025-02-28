@@ -1,3 +1,5 @@
+import { CTSEBadRequestException } from '@bewoak/common-http-exceptions-server';
+import { type Result, failure, failureValueList, success, successValueList } from '@bewoak/common-types-result';
 import { uuidv7 } from 'uuidv7';
 import { PDSPBEPathwayEntity } from '../entities/pathway';
 import { PathwayDescriptionValueObject } from '../value-objects/pathway-description.value-object';
@@ -11,14 +13,35 @@ export const pDSPBFPathwayFactory = ({
     pathwayId: pathwayIdValue,
     researchField: researchFieldValue,
     title: titleValue,
-}: PathwayFactoryParams) => {
-    const description = new PathwayDescriptionValueObject(descriptionValue);
-    const pathway = new PDSPBEPathwayEntity();
-    const researchField = new PathwayResearchFieldValueObject(researchFieldValue);
-    const title = new PathwayTitleValueObject(titleValue);
+}: PathwayFactoryParams): Result<PDSPBEPathwayEntity, CTSEBadRequestException> => {
+    const descriptionResult = PathwayDescriptionValueObject.create(descriptionValue);
+    const researchFieldResult = PathwayResearchFieldValueObject.create(researchFieldValue);
+    const titleResult = PathwayTitleValueObject.create(titleValue);
 
     const uuid = pathwayIdValue ?? uuidv7();
-    const pathwayId = new PathwayIdValueObject(uuid);
+    const pathwayIdResult = PathwayIdValueObject.create(uuid);
+
+    const failures = failureValueList([pathwayIdResult, descriptionResult, researchFieldResult, titleResult]);
+
+    if (haveErrors(failures)) {
+        return failure(
+            new CTSEBadRequestException(
+                'Invalid pathway data',
+                failures.map((failure) => ({
+                    message: failure.message,
+                }))
+            )
+        );
+    }
+
+    const [description, pathwayId, researchField, title] = successValueList([
+        descriptionResult,
+        pathwayIdResult,
+        researchFieldResult,
+        titleResult,
+    ]);
+
+    const pathway = new PDSPBEPathwayEntity();
 
     pathway.initialize({
         pathwayId,
@@ -27,5 +50,7 @@ export const pDSPBFPathwayFactory = ({
         researchField,
     });
 
-    return pathway;
+    return success(pathway);
 };
+
+export const haveErrors = (errors: CTSEBadRequestException[]) => errors.length > 0;

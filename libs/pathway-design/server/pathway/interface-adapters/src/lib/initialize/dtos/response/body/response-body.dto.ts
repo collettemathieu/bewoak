@@ -9,12 +9,13 @@ export class InitializedPathwayResponseBodyDto implements PDSPBPPathwayPresenter
 }
 
 export class InitializedPathwayBadRequestExceptionBodyDto implements CTSEBadRequestException {
+    errors!: Record<string, unknown>[];
     message!: string;
-    name = 'BadRequestException' as const;
-    statusCode = 400;
+    name!: string;
+    statusCode!: number;
 }
 export class InitializedPathwayInternalServerExceptionBodyDto implements CTSEInternalServerException {
     message!: string;
-    name = 'InternalServerException' as const;
-    statusCode = 500;
+    name!: string;
+    statusCode!: number;
 }

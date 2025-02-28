@@ -1,6 +1,7 @@
 import { strict as assert } from 'node:assert';
 
 import type { CTSEException } from '@bewoak/common-http-exceptions-server';
+import { successValue } from '@bewoak/common-types-result';
 import {
     type PDSPBEPathwayEntity,
     type PDSPBPChangeTitlePathwayPersistence,
@@ -30,12 +31,14 @@ class FakeChangeTitlePathwayPersistence implements PDSPBPChangeTitlePathwayPersi
             throw new Error('Pathway id does not match');
         }
 
-        const pathwayWithTitleChanged = pDSPBFPathwayFactory({
-            description: this.pDSPBEPathwayEntity.description,
-            pathwayId: this.pDSPBEPathwayEntity.pathwayId,
-            researchField: this.pDSPBEPathwayEntity.researchField,
-            title,
-        });
+        const pathwayWithTitleChanged = successValue(
+            pDSPBFPathwayFactory({
+                description: this.pDSPBEPathwayEntity.description,
+                pathwayId: this.pDSPBEPathwayEntity.pathwayId,
+                researchField: this.pDSPBEPathwayEntity.researchField,
+                title,
+            })
+        );
         return Promise.resolve(pathwayWithTitleChanged);
     }
 }
@@ -91,11 +94,13 @@ export default class ControllerSteps {
             researchField: string;
         };
 
-        this.pDSPBEPathwayEntity = pDSPBFPathwayFactory({
-            title: firstRow.title,
-            description: firstRow.description,
-            researchField: firstRow.researchField,
-        });
+        this.pDSPBEPathwayEntity = successValue(
+            pDSPBFPathwayFactory({
+                title: firstRow.title,
+                description: firstRow.description,
+                researchField: firstRow.researchField,
+            })
+        );
 
         this.fakeChangeTitlePathwayPersistence.save(this.pDSPBEPathwayEntity);
     }

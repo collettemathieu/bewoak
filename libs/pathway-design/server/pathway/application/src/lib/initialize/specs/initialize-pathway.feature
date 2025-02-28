@@ -11,8 +11,15 @@ Feature: Application - Initialize a new pathway
       | title       | description      | researchField |
       | My Pathway  | A test pathway   | biology |
 
-  Scenario: When I initiliaze a pathway in application, but an error occured during the process of saving the pathway
+  Scenario: When I initiliaze a pathway in application, but the process of saving the pathway fails
     When I initialize a pathway in application with these data but the persistence layer fails
       | title       | description      | researchField |
       | My Pathway  | A test pathway   | biology |
-    Then It should return an error message indicating that the pathway could not be saved
+    Then It should return an exception message indicating that the pathway could not be saved
+
+
+  Scenario: When I initiliaze a pathway in application, but data are invalid
+    When I initialize a pathway in application with these invalid data
+      | title       | description      | researchField |
+      | My Pathway  |                  | biology |
+    Then It should return an exception message indicating why data are invalid

@@ -1,2 +1,2 @@
 export { ServerLogger } from './lib/logger';
-export { ErrorLog } from './lib/logger.decorators';
+export { ErrorLog, Log } from './lib/logger.decorators';
