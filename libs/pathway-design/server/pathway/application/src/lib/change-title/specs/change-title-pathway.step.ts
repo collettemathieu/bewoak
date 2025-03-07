@@ -1,7 +1,13 @@
 import { strict as assert } from 'node:assert';
 
-import type { CTSEException } from '@bewoak/common-http-exceptions-server';
-import { success, successValue } from '@bewoak/common-types-result';
+import {
+    CTSEBadRequestException,
+    type CTSEException,
+    CTSENotFoundRequestException,
+    HttpStatus,
+} from '@bewoak/common-http-exceptions-server';
+import { failure, success, successValue } from '@bewoak/common-types-result';
+import { pDCPBRPathwayTitleRules } from '@bewoak/pathway-design-common-pathway-business-rules';
 import {
     type PDSPBEPathwayEntity,
     type PDSPBPChangeTitlePathwayPersistence,
@@ -25,11 +31,15 @@ class FakeChangeTitlePathwayPersistence implements PDSPBPChangeTitlePathwayPersi
 
     changeTitle(pathwayId: string, title: string) {
         if (this.pDSPBEPathwayEntity === undefined) {
-            throw new Error('Pathway is not initialized');
+            return Promise.resolve(failure(new CTSENotFoundRequestException('Pathway not found in memory')));
         }
 
         if (this.pDSPBEPathwayEntity.pathwayId !== pathwayId) {
             throw new Error('Pathway id does not match');
+        }
+
+        if (!pDCPBRPathwayTitleRules.isValid(title)) {
+            return Promise.resolve(failure(new CTSEBadRequestException(pDCPBRPathwayTitleRules.textError())));
         }
 
         const pathwayWithTitleChanged = successValue(
@@ -123,6 +133,19 @@ export default class ControllerSteps {
         );
     }
 
+    @when('No pathway is initialized in application')
+    public async whenNoPathwayIsInitialized() {
+        this.result = await this.pDSPACUchangeTitlePathwayUseCase.execute(
+            this.fakeChangeTitlePathwayPersistence,
+            this.fakePathwayPresenter,
+            this.fakeEventPublisher as EventPublisher,
+            {
+                pathwayId: 'unknown',
+                title: 'unknown',
+            }
+        );
+    }
+
     @then('It should call the persistence layer to modify the title of the pathway')
     public thenPersistenceLayerShouldBeCalled() {
         assert(this.persistenceSpy?.calledOnce);
@@ -157,5 +180,31 @@ export default class ControllerSteps {
         assert.strictEqual(result?.title, firstRow.title);
         assert.strictEqual(result?.description, this.pDSPBEPathwayEntity.description);
         assert.strictEqual(result?.researchField, this.pDSPBEPathwayEntity.researchField);
+    }
+
+    @then('It should return an exception message indicating that the pathway is not found')
+    public thenAnNotFoundExceptionShouldBeReturned() {
+        if (this.result === undefined) {
+            throw new Error('Result is undefined');
+        }
+
+        const result = this.result as CTSEException;
+
+        assert.strictEqual(result.message, 'Pathway not found in memory');
+        assert.strictEqual(result.statusCode, HttpStatus.NOT_FOUND);
+        assert.strictEqual(result.name, 'NotFoundRequestException');
+    }
+
+    @then('It should return an exception message indicating that the new title is invalid')
+    public thenAnBadRequestExceptionShouldBeReturned() {
+        if (this.result === undefined) {
+            throw new Error('Result is undefined');
+        }
+
+        const result = this.result as CTSEException;
+
+        assert.strictEqual(result.message, pDCPBRPathwayTitleRules.textError());
+        assert.strictEqual(result.statusCode, HttpStatus.BAD_REQUEST);
+        assert.strictEqual(result.name, 'BadRequestException');
     }
 }

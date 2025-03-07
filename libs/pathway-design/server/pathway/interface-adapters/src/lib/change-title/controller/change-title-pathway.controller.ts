@@ -4,20 +4,13 @@ import {
     PDSPAChangeTitlePathwayService,
 } from '@bewoak/pathway-design-server-pathway-application';
 import { Body, Controller, Param, Patch, UsePipes, ValidationPipe } from '@nestjs/common';
-import {
-    ApiBadRequestResponse,
-    ApiInternalServerErrorResponse,
-    ApiNotFoundResponse,
-    ApiOkResponse,
-    ApiTags,
-} from '@nestjs/swagger';
+import { ApiBadRequestResponse, ApiNotFoundResponse, ApiOkResponse, ApiTags } from '@nestjs/swagger';
 // biome-ignore lint/style/useImportType: <explanation>
 import { ChangeTitlePathwayRequestBodyDto } from '../dtos/request/body/request-body.dto';
 // biome-ignore lint/style/useImportType: <explanation>
 import { ChangeTitlePathwayRequestParamsDto } from '../dtos/request/params/request-params.dto';
 import {
     ChangeTitlePathwayBadRequestExceptionBodyDto,
-    ChangeTitlePathwayInternalServerExceptionBodyDto,
     ChangeTitlePathwayNotFoundExceptionBodyDto,
     ChangeTitlePathwayResponseBodyDto,
 } from '../dtos/response/body/response-body.dto';
@@ -43,10 +36,6 @@ export class ChangeTitlePathwayController {
     @ApiBadRequestResponse({
         description: 'Cannot change the title of the pathway. Data are not valid.',
         type: ChangeTitlePathwayBadRequestExceptionBodyDto,
-    })
-    @ApiInternalServerErrorResponse({
-        description: 'Cannot change the title of the pathway. Internal server exception occured.',
-        type: ChangeTitlePathwayInternalServerExceptionBodyDto,
     })
     @ApiNotFoundResponse({
         description: 'Cannot change the title of the pathway. Pathway not found.',
