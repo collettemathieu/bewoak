@@ -19,9 +19,13 @@ export class CTSEBadRequestException extends CTSEException {
         super(message, 'BadRequestException', HttpStatus.BAD_REQUEST, errors);
     }
 }
-
 export class CTSEInternalServerException extends CTSEException {
     constructor(message: string) {
         super(message, 'InternalServerException', HttpStatus.INTERNAL_SERVER_ERROR);
+    }
+}
+export class CTSENotFoundRequestException extends CTSEException {
+    constructor(message: string) {
+        super(message, 'NotFoundRequestException', HttpStatus.NOT_FOUND);
     }
 }

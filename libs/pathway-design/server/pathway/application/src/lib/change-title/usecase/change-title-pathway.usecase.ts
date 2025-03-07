@@ -1,3 +1,4 @@
+import { failureValue, isSuccess, successValue } from '@bewoak/common-types-result';
 import type { PDSPBPChangeTitlePathwayPersistence, PDSPBPPathwayPresenter } from '@bewoak/pathway-design-server-pathway-business';
 import type { EventPublisher } from '@nestjs/cqrs';
 import { firstValueFrom, map, of, switchMap, tap } from 'rxjs';
@@ -20,10 +21,18 @@ export class PDSPACUChangeTitlePathwayUseCase {
             of('').pipe(
                 switchMap(() => pDSPBPChangeTitlePathwayPersistence.changeTitle(pathwayId, title)),
                 tap((pathway) => {
-                    eventPublisher.mergeObjectContext(pathway);
-                    pathway.commit();
+                    if (isSuccess(pathway)) {
+                        const pathwaySuccessed = successValue(pathway);
+                        eventPublisher.mergeObjectContext(pathwaySuccessed);
+                        pathwaySuccessed.commit();
+                    }
                 }),
-                map((pathway) => pDSPBPPathwayPresenter.present(pathway))
+                map((pathway) => {
+                    if (isSuccess(pathway)) {
+                        return pDSPBPPathwayPresenter.present(successValue(pathway));
+                    }
+                    return pDSPBPPathwayPresenter.exception(failureValue(pathway));
+                })
             )
         );
     }

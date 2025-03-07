@@ -1,5 +1,5 @@
 import { beforeEach, describe, expect, spyOn, test } from 'bun:test';
-import type { CTSEInternalServerException } from '@bewoak/common-http-exceptions-server';
+import { type CTSEInternalServerException, HttpStatus } from '@bewoak/common-http-exceptions-server';
 import { ServerLogger } from '@bewoak/common-log-server';
 import { failureValue, successValue } from '@bewoak/common-types-result';
 import { type PDSPBEPathwayEntity, pDSPBFPathwayFactory } from '@bewoak/pathway-design-server-pathway-business';
@@ -119,7 +119,7 @@ describe('InitializePathwayInMemoryPersistence', () => {
 
         test('should send an error message', async () => {
             expect(result.message).toBe('Pathway was not been added in memory');
-            expect(result.statusCode).toBe(500);
+            expect(result.statusCode).toBe(HttpStatus.INTERNAL_SERVER_ERROR);
             expect(result.name).toBe('InternalServerException');
         });
     });

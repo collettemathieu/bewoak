@@ -1,5 +1,8 @@
+import { CTSENotFoundRequestException } from '@bewoak/common-http-exceptions-server';
+import { ErrorLog } from '@bewoak/common-log-server';
+import { failure, success } from '@bewoak/common-types-result';
 import type { PDSPBPChangeTitlePathwayPersistence } from '@bewoak/pathway-design-server-pathway-business';
-import { Inject, Injectable, NotFoundException } from '@nestjs/common';
+import { Inject, Injectable } from '@nestjs/common';
 import { mapPathwayInMemoryToPathwayEntity } from '../../common/in-memory/mappers/in-memory-pathway.mapper';
 import { PathwayInMemoryRepository } from '../../common/in-memory/repositories/in-memory-pathway.repository';
 
@@ -10,19 +13,14 @@ export class ChangeTitlePathwayInMemoryPersistence implements PDSPBPChangeTitleP
         private pathwayInMemoryRepository: PathwayInMemoryRepository
     ) {}
 
+    @ErrorLog()
     async changeTitle(pathwayId: string, title: string) {
-        try {
-            await this.pathwayInMemoryRepository.patch(pathwayId, { title });
-        } catch (error) {
-            throw new NotFoundException(`An error has occurred while changing the title of the pathway: ${error}`);
-        }
-
-        const pathwayInMemory = await this.pathwayInMemoryRepository.getByPathwayId(pathwayId);
+        const pathwayInMemory = await this.pathwayInMemoryRepository.patch(pathwayId, { title });
 
         if (pathwayInMemory === undefined) {
-            throw new NotFoundException('Pathway not found in memory');
+            return failure(new CTSENotFoundRequestException('Pathway not found in memory'));
         }
 
-        return mapPathwayInMemoryToPathwayEntity(pathwayInMemory);
+        return success(mapPathwayInMemoryToPathwayEntity(pathwayInMemory));
     }
 }

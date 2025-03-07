@@ -1,11 +1,12 @@
 import { strict as assert } from 'node:assert';
 
 import type { CTSEException } from '@bewoak/common-http-exceptions-server';
-import { successValue } from '@bewoak/common-types-result';
+import { success, successValue } from '@bewoak/common-types-result';
 import {
     type PDSPBEPathwayEntity,
     type PDSPBPChangeTitlePathwayPersistence,
     type PDSPBPPathwayPresenter,
+    type PDSPBPPathwayPresenterResult,
     type PDSPBPPathwayPresenters,
     pDSPBFPathwayFactory,
 } from '@bewoak/pathway-design-server-pathway-business';
@@ -39,7 +40,7 @@ class FakeChangeTitlePathwayPersistence implements PDSPBPChangeTitlePathwayPersi
                 title,
             })
         );
-        return Promise.resolve(pathwayWithTitleChanged);
+        return Promise.resolve(success(pathwayWithTitleChanged));
     }
 }
 
@@ -78,7 +79,7 @@ export default class ControllerSteps {
     private readonly fakePathwayPresenter = new FakePathwayPresenter();
     private persistenceSpy: sinon.SinonSpy | undefined;
     private presenterSpy: sinon.SinonSpy | undefined;
-    private result: PDSPBPPathwayPresenters | undefined;
+    private result: PDSPBPPathwayPresenterResult | undefined;
 
     @before()
     public before() {
@@ -143,12 +144,18 @@ export default class ControllerSteps {
             throw new Error('Pathway is not initialized');
         }
 
+        if (this.result === undefined) {
+            throw new Error('Result is undefined');
+        }
+
         const firstRow = dataTable.hashes()[0] as {
             title: string;
         };
 
-        assert.strictEqual(this.result?.title, firstRow.title);
-        assert.strictEqual(this.result?.description, this.pDSPBEPathwayEntity.description);
-        assert.strictEqual(this.result?.researchField, this.pDSPBEPathwayEntity.researchField);
+        const result = this.result as PDSPBPPathwayPresenters;
+
+        assert.strictEqual(result?.title, firstRow.title);
+        assert.strictEqual(result?.description, this.pDSPBEPathwayEntity.description);
+        assert.strictEqual(result?.researchField, this.pDSPBEPathwayEntity.researchField);
     }
 }

@@ -16,7 +16,7 @@ export class PathwayInMemoryRepository {
         const pathway = await this.getByPathwayId(pathwayId);
 
         if (pathway === undefined || pathway.id === undefined) {
-            throw new Error('Pathway not found in memory');
+            return undefined;
         }
 
         const newPathway = new PathwayInMemoryEntity(
@@ -28,6 +28,8 @@ export class PathwayInMemoryRepository {
         );
 
         this.#pathways.set(pathway.id, newPathway);
+
+        return this.getByPathwayId(pathwayId);
     }
 
     async getByPathwayId(pathwayId: string) {
