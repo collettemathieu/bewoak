@@ -1,9 +1,9 @@
-import { beforeEach, describe, expect, spyOn, test } from 'bun:test';
 import { type CTSENotFoundRequestException, HttpStatus } from '@bewoak/common-http-exceptions-server';
 import { ServerLogger } from '@bewoak/common-log-server';
 import { failureValue, successValue } from '@bewoak/common-types-result';
 import { type PDSPBEPathwayEntity, pDSPBFPathwayFactory } from '@bewoak/pathway-design-server-pathway-business';
 import { Test } from '@nestjs/testing';
+import { beforeEach, describe, expect, spyOn, test } from 'bun:test';
 import { mapPathwayEntityToInMemoryPersistence } from '../../common/in-memory/mappers/in-memory-pathway.mapper';
 import { PathwayInMemoryRepository } from '../../common/in-memory/repositories/in-memory-pathway.repository';
 import { ChangeTitlePathwayInMemoryPersistence } from './change-title-pathway-in-memory.persistence';
@@ -49,9 +49,7 @@ describe('ChangeTitlePathwayInMemoryPersistence', () => {
             spyOn(pathwayInMemoryRepository, 'patch');
             spyOn(pathwayInMemoryRepository, 'getByPathwayId');
 
-            result = successValue(
-                await changeTitlePathwayInMemoryPersistence.changeTitle(pDSPBEPathwayEntity.pathwayId, newTitle)
-            );
+            result = successValue(await changeTitlePathwayInMemoryPersistence.changeTitle(pDSPBEPathwayEntity, newTitle));
         });
 
         test('logger should not have been called', () => {
@@ -61,7 +59,7 @@ describe('ChangeTitlePathwayInMemoryPersistence', () => {
         test('should call the change title method with the title of the pathway in parameter', () => {
             expect(changeTitlePathwayInMemoryPersistence).toBeDefined();
             expect(changeTitlePathwayInMemoryPersistence.changeTitle).toHaveBeenCalledWith(
-                pDSPBEPathwayEntity.pathwayId,
+                pDSPBEPathwayEntity,
                 'new pathway title'
             );
         });
@@ -106,9 +104,7 @@ describe('ChangeTitlePathwayInMemoryPersistence', () => {
             module.useLogger(serverLogger);
             spyOn(serverLogger, 'error');
 
-            result = failureValue(
-                await changeTitlePathwayInMemoryPersistence.changeTitle(pDSPBEPathwayEntity.pathwayId, newTitle)
-            );
+            result = failureValue(await changeTitlePathwayInMemoryPersistence.changeTitle(pDSPBEPathwayEntity, newTitle));
         });
 
         test('logger should have been called', () => {
@@ -166,9 +162,7 @@ describe('ChangeTitlePathwayInMemoryPersistence', () => {
             module.useLogger(serverLogger);
             spyOn(serverLogger, 'error');
 
-            result = failureValue(
-                await changeTitlePathwayInMemoryPersistence.changeTitle(pDSPBEPathwayEntity.pathwayId, newTitle)
-            );
+            result = failureValue(await changeTitlePathwayInMemoryPersistence.changeTitle(pDSPBEPathwayEntity, newTitle));
         });
 
         test('logger should have been called', () => {

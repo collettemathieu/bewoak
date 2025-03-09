@@ -1,11 +1,6 @@
 import { strict as assert } from 'node:assert';
 
-import {
-    CTSEBadRequestException,
-    type CTSEException,
-    CTSENotFoundRequestException,
-    HttpStatus,
-} from '@bewoak/common-http-exceptions-server';
+import { type CTSEException, CTSENotFoundRequestException, HttpStatus } from '@bewoak/common-http-exceptions-server';
 import { failure, success, successValue } from '@bewoak/common-types-result';
 import { pDCPBRPathwayTitleRules } from '@bewoak/pathway-design-common-pathway-business-rules';
 import {
@@ -29,17 +24,21 @@ class FakeChangeTitlePathwayPersistence implements PDSPBPChangeTitlePathwayPersi
         this.pDSPBEPathwayEntity = pDSPBEPathwayEntity;
     }
 
-    changeTitle(pathwayId: string, title: string) {
+    getPathwayByPathwayId(_pathwayId: string) {
         if (this.pDSPBEPathwayEntity === undefined) {
             return Promise.resolve(failure(new CTSENotFoundRequestException('Pathway not found in memory')));
         }
 
-        if (this.pDSPBEPathwayEntity.pathwayId !== pathwayId) {
-            throw new Error('Pathway id does not match');
+        return Promise.resolve(success(this.pDSPBEPathwayEntity));
+    }
+
+    changeTitle(pathway: PDSPBEPathwayEntity, title: string) {
+        if (this.pDSPBEPathwayEntity === undefined) {
+            return Promise.resolve(failure(new CTSENotFoundRequestException('Pathway not found in memory')));
         }
 
-        if (!pDCPBRPathwayTitleRules.isValid(title)) {
-            return Promise.resolve(failure(new CTSEBadRequestException(pDCPBRPathwayTitleRules.textError())));
+        if (this.pDSPBEPathwayEntity.pathwayId !== pathway.pathwayId) {
+            throw new Error('Pathway id does not match');
         }
 
         const pathwayWithTitleChanged = successValue(

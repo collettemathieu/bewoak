@@ -16,22 +16,36 @@ export class PDSPACUChangeTitlePathwayUseCase {
             title: string;
         }
     ) {
-        // TODO: pattern transactional outbox should be implemented here => https://microservices.io/patterns/data/transactional-outbox.html
         return firstValueFrom(
             of('').pipe(
-                switchMap(() => pDSPBPChangeTitlePathwayPersistence.changeTitle(pathwayId, title)),
-                tap((pathway) => {
-                    if (isSuccess(pathway)) {
-                        const pathwaySuccessed = successValue(pathway);
-                        eventPublisher.mergeObjectContext(pathwaySuccessed);
-                        pathwaySuccessed.commit();
+                switchMap(() => pDSPBPChangeTitlePathwayPersistence.getPathwayByPathwayId(pathwayId)),
+                map((result) => {
+                    if (isSuccess(result)) {
+                        const pathway = successValue(result);
+                        return pathway.changeTitle(title);
+                    }
+                    return result;
+                }),
+                switchMap((result) => {
+                    if (isSuccess(result)) {
+                        return pDSPBPChangeTitlePathwayPersistence.changeTitle(successValue(result), title);
+                    }
+
+                    return of(result);
+                }),
+                tap((result) => {
+                    // TODO: pattern transactional outbox should be implemented here => https://microservices.io/patterns/data/transactional-outbox.html
+                    if (isSuccess(result)) {
+                        const pathway = successValue(result);
+                        eventPublisher.mergeObjectContext(pathway);
+                        pathway.commit();
                     }
                 }),
-                map((pathway) => {
-                    if (isSuccess(pathway)) {
-                        return pDSPBPPathwayPresenter.present(successValue(pathway));
+                map((result) => {
+                    if (isSuccess(result)) {
+                        return pDSPBPPathwayPresenter.present(successValue(result));
                     }
-                    return pDSPBPPathwayPresenter.exception(failureValue(pathway));
+                    return pDSPBPPathwayPresenter.exception(failureValue(result));
                 })
             )
         );

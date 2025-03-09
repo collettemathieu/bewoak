@@ -6,7 +6,7 @@ import {
     pDSPBFPathwayFactory,
 } from '@bewoak/pathway-design-server-pathway-business';
 import type { EventPublisher } from '@nestjs/cqrs';
-import { firstValueFrom, from, of, switchMap } from 'rxjs';
+import { firstValueFrom, map, of, switchMap, tap } from 'rxjs';
 
 export class PDSPAIUInitializePathwayUsecase {
     @ErrorLog()
@@ -26,31 +26,27 @@ export class PDSPAIUInitializePathwayUsecase {
         }
     ) {
         return firstValueFrom(
-            of(
-                pDSPBFPathwayFactory({
-                    title,
-                    description,
-                    researchField,
-                })
-            ).pipe(
+            of('').pipe(
+                map(() => pDSPBFPathwayFactory({ title, description, researchField })),
                 switchMap((result) => {
                     if (isSuccess(result)) {
+                        return pDSPBPInitializePathwayPersistence.save(successValue(result));
+                    }
+                    return of(result);
+                }),
+                tap((result) => {
+                    // TODO: pattern transactional outbox should be implemented here => https://microservices.io/patterns/data/transactional-outbox.html
+                    if (isSuccess(result)) {
                         const pathway = successValue(result);
-                        // TODO: pattern transactional outbox should be implemented here => https://microservices.io/patterns/data/transactional-outbox.html
-
                         eventPublisher.mergeObjectContext(pathway);
                         pathway.commit();
-
-                        return from(pDSPBPInitializePathwayPersistence.save(pathway)).pipe(
-                            switchMap((result) =>
-                                isSuccess(result)
-                                    ? of(pDSPBPPathwayPresenter.present(successValue(result)))
-                                    : of(pDSPBPPathwayPresenter.exception(failureValue(result)))
-                            )
-                        );
                     }
-
-                    return of(pDSPBPPathwayPresenter.exception(failureValue(result)));
+                }),
+                map((result) => {
+                    if (isSuccess(result)) {
+                        return pDSPBPPathwayPresenter.present(successValue(result));
+                    }
+                    return pDSPBPPathwayPresenter.exception(failureValue(result));
                 })
             )
         );
