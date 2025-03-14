@@ -1,7 +1,7 @@
 Feature: Business - Change the title of a pathway
 
   Scenario: I want to change the title of a pathway in business with a valid title
-    Given I have a pathway in business with these data
+    Given I have a pathway in business with these valid data
       | title       | description      | researchField |
       | My Pathway | A test pathway   | biology |
     When I change the title of the pathway in business to "My New Pathway"
@@ -9,7 +9,7 @@ Feature: Business - Change the title of a pathway
     Then I should see the title of the pathway in business changed to "My New Pathway"
 
   Scenario: I want to change the title of a pathway with an invalid title
-    Given I have a pathway in business with these data
+    Given I have a pathway in business with these valid data
       | title       | description      | researchField |
       | My Pathway  | A test pathway   | biology |
     When I change the title of the pathway in business to ""

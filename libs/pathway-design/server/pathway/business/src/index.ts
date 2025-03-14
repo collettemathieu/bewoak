@@ -1,4 +1,5 @@
 export { PDSPBEPathwayEntity } from './lib/pathway/entities/pathway';
+export { PDSPBE_INVALID_PATHWAY_DATA_INITIALIZATION_MESSAGE } from './lib/pathway/entities/pathway.constants';
 export { PDSPBEPathwayInitializedEvent } from './lib/pathway/events/pathway-initialized.event';
 export { pDSPBFPathwayFactory } from './lib/pathway/factories/pathway.factory';
 export {

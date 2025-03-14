@@ -13,7 +13,7 @@ import {
     type PDSPPPresenterDriverAuthorized,
 } from '@bewoak/pathway-design-server-pathway-presenters';
 import type { DataTable } from '@cucumber/cucumber';
-import type { INestApplication } from '@nestjs/common';
+import { HttpStatus, type INestApplication } from '@nestjs/common';
 import { CqrsModule } from '@nestjs/cqrs';
 import { EventEmitterModule } from '@nestjs/event-emitter';
 import { Test } from '@nestjs/testing';
@@ -80,6 +80,14 @@ class ControllerSteps {
         const firstRow = dataTable.hashes()[0];
 
         assert.strictEqual(this.response.body.title, firstRow.title);
+    }
+
+    @then('I should an error message from the platform during changing the title')
+    public thenIShouldSeeAnErrorMessage() {
+        assert.notEqual(this.response.body.message, undefined);
+        assert.notEqual(this.response.body.name, undefined);
+        assert.strictEqual(this.response.body.errors, undefined);
+        assert.strictEqual(this.response.body.statusCode, HttpStatus.BAD_REQUEST);
     }
 }
 

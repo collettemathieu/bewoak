@@ -10,6 +10,7 @@ import { PathwayDescriptionValueObject } from '../value-objects/pathway-descript
 import { PathwayIdValueObject } from '../value-objects/pathway-id.value-object';
 import { PathwayResearchFieldValueObject } from '../value-objects/pathway-research-field.value-object';
 import { PathwayTitleValueObject } from '../value-objects/pathway-title.value-object';
+import { PDSPBE_INVALID_PATHWAY_DATA_INITIALIZATION_MESSAGE } from './pathway.constants';
 import type { AddArticleParams, InitializePathwayParams } from './pathway.types';
 
 export class PDSPBEPathwayEntity extends AggregateRoot {
@@ -39,18 +40,18 @@ export class PDSPBEPathwayEntity extends AggregateRoot {
         return this.#title?.value ?? '';
     }
 
-    initialize({ pathwayId, title, description, researchField }: InitializePathwayParams) {
-        const pathwayIdResult = PathwayIdValueObject.create(pathwayId);
-        const titleResult = PathwayTitleValueObject.create(title);
+    initialize({ description, pathwayId, researchField, title }: InitializePathwayParams) {
         const descriptionResult = PathwayDescriptionValueObject.create(description);
+        const pathwayIdResult = PathwayIdValueObject.create(pathwayId);
         const researchFieldResult = PathwayResearchFieldValueObject.create(researchField);
+        const titleResult = PathwayTitleValueObject.create(title);
 
         const failures = failureValueList([pathwayIdResult, descriptionResult, researchFieldResult, titleResult]);
 
         if (haveErrors(failures)) {
             return failure(
                 new CTSEBadRequestException(
-                    'Invalid pathway data',
+                    PDSPBE_INVALID_PATHWAY_DATA_INITIALIZATION_MESSAGE,
                     failures.map((failure) => ({
                         message: failure.message,
                     }))

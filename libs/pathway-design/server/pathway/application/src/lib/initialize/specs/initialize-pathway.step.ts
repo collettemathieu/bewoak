@@ -1,12 +1,13 @@
 import { strict as assert } from 'node:assert';
 import { type CTSEException, CTSEInternalServerException, HttpStatus } from '@bewoak/common-http-exceptions-server';
 import { failure, success } from '@bewoak/common-types-result';
-import type {
-    PDSPBEPathwayEntity,
-    PDSPBPInitializePathwayPersistence,
-    PDSPBPPathwayPresenter,
-    PDSPBPPathwayPresenterResult,
-    PDSPBPPathwayPresenters,
+import {
+    type PDSPBEPathwayEntity,
+    PDSPBE_INVALID_PATHWAY_DATA_INITIALIZATION_MESSAGE,
+    type PDSPBPInitializePathwayPersistence,
+    type PDSPBPPathwayPresenter,
+    type PDSPBPPathwayPresenterResult,
+    type PDSPBPPathwayPresenters,
 } from '@bewoak/pathway-design-server-pathway-business';
 import type { DataTable } from '@cucumber/cucumber';
 import type { EventPublisher } from '@nestjs/cqrs';
@@ -184,7 +185,7 @@ export default class ControllerSteps {
 
         const result = this.result as CTSEException;
 
-        assert.strictEqual(result.message, 'Invalid pathway data');
+        assert.strictEqual(result.message, PDSPBE_INVALID_PATHWAY_DATA_INITIALIZATION_MESSAGE);
         assert.strictEqual(result.statusCode, HttpStatus.BAD_REQUEST);
         assert.strictEqual(result.name, 'BadRequestException');
     }

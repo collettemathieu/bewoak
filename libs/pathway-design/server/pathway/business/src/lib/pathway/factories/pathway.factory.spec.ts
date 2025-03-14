@@ -2,6 +2,7 @@ import { describe, expect, it } from 'bun:test';
 import { CTSEBadRequestException } from '@bewoak/common-http-exceptions-server';
 import { failureValue, successValue } from '@bewoak/common-types-result';
 import { PDSPBEPathwayEntity } from '../entities/pathway';
+import { PDSPBE_INVALID_PATHWAY_DATA_INITIALIZATION_MESSAGE } from '../entities/pathway.constants';
 import { pDSPBFPathwayFactory } from './pathway.factory';
 import type { PathwayFactoryParams } from './pathway.factory.types';
 
@@ -47,7 +48,7 @@ describe('pDSPBFPathwayFactory', () => {
         const failure = failureValue(pDSPBFPathwayFactory(params));
 
         expect(failure).toBeInstanceOf(CTSEBadRequestException);
-        expect(failure.message).toBe('Invalid pathway data');
+        expect(failure.message).toBe(PDSPBE_INVALID_PATHWAY_DATA_INITIALIZATION_MESSAGE);
         expect(failure.errors).toHaveLength(1);
     });
 
@@ -61,7 +62,7 @@ describe('pDSPBFPathwayFactory', () => {
         const failure = failureValue(pDSPBFPathwayFactory(params));
 
         expect(failure).toBeInstanceOf(CTSEBadRequestException);
-        expect(failure.message).toBe('Invalid pathway data');
+        expect(failure.message).toBe(PDSPBE_INVALID_PATHWAY_DATA_INITIALIZATION_MESSAGE);
         expect(failure.errors).toHaveLength(1);
     });
 
@@ -75,7 +76,7 @@ describe('pDSPBFPathwayFactory', () => {
         const failure = failureValue(pDSPBFPathwayFactory(params));
 
         expect(failure).toBeInstanceOf(CTSEBadRequestException);
-        expect(failure.message).toBe('Invalid pathway data');
+        expect(failure.message).toBe(PDSPBE_INVALID_PATHWAY_DATA_INITIALIZATION_MESSAGE);
         expect(failure.errors).toHaveLength(1);
     });
 
@@ -89,7 +90,7 @@ describe('pDSPBFPathwayFactory', () => {
         const failure = failureValue(pDSPBFPathwayFactory(params));
 
         expect(failure).toBeInstanceOf(CTSEBadRequestException);
-        expect(failure.message).toBe('Invalid pathway data');
+        expect(failure.message).toBe(PDSPBE_INVALID_PATHWAY_DATA_INITIALIZATION_MESSAGE);
         expect(failure.errors).toHaveLength(3);
     });
 
@@ -102,7 +103,7 @@ describe('pDSPBFPathwayFactory', () => {
         const failure = failureValue(pDSPBFPathwayFactory(params));
 
         expect(failure).toBeInstanceOf(CTSEBadRequestException);
-        expect(failure.message).toBe('Invalid pathway data');
+        expect(failure.message).toBe(PDSPBE_INVALID_PATHWAY_DATA_INITIALIZATION_MESSAGE);
         expect(failure.errors).toHaveLength(3);
     });
 });

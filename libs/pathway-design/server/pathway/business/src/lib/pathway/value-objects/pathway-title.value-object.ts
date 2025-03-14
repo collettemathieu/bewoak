@@ -7,13 +7,7 @@ export class PathwayTitleValueObject {
 
     static create(title: string): Result<PathwayTitleValueObject, CTSEBadRequestException> {
         if (!pDCPBRPathwayTitleRules.isValid(title)) {
-            return failure(
-                new CTSEBadRequestException('Invalid title', [
-                    {
-                        message: pDCPBRPathwayTitleRules.textError(),
-                    },
-                ])
-            );
+            return failure(new CTSEBadRequestException(pDCPBRPathwayTitleRules.textError()));
         }
         return success(new PathwayTitleValueObject(title));
     }
