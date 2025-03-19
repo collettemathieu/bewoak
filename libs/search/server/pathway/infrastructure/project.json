@@ -30,12 +30,6 @@
             "options": {
                 "command": "bun test --coverage --coverage-dir=dist/reports/{projectRoot}/coverage --coverage-reporter=lcov {projectRoot}"
             }
-        },
-        "test-feature": {
-            "executor": "nx:run-commands",
-            "options": {
-                "command": "TS_NODE_PROJECT='{projectRoot}/tsconfig.spec.json' bun run cucumber-js --config={projectRoot}/cucumber.js"
-            }
         }
     },
     "tags": ["type:search:server:pathway:infrastructure"],
