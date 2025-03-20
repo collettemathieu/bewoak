@@ -32,7 +32,7 @@ class FakeChangeTitlePathwayPersistence implements PDSPBPChangeTitlePathwayPersi
         return Promise.resolve(success(this.pDSPBEPathwayEntity));
     }
 
-    changeTitle(pathway: PDSPBEPathwayEntity, title: string) {
+    changeTitle(pathway: PDSPBEPathwayEntity) {
         if (this.pDSPBEPathwayEntity === undefined) {
             return Promise.resolve(failure(new CTSENotFoundRequestException('Pathway not found in memory')));
         }
@@ -46,7 +46,7 @@ class FakeChangeTitlePathwayPersistence implements PDSPBPChangeTitlePathwayPersi
                 description: this.pDSPBEPathwayEntity.description,
                 pathwayId: this.pDSPBEPathwayEntity.pathwayId,
                 researchField: this.pDSPBEPathwayEntity.researchField,
-                title,
+                title: pathway.title,
             })
         );
         return Promise.resolve(success(pathwayWithTitleChanged));

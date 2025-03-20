@@ -4,6 +4,10 @@ import { ServerLogger } from '@bewoak/common-log-server';
 import { failureValue, successValue } from '@bewoak/common-types-result';
 import { type PDSPBEPathwayEntity, pDSPBFPathwayFactory } from '@bewoak/pathway-design-server-pathway-business';
 import { Test } from '@nestjs/testing';
+import {
+    PATHWAY_NOT_FOUND_IN_MEMORY,
+    PATHWAY_TITLE_NOT_CHANGED_IN_MEMORY,
+} from '../../common/in-memory/constants/in-memory-pathway.constants';
 import { mapPathwayEntityToInMemoryPersistence } from '../../common/in-memory/mappers/in-memory-pathway.mapper';
 import { PathwayInMemoryRepository } from '../../common/in-memory/repositories/in-memory-pathway.repository';
 import { ChangeTitlePathwayInMemoryPersistence } from './change-title-pathway-in-memory.persistence';
@@ -33,7 +37,7 @@ describe('ChangeTitlePathwayInMemoryPersistence', () => {
                 pDSPBFPathwayFactory({
                     description: 'pathway description',
                     researchField: 'pathway research field',
-                    title: 'pathway title',
+                    title: newTitle,
                 })
             );
 
@@ -49,7 +53,7 @@ describe('ChangeTitlePathwayInMemoryPersistence', () => {
             spyOn(pathwayInMemoryRepository, 'patch');
             spyOn(pathwayInMemoryRepository, 'getByPathwayId');
 
-            result = successValue(await changeTitlePathwayInMemoryPersistence.changeTitle(pDSPBEPathwayEntity, newTitle));
+            result = successValue(await changeTitlePathwayInMemoryPersistence.changeTitle(pDSPBEPathwayEntity));
         });
 
         test('logger should not have been called', () => {
@@ -58,17 +62,14 @@ describe('ChangeTitlePathwayInMemoryPersistence', () => {
 
         test('should call the change title method with the title of the pathway in parameter', () => {
             expect(changeTitlePathwayInMemoryPersistence).toBeDefined();
-            expect(changeTitlePathwayInMemoryPersistence.changeTitle).toHaveBeenCalledWith(
-                pDSPBEPathwayEntity,
-                'new pathway title'
-            );
+            expect(changeTitlePathwayInMemoryPersistence.changeTitle).toHaveBeenCalledWith(pDSPBEPathwayEntity);
         });
 
         test('should save the pathway in memory and return the pathway saved', () => {
             expect(pathwayInMemoryRepository.patch).toHaveBeenCalledTimes(1);
             expect(pathwayInMemoryRepository.getByPathwayId).toHaveBeenCalledTimes(2);
 
-            expect(result).not.toBe(pDSPBEPathwayEntity);
+            expect(result).toBe(pDSPBEPathwayEntity);
             expect(result.title).toStrictEqual(newTitle);
             expect(result.description).toStrictEqual(pDSPBEPathwayEntity.description);
             expect(result.researchField).toStrictEqual(pDSPBEPathwayEntity.researchField);
@@ -80,8 +81,6 @@ describe('ChangeTitlePathwayInMemoryPersistence', () => {
         let pDSPBEPathwayEntity: PDSPBEPathwayEntity;
         let result: CTSENotFoundRequestException;
         let serverLogger: ServerLogger;
-
-        const newTitle = 'new pathway title';
 
         beforeEach(async () => {
             const module = await Test.createTestingModule({
@@ -104,7 +103,7 @@ describe('ChangeTitlePathwayInMemoryPersistence', () => {
             module.useLogger(serverLogger);
             spyOn(serverLogger, 'error');
 
-            result = failureValue(await changeTitlePathwayInMemoryPersistence.changeTitle(pDSPBEPathwayEntity, newTitle));
+            result = failureValue(await changeTitlePathwayInMemoryPersistence.changeTitle(pDSPBEPathwayEntity));
         });
 
         test('logger should have been called', () => {
@@ -119,14 +118,13 @@ describe('ChangeTitlePathwayInMemoryPersistence', () => {
         });
 
         test('should send an exception message', async () => {
-            expect(result.message).toBe('Pathway not found in memory');
+            expect(result.message).toBe(PATHWAY_NOT_FOUND_IN_MEMORY);
             expect(result.statusCode).toBe(HttpStatus.NOT_FOUND);
             expect(result.name).toBe('NotFoundRequestException');
         });
     });
 
     describe('When I want to change the title of a pathway and the pathway is not recovered in memory', () => {
-        const newTitle = 'new pathway title';
         let changeTitlePathwayInMemoryPersistence: ChangeTitlePathwayInMemoryPersistence;
         let pDSPBEPathwayEntity: PDSPBEPathwayEntity;
         let result: CTSENotFoundRequestException;
@@ -162,7 +160,7 @@ describe('ChangeTitlePathwayInMemoryPersistence', () => {
             module.useLogger(serverLogger);
             spyOn(serverLogger, 'error');
 
-            result = failureValue(await changeTitlePathwayInMemoryPersistence.changeTitle(pDSPBEPathwayEntity, newTitle));
+            result = failureValue(await changeTitlePathwayInMemoryPersistence.changeTitle(pDSPBEPathwayEntity));
         });
 
         test('logger should have been called', () => {
@@ -177,9 +175,69 @@ describe('ChangeTitlePathwayInMemoryPersistence', () => {
         });
 
         test('should send an exception message', async () => {
-            expect(result.message).toBe('Pathway not found in memory');
+            expect(result.message).toBe(PATHWAY_NOT_FOUND_IN_MEMORY);
             expect(result.statusCode).toBe(HttpStatus.NOT_FOUND);
             expect(result.name).toBe('NotFoundRequestException');
+        });
+    });
+
+    describe('When I want to change the title of a pathway and the title of the pathway is not saved in memory', () => {
+        const newTitle = 'new pathway title';
+        let changeTitlePathwayInMemoryPersistence: ChangeTitlePathwayInMemoryPersistence;
+        let pDSPBEPathwayEntity: PDSPBEPathwayEntity;
+        let result: CTSENotFoundRequestException;
+        let serverLogger: ServerLogger;
+
+        beforeEach(async () => {
+            const module = await Test.createTestingModule({
+                providers: [
+                    ChangeTitlePathwayInMemoryPersistence,
+                    {
+                        provide: PathwayInMemoryRepository,
+                        useValue: {
+                            patch: () => ({
+                                title: 'pathway title',
+                            }),
+                            getByPathwayId: () => undefined,
+                        },
+                    },
+                ],
+            }).compile();
+
+            changeTitlePathwayInMemoryPersistence = module.get<ChangeTitlePathwayInMemoryPersistence>(
+                ChangeTitlePathwayInMemoryPersistence
+            );
+
+            pDSPBEPathwayEntity = successValue(
+                pDSPBFPathwayFactory({
+                    description: 'pathway description',
+                    researchField: 'pathway research field',
+                    title: newTitle,
+                })
+            );
+
+            serverLogger = new ServerLogger('', '');
+            module.useLogger(serverLogger);
+            spyOn(serverLogger, 'error');
+
+            result = failureValue(await changeTitlePathwayInMemoryPersistence.changeTitle(pDSPBEPathwayEntity));
+        });
+
+        test('logger should have been called', () => {
+            expect(serverLogger.error).toHaveBeenCalledTimes(1);
+            expect(serverLogger.error).toHaveBeenCalledWith(
+                result.message,
+                result,
+                { constructor: 'ChangeTitlePathwayInMemoryPersistence' },
+                { method: 'changeTitle' },
+                { errors: {} }
+            );
+        });
+
+        test('should send an exception message', async () => {
+            expect(result.message).toBe(PATHWAY_TITLE_NOT_CHANGED_IN_MEMORY);
+            expect(result.statusCode).toBe(HttpStatus.INTERNAL_SERVER_ERROR);
+            expect(result.name).toBe('InternalServerException');
         });
     });
 });

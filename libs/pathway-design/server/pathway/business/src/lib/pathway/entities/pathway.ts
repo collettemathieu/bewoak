@@ -1,3 +1,4 @@
+import { SpanOtel } from '@bewoak/common-configs-server-otel';
 import { CTSEBadRequestException } from '@bewoak/common-http-exceptions-server';
 import { failure, failureValueList, isFailure, success, successValue, successValueList } from '@bewoak/common-types-result';
 import { AggregateRoot } from '@nestjs/cqrs';
@@ -40,6 +41,7 @@ export class PDSPBEPathwayEntity extends AggregateRoot {
         return this.#title?.value ?? '';
     }
 
+    @SpanOtel()
     initialize({ description, pathwayId, researchField, title }: InitializePathwayParams) {
         const descriptionResult = PathwayDescriptionValueObject.create(description);
         const pathwayIdResult = PathwayIdValueObject.create(pathwayId);
@@ -86,6 +88,7 @@ export class PDSPBEPathwayEntity extends AggregateRoot {
         return success(this);
     }
 
+    @SpanOtel()
     changeTitle(title: string) {
         const titleResult = PathwayTitleValueObject.create(title);
 

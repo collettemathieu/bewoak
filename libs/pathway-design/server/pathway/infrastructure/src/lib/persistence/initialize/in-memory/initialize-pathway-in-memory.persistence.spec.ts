@@ -4,6 +4,10 @@ import { ServerLogger } from '@bewoak/common-log-server';
 import { failureValue, successValue } from '@bewoak/common-types-result';
 import { type PDSPBEPathwayEntity, pDSPBFPathwayFactory } from '@bewoak/pathway-design-server-pathway-business';
 import { Test } from '@nestjs/testing';
+import {
+    PATHWAY_NOT_ADDED_IN_MEMORY,
+    PATHWAY_NOT_SAVED_CORRECTLY_IN_MEMORY,
+} from '../../common/in-memory/constants/in-memory-pathway.constants';
 import { PathwayInMemoryRepository } from '../../common/in-memory/repositories/in-memory-pathway.repository';
 import { InitializePathwayInMemoryPersistence } from './initialize-pathway-in-memory.persistence';
 
@@ -59,7 +63,7 @@ describe('InitializePathwayInMemoryPersistence', () => {
             expect(pathwayInMemoryRepository.add).toHaveBeenCalledTimes(1);
             expect(pathwayInMemoryRepository.getByPathwayId).toHaveBeenCalledTimes(1);
 
-            expect(result).not.toBe(pDSPBEPathwayEntity);
+            expect(result).toBe(pDSPBEPathwayEntity);
             expect(result.title).toStrictEqual(pDSPBEPathwayEntity.title);
             expect(result.description).toStrictEqual(pDSPBEPathwayEntity.description);
             expect(result.researchField).toStrictEqual(pDSPBEPathwayEntity.researchField);
@@ -118,7 +122,75 @@ describe('InitializePathwayInMemoryPersistence', () => {
         });
 
         test('should send an error message', async () => {
-            expect(result.message).toBe('Pathway was not been added in memory');
+            expect(result.message).toBe(PATHWAY_NOT_ADDED_IN_MEMORY);
+            expect(result.statusCode).toBe(HttpStatus.INTERNAL_SERVER_ERROR);
+            expect(result.name).toBe('InternalServerException');
+        });
+    });
+
+    describe('When I want to save a pathway but the pathway is saved correctly in memory', () => {
+        let initializePathwayInMemoryPersistence: InitializePathwayInMemoryPersistence;
+        let pDSPBEPathwayEntity: PDSPBEPathwayEntity;
+        let result: CTSEInternalServerException;
+        let serverLogger: ServerLogger;
+
+        const descriptionPathway = 'pathway description';
+        const pathwayId = 'pathway id';
+        const researchFieldPathway = 'pathway research field';
+        const titlePathway = 'pathway title';
+
+        beforeEach(async () => {
+            const module = await Test.createTestingModule({
+                providers: [
+                    InitializePathwayInMemoryPersistence,
+                    {
+                        provide: PathwayInMemoryRepository,
+                        useValue: {
+                            add: () => undefined,
+                            getByPathwayId: () => ({
+                                description: descriptionPathway,
+                                pathwayId: pathwayId,
+                                researchField: researchFieldPathway,
+                                title: titlePathway,
+                            }),
+                        },
+                    },
+                ],
+            }).compile();
+
+            serverLogger = new ServerLogger('', '');
+            module.useLogger(serverLogger);
+
+            spyOn(serverLogger, 'error');
+
+            initializePathwayInMemoryPersistence = module.get<InitializePathwayInMemoryPersistence>(
+                InitializePathwayInMemoryPersistence
+            );
+
+            pDSPBEPathwayEntity = successValue(
+                pDSPBFPathwayFactory({
+                    description: descriptionPathway,
+                    researchField: researchFieldPathway,
+                    title: titlePathway,
+                })
+            );
+
+            result = failureValue(await initializePathwayInMemoryPersistence.save(pDSPBEPathwayEntity));
+        });
+
+        test('logger should have been called', () => {
+            expect(serverLogger.error).toHaveBeenCalledTimes(1);
+            expect(serverLogger.error).toHaveBeenCalledWith(
+                result.message,
+                result,
+                { constructor: 'InitializePathwayInMemoryPersistence' },
+                { method: 'save' },
+                { errors: {} }
+            );
+        });
+
+        test('should send an error message', async () => {
+            expect(result.message).toBe(PATHWAY_NOT_SAVED_CORRECTLY_IN_MEMORY);
             expect(result.statusCode).toBe(HttpStatus.INTERNAL_SERVER_ERROR);
             expect(result.name).toBe('InternalServerException');
         });

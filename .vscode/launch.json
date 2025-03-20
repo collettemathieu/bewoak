@@ -1,48 +1,63 @@
+
 {
     "version": "0.2.0",
     "configurations": [
       {
-        "type": "bun",
+        "name": "Attach by Process ID",
+        "processId": "${command:PickProcess}",
+        "request": "attach",
+        "skipFiles": [
+          "<node_internals>/**"
+        ],
+        "type": "node"
+      },
+      {
+        "name": "Backend",
+        "type": "node",
         "request": "launch",
-        "name": "Debug Bun",
-        "program": "${file}",
-  
-        // The arguments to pass to the program, if any.
-        "args": [],
-  
-        // The working directory of the program.
-        "cwd": "${workspaceFolder}",
-  
-        // The environment variables to pass to the program.
-        "env": {},
-  
-        // If the environment variables should not be inherited from the parent process.
-        "strictEnv": false,
-  
-        // If the program should be run in watch mode.
-        // This is equivalent to passing `--watch` to the `bun` executable.
-        // You can also set this to "hot" to enable hot reloading using `--hot`.
-        "watchMode": false,
-  
-        // If the debugger should stop on the first line of the program.
+        "runtimeExecutable": "bun",
+        "runtimeArgs": ["run", "start:pathway-design:app"],
+        "outputCapture": "std",
+        "internalConsoleOptions": "openOnSessionStart",
+        "console": "internalConsole",
+        "env": {
+            "TS_NODE_IGNORE": "false",
+            "TS_NODE_PROJECT": "${workspaceFolder}/apps/pathway-design/server/tsconfig.json"
+        },
+        "cwd": "${workspaceFolder}/apps/pathway-design/server"
+    },
+      {
+        "type": "node",
+        "request": "launch",
+        "name": "Debug Nest Framework avec Bun (test)",
+        "runtimeExecutable": "bun",
+        "runtimeArgs": [
+          "--inspect",
+          "run",
+          "start:pathway-design:app"
+        ],
+        "autoAttachChildProcesses": true,
+        "restart": true,
+        "sourceMaps": true,
+        "outFiles": ["${workspaceFolder}/dist/**/*.js"],
+        "localRoot": "${workspaceFolder}",
+        "remoteRoot": ".",
+        "trace": true,
         "stopOnEntry": false,
-  
-        // If the debugger should be disabled. (for example, breakpoints will not be hit)
-        "noDebug": false,
-  
-        // The path to the `bun` executable, defaults to your `PATH` environment variable.
-        "runtime": "bun",
-  
-        // The arguments to pass to the `bun` executable, if any.
-        // Unlike `args`, these are passed to the executable itself, not the program.
-        "runtimeArgs": [],
+        "console": "integratedTerminal"
+      },
+      {
+        "name": "Debug Node App",
+        "type": "bun",
+        "request": "attach",
+        "debugServer": 9229,
+
       },
       {
         "type": "bun",
         "request": "attach",
         "name": "Attach to Bun",
-        // This value can be retrieved by using `bun --inspect`.
-        "url": "ws://localhost:6499/",
+        "url": "ws://localhost:9229/",
       }
     ]
-  }
+}

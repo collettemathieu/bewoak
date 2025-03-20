@@ -7,14 +7,15 @@ module.exports = {
     },
     plugins: [
         new NxAppWebpackPlugin({
-            target: 'node',
+            assets: ['./src/assets'],
             compiler: 'tsc',
             main: './src/main.ts',
-            tsConfig: './tsconfig.app.json',
-            assets: ['./src/assets'],
             optimization: process.env.BUN_ENV === 'production',
             outputHashing: process.env.BUN_ENV === 'production' ? 'all' : 'none',
+            sourceMap: true,
+            target: 'node',
             transformers: [{ name: '@nestjs/swagger/plugin' }],
+            tsConfig: './tsconfig.app.json',
         }),
     ],
 };

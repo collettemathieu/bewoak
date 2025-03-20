@@ -41,6 +41,9 @@ Thumbs.db
 .nx/cache
 .nx/workspace-data
 
+# Observability
+docker/otel-instrumentation/data/tempo
+
 # stryker temp files
 .stryker-tmp
 reports

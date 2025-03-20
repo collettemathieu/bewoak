@@ -1,6 +1,6 @@
 services:
   init-tempo:
-    image: &tempoImage grafana/tempo:latest
+    image: &tempoImage grafana/tempo:2.6.1
     user: root
     entrypoint:
       - "chown"
@@ -10,6 +10,7 @@ services:
       - ./data/tempo:/var/tempo
 
   tempo:
+    container_name: tempo
     image: *tempoImage
     command: [ "-config.file=/etc/tempo.yaml" ]
     volumes:
@@ -25,6 +26,7 @@ services:
       - init-tempo
 
   otel-collector:
+    container_name: otel-collector
     image: otel/opentelemetry-collector:0.86.0
     command: [ "--config=/etc/otel-collector.yaml" ]
     volumes:
@@ -33,6 +35,7 @@ services:
       - tempo
 
   prometheus:
+    container_name: prometheus
     image: prom/prometheus:latest
     command:
       - --config.file=/etc/prometheus.yaml
@@ -43,6 +46,7 @@ services:
     ports:
       - '9091:9090'
   grafana:
+    container_name: grafana
     image: grafana/grafana:11.0.0
     volumes:
       - ./configs/grafana/grafana-datasources.yaml:/etc/grafana/provisioning/datasources/datasources.yaml

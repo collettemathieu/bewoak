@@ -3,7 +3,7 @@ import type { AsyncResult } from '@bewoak/common-types-result';
 import type { PDSPBEPathwayEntity } from '../../../entities/pathway';
 
 export interface PDSPBPChangeTitlePathwayPersistence {
-    changeTitle: (pathway: PDSPBEPathwayEntity, title: string) => AsyncResult<PDSPBEPathwayEntity, CTSEException>;
+    changeTitle: (pathway: PDSPBEPathwayEntity) => AsyncResult<PDSPBEPathwayEntity, CTSEException>;
     getPathwayByPathwayId: (pathwayId: string) => AsyncResult<PDSPBEPathwayEntity, CTSEException>;
 }
 

@@ -1,3 +1,4 @@
+import { SpanOtel } from '@bewoak/common-configs-server-otel';
 // biome-ignore lint/style/useImportType: <explanation>
 import { PDSPAInitializePathwayCommand, PDSPAInitializePathwayService } from '@bewoak/pathway-design-server-pathway-application';
 import { Body, Controller, Post, UsePipes, ValidationPipe } from '@nestjs/common';
@@ -36,6 +37,7 @@ export class InitializePathwayController {
         description: 'Cannot initiate pathway. Internal server exception occured.',
         type: InitializedPathwayInternalServerExceptionBodyDto,
     })
+    @SpanOtel()
     execute(@Body() initializePathwayRequestBodyDto: InitializePathwayRequestBodyDto) {
         return this.pDSPAInitializePathwayService.initialize(
             new PDSPAInitializePathwayCommand(

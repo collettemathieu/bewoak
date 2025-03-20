@@ -28,7 +28,7 @@ export class PDSPACUChangeTitlePathwayUseCase {
                 }),
                 switchMap((result) => {
                     if (isSuccess(result)) {
-                        return pDSPBPChangeTitlePathwayPersistence.changeTitle(successValue(result), title);
+                        return pDSPBPChangeTitlePathwayPersistence.changeTitle(successValue(result));
                     }
 
                     return of(result);

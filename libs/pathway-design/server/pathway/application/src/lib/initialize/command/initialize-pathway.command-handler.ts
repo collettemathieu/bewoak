@@ -9,6 +9,7 @@ import { Inject } from '@nestjs/common';
 // biome-ignore lint/style/useImportType: <explanation>
 import { CommandHandler, EventPublisher, type ICommandHandler } from '@nestjs/cqrs';
 
+import { SpanOtel } from '@bewoak/common-configs-server-otel';
 // biome-ignore lint/style/useImportType: <explanation>
 import { PDSPAIUInitializePathwayUsecase } from '../usecase/initialize-pathway.usecase';
 import { PDSPAInitializePathwayCommand } from './initialize-pathway.command';
@@ -24,6 +25,7 @@ export class PDSPAInitializePathwayCommandHandler implements ICommandHandler<PDS
         private readonly eventPublisher: EventPublisher
     ) {}
 
+    @SpanOtel()
     execute(pDSPAInitializePathwayCommand: PDSPAInitializePathwayCommand) {
         return this.pDSPAIUInitializePathwayUsecase.execute(
             this.pDSPBPInitializePathwayPersistence,

@@ -14,6 +14,7 @@ import { envSchema } from './environment/env.schema';
 async function bootstrap() {
     runLogOtelInstrumentation();
     runOtelInstrumentation('PathwayDesignServer');
+
     cCSECheckEnvironmentVariables(envSchema);
 
     const env = cCSEGetEnvironmentVariables(envSchema);
