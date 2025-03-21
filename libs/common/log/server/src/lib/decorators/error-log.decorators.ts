@@ -1,7 +1,7 @@
 import { CTSEException } from '@bewoak/common-http-exceptions-server';
 import { Logger } from '@nestjs/common';
 
-export function ErrorLog() {
+export const ErrorLog = () => {
     // biome-ignore lint/complexity/noBannedTypes: <explanation>
     return (target: Object, propertyKey: string | symbol, descriptor: PropertyDescriptor) => {
         const originalMethod = descriptor.value;
@@ -33,5 +33,7 @@ export function ErrorLog() {
 
             return result;
         };
+
+        return descriptor;
     };
-}
+};

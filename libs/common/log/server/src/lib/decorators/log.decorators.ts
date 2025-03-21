@@ -1,6 +1,6 @@
 import { Logger } from '@nestjs/common';
 
-export function Log(message: string) {
+export const Log = (message: string) => {
     // biome-ignore lint/complexity/noBannedTypes: <explanation>
     return (target: Object, propertyKey: string | symbol, descriptor: PropertyDescriptor) => {
         const originalMethod = descriptor.value;
@@ -14,5 +14,7 @@ export function Log(message: string) {
 
             return result;
         };
+
+        return descriptor;
     };
-}
+};

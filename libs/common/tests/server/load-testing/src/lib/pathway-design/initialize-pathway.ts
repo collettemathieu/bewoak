@@ -5,8 +5,11 @@ export const options = {
     hosts: { 'test.io': '127.0.0.1:3000' },
     stages: [
         { duration: '10s', target: 100 },
-        { duration: '20s', target: 1000 },
+        { duration: '30s', target: 1000 },
+        { duration: '30s', target: 10000 },
+        { duration: '30s', target: 1000 },
         { duration: '30s', target: 100 },
+        { duration: '10s', target: 0 },
     ],
     thresholds: { http_req_duration: ['avg<100', 'p(95)<200'] },
     noConnectionReuse: true,

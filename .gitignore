@@ -42,7 +42,8 @@ Thumbs.db
 .nx/workspace-data
 
 # Observability
-docker/otel-instrumentation/data/tempo
+docker/otel-instrumentation/data/tempo/*
+docker/otel-instrumentation/data/loki/*
 
 # stryker temp files
 .stryker-tmp

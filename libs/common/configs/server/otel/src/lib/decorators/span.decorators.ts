@@ -1,6 +1,6 @@
 import { context, trace } from '@opentelemetry/api';
 
-export function SpanOtel() {
+export const SpanOtel = () => {
     // biome-ignore lint/complexity/noBannedTypes: <explanation>
     return (target: Object, propertyKey: string | symbol, descriptor: PropertyDescriptor) => {
         const tracer = trace.getTracer('span-otel-tracer');
@@ -25,8 +25,10 @@ export function SpanOtel() {
             span.end();
             return result;
         };
+
+        return descriptor;
     };
-}
+};
 
 export const getAttributes = (args: unknown[]) =>
     args.reduce<Record<string, string | number | boolean>>((acc, arg, index) => {

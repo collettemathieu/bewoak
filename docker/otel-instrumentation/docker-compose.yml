@@ -14,7 +14,7 @@ services:
     image: *tempoImage
     command: [ "-config.file=/etc/tempo.yaml" ]
     volumes:
-      - ./configs/tempo/tempo.yaml:/etc/tempo.yaml
+      - ./configs/tempo/tempo-config.yaml:/etc/tempo.yaml
       - ./data/tempo:/var/tempo
     ports:
       - "14268:14268"  # jaeger ingest
@@ -27,29 +27,30 @@ services:
 
   otel-collector:
     container_name: otel-collector
-    image: otel/opentelemetry-collector:0.86.0
+    image: otel/opentelemetry-collector:0.122.1
     command: [ "--config=/etc/otel-collector.yaml" ]
     volumes:
-      - ./configs/otel-collector/otel-collector.yaml:/etc/otel-collector.yaml
+      - ./configs/otel-collector/otel-collector-config.yaml:/etc/otel-collector.yaml
     depends_on:
       - tempo
 
   prometheus:
     container_name: prometheus
-    image: prom/prometheus:latest
+    image: prom/prometheus:v3.2.1
     command:
       - --config.file=/etc/prometheus.yaml
       - --web.enable-remote-write-receiver
       - --enable-feature=exemplar-storage
     volumes:
-      - ./configs/prometheus/prometheus.yaml:/etc/prometheus.yaml
+      - ./configs/prometheus/prometheus-config.yaml:/etc/prometheus.yaml
     ports:
       - '9091:9090'
+
   grafana:
     container_name: grafana
-    image: grafana/grafana:11.0.0
+    image: grafana/grafana:11.5.2
     volumes:
-      - ./configs/grafana/grafana-datasources.yaml:/etc/grafana/provisioning/datasources/datasources.yaml
+      - ./configs/grafana/grafana-config.yaml:/etc/grafana/provisioning/datasources/datasources.yaml
     environment:
       - GF_AUTH_ANONYMOUS_ENABLED=true
       - GF_AUTH_ANONYMOUS_ORG_ROLE=Admin
@@ -57,3 +58,14 @@ services:
       - GF_FEATURE_TOGGLES_ENABLE=traceqlEditor
     ports:
       - "3003:3000"
+
+  loki:
+    container_name: loki
+    image: grafana/loki:3.4.2
+    ports:
+      - "3100:3100"
+    command:
+      - -config.file=/etc/loki/local-config.yaml
+    volumes:
+      - ./configs/loki/loki-config.yaml:/etc/loki/local-config.yaml
+      - ./data/loki:/loki
