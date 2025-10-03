@@ -30,12 +30,6 @@
             "options": {
                 "command": "TS_NODE_PROJECT='{projectRoot}/tsconfig.spec.json' bun run cucumber-js --config={projectRoot}/cucumber.js"
             }
-        },
-        "test": {
-            "executor": "nx:run-commands",
-            "options": {
-                "command": "bun test --coverage --coverage-dir=dist/reports/{projectRoot}/coverage --coverage-reporter=lcov {projectRoot}"
-            }
         }
     },
     "tags": ["type:pathway-design:server:pathway:application"],

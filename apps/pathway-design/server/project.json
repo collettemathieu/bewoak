@@ -26,12 +26,6 @@
                 "command": "bun run biome check --write {projectRoot} --config-path={projectRoot}/biome.json"
             }
         },
-        "test": {
-            "executor": "nx:run-commands",
-            "options": {
-                "command": "bun test --coverage --coverage-dir=dist/reports/{projectRoot}/coverage --coverage-reporter=lcov {projectRoot}"
-            }
-        },
         "test-feature": {
             "executor": "nx:run-commands",
             "options": {

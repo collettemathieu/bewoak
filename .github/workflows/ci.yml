@@ -17,12 +17,11 @@ jobs:
       - uses: actions/checkout@v4
         with:
           fetch-depth: 0
-      
-      
+
       - uses: oven-sh/setup-bun@v1
         with:
-          bun-version: latest
-      
+          bun-version: 1.2.23
+
         # Set NX_BASE and NX_HEAD explicitly for pull requests
       - name: Set NX_BASE and NX_HEAD for PR
         if: github.event_name == 'pull_request'
