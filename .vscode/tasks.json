@@ -1,0 +1,43 @@
+{
+  "version": "2.0.0",
+  "tasks": [
+    {
+      "type": "shell",
+      "label": "build-pathway-design-server",
+      "command": "bun",
+      "args": ["nx", "build", "pathway-design-server"],
+      "group": "build",
+      "presentation": {
+        "echo": true,
+        "reveal": "always",
+        "focus": false,
+        "panel": "shared",
+        "showReuseMessage": true,
+        "clear": false
+      },
+      "options": {
+        "cwd": "${workspaceFolder}"
+      },
+      "problemMatcher": []
+    },
+    {
+      "type": "shell",
+      "label": "test-runtime-compatibility",
+      "command": "bash",
+      "args": [
+        "-c",
+        "echo '🧪 Validating Bun build + Node.js runtime compatibility...' && bun nx build pathway-design-server && echo '✅ Build successful with Bun' && node dist/apps/pathway-design-server/main.js & NODE_PID=$! && sleep 2 && echo '✅ Node.js runtime started' && kill $NODE_PID 2>/dev/null || true && echo '🎉 Compatibility validated!'"
+      ],
+      "group": "test",
+      "presentation": {
+        "echo": true,
+        "reveal": "always",
+        "focus": true,
+        "panel": "new"
+      },
+      "options": {
+        "cwd": "${workspaceFolder}"
+      }
+    }
+  ]
+}

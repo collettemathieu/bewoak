@@ -1,14 +1,40 @@
 {  
   "version": "0.2.0",  
-  "configurations": [  
+  "configurations": [
     {
-      "name": "Launch pathway-design-server",
+      "name": "Debug pathway-design-server",
       "request": "launch",
       "type": "node",
-      "runtimeExecutable": "bun",
-      "runtimeArgs": ["run", "start:pathway-design:app"],
+      "program": "${workspaceFolder}/dist/apps/pathway-design-server/main.js",
       "console": "integratedTerminal",
-      "cwd": "${workspaceFolder}/apps/pathway-design/server"
+      "cwd": "${workspaceFolder}",
+      "preLaunchTask": "build-pathway-design-server",
+      "env": {
+        "PORT": "3000",
+        "GLOBAL_PREFIX": "api",
+        "PERSISTENCE_DRIVER": "inMemory",
+        "PRESENTER_DRIVER": "toJson"
+      },
+      "skipFiles": [
+        "<node_internals>/**"
+      ],
+      "sourceMapPathOverrides": {
+        "webpack:///./*": "${workspaceFolder}/*",
+        "webpack:///src/*": "${workspaceFolder}/apps/pathway-design/server/src/*",
+        "webpack:///*": "*"
+      }
+    },
+    {
+      "name": "Attach to pathway-design-server",
+      "request": "attach",
+      "type": "node",
+      "port": 9229,
+      "address": "localhost",
+      "restart": false,
+      "sourceMaps": true,
+      "skipFiles": [
+        "<node_internals>/**"
+      ]
     }
   ]  
 }  
