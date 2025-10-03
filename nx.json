@@ -29,5 +29,8 @@
             "inputs": ["production", "^production"]
         }
     },
-    "useLegacyCache": true
+    "tui": {
+        "autoExit": true,
+        "enabled": true
+    }
 }
