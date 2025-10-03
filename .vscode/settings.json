@@ -29,5 +29,6 @@
         "tree.indentGuidesStroke": "#05ef3c"
     },
     "workbench.tree.indent": 15,
-    "workbench.tree.renderIndentGuides": "always"
+    "workbench.tree.renderIndentGuides": "always",
+    "nxConsole.generateAiAgentRules": true
 }

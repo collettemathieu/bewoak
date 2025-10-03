@@ -43,8 +43,12 @@ Thumbs.db
 
 # Observability
 docker/otel-instrumentation/data/tempo/*
+!docker/otel-instrumentation/data/tempo/.gitkeep
 docker/otel-instrumentation/data/loki/*
+!docker/otel-instrumentation/data/loki/.gitkeep
 
 # stryker temp files
 .stryker-tmp
 reports
+.cursor/rules/nx-rules.mdc
+.github/instructions/nx.instructions.md

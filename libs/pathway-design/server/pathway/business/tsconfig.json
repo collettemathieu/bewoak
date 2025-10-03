@@ -11,11 +11,12 @@
         "noPropertyAccessFromIndexSignature": true,
         "strict": true,
         "strictNullChecks": true,
-        "strictPropertyInitialization": true
+        "strictPropertyInitialization": true,
+        "sourceMap": true
     },
     "extends": "../../../../../tsconfig.base.json",
     "files": [],
-    "include": [],
+    "include": ["src/**/*.ts"],
     "references": [
         {
             "path": "./tsconfig.lib.json"

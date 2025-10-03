@@ -1,63 +1,14 @@
-
-{
-    "version": "0.2.0",
-    "configurations": [
-      {
-        "name": "Attach by Process ID",
-        "processId": "${command:PickProcess}",
-        "request": "attach",
-        "skipFiles": [
-          "<node_internals>/**"
-        ],
-        "type": "node"
-      },
-      {
-        "name": "Backend",
-        "type": "node",
-        "request": "launch",
-        "runtimeExecutable": "bun",
-        "runtimeArgs": ["run", "start:pathway-design:app"],
-        "outputCapture": "std",
-        "internalConsoleOptions": "openOnSessionStart",
-        "console": "internalConsole",
-        "env": {
-            "TS_NODE_IGNORE": "false",
-            "TS_NODE_PROJECT": "${workspaceFolder}/apps/pathway-design/server/tsconfig.json"
-        },
-        "cwd": "${workspaceFolder}/apps/pathway-design/server"
-    },
-      {
-        "type": "node",
-        "request": "launch",
-        "name": "Debug Nest Framework avec Bun (test)",
-        "runtimeExecutable": "bun",
-        "runtimeArgs": [
-          "--inspect",
-          "run",
-          "start:pathway-design:app"
-        ],
-        "autoAttachChildProcesses": true,
-        "restart": true,
-        "sourceMaps": true,
-        "outFiles": ["${workspaceFolder}/dist/**/*.js"],
-        "localRoot": "${workspaceFolder}",
-        "remoteRoot": ".",
-        "trace": true,
-        "stopOnEntry": false,
-        "console": "integratedTerminal"
-      },
-      {
-        "name": "Debug Node App",
-        "type": "bun",
-        "request": "attach",
-        "debugServer": 9229,
-
-      },
-      {
-        "type": "bun",
-        "request": "attach",
-        "name": "Attach to Bun",
-        "url": "ws://localhost:9229/",
-      }
-    ]
-}
+{  
+  "version": "0.2.0",  
+  "configurations": [  
+    {
+      "name": "Launch pathway-design-server",
+      "request": "launch",
+      "type": "node",
+      "runtimeExecutable": "bun",
+      "runtimeArgs": ["run", "start:pathway-design:app"],
+      "console": "integratedTerminal",
+      "cwd": "${workspaceFolder}/apps/pathway-design/server"
+    }
+  ]  
+}  
