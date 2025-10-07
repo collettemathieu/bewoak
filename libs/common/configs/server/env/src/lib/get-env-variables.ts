@@ -1,4 +1,8 @@
 import type { ZodObject, ZodRawShape, z } from 'zod';
+import { cCSECheckEnvironmentVariables } from './check-env-variables';
 
-export const cCSEGetEnvironmentVariables = (envSchema: ZodObject<ZodRawShape>) =>
-    envSchema.safeParse(process.env).data as z.infer<typeof envSchema>;
+export const cCSEGetEnvironmentVariables = <T extends ZodObject<ZodRawShape>>(envSchema: T) => {
+    cCSECheckEnvironmentVariables(envSchema);
+
+    return envSchema.parse(process.env) as z.infer<typeof envSchema>;
+};

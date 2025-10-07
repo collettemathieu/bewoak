@@ -3,7 +3,7 @@ import { HttpAdapterHost, NestFactory } from '@nestjs/core';
 
 import { AppModule } from './app/app.module';
 
-import { cCSECheckEnvironmentVariables, cCSEGetEnvironmentVariables } from '@bewoak/common-configs-server-env';
+import { cCSEGetEnvironmentVariables } from '@bewoak/common-configs-server-env';
 import { runLogOtelInstrumentation, runOtelInstrumentation } from '@bewoak/common-configs-server-otel';
 import { cCSSSetupSwaggerDocument } from '@bewoak/common-configs-server-swagger';
 import { LogHttpExceptionFilter } from '@bewoak/common-http-exceptions-server';
@@ -15,9 +15,8 @@ async function bootstrap() {
     runLogOtelInstrumentation();
     runOtelInstrumentation('PathwayDesignServer');
 
-    cCSECheckEnvironmentVariables(envSchema);
-
     const env = cCSEGetEnvironmentVariables(envSchema);
+
     const persistenceDriver = env.PERSISTENCE_DRIVER;
     const presenterDriver = env.PRESENTER_DRIVER;
     const port = env.PORT;
