@@ -9,6 +9,7 @@ import { cCSSSetupSwaggerDocument } from '@bewoak/common-configs-server-swagger'
 import { LogHttpExceptionFilter } from '@bewoak/common-http-exceptions-server';
 import { HandleExceptionInterceptor } from '@bewoak/common-interceptors-server';
 import { ServerLogger } from '@bewoak/common-log-server';
+import { FastifyAdapter } from '@nestjs/platform-fastify';
 import { envSchema } from './environment/env.schema';
 
 async function bootstrap() {
@@ -27,6 +28,7 @@ async function bootstrap() {
             persistenceDriver,
             presenterDriver,
         }),
+        new FastifyAdapter(),
         {
             bufferLogs: true,
             logger: new ServerLogger('PathwayDesignServer', '1.0.0'),

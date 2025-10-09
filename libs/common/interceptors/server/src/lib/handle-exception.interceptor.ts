@@ -2,15 +2,14 @@ import { SpanOtel } from '@bewoak/common-configs-server-otel';
 import { CTSEException } from '@bewoak/common-http-exceptions-server';
 import { type CallHandler, type ExecutionContext, Injectable, type NestInterceptor } from '@nestjs/common';
 import type { Response } from 'express';
-import type { Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
 
 @Injectable()
 export class HandleExceptionInterceptor implements NestInterceptor {
     @SpanOtel()
-    intercept(context: ExecutionContext, next: CallHandler): Observable<unknown> {
+    intercept(context: ExecutionContext, next: CallHandler) {
         return next.handle().pipe(
-            map((data) => {
+            map((data: unknown) => {
                 if (data instanceof CTSEException) {
                     const response = context.switchToHttp().getResponse<Response>();
 

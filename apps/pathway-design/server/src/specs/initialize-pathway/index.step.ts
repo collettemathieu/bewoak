@@ -1,5 +1,4 @@
 import { strict as assert } from 'node:assert';
-import type { Http2Server } from 'node:http2';
 import { CCEPPathwayInitializedEvent } from '@bewoak/common-contracts-events-pathway';
 import {
     PDSPIPPathwayPersistenceInfrastructureModule,
@@ -11,21 +10,21 @@ import {
     type PDSPPPresenterDriverAuthorized,
 } from '@bewoak/pathway-design-server-pathway-presenters';
 import type { DataTable } from '@cucumber/cucumber';
-import { HttpStatus, type INestApplication } from '@nestjs/common';
+import { HttpStatus } from '@nestjs/common';
 import { CqrsModule } from '@nestjs/cqrs';
 import { EventEmitter2, EventEmitterModule } from '@nestjs/event-emitter';
+import { FastifyAdapter, type NestFastifyApplication } from '@nestjs/platform-fastify';
 import { Test } from '@nestjs/testing';
 import { binding, given, then, when } from 'cucumber-tsflow';
+import type * as fastify from 'fastify';
 import sinon from 'sinon';
-import request from 'supertest';
 
 @binding()
 class ControllerSteps {
-    private app: INestApplication;
+    private app: NestFastifyApplication;
     private eventEmitter: EventEmitter2;
     private eventEmitterSpy: sinon.SinonSpy | undefined;
-    private httpServer: Http2Server;
-    private response: request.Response;
+    private response: fastify.LightMyRequestResponse;
 
     @given('I am authenticated on the platform for initialize a pathway with {string} and {string}')
     public async connectToServer(presenter: PDSPPPresenterDriverAuthorized, persistence: PDSPIPPersistenceDriverAuthorized) {
@@ -48,33 +47,39 @@ class ControllerSteps {
             exports: [],
         }).compile();
 
-        this.app = testingModule.createNestApplication();
+        this.app = testingModule.createNestApplication(new FastifyAdapter());
         await this.app.init();
 
         this.eventEmitter = this.app.get(EventEmitter2);
         this.eventEmitterSpy = sinon.spy(this.eventEmitter, 'emit');
-
-        this.httpServer = this.app.getHttpServer();
     }
 
     @when('I want to initialize on the platform a pathway with these data')
     public async whenIInitiateAPathway(dataTable: DataTable) {
         const firstRow = dataTable.hashes()[0];
 
-        this.response = await request(this.httpServer).post('/pathway/initialize').send({
-            title: firstRow.title,
-            description: firstRow.description,
-            researchField: firstRow.researchField,
+        this.response = await this.app.inject({
+            method: 'POST',
+            url: '/pathway/initialize',
+            headers: {
+                'content-type': 'application/json',
+            },
+            payload: {
+                title: firstRow.title,
+                description: firstRow.description,
+                researchField: firstRow.researchField,
+            },
         });
     }
 
     @then('The platform should send an event to the event bus with the pathway initialized')
     public thenPlatformSendAnEventToEventBus() {
+        const responseBody = JSON.parse(this.response.body);
         const expectedEvent = new CCEPPathwayInitializedEvent(
-            this.response.body.description,
-            this.response.body.pathwayId,
-            this.response.body.researchField,
-            this.response.body.title
+            responseBody.description,
+            responseBody.pathwayId,
+            responseBody.researchField,
+            responseBody.title
         );
 
         const typeArg = this.eventEmitterSpy?.getCall(0).args[0];
@@ -88,24 +93,27 @@ class ControllerSteps {
     @then('I should retrieve from the platform a pathway initialized with its data')
     public thenIShouldRetrieveAPathwayInitiated(dataTable: DataTable) {
         const firstRow = dataTable.hashes()[0];
+        const responseBody = JSON.parse(this.response.body);
 
-        assert.strictEqual(this.response.body.title, firstRow.title);
-        assert.strictEqual(this.response.body.description, firstRow.description);
-        assert.strictEqual(this.response.body.researchField, firstRow.researchField);
+        assert.strictEqual(responseBody.title, firstRow.title);
+        assert.strictEqual(responseBody.description, firstRow.description);
+        assert.strictEqual(responseBody.researchField, firstRow.researchField);
     }
 
     @then('The pathway received from the platform should be have a unique identifier')
     public thenThePathwayIdentifierShouldBeUnique() {
-        assert.notEqual(this.response.body.pathwayId, undefined);
-        assert.notEqual(this.response.body.pathwayId, '');
+        const responseBody = JSON.parse(this.response.body);
+        assert.notEqual(responseBody.pathwayId, undefined);
+        assert.notEqual(responseBody.pathwayId, '');
     }
 
     @then('I should see two errors message from the platform during the initialization')
     public thenIShouldSeeAnErrorMessage() {
-        assert.notEqual(this.response.body.message, undefined);
-        assert.notEqual(this.response.body.name, undefined);
-        assert.strictEqual(this.response.body.errors.length, 2);
-        assert.strictEqual(this.response.body.statusCode, HttpStatus.BAD_REQUEST);
+        const responseBody = JSON.parse(this.response.body);
+        assert.notEqual(responseBody.message, undefined);
+        assert.notEqual(responseBody.name, undefined);
+        assert.strictEqual(responseBody.errors.length, 2);
+        assert.strictEqual(responseBody.statusCode, HttpStatus.BAD_REQUEST);
     }
 }
 

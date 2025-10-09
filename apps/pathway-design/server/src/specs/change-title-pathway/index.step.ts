@@ -1,5 +1,4 @@
 import { strict as assert } from 'node:assert';
-import type { Http2Server } from 'node:http2';
 import {
     PDSPIPPathwayPersistenceInfrastructureModule,
     type PDSPIPPersistenceDriverAuthorized,
@@ -13,18 +12,18 @@ import {
     type PDSPPPresenterDriverAuthorized,
 } from '@bewoak/pathway-design-server-pathway-presenters';
 import type { DataTable } from '@cucumber/cucumber';
-import { HttpStatus, type INestApplication } from '@nestjs/common';
+import { HttpStatus } from '@nestjs/common';
 import { CqrsModule } from '@nestjs/cqrs';
 import { EventEmitterModule } from '@nestjs/event-emitter';
+import { FastifyAdapter, type NestFastifyApplication } from '@nestjs/platform-fastify';
 import { Test } from '@nestjs/testing';
 import { binding, given, then, when } from 'cucumber-tsflow';
-import request from 'supertest';
+import type * as fastify from 'fastify';
 
 @binding()
 class ControllerSteps {
-    private app: INestApplication;
-    private httpServer: Http2Server;
-    private response: request.Response;
+    private app: NestFastifyApplication;
+    private response: fastify.LightMyRequestResponse;
 
     @given('I am authenticated on the platform for change the title of the pathway with {string} and {string}')
     public async connectToPlatform(presenter: PDSPPPresenterDriverAuthorized, persistence: PDSPIPPersistenceDriverAuthorized) {
@@ -52,42 +51,56 @@ class ControllerSteps {
             ],
         }).compile();
 
-        this.app = testingModule.createNestApplication();
+        this.app = testingModule.createNestApplication(new FastifyAdapter());
         await this.app.init();
-        this.httpServer = this.app.getHttpServer();
     }
 
     @given('I have a pathway on the platform with these data')
     public async givenIHaveAPathwayRecordedInMemroy(dataTable: DataTable) {
         const firstRow = dataTable.hashes()[0];
 
-        this.response = await request(this.httpServer).post('/pathway/initialize').send({
-            title: firstRow.title,
-            description: firstRow.description,
-            researchField: firstRow.researchField,
+        this.response = await this.app.inject({
+            method: 'POST',
+            url: '/pathway/initialize',
+            headers: { 'Content-Type': 'application/json' },
+            payload: {
+                title: firstRow.title,
+                description: firstRow.description,
+                researchField: firstRow.researchField,
+            },
         });
     }
 
     @when('I want to change the title of the pathway on the platform {string}')
     public async whenIChangeTheTitleOfThePathwayTo(title: string) {
-        this.response = await request(this.httpServer).patch(`/pathway/change-title/${this.response.body.pathwayId}`).send({
-            title,
+        const responseBody = JSON.parse(this.response.body);
+
+        this.response = await this.app.inject({
+            method: 'PATCH',
+            url: `/pathway/change-title/${responseBody.pathwayId}`,
+            headers: { 'Content-Type': 'application/json' },
+            payload: {
+                title,
+            },
         });
     }
 
     @then('I should receive from the platform the new title of the pathway')
     public async thenIShouldReceiveTheNewTitleOfThePathway(dataTable: DataTable) {
+        const responseBody = JSON.parse(this.response.body);
         const firstRow = dataTable.hashes()[0];
 
-        assert.strictEqual(this.response.body.title, firstRow.title);
+        assert.strictEqual(responseBody.title, firstRow.title);
     }
 
     @then('I should an error message from the platform during changing the title')
     public thenIShouldSeeAnErrorMessage() {
-        assert.notEqual(this.response.body.message, undefined);
-        assert.notEqual(this.response.body.name, undefined);
-        assert.strictEqual(this.response.body.errors, undefined);
-        assert.strictEqual(this.response.body.statusCode, HttpStatus.BAD_REQUEST);
+        const responseBody = JSON.parse(this.response.body);
+
+        assert.notEqual(responseBody.message, undefined);
+        assert.notEqual(responseBody.name, undefined);
+        assert.strictEqual(responseBody.errors, undefined);
+        assert.strictEqual(responseBody.statusCode, HttpStatus.BAD_REQUEST);
     }
 }
 

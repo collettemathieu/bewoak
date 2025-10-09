@@ -27,7 +27,7 @@
 //             ],
 //         }).compile();
 
-//         this.app = testingModule.createNestApplication();
+//         this.app = testingModule.createNestApplication(new FastifyAdapter());
 //         await this.app.init();
 //         this.httpServer = this.app.getHttpServer();
 //     }
