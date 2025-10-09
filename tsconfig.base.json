@@ -36,6 +36,7 @@
                 "libs/pathway-design/server/pathway/interface-adapters/src/index.ts"
             ],
             "@bewoak/pathway-design-server-pathway-presenters": ["libs/pathway-design/server/pathway/presenters/src/index.ts"],
+            "@bewoak/search-client-pathway-test-component": ["libs/search/client/pathway/src/index.ts"],
             "@bewoak/search-server-pathway-application": ["libs/search/server/pathway/application/src/index.ts"],
             "@bewoak/search-server-pathway-infrastructure": ["libs/search/server/pathway/infrastructure/src/index.ts"],
             "@bewoak/search-server-pathway-models": ["libs/search/server/pathway/models/src/index.ts"]

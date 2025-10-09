@@ -30,5 +30,8 @@
     },
     "workbench.tree.indent": 15,
     "workbench.tree.renderIndentGuides": "always",
-    "nxConsole.generateAiAgentRules": true
+    "nxConsole.generateAiAgentRules": true,
+    "cSpell.words": [
+        "bewoak"
+    ]
 }

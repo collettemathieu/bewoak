@@ -7,5 +7,7 @@
     "nrwl.angular-console",
     "oven.bun-vscode",
     "tamasfe.even-better-toml",
+    "ms-playwright.playwright",
+    "dbaeumer.vscode-eslint"
   ]
 }

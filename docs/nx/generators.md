@@ -21,3 +21,10 @@ bun run nx generate @nx/nest:lib --name=pathway --buildable --publishable --dire
 ```bash
 bun run nx g @nx/js:convert-to-swc pathway-design-server-business-entities-pathway
 ```
+
+### Create a Nx:Angular:Library
+
+```bash
+bun run nx generate @nx/angular:lib --buildable --publishable --linter=none --unitTestRunner=none --style=scss --strict --name test-component --directory libs/search/client --importPath=@bewoak/search-client-test-component 
+```
+

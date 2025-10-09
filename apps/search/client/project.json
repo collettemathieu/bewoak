@@ -1,0 +1,91 @@
+{
+    "name": "search-client",
+    "$schema": "../../../node_modules/nx/schemas/project-schema.json",
+    "projectType": "application",
+    "prefix": "app",
+    "sourceRoot": "apps/search/client/src",
+    "tags": ["search-client"],
+    "targets": {
+        "build": {
+            "executor": "@angular/build:application",
+            "outputs": ["{options.outputPath}"],
+            "options": {
+                "outputPath": "dist/apps/search/client",
+                "browser": "apps/search/client/src/main.ts",
+                "polyfills": ["zone.js"],
+                "tsConfig": "apps/search/client/tsconfig.app.json",
+                "inlineStyleLanguage": "scss",
+                "assets": [
+                    {
+                        "glob": "**/*",
+                        "input": "apps/search/client/public"
+                    }
+                ],
+                "styles": ["apps/search/client/src/styles.scss"],
+                "server": "apps/search/client/src/main.server.ts",
+                "ssr": {
+                    "entry": "apps/search/client/src/server.ts"
+                },
+                "outputMode": "server"
+            },
+            "configurations": {
+                "production": {
+                    "budgets": [
+                        {
+                            "type": "initial",
+                            "maximumWarning": "500kb",
+                            "maximumError": "1mb"
+                        },
+                        {
+                            "type": "anyComponentStyle",
+                            "maximumWarning": "4kb",
+                            "maximumError": "8kb"
+                        }
+                    ],
+                    "outputHashing": "all"
+                },
+                "development": {
+                    "optimization": false,
+                    "extractLicenses": false,
+                    "sourceMap": true
+                }
+            },
+            "defaultConfiguration": "production"
+        },
+        "serve": {
+            "continuous": true,
+            "executor": "@angular/build:dev-server",
+            "configurations": {
+                "production": {
+                    "buildTarget": "search-client:build:production"
+                },
+                "development": {
+                    "buildTarget": "search-client:build:development"
+                }
+            },
+            "defaultConfiguration": "development"
+        },
+        "extract-i18n": {
+            "executor": "@angular/build:extract-i18n",
+            "options": {
+                "buildTarget": "search-client:build"
+            }
+        },
+        "lint": {
+            "executor": "nx:run-commands",
+            "options": {
+                "command": "bun run biome check --write {projectRoot} --config-path={projectRoot}/biome.json"
+            }
+        },
+        "serve-static": {
+            "continuous": true,
+            "executor": "@nx/web:file-server",
+            "options": {
+                "buildTarget": "search-client:build",
+                "port": 4200,
+                "staticFilePath": "dist/apps/search/client/browser",
+                "spa": true
+            }
+        }
+    }
+}
