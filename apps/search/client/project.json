@@ -71,12 +71,6 @@
                 "buildTarget": "search-client:build"
             }
         },
-        "lint": {
-            "executor": "nx:run-commands",
-            "options": {
-                "command": "bun run biome check --write {projectRoot}"
-            }
-        },
         "serve-static": {
             "continuous": true,
             "executor": "@nx/web:file-server",

@@ -4,12 +4,6 @@
     "sourceRoot": "libs/common/tests/server/load-testing/src",
     "projectType": "library",
     "targets": {
-        "lint": {
-            "executor": "nx:run-commands",
-            "options": {
-                "command": "bun run biome check --write {projectRoot}"
-            }
-        },
         "load-testing": {
             "executor": "nx:run-commands",
             "options": {

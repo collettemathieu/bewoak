@@ -21,12 +21,7 @@
             },
             "defaultConfiguration": "production"
         },
-        "lint": {
-            "executor": "nx:run-commands",
-            "options": {
-                "command": "bun run biome check --write {projectRoot}"
-            }
-        },
+
         "nx-release-publish": {
             "options": {
                 "packageRoot": "dist/{projectRoot}"

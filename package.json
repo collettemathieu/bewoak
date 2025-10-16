@@ -102,7 +102,7 @@
         "build": "nx run-many --target=build --parallel=4",
         "format": "biome format --write",
         "format:check": "biome format",
-        "lint": "nx run-many --target=lint --parallel=4",
+        "lint": "biome lint",
         "nx": "nx",
         "postinstall": "chmod +x .hooks/* && git config core.hooksPath .hooks",
         "start:pathway-design:app": "PORT=3000 GLOBAL_PREFIX=api PERSISTENCE_DRIVER=inMemory PRESENTER_DRIVER=toJson nx serve pathway-design-server",

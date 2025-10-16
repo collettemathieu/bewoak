@@ -19,12 +19,7 @@
                 "packageRoot": "dist/{projectRoot}"
             }
         },
-        "lint": {
-            "executor": "nx:run-commands",
-            "options": {
-                "command": "bun run biome check --write {projectRoot}"
-            }
-        },
+
         "test-feature": {
             "executor": "nx:run-commands",
             "options": {

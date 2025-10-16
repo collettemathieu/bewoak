@@ -44,7 +44,8 @@ jobs:
       - uses: nrwl/nx-set-shas@v4
       - run: bun run commitlint --from=$NX_BASE --to=$NX_HEAD
       - run: bun run format:check
+      - run: bun run lint
 
       # Prepend any command with "nx-cloud record --" to record its logs to Nx Cloud
       # - run: bun nx-cloud record -- echo Hello World
-      - run: NX_TUI=false bun nx affected -t lint test build test-feature --base=$NX_BASE --head=$NX_HEAD --parallel --maxParallel=3
+      - run: NX_TUI=false bun nx affected -t test build test-feature --base=$NX_BASE --head=$NX_HEAD --parallel --maxParallel=3
