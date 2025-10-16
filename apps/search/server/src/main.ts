@@ -1,10 +1,8 @@
-import { Logger } from '@nestjs/common';
-import { NestFactory } from '@nestjs/core';
-
-import { AppModule } from './app/app.module';
-
 import { cCSECheckEnvironmentVariables, cCSEGetEnvironmentVariables } from '@bewoak/common-configs-server-env';
 import { cCSSSetupSwaggerDocument } from '@bewoak/common-configs-server-swagger';
+import { Logger } from '@nestjs/common';
+import { NestFactory } from '@nestjs/core';
+import { AppModule } from './app/app.module';
 import { envSchema } from './environment/env.schema';
 
 async function bootstrap() {
@@ -14,7 +12,9 @@ async function bootstrap() {
     const port = env.PORT;
     const globalPrefix = env.GLOBAL_PREFIX;
 
-    const app = await NestFactory.create(AppModule.register(), { bufferLogs: true });
+    const app = await NestFactory.create(AppModule.register(), {
+        bufferLogs: true,
+    });
     app.setGlobalPrefix(globalPrefix);
 
     cCSSSetupSwaggerDocument(app, {

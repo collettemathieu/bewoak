@@ -1,16 +1,14 @@
+import { SpanOtel } from '@bewoak/common-configs-server-otel';
 import {
-    type PDSPBPInitializePathwayPersistence,
-    type PDSPBPPathwayPresenter,
     PDSPBP_INITIALIZE_PATHWAY_PERSISTENCE,
     PDSPBP_PATHWAY_PRESENTER,
+    type PDSPBPInitializePathwayPersistence,
+    type PDSPBPPathwayPresenter,
 } from '@bewoak/pathway-design-server-pathway-business';
-
 import { Inject } from '@nestjs/common';
-// biome-ignore lint/style/useImportType: <explanation>
+// biome-ignore lint/style/useImportType: <To be explained>
 import { CommandHandler, EventPublisher, type ICommandHandler } from '@nestjs/cqrs';
-
-import { SpanOtel } from '@bewoak/common-configs-server-otel';
-// biome-ignore lint/style/useImportType: <explanation>
+// biome-ignore lint/style/useImportType: <To be explained>
 import { PDSPAIUInitializePathwayUsecase } from '../usecase/initialize-pathway.usecase';
 import { PDSPAInitializePathwayCommand } from './initialize-pathway.command';
 

@@ -1,5 +1,3 @@
-import { Module } from '@nestjs/common';
-
 import {
     PDSPIPPathwayPersistenceInfrastructureModule,
     type PDSPIPPersistenceDriverAuthorized,
@@ -12,6 +10,7 @@ import {
     PDSPPPathwayPresentersModule,
     type PDSPPPresenterDriverAuthorized,
 } from '@bewoak/pathway-design-server-pathway-presenters';
+import { Module } from '@nestjs/common';
 import { CqrsModule } from '@nestjs/cqrs';
 import { EventEmitterModule } from '@nestjs/event-emitter';
 
@@ -21,7 +20,7 @@ interface ApplicationBootstrapOptions {
 }
 
 @Module({})
-// biome-ignore lint/complexity/noStaticOnlyClass: <explanation>
+// biome-ignore lint/complexity/noStaticOnlyClass: <To be explained>
 export class AppModule {
     static register(options: ApplicationBootstrapOptions) {
         const persistenceModule = PDSPIPPathwayPersistenceInfrastructureModule.use(options.persistenceDriver);

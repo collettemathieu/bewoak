@@ -1,9 +1,10 @@
 {
+    "root": false,
     "$schema": "../../../../../node_modules/@biomejs/biome/configuration_schema.json",
-    "extends": ["../../../../../biome.json"],
+    "extends": "//",
     "linter": {
         "rules": {
-            "nursery": {
+            "style": {
                 "noRestrictedImports": {
                     "options": {
                         "paths": {}

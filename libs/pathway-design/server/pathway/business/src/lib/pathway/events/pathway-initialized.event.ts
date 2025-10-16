@@ -1,4 +1,4 @@
-import { type CEEvent, CE_EVENT_TYPE_PATHWAY_INITIALIZED, CE_EVENT_VERSION } from '@bewoak/common-events';
+import { CE_EVENT_TYPE_PATHWAY_INITIALIZED, CE_EVENT_VERSION, type CEEvent } from '@bewoak/common-events';
 
 export class PDSPBEPathwayInitializedEvent implements CEEvent {
     public readonly eventType = CE_EVENT_TYPE_PATHWAY_INITIALIZED;

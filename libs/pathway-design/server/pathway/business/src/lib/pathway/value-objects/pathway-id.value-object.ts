@@ -1,5 +1,5 @@
 import { CTSEBadRequestException } from '@bewoak/common-http-exceptions-server';
-import { type Result, failure, success } from '@bewoak/common-types-result';
+import { failure, type Result, success } from '@bewoak/common-types-result';
 import { pDCPBRPathwayIdRules } from '@bewoak/pathway-design-common-pathway-business-rules';
 
 export class PathwayIdValueObject {

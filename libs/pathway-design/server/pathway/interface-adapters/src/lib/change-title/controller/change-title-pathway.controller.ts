@@ -1,13 +1,13 @@
-// biome-ignore lint/style/useImportType: <explanation>
+// biome-ignore lint/style/useImportType: <To be explained>
 import {
     PDSPAChangeTitlePathwayCommand,
     PDSPAChangeTitlePathwayService,
 } from '@bewoak/pathway-design-server-pathway-application';
 import { Body, Controller, Param, Patch, UsePipes, ValidationPipe } from '@nestjs/common';
 import { ApiBadRequestResponse, ApiNotFoundResponse, ApiOkResponse, ApiTags } from '@nestjs/swagger';
-// biome-ignore lint/style/useImportType: <explanation>
+// biome-ignore lint/style/useImportType: <To be explained>
 import { ChangeTitlePathwayRequestBodyDto } from '../dtos/request/body/request-body.dto';
-// biome-ignore lint/style/useImportType: <explanation>
+// biome-ignore lint/style/useImportType: <To be explained>
 import { ChangeTitlePathwayRequestParamsDto } from '../dtos/request/params/request-params.dto';
 import {
     ChangeTitlePathwayBadRequestExceptionBodyDto,

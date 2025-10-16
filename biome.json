@@ -4,7 +4,18 @@
         "attributePosition": "auto",
         "enabled": true,
         "formatWithErrors": false,
-        "ignore": [".angular", ".detective", ".nx", ".vscode", "coverage", "dist", "node_modules", "reports", "tmp"],
+        "includes": [
+            "**",
+            "!.angular",
+            "!.detective",
+            "!.nx",
+            "!.vscode",
+            "!coverage",
+            "!dist",
+            "!node_modules",
+            "!reports",
+            "!tmp"
+        ],
         "indentStyle": "space",
         "indentWidth": 4,
         "lineEnding": "lf",
@@ -37,7 +48,18 @@
     },
     "linter": {
         "enabled": true,
-        "ignore": ["dist", "coverage", ".nx", ".vscode", "node_modules", "tmp", ".angular"],
+        "includes": [
+            "**",
+            "!.angular",
+            "!.detective",
+            "!.nx",
+            "!.vscode",
+            "!coverage",
+            "!dist",
+            "!node_modules",
+            "!reports",
+            "!tmp"
+        ],
         "rules": {
             "complexity": {
                 "noForEach": "off"
@@ -53,11 +75,15 @@
             },
             "recommended": true,
             "suspicious": {
-                "noConsoleLog": "error"
+                "noConsole": "error"
             }
         }
     },
-    "organizeImports": {
-        "enabled": true
+    "assist": {
+        "actions": {
+            "source": {
+                "organizeImports": "on"
+            }
+        }
     }
 }

@@ -2,7 +2,7 @@ import { CTSEException } from '@bewoak/common-http-exceptions-server';
 import { Logger } from '@nestjs/common';
 
 export const ErrorLog = () => {
-    // biome-ignore lint/complexity/noBannedTypes: <explanation>
+    // biome-ignore lint/complexity/noBannedTypes: <To be explained>
     return (target: Object, propertyKey: string | symbol, descriptor: PropertyDescriptor) => {
         const originalMethod = descriptor.value;
 

@@ -1,8 +1,8 @@
 import {
-    PDSPAIUInitializePathwayUsecase,
     PDSPAInitializePathwayCommandHandler,
     PDSPAInitializePathwayEventHandler,
     PDSPAInitializePathwayService,
+    PDSPAIUInitializePathwayUsecase,
 } from '@bewoak/pathway-design-server-pathway-application';
 import { type DynamicModule, Module, type Type } from '@nestjs/common';
 import { InitializePathwayController } from './controller/initialize-pathway.controller';

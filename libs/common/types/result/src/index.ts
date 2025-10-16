@@ -1,9 +1,4 @@
 export {
-    type AsyncResult,
-    type Result,
-} from './lib/types';
-
-export {
     failure,
     failureValue,
     failureValueList,
@@ -13,3 +8,7 @@ export {
     successValue,
     successValueList,
 } from './lib/helpers';
+export type {
+    AsyncResult,
+    Result,
+} from './lib/types';

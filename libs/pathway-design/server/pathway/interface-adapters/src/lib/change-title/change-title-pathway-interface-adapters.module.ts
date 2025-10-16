@@ -1,7 +1,7 @@
 import {
-    PDSPACUChangeTitlePathwayUseCase,
     PDSPAChangeTitlePathwayCommandHandler,
     PDSPAChangeTitlePathwayService,
+    PDSPACUChangeTitlePathwayUseCase,
 } from '@bewoak/pathway-design-server-pathway-application';
 import { type DynamicModule, Module, type Type } from '@nestjs/common';
 import { ChangeTitlePathwayController } from './controller/change-title-pathway.controller';

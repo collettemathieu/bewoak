@@ -23,7 +23,7 @@
         "lint": {
             "executor": "nx:run-commands",
             "options": {
-                "command": "bun run biome check --write {projectRoot} --config-path={projectRoot}/biome.json"
+                "command": "bun run biome check --write {projectRoot}"
             }
         },
         "test-feature": {

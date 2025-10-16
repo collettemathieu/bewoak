@@ -1,15 +1,13 @@
-import { Logger } from '@nestjs/common';
-import { HttpAdapterHost, NestFactory } from '@nestjs/core';
-
-import { AppModule } from './app/app.module';
-
 import { cCSEGetEnvironmentVariables } from '@bewoak/common-configs-server-env';
 import { runLogOtelInstrumentation, runOtelInstrumentation } from '@bewoak/common-configs-server-otel';
 import { cCSSSetupSwaggerDocument } from '@bewoak/common-configs-server-swagger';
 import { LogHttpExceptionFilter } from '@bewoak/common-http-exceptions-server';
 import { HandleExceptionInterceptor } from '@bewoak/common-interceptors-server';
 import { ServerLogger } from '@bewoak/common-log-server';
+import { Logger } from '@nestjs/common';
+import { HttpAdapterHost, NestFactory } from '@nestjs/core';
 import { FastifyAdapter } from '@nestjs/platform-fastify';
+import { AppModule } from './app/app.module';
 import { envSchema } from './environment/env.schema';
 
 async function bootstrap() {

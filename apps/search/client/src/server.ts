@@ -37,13 +37,15 @@ export function app() {
 
 const server = app();
 if (isMainModule(import.meta.url)) {
-    // biome-ignore lint/complexity/useLiteralKeys: <explanation>
+    // biome-ignore lint/complexity/useLiteralKeys: <Not justified>
     const port = +(process.env['PORT'] || 4000);
     server.listen({ port }, () => {
+        // biome-ignore lint/suspicious/noConsole: <Not justified>
         console.warn(`Fastify server listening on http://localhost:${port}`);
     });
 }
 
+// biome-ignore lint/suspicious/noConsole: <Not justified>
 console.warn('Fastify server started');
 
 export const reqHandler = createNodeRequestHandler(async (req, res) => {

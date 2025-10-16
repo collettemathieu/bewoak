@@ -1,7 +1,7 @@
 import { CCEPPathwayInitializedEvent } from '@bewoak/common-contracts-events-pathway';
 import { PDSPBEPathwayInitializedEvent } from '@bewoak/pathway-design-server-pathway-business';
 import { EventsHandler, type IEventHandler } from '@nestjs/cqrs';
-// biome-ignore lint/style/useImportType: <explanation>
+// biome-ignore lint/style/useImportType: <To be explained>
 import { EventEmitter2 } from '@nestjs/event-emitter';
 
 @EventsHandler(PDSPBEPathwayInitializedEvent)

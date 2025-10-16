@@ -1,9 +1,9 @@
 import { SpanOtel } from '@bewoak/common-configs-server-otel';
-// biome-ignore lint/style/useImportType: <explanation>
+// biome-ignore lint/style/useImportType: <To be explained>
 import { PDSPAInitializePathwayCommand, PDSPAInitializePathwayService } from '@bewoak/pathway-design-server-pathway-application';
 import { Body, Controller, Post, UsePipes, ValidationPipe } from '@nestjs/common';
 import { ApiBadRequestResponse, ApiCreatedResponse, ApiInternalServerErrorResponse, ApiTags } from '@nestjs/swagger';
-// biome-ignore lint/style/useImportType: <explanation>
+// biome-ignore lint/style/useImportType: <To be explained>
 import { InitializePathwayRequestBodyDto } from '../dtos/request/body/request-body.dto';
 import {
     InitializedPathwayBadRequestExceptionBodyDto,

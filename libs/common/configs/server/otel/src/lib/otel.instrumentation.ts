@@ -4,7 +4,7 @@ import { PrometheusExporter } from '@opentelemetry/exporter-prometheus';
 import { OTLPTraceExporter } from '@opentelemetry/exporter-trace-otlp-http';
 import { HttpInstrumentation } from '@opentelemetry/instrumentation-http';
 import { NestInstrumentation } from '@opentelemetry/instrumentation-nestjs-core';
-import { Resource, envDetector, hostDetector, osDetector, processDetector } from '@opentelemetry/resources';
+import { envDetector, hostDetector, osDetector, processDetector, Resource } from '@opentelemetry/resources';
 import { MeterProvider } from '@opentelemetry/sdk-metrics';
 import { NodeSDK } from '@opentelemetry/sdk-node';
 import {
@@ -23,10 +23,7 @@ export const runOtelInstrumentation = (serviceName: string) => {
     // Exporteur de métriques Prometheus
     const prometheusExporter = new PrometheusExporter(
         { port: 9464 }, // Port par défaut pour Prometheus
-        () => {
-            // biome-ignore lint/suspicious/noConsoleLog: <explanation>
-            console.log('🎯 Prometheus metrics available at http://localhost:9464/metrics');
-        }
+        () => {}
     );
 
     const metricResource = new Resource({
@@ -58,7 +55,7 @@ export const runOtelInstrumentation = (serviceName: string) => {
     // Gestion propre à l'arrêt de l’application
     process.on('SIGTERM', async () => {
         await sdk.shutdown();
-        // biome-ignore lint/suspicious/noConsoleLog: <explanation>
+        // biome-ignore lint/suspicious/noConsole: <Not applicable>
         console.log('👋 OpenTelemetry shutdown');
         process.exit(0);
     });

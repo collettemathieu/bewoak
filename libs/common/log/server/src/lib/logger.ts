@@ -1,5 +1,5 @@
 import { Injectable, type LoggerService } from '@nestjs/common';
-import { type Logger, SeverityNumber, logs } from '@opentelemetry/api-logs';
+import { type Logger, logs, SeverityNumber } from '@opentelemetry/api-logs';
 import { attributes } from './logger.helpers';
 import type { OptionalParams } from './logger.types';
 

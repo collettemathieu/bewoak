@@ -1,6 +1,6 @@
 import type { PDSPBPPathwayPresenterResult } from '@bewoak/pathway-design-server-pathway-business';
 import { Injectable } from '@nestjs/common';
-// biome-ignore lint/style/useImportType: <explanation>
+// biome-ignore lint/style/useImportType: <To be explained>
 import { CommandBus } from '@nestjs/cqrs';
 import type { PDSPAChangeTitlePathwayCommand } from '../command/change-title-pathway.command';
 

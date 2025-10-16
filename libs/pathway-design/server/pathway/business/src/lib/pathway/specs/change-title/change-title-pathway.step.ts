@@ -1,6 +1,6 @@
 import { strict as assert } from 'node:assert';
 import type { CTSEBadRequestException } from '@bewoak/common-http-exceptions-server';
-import { type Result, failureValue, successValue } from '@bewoak/common-types-result';
+import { failureValue, type Result, successValue } from '@bewoak/common-types-result';
 import type { DataTable } from '@cucumber/cucumber';
 import { binding, given, then, when } from 'cucumber-tsflow';
 import sinon from 'sinon';
