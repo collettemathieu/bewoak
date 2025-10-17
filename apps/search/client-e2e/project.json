@@ -5,5 +5,12 @@
     "name": "search-client-e2e",
     "projectType": "application",
     "sourceRoot": "apps/search/client-e2e/src",
-    "targets": {}
+    "targets": {
+        "test-feature": {
+            "executor": "nx:run-commands",
+            "options": {
+                "command": "bash {projectRoot}/test-e2e.sh"
+            }
+        }
+    }
 }

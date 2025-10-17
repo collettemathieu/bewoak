@@ -15,7 +15,7 @@ Before(async () => {
 });
 
 Given('User navigates to the Homepage', async () => {
-    await page.goto('http://localhost:4200');
+    await page.goto('http://localhost:4000');
 });
 
 Then('It should show the test component', async () => {
