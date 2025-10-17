@@ -1,31 +1,31 @@
 {
-    "name": "common-types-result",
     "$schema": "../../../../node_modules/nx/schemas/project-schema.json",
-    "sourceRoot": "libs/common/types/result/src",
+    "name": "common-types-result",
     "projectType": "library",
+    "release": {
+        "version": {
+            "currentVersionResolver": "git-tag",
+            "manifestRootsToUpdate": ["dist/{projectRoot}"],
+            "preserveLocalDependencyProtocols": false
+        }
+    },
+    "sourceRoot": "libs/common/types/result/src",
+    "tags": ["type:common:types:result"],
     "targets": {
         "build": {
             "executor": "@nx/js:swc",
-            "outputs": ["{options.outputPath}"],
             "options": {
-                "outputPath": "dist/libs/common/types/result",
+                "assets": [],
                 "main": "libs/common/types/result/src/index.ts",
-                "tsConfig": "libs/common/types/result/tsconfig.lib.json",
-                "assets": []
-            }
+                "outputPath": "dist/libs/common/types/result",
+                "tsConfig": "libs/common/types/result/tsconfig.lib.json"
+            },
+            "outputs": ["{options.outputPath}"]
         },
         "nx-release-publish": {
             "options": {
                 "packageRoot": "dist/{projectRoot}"
             }
-        }
-    },
-    "tags": ["type:common:types:result"],
-    "release": {
-        "version": {
-            "currentVersionResolver": "git-tag",
-            "preserveLocalDependencyProtocols": false,
-            "manifestRootsToUpdate": ["dist/{projectRoot}"]
         }
     }
 }

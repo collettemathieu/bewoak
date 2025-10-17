@@ -105,18 +105,19 @@
         "lint": "biome lint",
         "nx": "nx",
         "postinstall": "chmod +x .hooks/* && git config core.hooksPath .hooks",
+        "pretest": "rm -rf dist && rm -rf reports && bun run nx reset && bun run tools:sort-json",
         "start:pathway-design:app": "PORT=3000 GLOBAL_PREFIX=api PERSISTENCE_DRIVER=inMemory PRESENTER_DRIVER=toJson nx serve pathway-design-server",
-        "start:search:app": "PORT=3000 GLOBAL_PREFIX=api nx serve search-server",
+        "start:search:app:client": "nx serve search-client",
+        "start:search:app:server": "PORT=3000 GLOBAL_PREFIX=api nx serve search-server",
         "stryker": "stryker",
-        "test": "rm -rf dist && rm -rf reports && bun run nx reset && bun run test:ci",
-        "test:ci": "bun run test:unit && bun run test:feature && bun run lint && bun run format && bun run build",
+        "test": "bun test && bun run test:feature && bun run lint && bun run format && bun run build",
         "test:feature": "nx run-many --target=test-feature --parallel=4",
         "test:load-testing": "nx run-many --target=load-testing --output-style=static",
         "test:mutation": "nx run-many --target=test-mutation --parallel=4",
-        "test:unit": "nx run-many --target=test --parallel=4",
         "tools:autocanon": "autocannon -c 10 -d 10s http://localhost:3000/api/pathway/initialize",
         "tools:detective": "detective",
-        "tools:otel:run": "docker compose -f ./docker/otel-instrumentation/docker-compose.yml up"
+        "tools:otel:run": "docker compose -f ./docker/otel-instrumentation/docker-compose.yml up",
+        "tools:sort-json": "bun run scripts/sort-json-files.ts"
     },
     "version": "0.0.1"
 }

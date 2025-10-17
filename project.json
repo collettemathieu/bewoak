@@ -1,12 +1,12 @@
 {
-    "name": "@bewoak/source",
     "$schema": "node_modules/nx/schemas/project-schema.json",
+    "name": "@bewoak/source",
     "targets": {
         "local-registry": {
             "executor": "@nx/js:verdaccio",
             "options": {
-                "port": 4873,
                 "config": ".verdaccio/config.yml",
+                "port": 4873,
                 "storage": "tmp/local-registry/storage"
             }
         }

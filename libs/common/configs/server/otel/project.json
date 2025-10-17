@@ -1,31 +1,31 @@
 {
-    "name": "common-configs-server-otel",
     "$schema": "../../../../../node_modules/nx/schemas/project-schema.json",
-    "sourceRoot": "libs/common/configs/server/otel/src",
+    "name": "common-configs-server-otel",
     "projectType": "library",
+    "release": {
+        "version": {
+            "currentVersionResolver": "git-tag",
+            "manifestRootsToUpdate": ["dist/{projectRoot}"],
+            "preserveLocalDependencyProtocols": false
+        }
+    },
+    "sourceRoot": "libs/common/configs/server/otel/src",
+    "tags": ["type:common:configs:server:otel"],
     "targets": {
         "build": {
             "executor": "@nx/js:swc",
-            "outputs": ["{options.outputPath}"],
             "options": {
-                "outputPath": "dist/libs/common/configs/server/otel",
+                "assets": [],
                 "main": "libs/common/configs/server/otel/src/index.ts",
-                "tsConfig": "libs/common/configs/server/otel/tsconfig.lib.json",
-                "assets": []
-            }
+                "outputPath": "dist/libs/common/configs/server/otel",
+                "tsConfig": "libs/common/configs/server/otel/tsconfig.lib.json"
+            },
+            "outputs": ["{options.outputPath}"]
         },
         "nx-release-publish": {
             "options": {
                 "packageRoot": "dist/{projectRoot}"
             }
-        }
-    },
-    "tags": ["type:common:configs:server:otel"],
-    "release": {
-        "version": {
-            "currentVersionResolver": "git-tag",
-            "preserveLocalDependencyProtocols": false,
-            "manifestRootsToUpdate": ["dist/{projectRoot}"]
         }
     }
 }

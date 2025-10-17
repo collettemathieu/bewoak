@@ -1,25 +1,32 @@
 {
-    "name": "pathway-design-common-pathway-business-rules",
     "$schema": "../../../../../../../node_modules/nx/schemas/project-schema.json",
-    "sourceRoot": "libs/pathway-design/common/pathway/business/rules/src",
+    "name": "pathway-design-common-pathway-business-rules",
     "projectType": "library",
+    "release": {
+        "version": {
+            "currentVersionResolver": "git-tag",
+            "manifestRootsToUpdate": ["dist/{projectRoot}"],
+            "preserveLocalDependencyProtocols": false
+        }
+    },
+    "sourceRoot": "libs/pathway-design/common/pathway/business/rules/src",
+    "tags": ["type:pathway-design:common:business:pathway:rules"],
     "targets": {
         "build": {
             "executor": "@nx/js:swc",
-            "outputs": ["{options.outputPath}"],
             "options": {
-                "outputPath": "dist/libs/pathway-design/common/pathway/business/rules",
+                "assets": [],
                 "main": "libs/pathway-design/common/pathway/business/rules/src/index.ts",
-                "tsConfig": "libs/pathway-design/common/pathway/business/rules/tsconfig.lib.json",
-                "assets": []
-            }
+                "outputPath": "dist/libs/pathway-design/common/pathway/business/rules",
+                "tsConfig": "libs/pathway-design/common/pathway/business/rules/tsconfig.lib.json"
+            },
+            "outputs": ["{options.outputPath}"]
         },
         "nx-release-publish": {
             "options": {
                 "packageRoot": "dist/{projectRoot}"
             }
         },
-
         "test": {
             "executor": "nx:run-commands",
             "options": {
@@ -31,14 +38,6 @@
             "options": {
                 "command": "bun run stryker run {projectRoot}/stryker.config.json && bunx lite-server --baseDir=reports/test-mutation/{projectRoot}"
             }
-        }
-    },
-    "tags": ["type:pathway-design:common:business:pathway:rules"],
-    "release": {
-        "version": {
-            "currentVersionResolver": "git-tag",
-            "preserveLocalDependencyProtocols": false,
-            "manifestRootsToUpdate": ["dist/{projectRoot}"]
         }
     }
 }

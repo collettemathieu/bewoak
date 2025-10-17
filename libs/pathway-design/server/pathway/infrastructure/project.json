@@ -1,38 +1,37 @@
 {
-    "name": "pathway-design-server-pathway-infrastructure",
     "$schema": "../../../../../../../node_modules/nx/schemas/project-schema.json",
-    "sourceRoot": "libs/pathway-design/server/pathway/infrastructure/src",
+    "name": "pathway-design-server-pathway-infrastructure",
     "projectType": "library",
+    "release": {
+        "version": {
+            "currentVersionResolver": "git-tag",
+            "manifestRootsToUpdate": ["dist/{projectRoot}"],
+            "preserveLocalDependencyProtocols": false
+        }
+    },
+    "sourceRoot": "libs/pathway-design/server/pathway/infrastructure/src",
+    "tags": ["type:pathway-design:server:pathway:infrastructure"],
     "targets": {
         "build": {
             "executor": "@nx/js:swc",
-            "outputs": ["{options.outputPath}"],
             "options": {
-                "outputPath": "dist/libs/pathway-design/server/pathway/infrastructure",
+                "assets": [],
                 "main": "libs/pathway-design/server/pathway/infrastructure/src/index.ts",
-                "tsConfig": "libs/pathway-design/server/pathway/infrastructure/tsconfig.lib.json",
-                "assets": []
-            }
+                "outputPath": "dist/libs/pathway-design/server/pathway/infrastructure",
+                "tsConfig": "libs/pathway-design/server/pathway/infrastructure/tsconfig.lib.json"
+            },
+            "outputs": ["{options.outputPath}"]
         },
         "nx-release-publish": {
             "options": {
                 "packageRoot": "dist/{projectRoot}"
             }
         },
-
         "test": {
             "executor": "nx:run-commands",
             "options": {
                 "command": "bun test --coverage --coverage-dir=dist/reports/{projectRoot}/coverage --coverage-reporter=lcov {projectRoot}"
             }
-        }
-    },
-    "tags": ["type:pathway-design:server:pathway:infrastructure"],
-    "release": {
-        "version": {
-            "currentVersionResolver": "git-tag",
-            "preserveLocalDependencyProtocols": false,
-            "manifestRootsToUpdate": ["dist/{projectRoot}"]
         }
     }
 }

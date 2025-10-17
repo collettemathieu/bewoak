@@ -1,9 +1,9 @@
 {
-    "name": "@bewoak/pathway-design-common-pathway-business-rules",
-    "version": "0.0.1",
     "dependencies": {
         "@swc/helpers": "~0.5.11"
     },
     "main": "./src/index.js",
-    "typings": "./src/index.d.ts"
+    "name": "@bewoak/pathway-design-common-pathway-business-rules",
+    "typings": "./src/index.d.ts",
+    "version": "0.0.1"
 }

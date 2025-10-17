@@ -1,31 +1,31 @@
 {
-    "name": "common-http-exceptions-server",
     "$schema": "../../../../node_modules/nx/schemas/project-schema.json",
-    "sourceRoot": "libs/common/http-exceptions/server/src",
+    "name": "common-http-exceptions-server",
     "projectType": "library",
+    "release": {
+        "version": {
+            "currentVersionResolver": "git-tag",
+            "manifestRootsToUpdate": ["dist/{projectRoot}"],
+            "preserveLocalDependencyProtocols": false
+        }
+    },
+    "sourceRoot": "libs/common/http-exceptions/server/src",
+    "tags": ["type:common:http-exceptions:server"],
     "targets": {
         "build": {
             "executor": "@nx/js:swc",
-            "outputs": ["{options.outputPath}"],
             "options": {
-                "outputPath": "dist/libs/common/http-exceptions/server",
+                "assets": [],
                 "main": "libs/common/http-exceptions/server/src/index.ts",
-                "tsConfig": "libs/common/http-exceptions/server/tsconfig.lib.json",
-                "assets": []
-            }
+                "outputPath": "dist/libs/common/http-exceptions/server",
+                "tsConfig": "libs/common/http-exceptions/server/tsconfig.lib.json"
+            },
+            "outputs": ["{options.outputPath}"]
         },
         "nx-release-publish": {
             "options": {
                 "packageRoot": "dist/{projectRoot}"
             }
-        }
-    },
-    "tags": ["type:common:http-exceptions:server"],
-    "release": {
-        "version": {
-            "currentVersionResolver": "git-tag",
-            "preserveLocalDependencyProtocols": false,
-            "manifestRootsToUpdate": ["dist/{projectRoot}"]
         }
     }
 }

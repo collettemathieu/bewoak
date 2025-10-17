@@ -1,10 +1,10 @@
 {
-    "extends": "./tsconfig.json",
     "compilerOptions": {
-        "module": "CommonJS",
-        "esModuleInterop": true,
         "composite": true,
-        "declaration": true
+        "declaration": true,
+        "esModuleInterop": true,
+        "module": "CommonJS"
     },
+    "extends": "./tsconfig.json",
     "include": ["src/**/*.ts"]
 }

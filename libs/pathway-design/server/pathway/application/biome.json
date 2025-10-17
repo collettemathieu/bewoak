@@ -1,18 +1,18 @@
 {
-    "root": false,
     "$schema": "../../../../../node_modules/@biomejs/biome/configuration_schema.json",
     "extends": "//",
     "linter": {
         "rules": {
             "style": {
                 "noRestrictedImports": {
+                    "level": "error",
                     "options": {
                         "paths": {}
-                    },
-                    "level": "error"
+                    }
                 }
             }
         }
     },
-    "overrides": [{}]
+    "overrides": [{}],
+    "root": false
 }

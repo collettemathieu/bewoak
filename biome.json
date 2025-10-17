@@ -1,5 +1,12 @@
 {
     "$schema": "./node_modules/@biomejs/biome/configuration_schema.json",
+    "assist": {
+        "actions": {
+            "source": {
+                "organizeImports": "on"
+            }
+        }
+    },
     "formatter": {
         "attributePosition": "auto",
         "enabled": true,
@@ -76,13 +83,6 @@
             "recommended": true,
             "suspicious": {
                 "noConsole": "error"
-            }
-        }
-    },
-    "assist": {
-        "actions": {
-            "source": {
-                "organizeImports": "on"
             }
         }
     }

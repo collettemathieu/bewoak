@@ -1,16 +1,11 @@
 {
-    "name": "pathway-design-server",
     "$schema": "../../../node_modules/nx/schemas/project-schema.json",
-    "sourceRoot": "apps/pathway-design/server/src",
+    "name": "pathway-design-server",
     "projectType": "application",
+    "sourceRoot": "apps/pathway-design/server/src",
     "tags": ["pathway-design-server"],
     "targets": {
         "serve": {
-            "executor": "@nx/js:node",
-            "defaultConfiguration": "development",
-            "options": {
-                "buildTarget": "pathway-design-server:build"
-            },
             "configurations": {
                 "development": {
                     "buildTarget": "pathway-design-server:build:development"
@@ -18,9 +13,13 @@
                 "production": {
                     "buildTarget": "pathway-design-server:build:production"
                 }
+            },
+            "defaultConfiguration": "development",
+            "executor": "@nx/js:node",
+            "options": {
+                "buildTarget": "pathway-design-server:build"
             }
         },
-
         "test-feature": {
             "executor": "nx:run-commands",
             "options": {

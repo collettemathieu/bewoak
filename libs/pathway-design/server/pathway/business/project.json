@@ -1,25 +1,32 @@
 {
-    "name": "pathway-design-server-pathway-business",
     "$schema": "../../../../../../../node_modules/nx/schemas/project-schema.json",
-    "sourceRoot": "libs/pathway-design/server/pathway/business/src",
+    "name": "pathway-design-server-pathway-business",
     "projectType": "library",
+    "release": {
+        "version": {
+            "currentVersionResolver": "git-tag",
+            "manifestRootsToUpdate": ["dist/{projectRoot}"],
+            "preserveLocalDependencyProtocols": false
+        }
+    },
+    "sourceRoot": "libs/pathway-design/server/pathway/business/src",
+    "tags": ["type:pathway-design:server:pathway:business"],
     "targets": {
         "build": {
             "executor": "@nx/js:swc",
-            "outputs": ["{options.outputPath}"],
             "options": {
-                "outputPath": "dist/libs/pathway-design/server/pathway/business",
+                "assets": [],
                 "main": "libs/pathway-design/server/pathway/business/src/index.ts",
-                "tsConfig": "libs/pathway-design/server/pathway/business/tsconfig.lib.json",
-                "assets": []
-            }
+                "outputPath": "dist/libs/pathway-design/server/pathway/business",
+                "tsConfig": "libs/pathway-design/server/pathway/business/tsconfig.lib.json"
+            },
+            "outputs": ["{options.outputPath}"]
         },
         "nx-release-publish": {
             "options": {
                 "packageRoot": "dist/{projectRoot}"
             }
         },
-
         "test": {
             "executor": "nx:run-commands",
             "options": {
@@ -37,14 +44,6 @@
             "options": {
                 "command": "bun run stryker run {projectRoot}/stryker.config.json && bunx lite-server --baseDir=reports/test-mutation/{projectRoot}"
             }
-        }
-    },
-    "tags": ["type:pathway-design:server:pathway:business"],
-    "release": {
-        "version": {
-            "currentVersionResolver": "git-tag",
-            "preserveLocalDependencyProtocols": false,
-            "manifestRootsToUpdate": ["dist/{projectRoot}"]
         }
     }
 }

@@ -1,25 +1,32 @@
 {
-    "name": "common-log-server",
     "$schema": "../../../../node_modules/nx/schemas/project-schema.json",
-    "sourceRoot": "libs/common/log/server/src",
+    "name": "common-log-server",
     "projectType": "library",
+    "release": {
+        "version": {
+            "currentVersionResolver": "git-tag",
+            "manifestRootsToUpdate": ["dist/{projectRoot}"],
+            "preserveLocalDependencyProtocols": false
+        }
+    },
+    "sourceRoot": "libs/common/log/server/src",
+    "tags": ["type:common:configs:server:log"],
     "targets": {
         "build": {
             "executor": "@nx/js:swc",
-            "outputs": ["{options.outputPath}"],
             "options": {
-                "outputPath": "dist/libs/common/log/server",
+                "assets": [],
                 "main": "libs/common/log/server/src/index.ts",
-                "tsConfig": "libs/common/log/server/tsconfig.lib.json",
-                "assets": []
-            }
+                "outputPath": "dist/libs/common/log/server",
+                "tsConfig": "libs/common/log/server/tsconfig.lib.json"
+            },
+            "outputs": ["{options.outputPath}"]
         },
         "nx-release-publish": {
             "options": {
                 "packageRoot": "dist/{projectRoot}"
             }
         },
-
         "test": {
             "executor": "nx:run-commands",
             "options": {
@@ -31,14 +38,6 @@
             "options": {
                 "command": "bun run stryker run {projectRoot}/stryker.config.json && bunx lite-server --baseDir=reports/test-mutation/{projectRoot}"
             }
-        }
-    },
-    "tags": ["type:common:configs:server:log"],
-    "release": {
-        "version": {
-            "currentVersionResolver": "git-tag",
-            "preserveLocalDependencyProtocols": false,
-            "manifestRootsToUpdate": ["dist/{projectRoot}"]
         }
     }
 }

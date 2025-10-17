@@ -1,37 +1,37 @@
 {
-    "name": "search-server-pathway-infrastructure",
     "$schema": "../../../../../../../node_modules/nx/schemas/project-schema.json",
-    "sourceRoot": "libs/search/server/pathway/infrastructure/src",
+    "name": "search-server-pathway-infrastructure",
     "projectType": "library",
+    "release": {
+        "version": {
+            "currentVersionResolver": "git-tag",
+            "manifestRootsToUpdate": ["dist/{projectRoot}"],
+            "preserveLocalDependencyProtocols": false
+        }
+    },
+    "sourceRoot": "libs/search/server/pathway/infrastructure/src",
+    "tags": ["type:search:server:pathway:infrastructure"],
     "targets": {
         "build": {
             "executor": "@nx/js:swc",
-            "outputs": ["{options.outputPath}"],
             "options": {
-                "outputPath": "dist/libs/search/server/pathway/infrastructure",
+                "assets": [],
                 "main": "libs/search/server/pathway/infrastructure/src/index.ts",
-                "tsConfig": "libs/search/server/pathway/infrastructure/tsconfig.lib.json",
-                "assets": []
-            }
-        },
-        "nx-release-publish": {
-            "options": {
-                "packageRoot": "dist/{projectRoot}"
-            }
+                "outputPath": "dist/libs/search/server/pathway/infrastructure",
+                "tsConfig": "libs/search/server/pathway/infrastructure/tsconfig.lib.json"
+            },
+            "outputs": ["{options.outputPath}"]
         },
         "lint": {
             "executor": "nx:run-commands",
             "options": {
                 "command": "bun run biome lint --write {projectRoot}"
             }
-        }
-    },
-    "tags": ["type:search:server:pathway:infrastructure"],
-    "release": {
-        "version": {
-            "currentVersionResolver": "git-tag",
-            "preserveLocalDependencyProtocols": false,
-            "manifestRootsToUpdate": ["dist/{projectRoot}"]
+        },
+        "nx-release-publish": {
+            "options": {
+                "packageRoot": "dist/{projectRoot}"
+            }
         }
     }
 }

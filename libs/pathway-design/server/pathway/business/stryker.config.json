@@ -5,6 +5,12 @@
         "command": "bun test"
     },
     "coverageAnalysis": "off",
+    "htmlReporter": {
+        "fileName": "reports/test-mutation/libs/pathway-design/server/pathway/business/index.html"
+    },
+    "jsonReporter": {
+        "fileName": "reports/test-mutation/libs/pathway-design/server/pathway/business/index.json"
+    },
     "logLevel": "debug",
     "mutate": [
         "libs/pathway-design/server/pathway/business/src/lib/**/*.ts",
@@ -13,12 +19,6 @@
     ],
     "packageManager": "npm",
     "reporters": ["html", "progress", "json"],
-    "jsonReporter": {
-        "fileName": "reports/test-mutation/libs/pathway-design/server/pathway/business/index.json"
-    },
-    "htmlReporter": {
-        "fileName": "reports/test-mutation/libs/pathway-design/server/pathway/business/index.html"
-    },
     "testRunner": "command",
     "testRunner_comment": "Take a look at (missing 'homepage' URL in package.json) for information about the command plugin."
 }

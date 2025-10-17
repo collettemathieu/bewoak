@@ -8,5 +8,10 @@ import { RouterModule } from '@angular/router';
     styleUrl: './app.scss',
 })
 export class App {
-    protected title = 'client';
+    title = 'client';
+    shell?: string;
+
+    ngOnInit() {
+        this.shell = 'pkgJSON';
+    }
 }

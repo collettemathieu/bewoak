@@ -1,8 +1,9 @@
 {
-    "name": "common-tests-server-load-testing",
     "$schema": "../../../../../node_modules/nx/schemas/project-schema.json",
-    "sourceRoot": "libs/common/tests/server/load-testing/src",
+    "name": "common-tests-server-load-testing",
     "projectType": "library",
+    "sourceRoot": "libs/common/tests/server/load-testing/src",
+    "tags": ["type:common:tests:server:load-testing"],
     "targets": {
         "load-testing": {
             "executor": "nx:run-commands",
@@ -15,6 +16,5 @@
                 "parallel": false
             }
         }
-    },
-    "tags": ["type:common:tests:server:load-testing"]
+    }
 }

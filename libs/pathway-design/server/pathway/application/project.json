@@ -1,38 +1,37 @@
 {
-    "name": "pathway-design-server-pathway-application",
     "$schema": "../../../../../node_modules/nx/schemas/project-schema.json",
-    "sourceRoot": "libs/pathway-design/server/pathway/application/src",
+    "name": "pathway-design-server-pathway-application",
     "projectType": "library",
+    "release": {
+        "version": {
+            "currentVersionResolver": "git-tag",
+            "manifestRootsToUpdate": ["dist/{projectRoot}"],
+            "preserveLocalDependencyProtocols": false
+        }
+    },
+    "sourceRoot": "libs/pathway-design/server/pathway/application/src",
+    "tags": ["type:pathway-design:server:pathway:application"],
     "targets": {
         "build": {
             "executor": "@nx/js:swc",
-            "outputs": ["{options.outputPath}"],
             "options": {
-                "outputPath": "dist/libs/pathway-design/server/pathway/application",
+                "assets": [],
                 "main": "libs/pathway-design/server/pathway/application/src/index.ts",
-                "tsConfig": "libs/pathway-design/server/pathway/application/tsconfig.lib.json",
-                "assets": []
-            }
+                "outputPath": "dist/libs/pathway-design/server/pathway/application",
+                "tsConfig": "libs/pathway-design/server/pathway/application/tsconfig.lib.json"
+            },
+            "outputs": ["{options.outputPath}"]
         },
         "nx-release-publish": {
             "options": {
                 "packageRoot": "dist/{projectRoot}"
             }
         },
-
         "test-feature": {
             "executor": "nx:run-commands",
             "options": {
                 "command": "TS_NODE_PROJECT='{projectRoot}/tsconfig.spec.json' bun run cucumber-js --config={projectRoot}/cucumber.js"
             }
-        }
-    },
-    "tags": ["type:pathway-design:server:pathway:application"],
-    "release": {
-        "version": {
-            "currentVersionResolver": "git-tag",
-            "preserveLocalDependencyProtocols": false,
-            "manifestRootsToUpdate": ["dist/{projectRoot}"]
         }
     }
 }

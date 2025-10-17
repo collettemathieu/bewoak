@@ -1,38 +1,37 @@
 {
-    "name": "search-server-pathway-models",
     "$schema": "../../../../../node_modules/nx/schemas/project-schema.json",
-    "sourceRoot": "libs/search/server/pathway/models/src",
+    "name": "search-server-pathway-models",
     "projectType": "library",
+    "release": {
+        "version": {
+            "currentVersionResolver": "git-tag",
+            "manifestRootsToUpdate": ["dist/{projectRoot}"],
+            "preserveLocalDependencyProtocols": false
+        }
+    },
+    "sourceRoot": "libs/search/server/pathway/models/src",
+    "tags": ["type:search:server:pathway:models"],
     "targets": {
         "build": {
             "executor": "@nx/js:swc",
-            "outputs": ["{options.outputPath}"],
             "options": {
-                "outputPath": "dist/libs/search/server/pathway/models",
+                "assets": [],
                 "main": "libs/search/server/pathway/models/src/index.ts",
-                "tsConfig": "libs/search/server/pathway/models/tsconfig.lib.json",
-                "assets": []
-            }
+                "outputPath": "dist/libs/search/server/pathway/models",
+                "tsConfig": "libs/search/server/pathway/models/tsconfig.lib.json"
+            },
+            "outputs": ["{options.outputPath}"]
         },
         "nx-release-publish": {
             "options": {
                 "packageRoot": "dist/{projectRoot}"
             }
         },
-
         "test-feature": {
             "executor": "nx:run-commands",
             "options": {
                 "command": "TS_NODE_PROJECT='{projectRoot}/tsconfig.spec.json' bun run cucumber-js --config={projectRoot}/cucumber.js"
             }
-        }
-    },
-    "tags": ["type:search:server:pathway:models"],
-    "release": {
-        "version": {
-            "currentVersionResolver": "git-tag",
-            "preserveLocalDependencyProtocols": false,
-            "manifestRootsToUpdate": ["dist/{projectRoot}"]
         }
     }
 }

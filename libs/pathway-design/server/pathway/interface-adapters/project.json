@@ -1,31 +1,31 @@
 {
-    "name": "pathway-design-server-pathway-interface-adapters",
     "$schema": "../../../../../../../node_modules/nx/schemas/project-schema.json",
-    "sourceRoot": "libs/pathway-design/server/pathway/interface-adapters/src",
+    "name": "pathway-design-server-pathway-interface-adapters",
     "projectType": "library",
+    "release": {
+        "version": {
+            "currentVersionResolver": "git-tag",
+            "manifestRootsToUpdate": ["dist/{projectRoot}"],
+            "preserveLocalDependencyProtocols": false
+        }
+    },
+    "sourceRoot": "libs/pathway-design/server/pathway/interface-adapters/src",
+    "tags": ["type:pathway-design:server:pathway:interface-adapters"],
     "targets": {
         "build": {
             "executor": "@nx/js:swc",
-            "outputs": ["{options.outputPath}"],
             "options": {
-                "outputPath": "dist/libs/pathway-design/server/pathway/interface-adapters",
+                "assets": [],
                 "main": "libs/pathway-design/server/pathway/interface-adapters/src/index.ts",
-                "tsConfig": "libs/pathway-design/server/pathway/interface-adapters/tsconfig.lib.json",
-                "assets": []
-            }
+                "outputPath": "dist/libs/pathway-design/server/pathway/interface-adapters",
+                "tsConfig": "libs/pathway-design/server/pathway/interface-adapters/tsconfig.lib.json"
+            },
+            "outputs": ["{options.outputPath}"]
         },
         "nx-release-publish": {
             "options": {
                 "packageRoot": "dist/{projectRoot}"
             }
-        }
-    },
-    "tags": ["type:pathway-design:server:pathway:interface-adapters"],
-    "release": {
-        "version": {
-            "currentVersionResolver": "git-tag",
-            "preserveLocalDependencyProtocols": false,
-            "manifestRootsToUpdate": ["dist/{projectRoot}"]
         }
     }
 }

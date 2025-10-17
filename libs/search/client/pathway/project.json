@@ -1,38 +1,37 @@
 {
-    "name": "test-component",
     "$schema": "../../../../node_modules/nx/schemas/project-schema.json",
-    "sourceRoot": "libs/search/client/pathway/src",
+    "name": "test-component",
     "prefix": "lib",
-    "tags": [],
     "projectType": "library",
+    "release": {
+        "version": {
+            "currentVersionResolver": "git-tag",
+            "fallbackCurrentVersionResolver": "disk",
+            "manifestRootsToUpdate": ["dist/{projectRoot}"]
+        }
+    },
+    "sourceRoot": "libs/search/client/pathway/src",
+    "tags": [],
     "targets": {
         "build": {
+            "configurations": {
+                "development": {},
+                "production": {
+                    "tsConfig": "libs/search/client/pathway/tsconfig.lib.prod.json"
+                }
+            },
+            "defaultConfiguration": "production",
             "executor": "@nx/angular:package",
-            "outputs": ["{workspaceRoot}/dist/{projectRoot}"],
             "options": {
                 "project": "libs/search/client/pathway/ng-package.json",
                 "tsConfig": "libs/search/client/pathway/tsconfig.lib.json"
             },
-            "configurations": {
-                "production": {
-                    "tsConfig": "libs/search/client/pathway/tsconfig.lib.prod.json"
-                },
-                "development": {}
-            },
-            "defaultConfiguration": "production"
+            "outputs": ["{workspaceRoot}/dist/{projectRoot}"]
         },
-
         "nx-release-publish": {
             "options": {
                 "packageRoot": "dist/{projectRoot}"
             }
-        }
-    },
-    "release": {
-        "version": {
-            "manifestRootsToUpdate": ["dist/{projectRoot}"],
-            "currentVersionResolver": "git-tag",
-            "fallbackCurrentVersionResolver": "disk"
         }
     }
 }

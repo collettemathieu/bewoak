@@ -1,31 +1,31 @@
 {
-    "name": "common-configs-server-swagger",
     "$schema": "../../../../../node_modules/nx/schemas/project-schema.json",
-    "sourceRoot": "libs/common/configs/server/swagger/src",
+    "name": "common-configs-server-swagger",
     "projectType": "library",
+    "release": {
+        "version": {
+            "currentVersionResolver": "git-tag",
+            "manifestRootsToUpdate": ["dist/{projectRoot}"],
+            "preserveLocalDependencyProtocols": false
+        }
+    },
+    "sourceRoot": "libs/common/configs/server/swagger/src",
+    "tags": ["type:common:configs:server:swagger"],
     "targets": {
         "build": {
             "executor": "@nx/js:swc",
-            "outputs": ["{options.outputPath}"],
             "options": {
-                "outputPath": "dist/libs/common/configs/server/swagger",
+                "assets": [],
                 "main": "libs/common/configs/server/swagger/src/index.ts",
-                "tsConfig": "libs/common/configs/server/swagger/tsconfig.lib.json",
-                "assets": []
-            }
+                "outputPath": "dist/libs/common/configs/server/swagger",
+                "tsConfig": "libs/common/configs/server/swagger/tsconfig.lib.json"
+            },
+            "outputs": ["{options.outputPath}"]
         },
         "nx-release-publish": {
             "options": {
                 "packageRoot": "dist/{projectRoot}"
             }
-        }
-    },
-    "tags": ["type:common:configs:server:swagger"],
-    "release": {
-        "version": {
-            "currentVersionResolver": "git-tag",
-            "preserveLocalDependencyProtocols": false,
-            "manifestRootsToUpdate": ["dist/{projectRoot}"]
         }
     }
 }
