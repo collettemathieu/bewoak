@@ -41,6 +41,7 @@ jobs:
           echo "NX_HEAD=$HEAD_SHA" >> $GITHUB_ENV
 
       - run: bun install --no-cache
+      - run: bun playwright install
       - uses: nrwl/nx-set-shas@v4
       - run: bun run commitlint --from=$NX_BASE --to=$NX_HEAD
       - run: bun run format:check
