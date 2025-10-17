@@ -100,7 +100,7 @@
     },
     "scripts": {
         "build": "nx run-many --target=build --parallel=4",
-        "format": "biome format --write",
+        "format": "bun run tools:sort-json && biome format --write",
         "format:check": "biome format",
         "lint": "biome lint",
         "nx": "nx",

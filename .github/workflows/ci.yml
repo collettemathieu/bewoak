@@ -43,7 +43,6 @@ jobs:
       - run: bun install --no-cache
       - uses: nrwl/nx-set-shas@v4
       - run: bun run commitlint --from=$NX_BASE --to=$NX_HEAD
-      - run: bun run tools:sort-json
       - run: bun run format:check
       - run: bun run lint
 
