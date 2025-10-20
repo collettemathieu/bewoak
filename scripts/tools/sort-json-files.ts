@@ -35,9 +35,6 @@ function sortJsonFiles(dir: string, level = 0): void {
                             writeFileSync(fullPath, sortedContent);
                             // biome-ignore lint/suspicious/noConsole: CLI script needs console output
                             console.log(`${indent}  ✅ Sorted: ${fullPath}`);
-                        } else {
-                            // biome-ignore lint/suspicious/noConsole: CLI script needs console output
-                            console.log(`${indent}  ➡️  Already sorted: ${fullPath}`);
                         }
                     } catch (parseError) {
                         const errorMessage = parseError instanceof Error ? parseError.message : 'Unknown error';

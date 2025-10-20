@@ -2,7 +2,7 @@
 
 set -e
 
-PROJECT_ROOT="apps/search/client-e2e"
+PROJECT_ROOT="apps/search/client"
 SERVER_PID=""
 
 cleanup() {

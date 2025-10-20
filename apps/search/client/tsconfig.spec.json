@@ -1,10 +1,23 @@
 {
     "compilerOptions": {
-        "composite": true,
-        "declaration": true,
+        "allowJs": true,
         "esModuleInterop": true,
-        "module": "CommonJS"
+        "module": "commonjs",
+        "noFallthroughCasesInSwitch": true,
+        "noImplicitOverride": true,
+        "noImplicitReturns": true,
+        "noPropertyAccessFromIndexSignature": true,
+        "outDir": "../../../dist/out-tsc",
+        "strict": true
     },
-    "extends": "./tsconfig.json",
-    "include": ["src/**/*.ts"]
+    "extends": "../../../tsconfig.base.json",
+    "include": [
+        "**/*.ts",
+        "**/*.js",
+        "src/**/*.spec.ts",
+        "src/**/*.spec.js",
+        "src/**/*.test.ts",
+        "src/**/*.test.js",
+        "src/**/*.d.ts"
+    ]
 }
