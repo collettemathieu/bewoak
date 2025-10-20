@@ -7,8 +7,6 @@ const EXCLUDED_FILES = ['bun.lockb', 'package-lock.json'];
 
 function sortJsonFiles(dir: string, level = 0): void {
     const indent = '  '.repeat(level);
-    // biome-ignore lint/suspicious/noConsole: CLI script needs console output
-    console.log(`${indent}📁 Scanning: ${dir}`);
 
     try {
         const items = readdirSync(dir);
