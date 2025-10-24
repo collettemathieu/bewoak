@@ -109,7 +109,7 @@
         "nx": "nx",
         "postinstall": "chmod +x .hooks/* && git config core.hooksPath .hooks",
         "pretest": "rm -rf dist && rm -rf reports && bun run nx reset",
-        "start:pathway-design:app": "PORT=3000 GLOBAL_PREFIX=api PERSISTENCE_DRIVER=inMemory PRESENTER_DRIVER=toJson nx serve pathway-design-server",
+        "start:apps-pathway-design": "PORT=3000 GLOBAL_PREFIX=api PERSISTENCE_DRIVER=inMemory PRESENTER_DRIVER=toJson nx serve apps-pathway-design-server",
         "start:search:app:client": "nx serve search-client",
         "start:search:app:server": "PORT=3000 GLOBAL_PREFIX=api nx serve search-server",
         "stryker": "stryker",

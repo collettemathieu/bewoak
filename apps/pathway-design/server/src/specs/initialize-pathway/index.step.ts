@@ -1,14 +1,12 @@
 import { strict as assert } from 'node:assert';
 import { CCEPPathwayInitializedEvent } from '@bewoak/common-contracts-events-pathway';
 import {
+    PDSPIAInitializePathwayInterfaceAdaptersModule,
     PDSPIPPathwayPersistenceInfrastructureModule,
     type PDSPIPPersistenceDriverAuthorized,
-} from '@bewoak/pathway-design-server-pathway-infrastructure';
-import { PDSPIAInitializePathwayInterfaceAdaptersModule } from '@bewoak/pathway-design-server-pathway-interface-adapters';
-import {
     PDSPPPathwayPresentersModule,
     type PDSPPPresenterDriverAuthorized,
-} from '@bewoak/pathway-design-server-pathway-presenters';
+} from '@bewoak/pathway-design-server';
 import type { DataTable } from '@cucumber/cucumber';
 import { HttpStatus } from '@nestjs/common';
 import { CqrsModule } from '@nestjs/cqrs';

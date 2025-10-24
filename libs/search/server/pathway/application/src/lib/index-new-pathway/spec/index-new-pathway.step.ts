@@ -1,24 +1,24 @@
 // import { strict as assert } from 'node:assert';
 // import type {
-//     PDSPBEPathwayEntity,
-//     PDSPBPInitializePathwayPersistence,
-//     PDSPBPPathwayPresenter,
-//     PDSPBPPathwayPresenters,
+//     PathwayEntity,
+//     InitializePathwayPersistence,
+//     PathwayPresenter,
+//     PathwayPresenters,
 // } from '@bewoak/pathway-design-server-pathway-business';
 // import type { DataTable } from '@cucumber/cucumber';
 // import type { EventPublisher } from '@nestjs/cqrs';
 // import { before, binding, then, when } from 'cucumber-tsflow';
 // import sinon from 'sinon';
-// import { PDSPAIUInitializePathwayUsecase } from '../usecase/initialize-pathway.usecase';
+// import { InitializePathwayUsecase } from '../usecase/initialize-pathway.usecase';
 
-// class FakeInitializePathwayPersistence implements PDSPBPInitializePathwayPersistence {
-//     save(pDSPBEPathwayEntity: PDSPBEPathwayEntity) {
+// class FakeInitializePathwayPersistence implements InitializePathwayPersistence {
+//     save(pDSPBEPathwayEntity: PathwayEntity) {
 //         return Promise.resolve(pDSPBEPathwayEntity);
 //     }
 // }
 
-// class FakePathwayPresenter implements PDSPBPPathwayPresenter {
-//     present(pDSPBEPathwayEntity: PDSPBEPathwayEntity) {
+// class FakePathwayPresenter implements PathwayPresenter {
+//     present(pDSPBEPathwayEntity: PathwayEntity) {
 //         return {
 //             description: pDSPBEPathwayEntity.description,
 //             id: pDSPBEPathwayEntity.id,
@@ -31,7 +31,7 @@
 // class FakeEventPublisher {
 //     static isEventPublished = false;
 
-//     mergeObjectContext(object: PDSPBEPathwayEntity) {
+//     mergeObjectContext(object: PathwayEntity) {
 //         object.publishAll = () => {
 //             FakeEventPublisher.isEventPublished = true;
 //         };
@@ -45,10 +45,10 @@
 //     private readonly fakeEventPublisher = new FakeEventPublisher();
 //     private readonly fakeInitializePathwayPersistence = new FakeInitializePathwayPersistence();
 //     private readonly fakePathwayPresenter = new FakePathwayPresenter();
-//     private readonly pDSPBUInitPathwayUseCase = new PDSPAIUInitializePathwayUsecase();
+//     private readonly pDSPBUInitPathwayUseCase = new InitializePathwayUsecase();
 //     private persistenceSpy: sinon.SinonSpy | undefined;
 //     private presenterSpy: sinon.SinonSpy | undefined;
-//     private result: PDSPBPPathwayPresenters | undefined;
+//     private result: PathwayPresenters | undefined;
 
 //     @before()
 //     public before() {

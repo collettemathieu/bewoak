@@ -1,15 +1,11 @@
 import {
-    PDSPIPPathwayPersistenceInfrastructureModule,
-    type PDSPIPPersistenceDriverAuthorized,
-} from '@bewoak/pathway-design-server-pathway-infrastructure';
-import {
     PDSPIAChangeTitlePathwayInterfaceAdaptersModule,
     PDSPIAInitializePathwayInterfaceAdaptersModule,
-} from '@bewoak/pathway-design-server-pathway-interface-adapters';
-import {
+    PDSPIPPathwayPersistenceInfrastructureModule,
+    type PDSPIPPersistenceDriverAuthorized,
     PDSPPPathwayPresentersModule,
     type PDSPPPresenterDriverAuthorized,
-} from '@bewoak/pathway-design-server-pathway-presenters';
+} from '@bewoak/pathway-design-server';
 import { Module } from '@nestjs/common';
 import { CqrsModule } from '@nestjs/cqrs';
 import { EventEmitterModule } from '@nestjs/event-emitter';

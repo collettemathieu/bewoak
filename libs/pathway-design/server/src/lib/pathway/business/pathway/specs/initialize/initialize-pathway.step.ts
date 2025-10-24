@@ -1,0 +1,87 @@
+import { strict as assert } from 'node:assert';
+import type { CTSEBadRequestException } from '@bewoak/common-http-exceptions-server';
+import { failureValue, type Result, successValue } from '@bewoak/common-types-result';
+import type { DataTable } from '@cucumber/cucumber';
+import { binding, then, when } from 'cucumber-tsflow';
+import sinon from 'sinon';
+import { uuidv7 } from 'uuidv7';
+import { PathwayEntity } from '../../entities/pathway';
+import { PathwayInitializedEvent } from '../../events/pathway-initialized.event';
+
+@binding()
+export default class PathwaySteps {
+    private applyMethodSpy: sinon.SinonSpy | undefined;
+    private pDSPBEPathwayEntity: PathwayEntity | undefined;
+    private result: Result<PathwayEntity, CTSEBadRequestException> | undefined;
+
+    @when('I initialize a pathway in business with these data')
+    public async whenIInitializeAPathway(dataTable: DataTable) {
+        const data = dataTable.hashes()[0] as {
+            title: string | undefined;
+            description: string | undefined;
+            researchField: string | undefined;
+        };
+
+        this.pDSPBEPathwayEntity = new PathwayEntity();
+        this.applyMethodSpy = sinon.spy(this.pDSPBEPathwayEntity, 'apply');
+
+        this.result = this.pDSPBEPathwayEntity.initialize({
+            description: data?.description ?? '',
+            pathwayId: uuidv7(),
+            researchField: data?.researchField ?? '',
+            title: data?.title ?? '',
+        });
+    }
+
+    @then('I should retrieve the attributes of the pathway from business')
+    public thenIShouldRetrieveAttributesPathway(dataTable: DataTable) {
+        const data = dataTable.hashes()[0] as {
+            title: string;
+            description: string;
+            researchField: string;
+        };
+
+        if (this.result === undefined) {
+            throw new Error('No Pathway initialized');
+        }
+
+        const pathway = successValue(this.result);
+
+        assert.strictEqual(pathway.title, data.title);
+        assert.strictEqual(pathway.description, data.description);
+        assert.strictEqual(pathway.researchField, data.researchField);
+    }
+
+    @then('It should apply an event indicating that the pathway has been initialized')
+    public thenItShouldApplyAnEvent() {
+        if (this.result === undefined) {
+            throw new Error('No Pathway initialized');
+        }
+
+        const pathway = successValue(this.result);
+
+        const expectedEvent = new PathwayInitializedEvent(pathway.pathwayId, {
+            description: pathway.description,
+            pathwayId: pathway.pathwayId,
+            researchField: pathway.researchField,
+            title: pathway.title,
+        });
+        const callArgs = this.applyMethodSpy?.getCall(0).args[0];
+
+        assert(this.applyMethodSpy?.calledOnce);
+        assert.deepStrictEqual(callArgs, expectedEvent);
+    }
+
+    @then('I should see an error message from business during the initialization')
+    public thenIShouldSeeAnErrorMessageDuringInitialization() {
+        if (this.result === undefined) {
+            throw new Error('No Pathway initialized');
+        }
+
+        const error = failureValue(this.result);
+
+        assert.notEqual(error, undefined);
+        assert.notEqual(error?.message, undefined);
+        assert.notEqual(error?.message, '');
+    }
+}
