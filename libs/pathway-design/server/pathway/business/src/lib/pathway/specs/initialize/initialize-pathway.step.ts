@@ -26,10 +26,10 @@ export default class PathwaySteps {
         this.applyMethodSpy = sinon.spy(this.pDSPBEPathwayEntity, 'apply');
 
         this.result = this.pDSPBEPathwayEntity.initialize({
-            pathwayId: uuidv7(),
-            title: data?.title ?? '',
             description: data?.description ?? '',
+            pathwayId: uuidv7(),
             researchField: data?.researchField ?? '',
+            title: data?.title ?? '',
         });
     }
 
@@ -61,10 +61,10 @@ export default class PathwaySteps {
         const pathway = successValue(this.result);
 
         const expectedEvent = new PDSPBEPathwayInitializedEvent(pathway.pathwayId, {
-            pathwayId: pathway.pathwayId,
-            title: pathway.title,
             description: pathway.description,
+            pathwayId: pathway.pathwayId,
             researchField: pathway.researchField,
+            title: pathway.title,
         });
         const callArgs = this.applyMethodSpy?.getCall(0).args[0];
 

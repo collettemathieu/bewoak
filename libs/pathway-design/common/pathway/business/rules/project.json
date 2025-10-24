@@ -1,5 +1,5 @@
 {
-    "$schema": "../../../../../../../node_modules/nx/schemas/project-schema.json",
+    "$schema": "../../../../../../node_modules/nx/schemas/project-schema.json",
     "name": "pathway-design-common-pathway-business-rules",
     "projectType": "library",
     "release": {

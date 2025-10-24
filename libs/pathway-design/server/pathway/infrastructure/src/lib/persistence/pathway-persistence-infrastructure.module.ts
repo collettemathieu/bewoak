@@ -13,9 +13,9 @@ export class PDSPIPPathwayPersistenceInfrastructureModule {
         const persistenceProviders = persistenceProvidersMap[driver];
 
         return {
+            exports: [PDSPBP_INITIALIZE_PATHWAY_PERSISTENCE, PDSPBP_CHANGE_TITLE_PATHWAY_PERSISTENCE],
             module: PDSPIPPathwayPersistenceInfrastructureModule,
             providers: [...persistenceProviders],
-            exports: [PDSPBP_INITIALIZE_PATHWAY_PERSISTENCE, PDSPBP_CHANGE_TITLE_PATHWAY_PERSISTENCE],
         };
     }
 }

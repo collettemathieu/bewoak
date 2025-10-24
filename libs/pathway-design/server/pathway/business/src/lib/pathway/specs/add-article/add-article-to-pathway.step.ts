@@ -20,9 +20,9 @@ export default class PathwaySteps {
 
         this.pDSPBEPathwayEntity = successValue(
             pDSPBFPathwayFactory({
-                title: data.title,
                 description: data.description,
                 researchField: data.researchField,
+                title: data.title,
             })
         );
     }

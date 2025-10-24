@@ -29,7 +29,7 @@ export class PDSPAIUInitializePathwayUsecase {
     ) {
         return firstValueFrom(
             of('').pipe(
-                map(() => pDSPBFPathwayFactory({ title, description, researchField })),
+                map(() => pDSPBFPathwayFactory({ description, researchField, title })),
                 switchMap((result) => {
                     if (isSuccess(result)) {
                         return pDSPBPInitializePathwayPersistence.save(successValue(result));

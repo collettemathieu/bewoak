@@ -1,64 +1,64 @@
 {
-    "version": "2.0.0",
     "tasks": [
         {
-            "type": "shell",
-            "label": "build-pathway-design-server",
-            "command": "bun",
             "args": ["nx", "build", "pathway-design-server"],
+            "command": "bun",
             "group": "build",
-            "presentation": {
-                "echo": true,
-                "reveal": "always",
-                "focus": false,
-                "panel": "shared",
-                "showReuseMessage": true,
-                "clear": false
-            },
+            "label": "build-pathway-design-server",
             "options": {
                 "cwd": "${workspaceFolder}"
             },
-            "problemMatcher": []
+            "presentation": {
+                "clear": false,
+                "echo": true,
+                "focus": false,
+                "panel": "shared",
+                "reveal": "always",
+                "showReuseMessage": true
+            },
+            "problemMatcher": [],
+            "type": "shell"
         },
         {
-            "type": "shell",
-            "label": "test-runtime-compatibility",
-            "command": "bash",
             "args": [
                 "-c",
                 "echo '🧪 Validating Bun build + Node.js runtime compatibility...' && bun nx build pathway-design-server && echo '✅ Build successful with Bun' && node dist/apps/pathway-design-server/main.js & NODE_PID=$! && sleep 2 && echo '✅ Node.js runtime started' && kill $NODE_PID 2>/dev/null || true && echo '🎉 Compatibility validated!'"
             ],
+            "command": "bash",
             "group": "test",
-            "presentation": {
-                "echo": true,
-                "reveal": "always",
-                "focus": true,
-                "panel": "new"
-            },
+            "label": "test-runtime-compatibility",
             "options": {
                 "cwd": "${workspaceFolder}"
-            }
+            },
+            "presentation": {
+                "echo": true,
+                "focus": true,
+                "panel": "new",
+                "reveal": "always"
+            },
+            "type": "shell"
         },
         {
-            "type": "shell",
-            "label": "sort-all-json-files",
-            "command": "bun",
             "args": [
                 "run",
                 "-e",
                 "import { readdirSync, readFileSync, writeFileSync, statSync } from 'fs'; import { join } from 'path'; function sortJsonFiles(dir) { const items = readdirSync(dir); for (const item of items) { const fullPath = join(dir, item); const stat = statSync(fullPath); if (stat.isDirectory() && !['node_modules', 'dist', '.nx', '.git', 'coverage', 'tmp'].includes(item)) { sortJsonFiles(fullPath); } else if (item.endsWith('.json') && !item.includes('lockb')) { try { const content = readFileSync(fullPath, 'utf8'); const parsed = JSON.parse(content); const sorted = JSON.stringify(parsed, null, 2) + '\\n'; writeFileSync(fullPath, sorted); console.log(`✅ Sorted: ${fullPath}`); } catch (e) { console.log(`⚠️  Skipped: ${fullPath} (${e.message})`); } } } } sortJsonFiles('.');"
             ],
+            "command": "bun",
             "group": "build",
-            "presentation": {
-                "echo": true,
-                "reveal": "always",
-                "focus": true,
-                "panel": "new"
-            },
+            "label": "sort-all-json-files",
             "options": {
                 "cwd": "${workspaceFolder}"
             },
-            "problemMatcher": []
+            "presentation": {
+                "echo": true,
+                "focus": true,
+                "panel": "new",
+                "reveal": "always"
+            },
+            "problemMatcher": [],
+            "type": "shell"
         }
-    ]
+    ],
+    "version": "2.0.0"
 }

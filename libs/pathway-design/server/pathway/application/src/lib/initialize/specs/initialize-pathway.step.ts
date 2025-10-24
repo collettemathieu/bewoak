@@ -83,9 +83,9 @@ export default class ControllerSteps {
             this.fakePathwayPresenter,
             this.fakeEventPublisher as EventPublisher,
             {
-                title: firstRow.title,
                 description: firstRow.description,
                 researchField: firstRow.researchField,
+                title: firstRow.title,
             }
         );
     }
@@ -103,9 +103,9 @@ export default class ControllerSteps {
             this.fakePathwayPresenter,
             this.fakeEventPublisher as EventPublisher,
             {
-                title: firstRow.title,
                 description: firstRow.description,
                 researchField: firstRow.researchField,
+                title: firstRow.title,
             }
         );
     }
@@ -123,9 +123,9 @@ export default class ControllerSteps {
             this.fakePathwayPresenter,
             this.fakeEventPublisher as EventPublisher,
             {
-                title: firstRow.title,
                 description: firstRow.description,
                 researchField: firstRow.researchField,
+                title: firstRow.title,
             }
         );
     }

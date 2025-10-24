@@ -4,11 +4,9 @@ import {
     type PDSPBPChangeTitlePathwayPersistence,
     type PDSPBPPathwayPresenter,
 } from '@bewoak/pathway-design-server-pathway-business';
-
 import { Inject } from '@nestjs/common';
 // biome-ignore lint/style/useImportType: <To be explained>
 import { CommandHandler, EventPublisher, type ICommandHandler } from '@nestjs/cqrs';
-
 // biome-ignore lint/style/useImportType: <To be explained>
 import { PDSPACUChangeTitlePathwayUseCase } from '../usecase/change-title-pathway.usecase';
 import { PDSPAChangeTitlePathwayCommand } from './change-title-pathway.command';

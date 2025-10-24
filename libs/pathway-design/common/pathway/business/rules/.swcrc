@@ -1,22 +1,22 @@
 {
+    "exclude": [".*\\.spec.tsx?$", ".*\\.step.ts$", ".*\\.test.tsx?$", ".*.js$"],
     "jsc": {
-        "target": "es2022",
+        "externalHelpers": true,
+        "keepClassNames": true,
+        "loose": true,
         "parser": {
-            "syntax": "typescript",
             "decorators": true,
-            "dynamicImport": true
+            "dynamicImport": true,
+            "syntax": "typescript"
         },
+        "target": "es2022",
         "transform": {
             "decoratorMetadata": true,
             "legacyDecorator": true
-        },
-        "keepClassNames": true,
-        "externalHelpers": true,
-        "loose": true
+        }
     },
     "module": {
         "type": "es6"
     },
-    "sourceMaps": true,
-    "exclude": [".*\\.spec.tsx?$", ".*\\.step.ts$", ".*\\.test.tsx?$", ".*.js$"]
+    "sourceMaps": true
 }

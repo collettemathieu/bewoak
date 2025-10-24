@@ -1,9 +1,9 @@
 import { Component } from '@angular/core';
 
 @Component({
-    selector: 'lib-test-component',
     imports: [],
-    templateUrl: './test-component.html',
+    selector: 'lib-test-component',
     styleUrl: './test-component.scss',
+    templateUrl: './test-component.html',
 })
 export class TestComponent {}

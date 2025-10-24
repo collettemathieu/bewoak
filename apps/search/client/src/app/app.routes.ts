@@ -5,5 +5,5 @@ export const appRoutes: Route[] = [
         loadComponent: () => import('@bewoak/search-client-pathway-test-component').then((m) => m.TestComponent),
         path: 'test',
     },
-    { path: '', redirectTo: '/test', pathMatch: 'full' },
+    { path: '', pathMatch: 'full', redirectTo: '/test' },
 ];

@@ -10,9 +10,9 @@ export class SSPIPPathwayPersistenceInfrastructureModule {
         const persistenceProviders = persistenceProvidersMap[driver];
 
         return {
+            exports: [SSPMP_ADD_PATHWAY_PERSISTENCE_PORT],
             module: SSPIPPathwayPersistenceInfrastructureModule,
             providers: [...persistenceProviders],
-            exports: [SSPMP_ADD_PATHWAY_PERSISTENCE_PORT],
         };
     }
 }

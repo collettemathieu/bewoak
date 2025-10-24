@@ -14,9 +14,9 @@ export const pDSPBFPathwayFactory = ({
     const uuid = pathwayId ?? uuidv7();
 
     return pathway.initialize({
-        pathwayId: uuid,
-        title,
         description,
+        pathwayId: uuid,
         researchField,
+        title,
     });
 };

@@ -9,9 +9,9 @@ export class PDSPPPathwayPresentersModule {
         const presenterModule = presenterModuleMap[driver];
 
         return {
-            module: PDSPPPathwayPresentersModule,
-            imports: [presenterModule],
             exports: [presenterModule],
+            imports: [presenterModule],
+            module: PDSPPPathwayPresentersModule,
         };
     }
 }

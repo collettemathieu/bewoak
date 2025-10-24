@@ -1,5 +1,4 @@
 import { After, Before, Given, setDefaultTimeout, Then } from '@cucumber/cucumber';
-
 import { type Browser, chromium, expect, type Page } from '@playwright/test';
 
 setDefaultTimeout(60 * 1000);

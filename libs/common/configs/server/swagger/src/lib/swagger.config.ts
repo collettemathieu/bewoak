@@ -11,12 +11,12 @@ export const cCSSSetupSwaggerDocument = (app: INestApplication, options: Swagger
     const documentOptionsWithBearerAuth = options.hasBearerAuth
         ? documentOptions.addBearerAuth(
               {
-                  description: 'Please enter token in following format: Bearer <JWT>',
-                  name: 'Authorization',
                   bearerFormat: 'Bearer',
+                  description: 'Please enter token in following format: Bearer <JWT>',
+                  in: 'Header',
+                  name: 'Authorization',
                   scheme: 'Bearer',
                   type: 'http',
-                  in: 'Header',
               },
               'access-token'
           )

@@ -102,10 +102,10 @@
         "callsites": "3.1.0"
     },
     "scripts": {
+        "biome:check": "biome check --write",
         "build": "nx run-many --target=build --parallel=4",
-        "format": "biome format --write",
-        "format:check": "biome format",
-        "lint": "biome lint",
+        "format": "biome format --write && biome lint --write",
+        "format:check": "biome format && biome lint",
         "nx": "nx",
         "postinstall": "chmod +x .hooks/* && git config core.hooksPath .hooks",
         "pretest": "rm -rf dist && rm -rf reports && bun run nx reset",
@@ -113,7 +113,7 @@
         "start:search:app:client": "nx serve search-client",
         "start:search:app:server": "PORT=3000 GLOBAL_PREFIX=api nx serve search-server",
         "stryker": "stryker",
-        "test": "bun test && bun run test:feature && bun run test:e2e && bun run lint && bun run build",
+        "test": "bun test && bun run test:feature && bun run test:e2e && bun run build",
         "test:e2e": "nx run-many --target=test-e2e --parallel=4",
         "test:feature": "nx run-many --target=test-feature --parallel=4",
         "test:load-testing": "nx run-many --target=load-testing --output-style=static",

@@ -9,13 +9,13 @@ import { InitializePathwayController } from './controller/initialize-pathway.con
 
 @Module({
     controllers: [InitializePathwayController],
+    exports: [PDSPAInitializePathwayService],
     providers: [
         PDSPAIUInitializePathwayUsecase,
         PDSPAInitializePathwayCommandHandler,
         PDSPAInitializePathwayEventHandler,
         PDSPAInitializePathwayService,
     ],
-    exports: [PDSPAInitializePathwayService],
 })
 // biome-ignore lint/complexity/noStaticOnlyClass: not pertinent here because this is a module
 export class PDSPIAInitializePathwayInterfaceAdaptersModule {
@@ -33,9 +33,9 @@ export class PDSPIAInitializePathwayInterfaceAdaptersModule {
 
     static build() {
         return {
-            module: PDSPIAInitializePathwayInterfaceAdaptersModule,
-            imports: PDSPIAInitializePathwayInterfaceAdaptersModule.imports,
             exports: [PDSPIAInitializePathwayInterfaceAdaptersModule],
+            imports: PDSPIAInitializePathwayInterfaceAdaptersModule.imports,
+            module: PDSPIAInitializePathwayInterfaceAdaptersModule,
         };
     }
 }

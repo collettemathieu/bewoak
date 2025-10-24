@@ -30,9 +30,9 @@ export class PDSPAInitializePathwayCommandHandler implements ICommandHandler<PDS
             this.pDSPBPPathwayPresenter,
             this.eventPublisher,
             {
-                title: pDSPAInitializePathwayCommand.title,
                 description: pDSPAInitializePathwayCommand.description,
                 researchField: pDSPAInitializePathwayCommand.researchField,
+                title: pDSPAInitializePathwayCommand.title,
             }
         );
     }

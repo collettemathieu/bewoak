@@ -29,22 +29,22 @@ class ControllerSteps {
     @given('I am authenticated on the platform for initialize a pathway with {string} and {string}')
     public async connectToServer(presenter: PDSPPPresenterDriverAuthorized, persistence: PDSPIPPersistenceDriverAuthorized) {
         const testingModule = await Test.createTestingModule({
+            exports: [],
             imports: [
                 PDSPIAInitializePathwayInterfaceAdaptersModule.withPresenter(PDSPPPathwayPresentersModule.use(presenter))
                     .withPersistence(PDSPIPPathwayPersistenceInfrastructureModule.use(persistence))
                     .build(),
                 CqrsModule.forRoot(),
                 EventEmitterModule.forRoot({
-                    wildcard: false,
                     delimiter: '.',
+                    ignoreErrors: false,
+                    maxListeners: 10,
                     newListener: false,
                     removeListener: false,
-                    maxListeners: 10,
                     verboseMemoryLeak: true,
-                    ignoreErrors: false,
+                    wildcard: false,
                 }),
             ],
-            exports: [],
         }).compile();
 
         this.app = testingModule.createNestApplication(new FastifyAdapter());
@@ -59,16 +59,16 @@ class ControllerSteps {
         const firstRow = dataTable.hashes()[0];
 
         this.response = await this.app.inject({
-            method: 'POST',
-            url: '/pathway/initialize',
             headers: {
                 'content-type': 'application/json',
             },
+            method: 'POST',
             payload: {
-                title: firstRow.title,
                 description: firstRow.description,
                 researchField: firstRow.researchField,
+                title: firstRow.title,
             },
+            url: '/pathway/initialize',
         });
     }
 

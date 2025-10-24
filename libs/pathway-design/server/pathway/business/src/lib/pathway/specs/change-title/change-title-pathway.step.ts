@@ -24,9 +24,9 @@ export default class ControllerSteps {
 
         this.pDSPBEPathwayEntity = successValue(
             pDSPBFPathwayFactory({
-                title: firstRow.title,
                 description: firstRow.description,
                 researchField: firstRow.researchField,
+                title: firstRow.title,
             })
         );
     }

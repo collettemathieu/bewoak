@@ -14,8 +14,8 @@ import {
 @ApiTags('Pathway')
 @UsePipes(
     new ValidationPipe({
-        whitelist: true,
         forbidNonWhitelisted: true,
+        whitelist: true,
     })
 )
 @Controller({

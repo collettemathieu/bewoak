@@ -1,12 +1,12 @@
 {
-  "recommendations": [
-    "alexkrechik.cucumberautocomplete",
-    "biomejs.biome",
-    "github.vscode-github-actions",
-    "nrwl.angular-console",
-    "oven.bun-vscode",
-    "tamasfe.even-better-toml",
-    "ms-playwright.playwright",
-    "dbaeumer.vscode-eslint"
-  ]
+    "recommendations": [
+        "alexkrechik.cucumberautocomplete",
+        "biomejs.biome",
+        "github.vscode-github-actions",
+        "nrwl.angular-console",
+        "oven.bun-vscode",
+        "tamasfe.even-better-toml",
+        "ms-playwright.playwright",
+        "dbaeumer.vscode-eslint"
+    ]
 }

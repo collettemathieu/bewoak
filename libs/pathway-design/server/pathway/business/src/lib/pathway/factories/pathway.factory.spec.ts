@@ -9,10 +9,10 @@ import type { PathwayFactoryParams } from './pathway.factory.types';
 describe('pDSPBFPathwayFactory', () => {
     it('should initialize a pathway with valid data', () => {
         const params: PathwayFactoryParams = {
-            pathwayId: '019499fb-7b30-798f-8b2b-ee263081005b',
-            title: 'My Pathway',
             description: 'A test pathway',
+            pathwayId: '019499fb-7b30-798f-8b2b-ee263081005b',
             researchField: 'biology',
+            title: 'My Pathway',
         };
         const pathway = successValue(pDSPBFPathwayFactory(params));
 
@@ -25,9 +25,9 @@ describe('pDSPBFPathwayFactory', () => {
 
     it('should generate a valid UUID if none is provided', () => {
         const params: PathwayFactoryParams = {
-            title: 'My Pathway',
             description: 'A test pathway',
             researchField: 'biology',
+            title: 'My Pathway',
         };
         const pathway = successValue(pDSPBFPathwayFactory(params));
 
@@ -40,10 +40,10 @@ describe('pDSPBFPathwayFactory', () => {
 
     it('should return a failure when description is invalid', () => {
         const params: PathwayFactoryParams = {
-            pathwayId: '019499fb-7b30-798f-8b2b-ee263081005b',
-            title: 'My Pathway',
             description: '',
+            pathwayId: '019499fb-7b30-798f-8b2b-ee263081005b',
             researchField: 'biology',
+            title: 'My Pathway',
         };
         const failure = failureValue(pDSPBFPathwayFactory(params));
 
@@ -54,10 +54,10 @@ describe('pDSPBFPathwayFactory', () => {
 
     it('should return a failure when title is invalid', () => {
         const params: PathwayFactoryParams = {
-            pathwayId: '019499fb-7b30-798f-8b2b-ee263081005b',
-            title: '',
             description: 'A test pathway',
+            pathwayId: '019499fb-7b30-798f-8b2b-ee263081005b',
             researchField: 'biology',
+            title: '',
         };
         const failure = failureValue(pDSPBFPathwayFactory(params));
 
@@ -68,10 +68,10 @@ describe('pDSPBFPathwayFactory', () => {
 
     it('should return a failure when researchField is invalid', () => {
         const params: PathwayFactoryParams = {
-            pathwayId: '019499fb-7b30-798f-8b2b-ee263081005b',
-            title: 'My Pathway',
             description: 'A test pathway',
+            pathwayId: '019499fb-7b30-798f-8b2b-ee263081005b',
             researchField: '',
+            title: 'My Pathway',
         };
         const failure = failureValue(pDSPBFPathwayFactory(params));
 
@@ -82,10 +82,10 @@ describe('pDSPBFPathwayFactory', () => {
 
     it('should return a failure when all fields are invalid', () => {
         const params: PathwayFactoryParams = {
-            pathwayId: '019499fb-7b30-798f-8b2b-ee263081005b',
-            title: '',
             description: '',
+            pathwayId: '019499fb-7b30-798f-8b2b-ee263081005b',
             researchField: '',
+            title: '',
         };
         const failure = failureValue(pDSPBFPathwayFactory(params));
 
@@ -96,9 +96,9 @@ describe('pDSPBFPathwayFactory', () => {
 
     it('should return a failure when all fields are invalid and no pathwayId is provided', () => {
         const params: PathwayFactoryParams = {
-            title: '',
             description: '',
             researchField: '',
+            title: '',
         };
         const failure = failureValue(pDSPBFPathwayFactory(params));
 

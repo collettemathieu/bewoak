@@ -2,7 +2,7 @@ import { Module } from '@nestjs/common';
 
 @Module({
     controllers: [],
-    providers: [],
     exports: [],
+    providers: [],
 })
 export class SSPAReadManyPathwayApplicationModule {}

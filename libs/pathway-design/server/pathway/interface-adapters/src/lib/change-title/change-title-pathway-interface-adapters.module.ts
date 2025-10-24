@@ -8,8 +8,8 @@ import { ChangeTitlePathwayController } from './controller/change-title-pathway.
 
 @Module({
     controllers: [ChangeTitlePathwayController],
-    providers: [PDSPAChangeTitlePathwayCommandHandler, PDSPAChangeTitlePathwayService, PDSPACUChangeTitlePathwayUseCase],
     exports: [PDSPAChangeTitlePathwayService],
+    providers: [PDSPAChangeTitlePathwayCommandHandler, PDSPAChangeTitlePathwayService, PDSPACUChangeTitlePathwayUseCase],
 })
 // biome-ignore lint/complexity/noStaticOnlyClass: not pertinent here because this is a module
 export class PDSPIAChangeTitlePathwayInterfaceAdaptersModule {
@@ -27,9 +27,9 @@ export class PDSPIAChangeTitlePathwayInterfaceAdaptersModule {
 
     static build() {
         return {
-            module: PDSPIAChangeTitlePathwayInterfaceAdaptersModule,
-            imports: PDSPIAChangeTitlePathwayInterfaceAdaptersModule.imports,
             exports: [PDSPIAChangeTitlePathwayInterfaceAdaptersModule],
+            imports: PDSPIAChangeTitlePathwayInterfaceAdaptersModule.imports,
+            module: PDSPIAChangeTitlePathwayInterfaceAdaptersModule,
         };
     }
 }

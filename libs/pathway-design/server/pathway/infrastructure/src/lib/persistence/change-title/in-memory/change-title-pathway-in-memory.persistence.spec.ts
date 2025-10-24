@@ -137,8 +137,8 @@ describe('ChangeTitlePathwayInMemoryPersistence', () => {
                     {
                         provide: PathwayInMemoryRepository,
                         useValue: {
-                            patch: () => undefined,
                             getByPathwayId: () => undefined,
+                            patch: () => undefined,
                         },
                     },
                 ],
@@ -195,10 +195,10 @@ describe('ChangeTitlePathwayInMemoryPersistence', () => {
                     {
                         provide: PathwayInMemoryRepository,
                         useValue: {
+                            getByPathwayId: () => undefined,
                             patch: () => ({
                                 title: 'pathway title',
                             }),
-                            getByPathwayId: () => undefined,
                         },
                     },
                 ],

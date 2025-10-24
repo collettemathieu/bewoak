@@ -1,6 +1,7 @@
 import type { Rules } from '../../types';
 
 export const pDCPBRPathwayResearchFieldRules: Rules<string | null | undefined> = {
+    isRequired: true,
     isValid: function (value) {
         return (
             value !== undefined &&
@@ -10,7 +11,6 @@ export const pDCPBRPathwayResearchFieldRules: Rules<string | null | undefined> =
             value.trim().length <= this.maxLength
         );
     },
-    isRequired: true,
     maxLength: 100,
     minLength: 1,
     textError: function () {

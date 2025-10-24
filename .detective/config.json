@@ -1,25 +1,14 @@
 {
-  "aliases": {},
-  "entries": [],
-  "filter": {
-    "files": [],
-    "logs": []
-  },
-  "groups": [
-    "apps",
-    "libs"
-  ],
-  "scopes": [
-    "apps/pathway-design",
-    "libs/common",
-    "libs/pathway-design"
-  ],
-  "teams": {
-    "alpha": [
-      "Mathieu Collette"
-    ],
-    "beta": [
-      "Personne Inconnue"
-    ]
-  }
+    "aliases": {},
+    "entries": [],
+    "filter": {
+        "files": [],
+        "logs": []
+    },
+    "groups": ["apps", "libs"],
+    "scopes": ["apps/pathway-design", "libs/common", "libs/pathway-design"],
+    "teams": {
+        "alpha": ["Mathieu Collette"],
+        "beta": ["Personne Inconnue"]
+    }
 }

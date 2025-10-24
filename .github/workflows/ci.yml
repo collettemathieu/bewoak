@@ -45,7 +45,6 @@ jobs:
       - uses: nrwl/nx-set-shas@v4
       - run: bun run commitlint --from=$NX_BASE --to=$NX_HEAD
       - run: bun run format:check
-      - run: bun run lint
 
       # Prepend any command with "nx-cloud record --" to record its logs to Nx Cloud
       # - run: bun nx-cloud record -- echo Hello World

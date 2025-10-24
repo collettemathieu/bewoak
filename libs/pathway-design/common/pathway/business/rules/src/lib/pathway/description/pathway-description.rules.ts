@@ -1,12 +1,12 @@
 import type { Rules } from '../../types';
 
 export const pDCPBRPathwayDescriptionRules: Rules<string | null | undefined> = {
+    isRequired: true,
     isValid: function (value) {
         const cleanValue = value?.trim();
 
         return cleanValue !== undefined && cleanValue.length >= this.minLength && cleanValue.length <= this.maxLength;
     },
-    isRequired: true,
     maxLength: 100,
     minLength: 1,
     textError: function () {

@@ -40,13 +40,13 @@ class ControllerSteps {
                     .build(),
                 CqrsModule.forRoot(),
                 EventEmitterModule.forRoot({
-                    wildcard: false,
                     delimiter: '.',
+                    ignoreErrors: false,
+                    maxListeners: 10,
                     newListener: false,
                     removeListener: false,
-                    maxListeners: 10,
                     verboseMemoryLeak: true,
-                    ignoreErrors: false,
+                    wildcard: false,
                 }),
             ],
         }).compile();
@@ -60,14 +60,14 @@ class ControllerSteps {
         const firstRow = dataTable.hashes()[0];
 
         this.response = await this.app.inject({
-            method: 'POST',
-            url: '/pathway/initialize',
             headers: { 'Content-Type': 'application/json' },
+            method: 'POST',
             payload: {
-                title: firstRow.title,
                 description: firstRow.description,
                 researchField: firstRow.researchField,
+                title: firstRow.title,
             },
+            url: '/pathway/initialize',
         });
     }
 
@@ -76,12 +76,12 @@ class ControllerSteps {
         const responseBody = JSON.parse(this.response.body);
 
         this.response = await this.app.inject({
-            method: 'PATCH',
-            url: `/pathway/change-title/${responseBody.pathwayId}`,
             headers: { 'Content-Type': 'application/json' },
+            method: 'PATCH',
             payload: {
                 title,
             },
+            url: `/pathway/change-title/${responseBody.pathwayId}`,
         });
     }
 

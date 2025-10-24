@@ -3,6 +3,7 @@ import { Module } from '@nestjs/common';
 import { ToJsonPathwayPresenter } from './to-json-pathway.presenter';
 
 @Module({
+    exports: [PDSPBP_PATHWAY_PRESENTER],
     providers: [
         ToJsonPathwayPresenter,
         {
@@ -10,6 +11,5 @@ import { ToJsonPathwayPresenter } from './to-json-pathway.presenter';
             useExisting: ToJsonPathwayPresenter,
         },
     ],
-    exports: [PDSPBP_PATHWAY_PRESENTER],
 })
 export class ToJsonPathwayPresenterModule {}

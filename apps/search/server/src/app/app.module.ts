@@ -5,8 +5,8 @@ import { Module } from '@nestjs/common';
 export class AppModule {
     static register() {
         return {
-            module: AppModule,
             imports: [],
+            module: AppModule,
         };
     }
 }
