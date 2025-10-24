@@ -1,18 +1,23 @@
 import opentelemetry from '@opentelemetry/api';
 import { getNodeAutoInstrumentations } from '@opentelemetry/auto-instrumentations-node';
+import { OTLPLogExporter } from '@opentelemetry/exporter-logs-otlp-http';
 import { PrometheusExporter } from '@opentelemetry/exporter-prometheus';
 import { OTLPTraceExporter } from '@opentelemetry/exporter-trace-otlp-http';
 import { HttpInstrumentation } from '@opentelemetry/instrumentation-http';
 import { NestInstrumentation } from '@opentelemetry/instrumentation-nestjs-core';
-import { envDetector, hostDetector, osDetector, processDetector, Resource } from '@opentelemetry/resources';
+import { envDetector, hostDetector, osDetector, processDetector, resourceFromAttributes } from '@opentelemetry/resources';
+import { ConsoleLogRecordExporter, SimpleLogRecordProcessor } from '@opentelemetry/sdk-logs';
 import { MeterProvider } from '@opentelemetry/sdk-metrics';
 import { NodeSDK } from '@opentelemetry/sdk-node';
+import { ATTR_SERVICE_NAME, ATTR_SERVICE_VERSION } from '@opentelemetry/semantic-conventions';
 import {
-    SEMRESATTRS_DEPLOYMENT_ENVIRONMENT,
-    SEMRESATTRS_K8S_POD_NAME,
-    SEMRESATTRS_SERVICE_NAME,
-    SEMRESATTRS_SERVICE_VERSION,
-} from '@opentelemetry/semantic-conventions';
+    ATTR_CONTAINER_NAME,
+    ATTR_DEPLOYMENT_ENVIRONMENT,
+    ATTR_DEPLOYMENT_ENVIRONMENT_NAME,
+    ATTR_K8S_POD_NAME,
+    ATTR_OTEL_COMPONENT_NAME,
+    ATTR_SERVICE_NAMESPACE,
+} from './unstable-semantic-convention';
 
 export const runOtelInstrumentation = (serviceName: string) => {
     // Exporteur de traces OTLP (peut être envoyé à Jaeger, Tempo, etc.)
@@ -26,27 +31,34 @@ export const runOtelInstrumentation = (serviceName: string) => {
         () => {}
     );
 
-    const metricResource = new Resource({
-        [SEMRESATTRS_SERVICE_NAME]: serviceName,
-        [SEMRESATTRS_SERVICE_VERSION]: '1.0.0',
-        [SEMRESATTRS_DEPLOYMENT_ENVIRONMENT]: 'prd',
-        [SEMRESATTRS_K8S_POD_NAME]: 'localhost',
+    const metricResource = resourceFromAttributes({
+        [ATTR_SERVICE_NAME]: serviceName,
+        [ATTR_SERVICE_VERSION]: '1.0.0',
+        [ATTR_CONTAINER_NAME]: serviceName,
+        [ATTR_OTEL_COMPONENT_NAME]: serviceName,
+        [ATTR_DEPLOYMENT_ENVIRONMENT]: 'prd',
+        [ATTR_DEPLOYMENT_ENVIRONMENT_NAME]: 'prd',
+        [ATTR_K8S_POD_NAME]: 'localhost',
+        [ATTR_SERVICE_NAMESPACE]: serviceName,
     });
 
     const metricProvider = new MeterProvider({
-        resource: metricResource,
         readers: [prometheusExporter],
+        resource: metricResource,
     });
 
     opentelemetry.metrics.setGlobalMeterProvider(metricProvider);
 
     const sdk = new NodeSDK({
-        resource: new Resource({
-            [SEMRESATTRS_SERVICE_NAME]: serviceName,
-        }),
-        traceExporter,
-        resourceDetectors: [envDetector, osDetector, hostDetector, processDetector],
         instrumentations: [getNodeAutoInstrumentations(), new NestInstrumentation(), new HttpInstrumentation()],
+        logRecordProcessors: [
+            new SimpleLogRecordProcessor(new ConsoleLogRecordExporter()),
+            // Use BatchLogRecordProcessor with OTLPLogExporter for production
+            new SimpleLogRecordProcessor(new OTLPLogExporter()),
+        ],
+        resource: metricResource,
+        resourceDetectors: [envDetector, osDetector, hostDetector, processDetector],
+        traceExporter,
     });
 
     // Démarrage de l’OTEL SDK

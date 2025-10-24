@@ -13,55 +13,55 @@ export class ServerLogger implements LoggerService {
 
     log(message: string, ...optionalParams: OptionalParams[]) {
         this.#logger.emit({
+            attributes: attributes(...optionalParams),
+            body: message,
             severityNumber: SeverityNumber.INFO,
             severityText: 'INFO',
-            body: message,
-            attributes: attributes(...optionalParams),
         });
     }
 
     fatal(message: string, ...optionalParams: OptionalParams[]) {
         this.#logger.emit({
+            attributes: attributes(...optionalParams),
+            body: message,
             severityNumber: SeverityNumber.FATAL,
             severityText: 'FATAL',
-            body: message,
-            attributes: attributes(...optionalParams),
         });
     }
 
     error(message: string, ...optionalParams: OptionalParams[]) {
         this.#logger.emit({
+            attributes: attributes(...optionalParams),
+            body: message,
             severityNumber: SeverityNumber.ERROR,
             severityText: 'ERROR',
-            body: message,
-            attributes: attributes(...optionalParams),
         });
     }
 
     warn(message: string, ...optionalParams: OptionalParams[]) {
         this.#logger.emit({
+            attributes: attributes(...optionalParams),
+            body: message,
             severityNumber: SeverityNumber.WARN,
             severityText: 'WARN',
-            body: message,
-            attributes: attributes(...optionalParams),
         });
     }
 
     debug(message: string, ...optionalParams: OptionalParams[]) {
         this.#logger.emit({
+            attributes: attributes(...optionalParams),
+            body: message,
             severityNumber: SeverityNumber.DEBUG,
             severityText: 'DEBUG',
-            body: message,
-            attributes: attributes(...optionalParams),
         });
     }
 
     verbose(message: string, ...optionalParams: OptionalParams[]) {
         this.#logger.emit({
+            attributes: attributes(...optionalParams),
+            body: message,
             severityNumber: SeverityNumber.TRACE,
             severityText: 'TRACE',
-            body: message,
-            attributes: attributes(...optionalParams),
         });
     }
 }

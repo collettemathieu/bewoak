@@ -1,5 +1,5 @@
 import { cCSEGetEnvironmentVariables } from '@bewoak/common-configs-server-env';
-import { runLogOtelInstrumentation, runOtelInstrumentation } from '@bewoak/common-configs-server-otel';
+import { runOtelInstrumentation } from '@bewoak/common-configs-server-otel';
 import { cCSSSetupSwaggerDocument } from '@bewoak/common-configs-server-swagger';
 import { LogHttpExceptionFilter } from '@bewoak/common-http-exceptions-server';
 import { HandleExceptionInterceptor } from '@bewoak/common-interceptors-server';
@@ -11,7 +11,6 @@ import { AppModule } from './app/app.module';
 import { envSchema } from './environment/env.schema';
 
 async function bootstrap() {
-    runLogOtelInstrumentation();
     runOtelInstrumentation('PathwayDesignServer');
 
     const env = cCSEGetEnvironmentVariables(envSchema);

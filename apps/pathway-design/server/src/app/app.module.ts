@@ -27,7 +27,6 @@ export class AppModule {
         const presenterModule = PDSPPPathwayPresentersModule.use(options.presenterDriver);
 
         return {
-            module: AppModule,
             imports: [
                 PDSPIAChangeTitlePathwayInterfaceAdaptersModule.withPresenter(presenterModule)
                     .withPersistence(persistenceModule)
@@ -37,15 +36,16 @@ export class AppModule {
                     .build(),
                 CqrsModule.forRoot(),
                 EventEmitterModule.forRoot({
-                    wildcard: false,
                     delimiter: '.',
+                    ignoreErrors: false,
+                    maxListeners: 10,
                     newListener: false,
                     removeListener: false,
-                    maxListeners: 10,
                     verboseMemoryLeak: true,
-                    ignoreErrors: false,
+                    wildcard: false,
                 }),
             ],
+            module: AppModule,
         };
     }
 }

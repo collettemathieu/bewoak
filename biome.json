@@ -3,7 +3,14 @@
     "assist": {
         "actions": {
             "source": {
-                "organizeImports": "on"
+                "organizeImports": {
+                    "level": "on",
+                    "options": {
+                        "groups": [":URL:", ":NODE:"]
+                    }
+                },
+                "recommended": true,
+                "useSortedKeys": "on"
             }
         }
     },
@@ -72,6 +79,10 @@
                 "noForEach": "off"
             },
             "correctness": {
+                "noUnusedImports": {
+                    "fix": "safe",
+                    "level": "error"
+                },
                 "noUnusedVariables": {
                     "fix": "none",
                     "level": "error"

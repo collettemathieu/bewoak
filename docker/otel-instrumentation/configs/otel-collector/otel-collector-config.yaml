@@ -2,6 +2,21 @@ receivers:
   otlp:
     protocols:
       grpc:
+        endpoint: 0.0.0.0:4317
+      http:
+        endpoint: 0.0.0.0:4318
+  filelog/docker:
+    include:
+      - /var/lib/docker/containers/*/*-json.log
+    start_at: end
+    include_file_path: true
+    include_file_name: false
+    operators:
+      - type: json_parser
+        parse_from: body
+        time_key: time
+        time_format: RFC3339Nano
+        message_key: log
 exporters:
   otlp:
     endpoint: tempo:4317
@@ -18,7 +33,7 @@ service:
     traces:
       receivers: [otlp]
       exporters: [otlp]
-    logs:
-      receivers: [otlp]
+    logs/gc:
+      receivers: [otlp, filelog/docker]
       processors: [batch]
       exporters: [otlphttp]

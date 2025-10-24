@@ -2,18 +2,15 @@
     "bun.debugTerminal.enabled": true,
     "bun.debugTerminal.stopOnEntry": false,
     "bun.runtime": "$HOME/.bun/bin/bun",
-    "cucumberautocomplete.steps": [
-        "apps/**/*.ts",
-        "libs/**/*.ts"
-    ],
+    "cSpell.words": ["bewoak"],
+    "cucumberautocomplete.steps": ["apps/**/*.ts", "libs/**/*.ts"],
     "cucumberautocomplete.strictGherkinCompletion": true,
     "editor.codeActionsOnSave": {
-        "quickfix.biome": "explicit",
-        "source.organizeImports": "explicit",
-        "source.organizeImports.biome": "explicit"
+        "source.fixAll.biome": "explicit"
     },
     "editor.defaultFormatter": "biomejs.biome",
     "editor.formatOnSave": true,
+    "nxConsole.generateAiAgentRules": true,
     "search.exclude": {
         "**/.detective": true,
         "**/.git": true,
@@ -29,9 +26,5 @@
         "tree.indentGuidesStroke": "#05ef3c"
     },
     "workbench.tree.indent": 15,
-    "workbench.tree.renderIndentGuides": "always",
-    "nxConsole.generateAiAgentRules": true,
-    "cSpell.words": [
-        "bewoak"
-    ]
+    "workbench.tree.renderIndentGuides": "always"
 }
