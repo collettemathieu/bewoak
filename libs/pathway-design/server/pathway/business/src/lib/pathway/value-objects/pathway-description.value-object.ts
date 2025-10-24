@@ -1,6 +1,6 @@
 import { CTSEBadRequestException } from '@bewoak/common-http-exceptions-server';
 import { failure, type Result, success } from '@bewoak/common-types-result';
-import { pDCPBRPathwayDescriptionRules } from '@bewoak/pathway-design-common-pathway-business-rules';
+import { pDCPBRPathwayDescriptionRules } from '@bewoak/pathway-design-common-pathway';
 
 export class PathwayDescriptionValueObject {
     private constructor(private readonly description: string) {}

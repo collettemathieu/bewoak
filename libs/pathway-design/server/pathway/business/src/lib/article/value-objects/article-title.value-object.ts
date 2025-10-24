@@ -1,5 +1,5 @@
 import { CTSEBadRequestException } from '@bewoak/common-http-exceptions-server';
-import { pDCPBRArticleTitleRules } from '@bewoak/pathway-design-common-pathway-business-rules';
+import { pDCPBRArticleTitleRules } from '@bewoak/pathway-design-common-pathway';
 
 export class ArticleTitleValueObject {
     constructor(private readonly title: string) {

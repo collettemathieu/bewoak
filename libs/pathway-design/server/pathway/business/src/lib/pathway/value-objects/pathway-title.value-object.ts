@@ -1,6 +1,6 @@
 import { CTSEBadRequestException } from '@bewoak/common-http-exceptions-server';
 import { failure, type Result, success } from '@bewoak/common-types-result';
-import { pDCPBRPathwayTitleRules } from '@bewoak/pathway-design-common-pathway-business-rules';
+import { pDCPBRPathwayTitleRules } from '@bewoak/pathway-design-common-pathway';
 
 export class PathwayTitleValueObject {
     private constructor(private readonly title: string) {}

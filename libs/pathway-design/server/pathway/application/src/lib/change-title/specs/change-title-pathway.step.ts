@@ -1,7 +1,7 @@
 import { strict as assert } from 'node:assert';
 import { type CTSEException, CTSENotFoundRequestException, HttpStatus } from '@bewoak/common-http-exceptions-server';
 import { failure, success, successValue } from '@bewoak/common-types-result';
-import { pDCPBRPathwayTitleRules } from '@bewoak/pathway-design-common-pathway-business-rules';
+import { pDCPBRPathwayTitleRules } from '@bewoak/pathway-design-common-pathway';
 import {
     type PDSPBEPathwayEntity,
     type PDSPBPChangeTitlePathwayPersistence,

@@ -1,6 +1,6 @@
 import { CTSEBadRequestException } from '@bewoak/common-http-exceptions-server';
 import { failure, type Result, success } from '@bewoak/common-types-result';
-import { pDCPBRPathwayResearchFieldRules } from '@bewoak/pathway-design-common-pathway-business-rules';
+import { pDCPBRPathwayResearchFieldRules } from '@bewoak/pathway-design-common-pathway';
 
 export class PathwayResearchFieldValueObject {
     private constructor(private readonly researchField: string) {}

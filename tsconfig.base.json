@@ -24,9 +24,7 @@
             "@bewoak/common-interceptors-server": ["libs/common/interceptors/server/src/index.ts"],
             "@bewoak/common-log-server": ["libs/common/log/server/src/index.ts"],
             "@bewoak/common-types-result": ["libs/common/types/result/src/index.ts"],
-            "@bewoak/pathway-design-common-pathway-business-rules": [
-                "libs/pathway-design/common/pathway/business/rules/src/index.ts"
-            ],
+            "@bewoak/pathway-design-common-pathway": ["libs/pathway-design/common/pathway/src/index.ts"],
             "@bewoak/pathway-design-server-pathway-application": ["libs/pathway-design/server/pathway/application/src/index.ts"],
             "@bewoak/pathway-design-server-pathway-business": ["libs/pathway-design/server/pathway/business/src/index.ts"],
             "@bewoak/pathway-design-server-pathway-infrastructure": [

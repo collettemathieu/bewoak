@@ -1,6 +1,6 @@
 import { CTSEBadRequestException } from '@bewoak/common-http-exceptions-server';
 import { failure, type Result, success } from '@bewoak/common-types-result';
-import { pDCPBRPathwayIdRules } from '@bewoak/pathway-design-common-pathway-business-rules';
+import { pDCPBRPathwayIdRules } from '@bewoak/pathway-design-common-pathway';
 
 export class PathwayIdValueObject {
     private constructor(private readonly pathwayId: string) {}

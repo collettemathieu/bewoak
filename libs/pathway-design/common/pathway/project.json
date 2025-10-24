@@ -1,6 +1,6 @@
 {
-    "$schema": "../../../../../../node_modules/nx/schemas/project-schema.json",
-    "name": "pathway-design-common-pathway-business-rules",
+    "$schema": "../../../../node_modules/nx/schemas/project-schema.json",
+    "name": "pathway-design-common-pathway",
     "projectType": "library",
     "release": {
         "version": {
@@ -9,16 +9,16 @@
             "preserveLocalDependencyProtocols": false
         }
     },
-    "sourceRoot": "libs/pathway-design/common/pathway/business/rules/src",
-    "tags": ["type:pathway-design:common:business:pathway:rules"],
+    "sourceRoot": "libs/pathway-design/common/pathway/src",
+    "tags": ["type:pathway-design:common:pathway"],
     "targets": {
         "build": {
             "executor": "@nx/js:swc",
             "options": {
                 "assets": [],
-                "main": "libs/pathway-design/common/pathway/business/rules/src/index.ts",
-                "outputPath": "dist/libs/pathway-design/common/pathway/business/rules",
-                "tsConfig": "libs/pathway-design/common/pathway/business/rules/tsconfig.lib.json"
+                "main": "libs/pathway-design/common/pathway/src/index.ts",
+                "outputPath": "dist/libs/pathway-design/common/pathway",
+                "tsConfig": "libs/pathway-design/common/pathway/tsconfig.lib.json"
             },
             "outputs": ["{options.outputPath}"]
         },

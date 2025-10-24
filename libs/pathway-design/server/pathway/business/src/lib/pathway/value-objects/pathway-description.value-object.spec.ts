@@ -1,7 +1,7 @@
 import { beforeAll, describe, expect, test } from 'bun:test';
 import { CTSEBadRequestException } from '@bewoak/common-http-exceptions-server';
 import { failureValue, successValue } from '@bewoak/common-types-result';
-import { pDCPBRPathwayDescriptionRules } from '@bewoak/pathway-design-common-pathway-business-rules';
+import { pDCPBRPathwayDescriptionRules } from '@bewoak/pathway-design-common-pathway';
 import { PathwayDescriptionValueObject } from './pathway-description.value-object';
 
 describe('PathwayDescriptionValueObject', () => {

@@ -1,5 +1,5 @@
 import { beforeAll, describe, expect, test } from 'bun:test';
-import { pDCPBRResourceUrlRules } from '@bewoak/pathway-design-common-pathway-business-rules';
+import { pDCPBRResourceUrlRules } from '@bewoak/pathway-design-common-pathway';
 import { ResourceUrlValueObject } from './resource-url.value-object';
 
 describe('ResourceUrlValueObject', () => {

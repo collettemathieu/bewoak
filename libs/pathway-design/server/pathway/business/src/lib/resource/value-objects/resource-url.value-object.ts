@@ -1,5 +1,5 @@
 import { CTSEBadRequestException } from '@bewoak/common-http-exceptions-server';
-import { pDCPBRResourceUrlRules } from '@bewoak/pathway-design-common-pathway-business-rules';
+import { pDCPBRResourceUrlRules } from '@bewoak/pathway-design-common-pathway';
 
 export class ResourceUrlValueObject {
     constructor(private readonly url: string) {
