@@ -1,0 +1,49 @@
+{
+    "$schema": "../../../node_modules/nx/schemas/project-schema.json",
+    "name": "search-server",
+    "projectType": "library",
+    "release": {
+        "version": {
+            "currentVersionResolver": "git-tag",
+            "manifestRootsToUpdate": ["dist/{projectRoot}"],
+            "preserveLocalDependencyProtocols": false
+        }
+    },
+    "sourceRoot": "libs/search/server/src",
+    "tags": ["type:search:server"],
+    "targets": {
+        "build": {
+            "executor": "@nx/js:swc",
+            "options": {
+                "assets": [],
+                "main": "libs/search/server/src/index.ts",
+                "outputPath": "dist/libs/search/server",
+                "tsConfig": "libs/search/server/tsconfig.lib.json"
+            },
+            "outputs": ["{options.outputPath}"]
+        },
+        "nx-release-publish": {
+            "options": {
+                "packageRoot": "dist/{projectRoot}"
+            }
+        },
+        "test": {
+            "executor": "nx:run-commands",
+            "options": {
+                "command": "bun test --coverage --coverage-dir=dist/reports/{projectRoot}/coverage --coverage-reporter=lcov {projectRoot}"
+            }
+        },
+        "test-feature": {
+            "executor": "nx:run-commands",
+            "options": {
+                "command": "TS_NODE_PROJECT='{projectRoot}/tsconfig.spec.json' bun run cucumber-js --config={projectRoot}/cucumber.js"
+            }
+        },
+        "test-mutation": {
+            "executor": "nx:run-commands",
+            "options": {
+                "command": "bun run stryker run {projectRoot}/stryker.config.json && bunx lite-server --baseDir=reports/test-mutation/{projectRoot}"
+            }
+        }
+    }
+}

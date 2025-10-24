@@ -10,7 +10,7 @@ import { AppModule } from './app/app.module';
 import { envSchema } from './environment/env.schema';
 
 async function bootstrap() {
-    runOtelInstrumentation('PathwayDesignServer');
+    runOtelInstrumentation('AppsPathwayDesignServer');
 
     const env = cCSEGetEnvironmentVariables(envSchema);
 
@@ -27,7 +27,7 @@ async function bootstrap() {
         new FastifyAdapter(),
         {
             bufferLogs: true,
-            logger: new ServerLogger('PathwayDesignServer', '1.0.0'),
+            logger: new ServerLogger('AppsPathwayDesignServer', '1.0.0'),
         }
     );
     app.setGlobalPrefix(globalPrefix);

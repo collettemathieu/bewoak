@@ -1,10 +1,10 @@
 {
     "$schema": "../../../node_modules/nx/schemas/project-schema.json",
-    "name": "search-client",
+    "name": "apps-search-client",
     "prefix": "app",
     "projectType": "application",
     "sourceRoot": "apps/search/client/src",
-    "tags": ["search-client"],
+    "tags": ["apps-search-client"],
     "targets": {
         "build": {
             "configurations": {
@@ -55,16 +55,16 @@
         "extract-i18n": {
             "executor": "@angular/build:extract-i18n",
             "options": {
-                "buildTarget": "search-client:build"
+                "buildTarget": "apps-search-client:build"
             }
         },
         "serve": {
             "configurations": {
                 "development": {
-                    "buildTarget": "search-client:build:development"
+                    "buildTarget": "apps-search-client:build:development"
                 },
                 "production": {
-                    "buildTarget": "search-client:build:production"
+                    "buildTarget": "apps-search-client:build:production"
                 }
             },
             "continuous": true,
@@ -75,7 +75,7 @@
             "continuous": true,
             "executor": "@nx/web:file-server",
             "options": {
-                "buildTarget": "search-client:build",
+                "buildTarget": "apps-search-client:build",
                 "port": 4200,
                 "spa": true,
                 "staticFilePath": "dist/apps/search/client/browser"

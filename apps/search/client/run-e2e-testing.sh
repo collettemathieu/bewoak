@@ -16,7 +16,7 @@ cleanup() {
 trap cleanup EXIT INT TERM
 
 echo "🔨 Building search-client..."
-bun nx build search-client
+bun nx build apps-search-client
 
 echo "🚀 Starting SSR server..."
 bun dist/apps/search/client/server/server.mjs &

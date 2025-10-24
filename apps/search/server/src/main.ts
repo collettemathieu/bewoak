@@ -1,11 +1,14 @@
 import { cCSECheckEnvironmentVariables, cCSEGetEnvironmentVariables } from '@bewoak/common-configs-server-env';
 import { cCSSSetupSwaggerDocument } from '@bewoak/common-configs-server-swagger';
+import { runOtelInstrumentation, ServerLogger } from '@bewoak/common-o11y-server';
 import { Logger } from '@nestjs/common';
 import { NestFactory } from '@nestjs/core';
 import { AppModule } from './app/app.module';
 import { envSchema } from './environment/env.schema';
 
 async function bootstrap() {
+    runOtelInstrumentation('AppsSearchServer');
+
     cCSECheckEnvironmentVariables(envSchema);
 
     const env = cCSEGetEnvironmentVariables(envSchema);
@@ -14,14 +17,15 @@ async function bootstrap() {
 
     const app = await NestFactory.create(AppModule.register(), {
         bufferLogs: true,
+        logger: new ServerLogger('AppsSearchServer', '1.0.0'),
     });
     app.setGlobalPrefix(globalPrefix);
 
     cCSSSetupSwaggerDocument(app, {
-        description: 'API for Pathway Design',
+        description: 'API for Search',
         hasBearerAuth: true,
         path: 'api',
-        title: 'Pathway Design API',
+        title: 'Search API',
         version: '1.0',
     });
 

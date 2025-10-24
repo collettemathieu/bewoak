@@ -1,23 +1,23 @@
 {
     "$schema": "../../../node_modules/nx/schemas/project-schema.json",
-    "name": "search-server",
+    "name": "apps-search-server",
     "projectType": "application",
     "sourceRoot": "apps/search/server/src",
-    "tags": ["search-server"],
+    "tags": ["apps-search-server"],
     "targets": {
         "serve": {
             "configurations": {
                 "development": {
-                    "buildTarget": "search-server:build:development"
+                    "buildTarget": "apps-search-server:build:development"
                 },
                 "production": {
-                    "buildTarget": "search-server:build:production"
+                    "buildTarget": "apps-search-server:build:production"
                 }
             },
             "defaultConfiguration": "development",
             "executor": "@nx/js:node",
             "options": {
-                "buildTarget": "search-server:build"
+                "buildTarget": "apps-search-server:build"
             }
         },
         "test-feature": {
