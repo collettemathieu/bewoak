@@ -5,7 +5,7 @@ import { OnEvent } from '@nestjs/event-emitter';
 export class IndexNewPathwayACL {
     @OnEvent(CCEP_EVENT_TYPE_PATHWAY_INITIALIZED)
     handleNewPathwayEvent(event: CCEPPathwayInitializedEvent) {
-        // biome-ignore lint/suspicious/noConsole: <explanation>
+        // biome-ignore lint/suspicious/noConsole: <for testing>
         console.log(event);
     }
 }
