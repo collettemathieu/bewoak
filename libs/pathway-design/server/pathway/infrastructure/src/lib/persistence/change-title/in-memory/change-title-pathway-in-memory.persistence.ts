@@ -1,5 +1,5 @@
 import { CTSEInternalServerException, CTSENotFoundRequestException } from '@bewoak/common-http-exceptions-server';
-import { ErrorLog } from '@bewoak/common-log-server';
+import { ErrorLog } from '@bewoak/common-o11y-server';
 import { failure, success } from '@bewoak/common-types-result';
 import type { PDSPBEPathwayEntity, PDSPBPChangeTitlePathwayPersistence } from '@bewoak/pathway-design-server-pathway-business';
 import { Inject, Injectable } from '@nestjs/common';

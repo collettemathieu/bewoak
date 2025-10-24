@@ -1,9 +1,8 @@
 import { cCSEGetEnvironmentVariables } from '@bewoak/common-configs-server-env';
-import { runOtelInstrumentation } from '@bewoak/common-configs-server-otel';
 import { cCSSSetupSwaggerDocument } from '@bewoak/common-configs-server-swagger';
 import { LogHttpExceptionFilter } from '@bewoak/common-http-exceptions-server';
 import { HandleExceptionInterceptor } from '@bewoak/common-interceptors-server';
-import { ServerLogger } from '@bewoak/common-log-server';
+import { runOtelInstrumentation, ServerLogger } from '@bewoak/common-o11y-server';
 import { Logger } from '@nestjs/common';
 import { HttpAdapterHost, NestFactory } from '@nestjs/core';
 import { FastifyAdapter } from '@nestjs/platform-fastify';

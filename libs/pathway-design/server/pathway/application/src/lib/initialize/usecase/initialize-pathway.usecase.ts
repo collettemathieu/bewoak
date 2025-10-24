@@ -1,5 +1,4 @@
-import { SpanOtel } from '@bewoak/common-configs-server-otel';
-import { ErrorLog, Log } from '@bewoak/common-log-server';
+import { ErrorLog, Log, TraceSpan } from '@bewoak/common-o11y-server';
 import { failureValue, isSuccess, successValue } from '@bewoak/common-types-result';
 import {
     type PDSPBPInitializePathwayPersistence,
@@ -12,7 +11,7 @@ import { firstValueFrom, map, of, switchMap, tap } from 'rxjs';
 export class PDSPAIUInitializePathwayUsecase {
     @ErrorLog()
     @Log('Initialize pathway')
-    @SpanOtel()
+    @TraceSpan()
     execute(
         pDSPBPInitializePathwayPersistence: PDSPBPInitializePathwayPersistence,
         pDSPBPPathwayPresenter: PDSPBPPathwayPresenter,

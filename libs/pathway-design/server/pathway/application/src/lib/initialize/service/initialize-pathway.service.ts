@@ -1,4 +1,4 @@
-import { SpanOtel } from '@bewoak/common-configs-server-otel';
+import { TraceSpan } from '@bewoak/common-o11y-server';
 import type { PDSPBPPathwayPresenterResult } from '@bewoak/pathway-design-server-pathway-business';
 import { Injectable } from '@nestjs/common';
 // biome-ignore lint/style/useImportType: <Need for the dependency injection>
@@ -9,7 +9,7 @@ import type { PDSPAInitializePathwayCommand } from '../command/initialize-pathwa
 export class PDSPAInitializePathwayService {
     constructor(private readonly commandBus: CommandBus) {}
 
-    @SpanOtel()
+    @TraceSpan()
     initialize(pDSPAInitializePathwayCommand: PDSPAInitializePathwayCommand) {
         return this.commandBus.execute<PDSPAInitializePathwayCommand, PDSPBPPathwayPresenterResult>(
             pDSPAInitializePathwayCommand

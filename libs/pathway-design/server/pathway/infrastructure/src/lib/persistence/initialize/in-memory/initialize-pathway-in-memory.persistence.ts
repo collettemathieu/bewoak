@@ -1,6 +1,5 @@
-import { SpanOtel } from '@bewoak/common-configs-server-otel';
 import { CTSEInternalServerException } from '@bewoak/common-http-exceptions-server';
-import { ErrorLog } from '@bewoak/common-log-server';
+import { ErrorLog, TraceSpan } from '@bewoak/common-o11y-server';
 import { failure, success } from '@bewoak/common-types-result';
 import type { PDSPBEPathwayEntity, PDSPBPInitializePathwayPersistence } from '@bewoak/pathway-design-server-pathway-business';
 import { Inject, Injectable } from '@nestjs/common';
@@ -20,7 +19,7 @@ export class InitializePathwayInMemoryPersistence implements PDSPBPInitializePat
     ) {}
 
     @ErrorLog()
-    @SpanOtel()
+    @TraceSpan()
     async save(pDSPBEPathwayEntity: PDSPBEPathwayEntity) {
         const peristenceModel = mapPathwayEntityToInMemoryPersistence(pDSPBEPathwayEntity);
 

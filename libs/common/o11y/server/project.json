@@ -1,6 +1,6 @@
 {
     "$schema": "../../../../node_modules/nx/schemas/project-schema.json",
-    "name": "common-log-server",
+    "name": "common-o11y-server",
     "projectType": "library",
     "release": {
         "version": {
@@ -9,16 +9,16 @@
             "preserveLocalDependencyProtocols": false
         }
     },
-    "sourceRoot": "libs/common/log/server/src",
-    "tags": ["type:common:configs:server:log"],
+    "sourceRoot": "libs/common/o11y/server/src",
+    "tags": ["type:common:configs:server:o11y"],
     "targets": {
         "build": {
             "executor": "@nx/js:swc",
             "options": {
                 "assets": [],
-                "main": "libs/common/log/server/src/index.ts",
-                "outputPath": "dist/libs/common/log/server",
-                "tsConfig": "libs/common/log/server/tsconfig.lib.json"
+                "main": "libs/common/o11y/server/src/index.ts",
+                "outputPath": "dist/libs/common/o11y/server",
+                "tsConfig": "libs/common/o11y/server/tsconfig.lib.json"
             },
             "outputs": ["{options.outputPath}"]
         },

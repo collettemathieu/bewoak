@@ -1,4 +1,4 @@
-import { SpanOtel } from '@bewoak/common-configs-server-otel';
+import { TraceSpan } from '@bewoak/common-o11y-server';
 import {
     PDSPBP_INITIALIZE_PATHWAY_PERSISTENCE,
     PDSPBP_PATHWAY_PRESENTER,
@@ -23,7 +23,7 @@ export class PDSPAInitializePathwayCommandHandler implements ICommandHandler<PDS
         private readonly eventPublisher: EventPublisher
     ) {}
 
-    @SpanOtel()
+    @TraceSpan()
     execute(pDSPAInitializePathwayCommand: PDSPAInitializePathwayCommand) {
         return this.pDSPAIUInitializePathwayUsecase.execute(
             this.pDSPBPInitializePathwayPersistence,

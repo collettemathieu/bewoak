@@ -1,6 +1,6 @@
 import { beforeEach, describe, expect, spyOn, test } from 'bun:test';
 import { type CTSEInternalServerException, HttpStatus } from '@bewoak/common-http-exceptions-server';
-import { ServerLogger } from '@bewoak/common-log-server';
+import { ServerLogger } from '@bewoak/common-o11y-server';
 import { failureValue, successValue } from '@bewoak/common-types-result';
 import { type PDSPBEPathwayEntity, pDSPBFPathwayFactory } from '@bewoak/pathway-design-server-pathway-business';
 import { Test } from '@nestjs/testing';
