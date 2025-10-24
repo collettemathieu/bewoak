@@ -1,9 +1,9 @@
 import { TraceSpan } from '@bewoak/common-o11y-server';
 import { Body, Controller, Post, UsePipes, ValidationPipe } from '@nestjs/common';
 import { ApiBadRequestResponse, ApiCreatedResponse, ApiInternalServerErrorResponse, ApiTags } from '@nestjs/swagger';
-import { InitializePathwayCommand } from '../../../application/initialize/command/initialize-pathway.command';
+import { InitializePathwayCommand } from '../../../../application/initialize/command/initialize-pathway.command';
 // biome-ignore lint/style/useImportType: <Not applicable>
-import { InitializePathwayService } from '../../../application/initialize/service/initialize-pathway.service';
+import { InitializePathwayService } from '../../../../application/initialize/service/initialize-pathway.service';
 // biome-ignore lint/style/useImportType: <To be explained>
 import { InitializePathwayRequestBodyDto } from '../dtos/request/body/request-body.dto';
 import {

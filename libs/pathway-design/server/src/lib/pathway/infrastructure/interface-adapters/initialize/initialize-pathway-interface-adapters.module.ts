@@ -1,8 +1,8 @@
 import { type DynamicModule, Module, type Type } from '@nestjs/common';
-import { InitializePathwayCommandHandler } from '../../application/initialize/command/initialize-pathway.command-handler';
-import { InitializePathwayEventHandler } from '../../application/initialize/event-handler/initialize-pathway.event-handler';
-import { InitializePathwayService } from '../../application/initialize/service/initialize-pathway.service';
-import { InitializePathwayUsecase } from '../../application/initialize/usecase/initialize-pathway.usecase';
+import { InitializePathwayCommandHandler } from '../../../application/initialize/command/initialize-pathway.command-handler';
+import { InitializePathwayEventHandler } from '../../../application/initialize/event-handler/initialize-pathway.event-handler';
+import { InitializePathwayService } from '../../../application/initialize/service/initialize-pathway.service';
+import { InitializePathwayUsecase } from '../../../application/initialize/usecase/initialize-pathway.usecase';
 import { InitializePathwayController } from './controller/initialize-pathway.controller';
 
 @Module({

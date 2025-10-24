@@ -1,8 +1,8 @@
 import { Body, Controller, Param, Patch, UsePipes, ValidationPipe } from '@nestjs/common';
 import { ApiBadRequestResponse, ApiNotFoundResponse, ApiOkResponse, ApiTags } from '@nestjs/swagger';
-import { ChangeTitlePathwayCommand } from '../../../application/change-title/command/change-title-pathway.command';
+import { ChangeTitlePathwayCommand } from '../../../../application/change-title/command/change-title-pathway.command';
 // biome-ignore lint/style/useImportType: <To be explained>
-import { ChangeTitlePathwayService } from '../../../application/change-title/service/change-title-pathway.service';
+import { ChangeTitlePathwayService } from '../../../../application/change-title/service/change-title-pathway.service';
 // biome-ignore lint/style/useImportType: <To be explained>
 import { ChangeTitlePathwayRequestBodyDto } from '../dtos/request/body/request-body.dto';
 // biome-ignore lint/style/useImportType: <To be explained>

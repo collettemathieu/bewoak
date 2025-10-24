@@ -26,9 +26,7 @@
             "@bewoak/pathway-design-common-pathway": ["libs/pathway-design/common/pathway/src/index.ts"],
             "@bewoak/pathway-design-server": ["libs/pathway-design/server/src/index.ts"],
             "@bewoak/search-client-pathway-test-component": ["libs/search/client/pathway/src/index.ts"],
-            "@bewoak/search-server-pathway-application": ["libs/search/server/pathway/application/src/index.ts"],
-            "@bewoak/search-server-pathway-infrastructure": ["libs/search/server/pathway/infrastructure/src/index.ts"],
-            "@bewoak/search-server-pathway-models": ["libs/search/server/pathway/models/src/index.ts"]
+            "@bewoak/search-server": ["libs/search/server/src/index.ts"]
         },
         "rootDir": ".",
         "skipDefaultLibCheck": true,

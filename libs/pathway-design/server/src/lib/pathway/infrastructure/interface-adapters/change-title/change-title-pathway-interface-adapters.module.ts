@@ -1,7 +1,7 @@
 import { type DynamicModule, Module, type Type } from '@nestjs/common';
-import { ChangeTitlePathwayCommandHandler } from '../../application/change-title/command/change-title-pathway.command-handler';
-import { ChangeTitlePathwayService } from '../../application/change-title/service/change-title-pathway.service';
-import { ChangeTitlePathwayUseCase } from '../../application/change-title/usecase/change-title-pathway.usecase';
+import { ChangeTitlePathwayCommandHandler } from '../../../application/change-title/command/change-title-pathway.command-handler';
+import { ChangeTitlePathwayService } from '../../../application/change-title/service/change-title-pathway.service';
+import { ChangeTitlePathwayUseCase } from '../../../application/change-title/usecase/change-title-pathway.usecase';
 import { ChangeTitlePathwayController } from './controller/change-title-pathway.controller';
 
 @Module({

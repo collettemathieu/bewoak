@@ -1,5 +1,5 @@
 import type { CTSEBadRequestException, CTSEInternalServerException } from '@bewoak/common-http-exceptions-server';
-import type { PathwayPresenters } from '../../../../../business/pathway/ports/presenters/pathway-presenter.port';
+import type { PathwayPresenters } from '../../../../../../business/pathway/ports/presenters/pathway-presenter.port';
 
 export class InitializedPathwayResponseBodyDto implements PathwayPresenters {
     description!: string;
