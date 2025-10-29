@@ -5,20 +5,47 @@
             "cwd": "${workspaceFolder}",
             "env": {
                 "GLOBAL_PREFIX": "api",
+                "NODE_OPTIONS": "--enable-source-maps",
                 "PERSISTENCE_DRIVER": "inMemory",
                 "PORT": "3000",
                 "PRESENTER_DRIVER": "toJson"
             },
-            "name": "Debug pathway-design-server",
-            "preLaunchTask": "build-pathway-design-server",
-            "program": "${workspaceFolder}/dist/apps/pathway-design-server/main.js",
+            "name": "Debug apps-pathway-design-server",
+            "preLaunchTask": "build-apps-pathway-design-server",
+            "program": "${workspaceFolder}/dist/apps/apps-pathway-design-server/main.js",
             "request": "launch",
             "skipFiles": ["<node_internals>/**"],
             "sourceMapPathOverrides": {
+                "webpack:///../../../*": "${workspaceFolder}/*",
                 "webpack:///./*": "${workspaceFolder}/*",
-                "webpack:///*": "*",
-                "webpack:///src/*": "${workspaceFolder}/apps/pathway-design/server/src/*"
+                "webpack:///./src/*": "${workspaceFolder}/apps/pathway-design/server/src/*",
+                "webpack:///*": "*"
             },
+            "sourceMaps": true,
+            "type": "node"
+        },
+        {
+            "console": "integratedTerminal",
+            "cwd": "${workspaceFolder}",
+            "env": {
+                "GLOBAL_PREFIX": "api",
+                "NODE_OPTIONS": "--enable-source-maps",
+                "PERSISTENCE_DRIVER": "inMemory",
+                "PORT": "3000",
+                "PRESENTER_DRIVER": "toJson"
+            },
+            "name": "Debug apps-shell-server",
+            "preLaunchTask": "build-apps-shell-server",
+            "program": "${workspaceFolder}/dist/apps/apps-shell-server/main.js",
+            "request": "launch",
+            "skipFiles": ["<node_internals>/**"],
+            "sourceMapPathOverrides": {
+                "webpack:///../../../*": "${workspaceFolder}/*",
+                "webpack:///./*": "${workspaceFolder}/*",
+                "webpack:///./src/*": "${workspaceFolder}/apps/shell/server/src/*",
+                "webpack:///*": "*"
+            },
+            "sourceMaps": true,
             "type": "node"
         },
         {

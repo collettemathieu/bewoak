@@ -49,7 +49,7 @@ class ControllerSteps {
         await this.app.init();
 
         this.eventEmitter = this.app.get(EventEmitter2);
-        this.eventEmitterSpy = sinon.spy(this.eventEmitter, 'emit');
+        this.eventEmitterSpy = sinon.spy(this.eventEmitter, 'emitAsync');
     }
 
     @when('I want to initialize on the platform a pathway with these data')

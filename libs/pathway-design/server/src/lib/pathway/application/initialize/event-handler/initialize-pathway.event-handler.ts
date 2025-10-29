@@ -15,6 +15,6 @@ export class InitializePathwayEventHandler implements IEventHandler<PathwayIniti
             pathwayInitializedEvent.payload.researchField,
             pathwayInitializedEvent.payload.title
         );
-        this.eventEmitter.emit(event.eventType, event);
+        this.eventEmitter.emitAsync(event.eventType, event);
     }
 }

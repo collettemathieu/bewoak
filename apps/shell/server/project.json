@@ -1,0 +1,30 @@
+{
+    "$schema": "../../../node_modules/nx/schemas/project-schema.json",
+    "name": "apps-shell-server",
+    "projectType": "application",
+    "sourceRoot": "apps/shell/server/src",
+    "tags": ["apps-shell-server"],
+    "targets": {
+        "serve": {
+            "configurations": {
+                "development": {
+                    "buildTarget": "apps-shell-server:build:development"
+                },
+                "production": {
+                    "buildTarget": "apps-shell-server:build:production"
+                }
+            },
+            "defaultConfiguration": "development",
+            "executor": "@nx/js:node",
+            "options": {
+                "buildTarget": "apps-shell-server:build"
+            }
+        },
+        "test-feature": {
+            "executor": "nx:run-commands",
+            "options": {
+                "command": "TS_NODE_PROJECT='{projectRoot}/tsconfig.spec.json' bun run cucumber-js --config={projectRoot}/cucumber.js"
+            }
+        }
+    }
+}
