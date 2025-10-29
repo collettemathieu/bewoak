@@ -6,32 +6,43 @@ import {
     PDSPPPathwayPresentersModule,
     type PDSPPPresenterDriverAuthorized,
 } from '@bewoak/pathway-design-server';
-import { SSPAAddPathwayApplicationModule } from '@bewoak/search-server';
+import {
+    SSPAAddPathwayApplicationModule,
+    SSPIPPathwayPersistenceInfrastructureModule,
+    type SSPIPPersistenceDriverAuthorized,
+} from '@bewoak/search-server';
 import { Module } from '@nestjs/common';
 import { CqrsModule } from '@nestjs/cqrs';
 import { EventEmitterModule } from '@nestjs/event-emitter';
 
 interface ApplicationBootstrapOptions {
-    persistenceDriver: PDSPIPPersistenceDriverAuthorized;
-    presenterDriver: PDSPPPresenterDriverAuthorized;
+    persistenceDriverSearchServer: SSPIPPersistenceDriverAuthorized;
+    persistenceDriverPathwayDesignServer: PDSPIPPersistenceDriverAuthorized;
+    presenterDriverPathwayDesignServer: PDSPPPresenterDriverAuthorized;
 }
 
 @Module({})
 // biome-ignore lint/complexity/noStaticOnlyClass: <To be explained>
 export class AppModule {
     static register(options: ApplicationBootstrapOptions) {
-        const persistenceModule = PDSPIPPathwayPersistenceInfrastructureModule.use(options.persistenceDriver);
-        const presenterModule = PDSPPPathwayPresentersModule.use(options.presenterDriver);
+        const persistenceModuleSearchServer = SSPIPPathwayPersistenceInfrastructureModule.use(
+            options.persistenceDriverSearchServer
+        );
+        const persistenceModulePathwayDesignServer = PDSPIPPathwayPersistenceInfrastructureModule.use(
+            options.persistenceDriverPathwayDesignServer
+        );
+        const presenterModulePathwayDesignServer = PDSPPPathwayPresentersModule.use(options.presenterDriverPathwayDesignServer);
 
         return {
             imports: [
-                PDSPIAChangeTitlePathwayInterfaceAdaptersModule.withPresenter(presenterModule)
-                    .withPersistence(persistenceModule)
+                PDSPIAChangeTitlePathwayInterfaceAdaptersModule.withPresenter(presenterModulePathwayDesignServer)
+                    .withPersistence(persistenceModulePathwayDesignServer)
                     .build(),
-                PDSPIAInitializePathwayInterfaceAdaptersModule.withPresenter(presenterModule)
-                    .withPersistence(persistenceModule)
+                PDSPIAInitializePathwayInterfaceAdaptersModule.withPresenter(presenterModulePathwayDesignServer)
+                    .withPersistence(persistenceModulePathwayDesignServer)
                     .build(),
                 CqrsModule.forRoot(),
+                SSPAAddPathwayApplicationModule.withPersistence(persistenceModuleSearchServer).build(),
                 EventEmitterModule.forRoot({
                     delimiter: '.',
                     ignoreErrors: false,
@@ -41,7 +52,6 @@ export class AppModule {
                     verboseMemoryLeak: true,
                     wildcard: false,
                 }),
-                SSPAAddPathwayApplicationModule,
             ],
             module: AppModule,
         };

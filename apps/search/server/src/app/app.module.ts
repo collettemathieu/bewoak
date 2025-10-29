@@ -1,14 +1,24 @@
-import { SSPAAddPathwayApplicationModule } from '@bewoak/search-server';
+import {
+    SSPAAddPathwayApplicationModule,
+    SSPIPPathwayPersistenceInfrastructureModule,
+    type SSPIPPersistenceDriverAuthorized,
+} from '@bewoak/search-server';
 import { Module } from '@nestjs/common';
 import { EventEmitterModule } from '@nestjs/event-emitter';
 
+interface ApplicationBootstrapOptions {
+    persistenceDriver: SSPIPPersistenceDriverAuthorized;
+}
+
 @Module({})
-// biome-ignore lint/complexity/noStaticOnlyClass: <Not applicable>
+// biome-ignore lint/complexity/noStaticOnlyClass: <To be explained>
 export class AppModule {
-    static register() {
+    static register(options: ApplicationBootstrapOptions) {
+        const persistenceModule = SSPIPPathwayPersistenceInfrastructureModule.use(options.persistenceDriver);
+
         return {
             imports: [
-                SSPAAddPathwayApplicationModule,
+                SSPAAddPathwayApplicationModule.withPersistence(persistenceModule).build(),
                 EventEmitterModule.forRoot({
                     delimiter: '.',
                     ignoreErrors: false,

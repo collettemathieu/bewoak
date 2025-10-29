@@ -14,8 +14,9 @@ async function bootstrap() {
     const env = cCSEGetEnvironmentVariables(envSchema);
     const port = env.PORT;
     const globalPrefix = env.GLOBAL_PREFIX;
+    const persistenceDriver = env.PERSISTENCE_DRIVER;
 
-    const app = await NestFactory.create(AppModule.register(), {
+    const app = await NestFactory.create(AppModule.register({ persistenceDriver }), {
         bufferLogs: true,
         logger: new ServerLogger('AppsSearchServer', '1.0.0'),
     });

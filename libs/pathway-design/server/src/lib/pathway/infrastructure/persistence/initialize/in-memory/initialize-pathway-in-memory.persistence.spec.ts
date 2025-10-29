@@ -129,7 +129,7 @@ describe('InitializePathwayInMemoryPersistence', () => {
         });
     });
 
-    describe('When I want to save a pathway but the pathway is saved correctly in memory', () => {
+    describe('When I want to save a pathway but the pathway is not saved correctly in memory', () => {
         let initializePathwayInMemoryPersistence: InitializePathwayInMemoryPersistence;
         let pathwayEntity: PathwayEntity;
         let result: CTSEInternalServerException;

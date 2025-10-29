@@ -112,7 +112,7 @@
         "start:apps-pathway-design:server": "PORT=3000 GLOBAL_PREFIX=api PERSISTENCE_DRIVER=inMemory PRESENTER_DRIVER=toJson nx serve apps-pathway-design-server",
         "start:apps-search:client": "nx serve apps-search-client",
         "start:apps-search:server": "PORT=3001 GLOBAL_PREFIX=api nx serve apps-search-server",
-        "start:apps-shell:server": "PORT=3000 GLOBAL_PREFIX=api PERSISTENCE_DRIVER=inMemory PRESENTER_DRIVER=toJson nx serve apps-shell-server",
+        "start:apps-shell:server": "PORT=3000 GLOBAL_PREFIX=api PERSISTENCE_DRIVER_PATHWAY_DESIGN_SERVER=inMemory PRESENTER_DRIVER_PATHWAY_DESIGN_SERVER=toJson PERSISTENCE_DRIVER_SEARCH_SERVER=inMemory nx serve apps-shell-server",
         "stryker": "stryker",
         "test": "bun test && bun run test:feature && bun run test:e2e && bun run build",
         "test:e2e": "nx run-many --target=test-e2e --parallel=4",

@@ -13,15 +13,17 @@ async function bootstrap() {
 
     const env = cCSEGetEnvironmentVariables(envSchema);
 
-    const persistenceDriver = env.PERSISTENCE_DRIVER;
-    const presenterDriver = env.PRESENTER_DRIVER;
+    const persistenceDriverPathwayDesignServer = env.PERSISTENCE_DRIVER_PATHWAY_DESIGN_SERVER;
+    const presenterDriverPathwayDesignServer = env.PRESENTER_DRIVER_PATHWAY_DESIGN_SERVER;
+    const persistenceDriverSearchServer = env.PERSISTENCE_DRIVER_SEARCH_SERVER;
     const port = env.PORT;
     const globalPrefix = env.GLOBAL_PREFIX;
 
     const app = await NestFactory.create(
         AppModule.register({
-            persistenceDriver,
-            presenterDriver,
+            persistenceDriverPathwayDesignServer,
+            persistenceDriverSearchServer,
+            presenterDriverPathwayDesignServer,
         }),
         new FastifyAdapter(),
         {
