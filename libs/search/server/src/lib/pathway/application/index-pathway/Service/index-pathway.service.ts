@@ -2,7 +2,7 @@ import { Injectable } from '@nestjs/common';
 
 @Injectable()
 export class IndexPathwayService {
-    // biome-ignore lint/suspicious/noExplicitAny: <explanation>
+    // biome-ignore lint/suspicious/noExplicitAny: <Not pertinent>
     async indexPathway(pathwayData: any): Promise<void> {
         // Implement indexing logic here
         // biome-ignore lint/suspicious/noConsole: <Not pertinent>
