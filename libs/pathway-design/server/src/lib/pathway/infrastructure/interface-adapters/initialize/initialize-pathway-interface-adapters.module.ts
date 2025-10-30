@@ -7,7 +7,7 @@ import { InitializePathwayController } from './controller/initialize-pathway.con
 
 @Module({
     controllers: [InitializePathwayController],
-    exports: [InitializePathwayService],
+    exports: [],
     providers: [
         InitializePathwayUsecase,
         InitializePathwayCommandHandler,

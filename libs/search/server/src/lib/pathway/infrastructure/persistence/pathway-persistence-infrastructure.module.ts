@@ -9,7 +9,6 @@ import type { SSPIPPersistenceDriverAuthorized } from './pathway-persistence-inf
 export class SSPIPPathwayPersistenceInfrastructureModule {
     static use(driver: SSPIPPersistenceDriverAuthorized) {
         const persistenceProviders = persistenceProvidersMap[driver];
-
         return {
             exports: [INDEX_PATHWAY_PERSISTENCE, READ_MANY_PATHWAY_PERSISTENCE],
             module: SSPIPPathwayPersistenceInfrastructureModule,

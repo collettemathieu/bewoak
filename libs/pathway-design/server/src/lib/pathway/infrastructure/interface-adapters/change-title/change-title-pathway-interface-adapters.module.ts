@@ -6,7 +6,7 @@ import { ChangeTitlePathwayController } from './controller/change-title-pathway.
 
 @Module({
     controllers: [ChangeTitlePathwayController],
-    exports: [ChangeTitlePathwayService],
+    exports: [],
     providers: [ChangeTitlePathwayCommandHandler, ChangeTitlePathwayService, ChangeTitlePathwayUseCase],
 })
 // biome-ignore lint/complexity/noStaticOnlyClass: not pertinent here because this is a module

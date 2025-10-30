@@ -13,6 +13,7 @@ export const persistenceProvidersMap: Record<SSPIPPersistenceDriverAuthorized, P
             provide: INDEX_PATHWAY_PERSISTENCE,
             useExisting: IndexPathwayInMemoryPersistence,
         },
+        ReadManyPathwayInMemoryPersistence,
         {
             provide: READ_MANY_PATHWAY_PERSISTENCE,
             useExisting: ReadManyPathwayInMemoryPersistence,

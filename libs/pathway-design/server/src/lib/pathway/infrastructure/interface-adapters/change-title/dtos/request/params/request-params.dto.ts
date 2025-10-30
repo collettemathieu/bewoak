@@ -1,3 +1,6 @@
-export type ChangeTitlePathwayRequestParamsDto = {
-    pathwayId: string;
-};
+import { IsString } from 'class-validator';
+
+export class ChangeTitlePathwayRequestParamsDto {
+    @IsString()
+    pathwayId!: string;
+}
