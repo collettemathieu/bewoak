@@ -1,11 +1,20 @@
-import { Injectable } from '@nestjs/common';
+import { Inject, Injectable } from '@nestjs/common';
+import {
+    INDEX_PATHWAY_PERSISTENCE,
+    type IndexPathwayPersistence,
+} from '../../../models/ports/persistences/index/index-pathway-persitence.port';
+import type { PathwayIndexData } from './index-pathway.types';
 
 @Injectable()
 export class IndexPathwayService {
-    // biome-ignore lint/suspicious/noExplicitAny: <Not pertinent>
-    async indexPathway(pathwayData: any): Promise<void> {
-        // Implement indexing logic here
-        // biome-ignore lint/suspicious/noConsole: <Not pertinent>
-        console.log('Indexing pathway data:', pathwayData);
+    constructor(
+        @Inject(INDEX_PATHWAY_PERSISTENCE)
+        private readonly indexPathwayPersistence: IndexPathwayPersistence
+    ) {}
+
+    async indexPathway(pathwayData: PathwayIndexData) {
+        // Pas de contrôle de la data (description = undefined par ex).
+        // Pas d'utilisation de createdAt et updatedAt pour l'instant.
+        return this.indexPathwayPersistence.index(pathwayData);
     }
 }

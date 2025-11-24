@@ -10,12 +10,10 @@ export class PathwayInitializedListener {
     @OnEvent(CCEP_EVENT_TYPE_PATHWAY_INITIALIZED, { async: true })
     handlePathwayInitializedEvent(event: CCEPPathwayInitializedEvent) {
         this.indexPathwayService.indexPathway({
-            createdAt: Date.now(),
             description: event.description,
             pathwayId: event.pathwayId,
             researchField: event.researchField,
             title: event.title,
-            updatedAt: Date.now(),
         });
     }
 }

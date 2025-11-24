@@ -1,106 +1,103 @@
-// import { strict as assert } from 'node:assert';
-// import type {
-//     PathwayEntity,
-//     InitializePathwayPersistence,
-//     PathwayPresenter,
-//     PathwayPresenters,
-// } from '@bewoak/pathway-design-server-pathway-business';
-// import type { DataTable } from '@cucumber/cucumber';
-// import type { EventPublisher } from '@nestjs/cqrs';
-// import { before, binding, then, when } from 'cucumber-tsflow';
-// import sinon from 'sinon';
-// import { InitializePathwayUsecase } from '../usecase/initialize-pathway.usecase';
+import { strict as assert } from 'node:assert';
+import { success, successValue } from '@bewoak/common-types-result';
+import type { DataTable } from '@cucumber/cucumber';
+import { before, binding, given, then } from 'cucumber-tsflow';
+import * as sinon from 'sinon';
+import { PathwayInMemoryEntity } from '../../../infrastructure/persistence/common/in-memory/entities/in-memory-pathway.entity';
+import type { PathwayEntity } from '../../../models/entities/pathway';
+import type { IndexPathwayPersistence } from '../../../models/ports/persistences/index/index-pathway-persitence.port';
+import { IndexPathwayService } from '../Service/index-pathway.service';
+import type { PathwayIndexData } from '../Service/index-pathway.types';
 
-// class FakeInitializePathwayPersistence implements InitializePathwayPersistence {
-//     save(pDSPBEPathwayEntity: PathwayEntity) {
-//         return Promise.resolve(pDSPBEPathwayEntity);
-//     }
-// }
+class FakeIndexPathwayPersistence implements IndexPathwayPersistence {
+    private pathwayEntity: PathwayInMemoryEntity | null = null;
 
-// class FakePathwayPresenter implements PathwayPresenter {
-//     present(pDSPBEPathwayEntity: PathwayEntity) {
-//         return {
-//             description: pDSPBEPathwayEntity.description,
-//             id: pDSPBEPathwayEntity.id,
-//             researchField: pDSPBEPathwayEntity.researchField,
-//             title: pDSPBEPathwayEntity.title,
-//         };
-//     }
-// }
+    public get result() {
+        return this.pathwayEntity;
+    }
 
-// class FakeEventPublisher {
-//     static isEventPublished = false;
+    index(pathwayEntity: PathwayEntity) {
+        this.pathwayEntity = new PathwayInMemoryEntity(
+            pathwayEntity.description,
+            pathwayEntity.pathwayId,
+            pathwayEntity.researchField,
+            pathwayEntity.title,
+            '1'
+        );
+        return Promise.resolve(success(pathwayEntity));
+    }
+}
 
-//     mergeObjectContext(object: PathwayEntity) {
-//         object.publishAll = () => {
-//             FakeEventPublisher.isEventPublished = true;
-//         };
+@binding()
+export default class ControllerSteps {
+    private readonly fakeIndexPathwayPersistence = new FakeIndexPathwayPersistence();
+    private readonly indexPathwayService = new IndexPathwayService(this.fakeIndexPathwayPersistence);
+    private persistenceSpy: sinon.SinonSpy | undefined;
+    private pathwayData: PathwayIndexData | undefined;
+    private result: PathwayEntity | undefined;
 
-//         return object;
-//     }
-// }
+    @before()
+    public before() {
+        this.persistenceSpy = sinon.spy(this.fakeIndexPathwayPersistence, 'index');
+    }
 
-// @binding()
-// export default class ControllerSteps {
-//     private readonly fakeEventPublisher = new FakeEventPublisher();
-//     private readonly fakeInitializePathwayPersistence = new FakeInitializePathwayPersistence();
-//     private readonly fakePathwayPresenter = new FakePathwayPresenter();
-//     private readonly pDSPBUInitPathwayUseCase = new InitializePathwayUsecase();
-//     private persistenceSpy: sinon.SinonSpy | undefined;
-//     private presenterSpy: sinon.SinonSpy | undefined;
-//     private result: PathwayPresenters | undefined;
+    @given('a new pathway with the following details has been created:')
+    public aNewPathwayHasBeenCreated(dataTable: DataTable) {
+        const firstRow = dataTable.hashes()[0] as {
+            title: string;
+            description: string;
+            researchField: string;
+            pathwayId: string;
+        };
 
-//     @before()
-//     public before() {
-//         this.persistenceSpy = sinon.spy(this.fakeInitializePathwayPersistence, 'save');
-//         this.presenterSpy = sinon.spy(this.fakePathwayPresenter, 'present');
-//     }
+        this.pathwayData = {
+            // createdAt: Date.now(),
+            description: firstRow.description,
+            pathwayId: firstRow.pathwayId,
+            researchField: firstRow.researchField,
+            title: firstRow.title,
+            // updatedAt: Date.now(),
+        };
+    }
 
-//     @when('I initialize a pathway in application with these data')
-//     public async whenIInitiateAPathway(dataTable: DataTable) {
-//         const firstRow = dataTable.hashes()[0] as {
-//             title: string;
-//             description: string;
-//             researchField: string;
-//         };
+    @then('the pathway should be indexed in the search system')
+    public async thenPathwayShouldBeIndexed() {
+        if (this.pathwayData === undefined) {
+            throw new Error('Pathway data is not defined');
+        }
 
-//         this.result = await this.pDSPBUInitPathwayUseCase.execute(
-//             this.fakeInitializePathwayPersistence,
-//             this.fakePathwayPresenter,
-//             this.fakeEventPublisher as EventPublisher,
-//             {
-//                 title: firstRow.title,
-//                 description: firstRow.description,
-//                 researchField: firstRow.researchField,
-//             }
-//         );
-//     }
+        this.result = successValue(
+            await this.indexPathwayService.indexPathway({
+                ...this.pathwayData,
+            })
+        );
 
-//     @then('I should receive the attributes of the pathway initialized')
-//     public thenIShouldReceivePathwayAttributes(dataTable: DataTable) {
-//         const firstRow = dataTable.hashes()[0] as {
-//             title: string;
-//             description: string;
-//             researchField: string;
-//         };
+        assert(this.persistenceSpy?.calledOnce);
 
-//         assert.strictEqual(this.result?.title, firstRow.title);
-//         assert.strictEqual(this.result?.description, firstRow.description);
-//         assert.strictEqual(this.result?.researchField, firstRow.researchField);
-//     }
+        assert.strictEqual(this.result.pathwayId, this.pathwayData.pathwayId);
+        assert.strictEqual(this.result.title, this.pathwayData.title);
+        assert.strictEqual(this.result.description, this.pathwayData.description);
+        assert.strictEqual(this.result.researchField, this.pathwayData.researchField);
+    }
 
-//     @then('It should call the persistence layer to save the pathway')
-//     public thenThePersistenceLayerShouldBeCalled() {
-//         assert(this.persistenceSpy?.calledOnce);
-//     }
+    @then('the indexed pathway should have the following details:')
+    public theIndexedPathwayShouldHaveTheFollowingDetails(dataTable: DataTable) {
+        const firstRow = dataTable.hashes()[0] as {
+            title: string;
+            description: string;
+            researchField: string;
+            pathwayId: string;
+        };
 
-//     @then('It should call the presenter to present the pathway initialized')
-//     public thenThePresenterShouldBeCalled() {
-//         assert(this.presenterSpy?.calledOnce);
-//     }
+        const pathwayEntity = this.fakeIndexPathwayPersistence.result;
+        if (!pathwayEntity) {
+            throw new Error('No pathway entity was indexed');
+        }
 
-//     @then('It should emit an event indicating that the pathway has been initialized')
-//     public thenAnEventShouldBeEmitted() {
-//         assert.ok(FakeEventPublisher.isEventPublished);
-//     }
-// }
+        assert.strictEqual(pathwayEntity.id, '1');
+        assert.strictEqual(pathwayEntity.title, firstRow.title);
+        assert.strictEqual(pathwayEntity.description, firstRow.description);
+        assert.strictEqual(pathwayEntity.researchField, firstRow.researchField);
+        assert.strictEqual(pathwayEntity.pathwayId, firstRow.pathwayId);
+    }
+}

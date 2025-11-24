@@ -15,7 +15,7 @@ import { FastifyAdapter, type NestFastifyApplication } from '@nestjs/platform-fa
 import { Test } from '@nestjs/testing';
 import { binding, given, then, when } from 'cucumber-tsflow';
 import type * as fastify from 'fastify';
-import sinon from 'sinon';
+import * as sinon from 'sinon';
 
 @binding()
 class ControllerSteps {

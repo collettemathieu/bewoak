@@ -4,7 +4,7 @@ import { failure, success } from '@bewoak/common-types-result';
 import type { DataTable } from '@cucumber/cucumber';
 import type { EventPublisher } from '@nestjs/cqrs';
 import { before, binding, then, when } from 'cucumber-tsflow';
-import sinon from 'sinon';
+import * as sinon from 'sinon';
 import type { PathwayEntity } from '../../../business/pathway/entities/pathway';
 import { INVALID_PATHWAY_DATA_INITIALIZATION_MESSAGE } from '../../../business/pathway/entities/pathway.constants';
 import type { InitializePathwayPersistence } from '../../../business/pathway/ports/persistences/initialize/initialize-pathway-persitence.port';

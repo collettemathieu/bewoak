@@ -3,7 +3,7 @@ import type { CTSEBadRequestException } from '@bewoak/common-http-exceptions-ser
 import { failureValue, type Result, successValue } from '@bewoak/common-types-result';
 import type { DataTable } from '@cucumber/cucumber';
 import { binding, given, then, when } from 'cucumber-tsflow';
-import sinon from 'sinon';
+import * as sinon from 'sinon';
 import type { PathwayEntity } from '../../entities/pathway';
 import { PDSPBEPathwayTitleChangedEvent } from '../../events/pathway-title-changed.event';
 import { pathwayFactory } from '../../factories/pathway.factory';

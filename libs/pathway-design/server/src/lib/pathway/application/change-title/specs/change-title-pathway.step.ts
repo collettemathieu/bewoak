@@ -5,7 +5,7 @@ import { pDCPBRPathwayTitleRules } from '@bewoak/pathway-design-common-pathway';
 import type { DataTable } from '@cucumber/cucumber';
 import type { EventPublisher } from '@nestjs/cqrs';
 import { before, binding, given, then, when } from 'cucumber-tsflow';
-import sinon from 'sinon';
+import * as sinon from 'sinon';
 import type { PathwayEntity } from '../../../business/pathway/entities/pathway';
 import { pathwayFactory } from '../../../business/pathway/factories/pathway.factory';
 import type { ChangeTitlePathwayPersistence } from '../../../business/pathway/ports/persistences/change-title/change-title-pathway-persitence.port';

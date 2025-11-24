@@ -1,12 +1,10 @@
-# Feature: Application - Initialize a new pathway
+Feature: Application - Index New Pathway
 
-#   Scenario: When I initiliaze a pathway in application, an event should be emitted
-#     When I initialize a pathway in application with these data
-#       | title       | description      | researchField |
-#       | My Pathway  | A test pathway   | biology |
-#     Then It should call the persistence layer to save the pathway
-#     And It should call the presenter to present the pathway initialized
-#     And It should emit an event indicating that the pathway has been initialized
-#     And I should receive the attributes of the pathway initialized
-#       | title       | description      | researchField |
-#       | My Pathway  | A test pathway   | biology |
+  Scenario: When a new pathway is created, it should be indexed in the search system
+    Given a new pathway with the following details has been created:
+        | title   | description   | researchField  | pathwayId  |
+        | Introduction to TypeScript | A beginner's guide to TypeScript. | Computer sciences | pathway-123 |
+    Then the pathway should be indexed in the search system
+    And the indexed pathway should have the following details:
+        | title   | description   | researchField  | pathwayId  |
+        | Introduction to TypeScript | A beginner's guide to TypeScript. | Computer sciences | pathway-123 |
