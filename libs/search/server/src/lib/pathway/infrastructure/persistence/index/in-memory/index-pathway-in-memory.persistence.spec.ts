@@ -28,7 +28,18 @@ describe('IndexPathwayInMemoryPersistence', () => {
 
             pathwayInMemoryRepository = module.get<PathwayInMemoryRepository>(PathwayInMemoryRepository);
 
-            pathwayEntity = new PathwayEntity('pathway id', 'pathway title', 'pathway description', 'pathway research field');
+            const date = new Date();
+
+            pathwayEntity = successValue(
+                PathwayEntity.create({
+                    createdAt: date,
+                    description: 'pathway description',
+                    pathwayId: 'pathway id',
+                    researchField: 'pathway research field',
+                    title: 'pathway title',
+                    updatedAt: date,
+                })
+            );
 
             spyOn(serverLogger, 'error');
 
@@ -56,6 +67,9 @@ describe('IndexPathwayInMemoryPersistence', () => {
             expect(result.title).toStrictEqual(pathwayEntity.title);
             expect(result.description).toStrictEqual(pathwayEntity.description);
             expect(result.researchField).toStrictEqual(pathwayEntity.researchField);
+            expect(result.pathwayId).toStrictEqual(pathwayEntity.pathwayId);
+            expect(result.createdAt).toStrictEqual(pathwayEntity.createdAt);
+            expect(result.updatedAt).toStrictEqual(pathwayEntity.updatedAt);
         });
     });
 
@@ -86,7 +100,16 @@ describe('IndexPathwayInMemoryPersistence', () => {
 
             indexPathwayInMemoryPersistence = module.get<IndexPathwayInMemoryPersistence>(IndexPathwayInMemoryPersistence);
 
-            pathwayEntity = new PathwayEntity('pathway id', 'pathway title', 'pathway description', 'pathway research field');
+            pathwayEntity = successValue(
+                PathwayEntity.create({
+                    createdAt: new Date(),
+                    description: 'pathway description',
+                    pathwayId: 'pathway id',
+                    researchField: 'pathway research field',
+                    title: 'pathway title',
+                    updatedAt: new Date(),
+                })
+            );
 
             result = failureValue(await indexPathwayInMemoryPersistence.index(pathwayEntity));
         });

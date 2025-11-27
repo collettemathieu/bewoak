@@ -32,13 +32,28 @@ describe('ReadManyPathwayInMemoryPersistence', () => {
 
             pathwayInMemoryRepository = module.get<PathwayInMemoryRepository>(PathwayInMemoryRepository);
 
-            pathwayEntity1 = new PathwayEntity('pathway id', 'pathway title', 'pathway description', 'pathway research field');
+            const date1 = new Date();
+            pathwayEntity1 = successValue(
+                PathwayEntity.create({
+                    createdAt: date1,
+                    description: 'pathway description 1',
+                    pathwayId: 'pathway id 1',
+                    researchField: 'pathway research field 1',
+                    title: 'pathway title 1',
+                    updatedAt: date1,
+                })
+            );
 
-            pathwayEntity2 = new PathwayEntity(
-                'pathway id 2',
-                'pathway title 2',
-                'pathway description 2',
-                'pathway research field 2'
+            const date2 = new Date();
+            pathwayEntity2 = successValue(
+                PathwayEntity.create({
+                    createdAt: date2,
+                    description: 'pathway description 2',
+                    pathwayId: 'pathway id 2',
+                    researchField: 'pathway research field 2',
+                    title: 'pathway title 2',
+                    updatedAt: date2,
+                })
             );
 
             spyOn(serverLogger, 'error');
@@ -71,12 +86,16 @@ describe('ReadManyPathwayInMemoryPersistence', () => {
             expect(result[0].title).toStrictEqual(pathwayEntity1.title);
             expect(result[0].description).toStrictEqual(pathwayEntity1.description);
             expect(result[0].researchField).toStrictEqual(pathwayEntity1.researchField);
+            expect(result[0].createdAt).toStrictEqual(pathwayEntity1.createdAt);
+            expect(result[0].updatedAt).toStrictEqual(pathwayEntity1.updatedAt);
 
             expect(result[1]).toBeInstanceOf(PathwayEntity);
             expect(result[1].pathwayId).toBe(pathwayEntity2.pathwayId);
             expect(result[1].title).toStrictEqual(pathwayEntity2.title);
             expect(result[1].description).toStrictEqual(pathwayEntity2.description);
             expect(result[1].researchField).toStrictEqual(pathwayEntity2.researchField);
+            expect(result[1].createdAt).toStrictEqual(pathwayEntity2.createdAt);
+            expect(result[1].updatedAt).toStrictEqual(pathwayEntity2.updatedAt);
         });
     });
 });

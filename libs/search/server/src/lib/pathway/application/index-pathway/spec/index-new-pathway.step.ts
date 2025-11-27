@@ -1,5 +1,6 @@
 import { strict as assert } from 'node:assert';
-import { success, successValue } from '@bewoak/common-types-result';
+import type { CTSEException } from '@bewoak/common-http-exceptions-server';
+import { failureValue, success, successValue } from '@bewoak/common-types-result';
 import type { DataTable } from '@cucumber/cucumber';
 import { before, binding, given, then } from 'cucumber-tsflow';
 import * as sinon from 'sinon';
@@ -10,18 +11,20 @@ import { IndexPathwayService } from '../Service/index-pathway.service';
 import type { PathwayIndexData } from '../Service/index-pathway.types';
 
 class FakeIndexPathwayPersistence implements IndexPathwayPersistence {
-    private pathwayEntity: PathwayInMemoryEntity | null = null;
+    private pathwayInMemoryEntity: PathwayInMemoryEntity | null = null;
 
     public get result() {
-        return this.pathwayEntity;
+        return this.pathwayInMemoryEntity;
     }
 
     index(pathwayEntity: PathwayEntity) {
-        this.pathwayEntity = new PathwayInMemoryEntity(
+        this.pathwayInMemoryEntity = new PathwayInMemoryEntity(
+            pathwayEntity.createdAt,
             pathwayEntity.description,
             pathwayEntity.pathwayId,
             pathwayEntity.researchField,
             pathwayEntity.title,
+            pathwayEntity.updatedAt,
             '1'
         );
         return Promise.resolve(success(pathwayEntity));
@@ -35,6 +38,7 @@ export default class ControllerSteps {
     private persistenceSpy: sinon.SinonSpy | undefined;
     private pathwayData: PathwayIndexData | undefined;
     private result: PathwayEntity | undefined;
+    private failure: CTSEException | undefined;
 
     @before()
     public before() {
@@ -51,12 +55,10 @@ export default class ControllerSteps {
         };
 
         this.pathwayData = {
-            // createdAt: Date.now(),
             description: firstRow.description,
             pathwayId: firstRow.pathwayId,
             researchField: firstRow.researchField,
             title: firstRow.title,
-            // updatedAt: Date.now(),
         };
     }
 
@@ -66,11 +68,15 @@ export default class ControllerSteps {
             throw new Error('Pathway data is not defined');
         }
 
+        const beforeExecution = new Date();
+
         this.result = successValue(
             await this.indexPathwayService.indexPathway({
                 ...this.pathwayData,
             })
         );
+
+        const afterExecution = new Date();
 
         assert(this.persistenceSpy?.calledOnce);
 
@@ -78,6 +84,20 @@ export default class ControllerSteps {
         assert.strictEqual(this.result.title, this.pathwayData.title);
         assert.strictEqual(this.result.description, this.pathwayData.description);
         assert.strictEqual(this.result.researchField, this.pathwayData.researchField);
+
+        assert(this.result.createdAt instanceof Date, 'createdAt should be a Date instance');
+        assert(this.result.updatedAt instanceof Date, 'updatedAt should be a Date instance');
+        assert(this.result.createdAt >= beforeExecution, 'createdAt should be after or equal to beforeExecution');
+        assert(this.result.createdAt <= afterExecution, 'createdAt should be before or equal to afterExecution');
+        assert(this.result.updatedAt >= beforeExecution, 'updatedAt should be after or equal to beforeExecution');
+        assert(this.result.updatedAt <= afterExecution, 'updatedAt should be before or equal to afterExecution');
+        assert.strictEqual(
+            this.result.createdAt.getTime(),
+            this.result.updatedAt.getTime(),
+            'createdAt and updatedAt should be equal for a new pathway'
+        );
+
+        assert(this.failure === undefined, 'There should be no failure during indexing');
     }
 
     @then('the indexed pathway should have the following details:')
@@ -89,15 +109,35 @@ export default class ControllerSteps {
             pathwayId: string;
         };
 
-        const pathwayEntity = this.fakeIndexPathwayPersistence.result;
-        if (!pathwayEntity) {
+        const pathwayInMemoryEntity = this.fakeIndexPathwayPersistence.result;
+        if (!pathwayInMemoryEntity) {
             throw new Error('No pathway entity was indexed');
         }
 
-        assert.strictEqual(pathwayEntity.id, '1');
-        assert.strictEqual(pathwayEntity.title, firstRow.title);
-        assert.strictEqual(pathwayEntity.description, firstRow.description);
-        assert.strictEqual(pathwayEntity.researchField, firstRow.researchField);
-        assert.strictEqual(pathwayEntity.pathwayId, firstRow.pathwayId);
+        assert.strictEqual(pathwayInMemoryEntity.id, '1');
+        assert.strictEqual(pathwayInMemoryEntity.title, firstRow.title);
+        assert.strictEqual(pathwayInMemoryEntity.description, firstRow.description);
+        assert.strictEqual(pathwayInMemoryEntity.researchField, firstRow.researchField);
+        assert.strictEqual(pathwayInMemoryEntity.pathwayId, firstRow.pathwayId);
+    }
+
+    @then('an error should occur during indexing')
+    public async thenAnErrorShouldOccurDuringIndexing() {
+        if (this.pathwayData === undefined) {
+            throw new Error('Pathway data is not defined');
+        }
+
+        this.failure = failureValue(
+            await this.indexPathwayService.indexPathway({
+                ...this.pathwayData,
+            })
+        );
+        assert(this.persistenceSpy?.notCalled);
+        assert(this.failure !== undefined, 'An error should have occurred during indexing');
+    }
+
+    @then('the pathway should not be indexed in the search system')
+    public thenPathwayShouldNotBeIndexed() {
+        assert(this.fakeIndexPathwayPersistence.result === null, 'Pathway should not be indexed');
     }
 }

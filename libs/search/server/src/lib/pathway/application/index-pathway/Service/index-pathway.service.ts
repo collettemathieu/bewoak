@@ -1,4 +1,6 @@
+import { isFailure, successValue } from '@bewoak/common-types-result';
 import { Inject, Injectable } from '@nestjs/common';
+import { PathwayEntity } from '../../../models/entities/pathway';
 import {
     INDEX_PATHWAY_PERSISTENCE,
     type IndexPathwayPersistence,
@@ -13,8 +15,19 @@ export class IndexPathwayService {
     ) {}
 
     async indexPathway(pathwayData: PathwayIndexData) {
-        // Pas de contrôle de la data (description = undefined par ex).
-        // Pas d'utilisation de createdAt et updatedAt pour l'instant.
-        return this.indexPathwayPersistence.index(pathwayData);
+        const pathwayEntityResult = PathwayEntity.create({
+            createdAt: new Date(),
+            description: pathwayData.description,
+            pathwayId: pathwayData.pathwayId,
+            researchField: pathwayData.researchField,
+            title: pathwayData.title,
+            updatedAt: new Date(),
+        });
+
+        if (isFailure(pathwayEntityResult)) {
+            return pathwayEntityResult;
+        }
+
+        return this.indexPathwayPersistence.index(successValue(pathwayEntityResult));
     }
 }
