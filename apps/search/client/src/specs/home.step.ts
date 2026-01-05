@@ -18,7 +18,7 @@ Given('User navigates to the Homepage', async () => {
 });
 
 Then('It should show the test component', async () => {
-    expect(await page.locator('p').innerText()).toContain('TestComponent works!');
+    expect(await page.locator('p').innerText()).toContain('Test works!');
 });
 
 After(async () => {
